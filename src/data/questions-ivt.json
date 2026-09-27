@@ -1413,7 +1413,7 @@
     "subsystemName": "Tính Giá Vốn & Kế Toán Kho",
     "category": "TÍCH HỢP",
     "title": "Mapping dữ liệu danh mục khi kết nối IVT Pro với AMIS Kế toán (MISA)",
-    "prompt": "Khi triển khai kết nối đồng bộ chứng từ giữa iPOS IVT Pro và phần mềm AMIS Kế toán, điều kiện tiên quyết về danh mục hàng hoá là gì?",
+    "prompt": "Khi triển khai kết nối đồng bộ chứng từ giữa IVT Pro và phần mềm AMIS Kế toán, điều kiện tiên quyết về danh mục hàng hoá là gì?",
     "options": [
       {
         "id": "A",
@@ -1880,8 +1880,8 @@
     "subsystem": "PHAN_HE_12_CHAN_DOAN_TICKET",
     "subsystemName": "Chẩn Đoán Sự Cố & Nâng Cấp Phiên Bản",
     "category": "QUY TRÌNH",
-    "title": "Tư duy 4 bước chẩn đoán Ticket theo chuẩn Chuyên gia hỗ trợ iPOS",
-    "prompt": "Khi tiếp nhận một ticket khiếu nại 'Số liệu kho bị sai' từ khách hàng, thứ tự 4 bước chẩn đoán chuyên nghiệp của kỹ thuật viên iPOS là gì?",
+    "title": "Tư duy 4 bước chẩn đoán Ticket theo chuẩn Chuyên gia hỗ trợ hệ thống kho",
+    "prompt": "Khi tiếp nhận một ticket khiếu nại 'Số liệu kho bị sai' từ khách hàng, thứ tự 4 bước chẩn đoán chuyên nghiệp của kỹ thuật viên triển khai là gì?",
     "options": [
       {
         "id": "A",
@@ -1904,7 +1904,7 @@
         "isCorrect": false
       }
     ],
-    "hint": "Xem Cẩm nang phương pháp suy luận và chẩn đoán ticket iPOS.",
+    "hint": "Xem Cẩm nang phương pháp suy luận và chẩn đoán ticket hệ thống kho.",
     "explanation": "Phương pháp chẩn đoán dựa trên chứng cứ thực nghiệm: Luôn đi từ Thẻ kho A06 (nguồn gốc sự thật) ngược về chứng từ phát sinh gốc, không phán đoán mò mẫm làm mất uy tín dịch vụ."
   },
   {
@@ -1977,7 +1977,7 @@
       }
     ],
     "hint": "Xem Tài liệu 10 - Mục I: Khi nào chuyển kỹ thuật (1900 4766 nhánh 3).",
-    "explanation": "Nhánh 3 Kỹ thuật chuyên sâu là tuyến phòng thủ cuối cùng: Chỉ tiếp nhận các ca lỗi cấu trúc dữ liệu, lỗi bug core phần mềm hoặc sự cố đồng bộ API AMIS/iPOS core cần can thiệp script sửa DB."
+    "explanation": "Nhánh 3 Kỹ thuật chuyên sâu là tuyến phòng thủ cuối cùng: Chỉ tiếp nhận các ca lỗi cấu trúc dữ liệu, lỗi bug core phần mềm hoặc sự cố đồng bộ API AMIS/Core ERP cần can thiệp script sửa DB."
   },
   {
     "id": "M1_13",
@@ -2313,7 +2313,7 @@
     "subsystemName": "Nhượng Quyền Franchise & Bán Nội Bộ",
     "category": "BẢN QUYỀN",
     "title": "Chính sách giá sản phẩm và Bán quyền sử dụng kho cho đại lý nhượng quyền",
-    "prompt": "Theo Chuyên đề 108: Chính sách giá sản phẩm iPOS Inventory, khi chuỗi mở thêm chi nhánh nhượng quyền thì mô hình cấp bản quyền được tính như thế nào?",
+    "prompt": "Theo Chuyên đề 108: Chính sách giá sản phẩm IVT Pro, khi chuỗi mở thêm chi nhánh nhượng quyền thì mô hình cấp bản quyền được tính như thế nào?",
     "options": [
       {
         "id": "A",
@@ -2336,7 +2336,7 @@
         "isCorrect": false
       }
     ],
-    "hint": "Xem Chuyên đề 108: Chính sách giá sản phẩm iPOS Inventory.",
+    "hint": "Xem Chuyên đề 108: Chính sách giá sản phẩm IVT Pro.",
     "explanation": "Mỗi điểm kinh doanh được cấp bản quyền tương ứng để đảm bảo tính độc lập về dữ liệu, bảo mật số liệu tài chính giữa các chủ đầu tư nhượng quyền khác nhau trong cùng hệ sinh thái thương hiệu."
   },
   {
@@ -2637,7 +2637,7 @@
     "subsystemName": "Quy Trình Kiểm Kê & Xử Lý Chênh Lệch",
     "category": "KIỂM KÊ",
     "title": "Sử dụng Ứng dụng Di Động (App Mobile) để quét mã vạch kiểm kê kho",
-    "prompt": "Thủ kho dùng điện thoại di động cài App iPOS Inventory Pro để kiểm kê. Lợi ích lớn nhất so với ghi chép sổ giấy là gì?",
+    "prompt": "Thủ kho dùng điện thoại di động cài App IVT Pro Mobile để kiểm kê. Lợi ích lớn nhất so với ghi chép sổ giấy là gì?",
     "options": [
       {
         "id": "A",
@@ -2840,7 +2840,7 @@
         "isCorrect": false
       }
     ],
-    "hint": "Xem Cẩm nang kỹ thuật iPOS: Tối ưu hiệu năng và xử lý chậm treo hệ thống.",
+    "hint": "Xem Cẩm nang kỹ thuật quản trị kho: Tối ưu hiệu năng và xử lý chậm treo hệ thống.",
     "explanation": "Kiểm kê phân đoạn (Sectional Inventory) là giải pháp vận hành thông minh: Giảm dung lượng payload của từng transaction, tránh tình trạng Database Lock bảng và nâng tốc độ lưu phiếu lên gấp 5 lần."
   },
   {
