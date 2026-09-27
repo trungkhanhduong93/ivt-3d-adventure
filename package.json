@@ -18,9 +18,7 @@
   "author": "IVT UI/UX Team",
   "license": "MIT",
   "dependencies": {
-    "three": "^0.186.1"
-  },
-  "devDependencies": {
+    "three": "^0.186.1",
     "vite": "^8.3.1"
   }
 }
