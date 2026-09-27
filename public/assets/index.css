@@ -325,3 +325,24 @@ dialog h2 {
     box-shadow: 0 6px 16px rgba(245, 158, 11, 0.65);
   }
 }
+
+
+/* Hiệu ứng Rương Bí Ẩn Ngôi Sao Vàng Lấp Lánh */
+.mystery-dot {
+  background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+  color: #fff9e6 !important;
+  border-color: #fef3c7 !important;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.7) !important;
+  animation: mysteryBounce 1.5s infinite ease-in-out !important;
+}
+
+@keyframes mysteryBounce {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    box-shadow: 0 0 10px rgba(245, 158, 11, 0.6);
+  }
+  50% {
+    transform: translateY(-5px) rotate(15deg) scale(1.2);
+    box-shadow: 0 0 20px rgba(245, 158, 11, 0.95);
+  }
+}
