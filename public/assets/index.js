@@ -4661,7 +4661,7 @@ function Yr(){
         `).join('')}
       </div>
       <div style="display:flex;flex-direction:column;gap:8px">
-        <button id="guide-to-next-west-btn" class="primary wide" style="background:linear-gradient(135deg,#059669,#10b981);box-shadow:0 4px 14px rgba(16,185,129,0.35);display:flex;align-items:center;justify-content:center;gap:8px">
+        <button id="guide-to-next-west-btn" class="primary wide">
           ${Xe("compass")} <span>Dẫn đường đến ${nextWest.name}</span> ${Xe("arrow")}
         </button>
         <button id="close-milo-dialog-btn" class="secondary wide">
@@ -4700,7 +4700,7 @@ function Yr(){
       ${isBridgeFinished ? "Cây cầu dữ liệu đã hoàn thành 6/6 nhịp! Bạn có thể tự do qua sông sang Đảo Bếp Trung Tâm hoặc luyện tập thêm." : `Hãy trả lời câu hỏi của Milo để ghép từng nhịp cầu dữ liệu (${ie.bridge}/${yt} nhịp đã xong)!`}
     </p>
     <div style="display:flex;flex-direction:column;gap:8px">
-      <button id="start-bridge-mission-btn" class="primary wide" style="background:linear-gradient(135deg,#059669,#10b981);box-shadow:0 4px 14px rgba(16,185,129,0.35);display:flex;align-items:center;justify-content:center;gap:8px">
+      <button id="start-bridge-mission-btn" class="primary wide">
         ${Xe("star")} <span>${isBridgeFinished ? "Luyện tập thêm câu hỏi xây cầu" : `Bắt đầu ghép nhịp cầu số ${ie.bridge + 1}/${yt}`}</span> ${Xe("arrow")}
       </button>
       <button id="close-milo-bridge-btn" class="secondary wide">Để sau</button>
@@ -5116,7 +5116,7 @@ Y("learn").onclick=()=>window.open("https://iposvni.gitbook.io/inventory/","_bla
 <div class="milo-tip" style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:14px;padding:10px 14px;color:#166534">
   <p style="margin:0;font-size:12px;font-weight:700"><b>Phím tắt</b>: <b>Space</b>: nhảy · <b>Kéo chuột</b>: xoay camera 3D · <b>Lăn chuột</b>: zoom xa/gần · <b>Esc</b>: đóng bảng.</p>
 </div>
-<button id="understood" class="primary wide" style="margin-top:12px;background:linear-gradient(135deg,#059669,#10b981);font-weight:800">Mình hiểu rồi! ${Xe("check")}</button>`,"help"),Y("understood").onclick=cr}function showLegalModal(onDone){
+<button id="understood" class="primary wide" style="margin-top:12px">Mình hiểu rồi! ${Xe("check")}</button>`,"help"),Y("understood").onclick=cr}function showLegalModal(onDone){
   Jn(
     "Căn cứ Pháp lý & Bản quyền",
     `<div class="help-list">
@@ -5137,7 +5137,7 @@ Y("learn").onclick=()=>window.open("https://iposvni.gitbook.io/inventory/","_bla
         <p><strong>Bảo mật & Quyền riêng tư (100% Client-side)</strong>Hệ thống hoạt động hoàn toàn trên trình duyệt người dùng (Offline Client-side), không truyền dữ liệu cá nhân hay dữ liệu doanh nghiệp lên bất kỳ máy chủ nào. Điểm số và cấp độ được lưu trên LocalStorage thiết bị của bạn.</p>
       </div>
     </div>
-    <button id="legal-confirm" class="primary wide">Tôi đã hiểu ${Xe("check")}</button>`,
+    <button id="legal-confirm" class="primary wide" style="margin-top:12px">Tôi đã hiểu ${Xe("check")}</button>`,
     "legal"
   );
   const lc=Y("legal-confirm");
