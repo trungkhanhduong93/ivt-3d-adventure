@@ -26,3 +26,211 @@
   line-height: 1.4;
   text-align: left;
 }
+
+
+/* ==========================================================================
+   FIX HIỂN THỊ BẢNG CÂU HỎI & CÁC PHƯƠNG ÁN (A, B, C, D) CHUẨN MỰC
+   ========================================================================== */
+dialog {
+  width: min(720px, calc(100vw - 28px)) !important;
+  max-width: 720px !important;
+  max-height: calc(100dvh - 36px) !important;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  padding: 32px 34px !important;
+  border-radius: 28px !important;
+  box-sizing: border-box !important;
+}
+
+dialog h2 {
+  font-family: var(--font-display) !important;
+  font-size: 26px !important;
+  line-height: 1.25 !important;
+  margin: 0 40px 10px 0 !important;
+  color: var(--ink) !important;
+  word-break: break-word !important;
+}
+
+.dialog-eyebrow {
+  margin: 6px 0 16px !important;
+  font-size: 11px !important;
+  font-weight: 900 !important;
+  letter-spacing: 1.5px !important;
+  color: var(--gold-deep) !important;
+  text-transform: uppercase !important;
+}
+
+.question-intro {
+  font-size: 16px !important;
+  line-height: 1.65 !important;
+  color: var(--ink) !important;
+  text-align: left !important;
+  margin: 0 0 18px 0 !important;
+  font-weight: 500 !important;
+  word-break: break-word !important;
+}
+
+.question-intro strong {
+  color: var(--ink-soft) !important;
+  font-weight: 800 !important;
+  font-family: var(--font-display) !important;
+}
+
+/* Biến danh sách câu trả lời thành 1 cột dọc chuẩn mực, full width */
+.answers {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+  width: 100% !important;
+  margin: 0 0 16px 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Từng phương án A, B, C, D hiển thị đầy đủ, không bị cắt chữ */
+.answer {
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+  width: 100% !important;
+  min-height: unset !important;
+  height: auto !important;
+  padding: 13px 16px !important;
+  border: 2px solid #e2e6d4 !important;
+  border-bottom: 4px solid #cbd3bb !important;
+  border-radius: 16px !important;
+  background: #fdfef9 !important;
+  text-align: left !important;
+  box-sizing: border-box !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+}
+
+.answer:hover:not(:disabled) {
+  background: #fffcf0 !important;
+  border-color: #ecd9a0 !important;
+  transform: translateY(-1px) !important;
+}
+
+.answer kbd {
+  flex-shrink: 0 !important;
+  min-width: 24px !important;
+  height: 24px !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  border-radius: 6px !important;
+  margin-top: 2px !important;
+  background: #eef2e1 !important;
+  border: 1px solid #c2ccb3 !important;
+  border-bottom: 2px solid #b2bc9f !important;
+  color: var(--ink) !important;
+}
+
+.answer > span {
+  flex: 1 !important;
+  font-family: var(--font) !important;
+  font-size: 15px !important;
+  line-height: 1.5 !important;
+  font-weight: 600 !important;
+  color: var(--ink) !important;
+  white-space: normal !important;
+  word-break: break-word !important;
+  text-align: left !important;
+}
+
+.answer.correct {
+  background: #eaf8e6 !important;
+  border-color: #6aa95c !important;
+  border-bottom-color: #4f8543 !important;
+  color: #1e5a1b !important;
+}
+
+.answer.wrong {
+  background: #fdeee9 !important;
+  border-color: #e8562f !important;
+  border-bottom-color: #b53818 !important;
+  opacity: 0.75 !important;
+}
+
+.feedback {
+  margin: 12px 0 !important;
+  padding: 14px 18px !important;
+  border-radius: 16px !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+  word-break: break-word !important;
+}
+
+.feedback.success {
+  background: #eaf8e6 !important;
+  border: 1px solid #a3dc96 !important;
+  color: #1a5e16 !important;
+}
+
+.feedback.error {
+  background: #fdeee9 !important;
+  border: 1px solid #f3b6a6 !important;
+  color: #9c270d !important;
+}
+
+.hint-area {
+  margin: 12px 0 !important;
+  padding: 14px 18px !important;
+  border-radius: 16px !important;
+  background: #fff8e6 !important;
+  border: 1px solid #ebd9a2 !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+  color: #6b531a !important;
+  word-break: break-word !important;
+}
+
+.quiz-footer {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  margin-top: 14px !important;
+}
+
+/* Căn chỉnh icon vùng đất trên badge góc trên bên trái */
+.area-icon {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+}
+.area-icon svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+/* Căn chỉnh icon các vùng đất 3D và panel bản đồ */
+.region-icon svg,
+.map-region-icon svg {
+  width: 18px !important;
+  height: 18px !important;
+  vertical-align: middle !important;
+}
+
+@media (max-width: 640px) {
+  dialog {
+    width: calc(100vw - 20px) !important;
+    padding: 24px 18px !important;
+    border-radius: 22px !important;
+  }
+  dialog h2 {
+    font-size: 20px !important;
+  }
+  .question-intro {
+    font-size: 14px !important;
+  }
+  .answer {
+    padding: 11px 13px !important;
+    gap: 9px !important;
+  }
+  .answer > span {
+    font-size: 13.5px !important;
+  }
+}
