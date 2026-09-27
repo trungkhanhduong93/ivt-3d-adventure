@@ -3972,8 +3972,18 @@ nearMilo(){return Math.hypot(this.player.position.x-this.milo.position.x,this.pl
   let pool = allQs.filter(q => q.role === role);
   if (!pool.length) pool = allQs;
   let match = null;
-  if (e === "station" && t) { match = allQs.find(q => q.id === t); }
-  if (!match) { match = pool.find(q => q.id.endsWith(String(plank).padStart(2, "0")) && q.id !== t) || pool[Math.floor(n() * pool.length)]; }
+  if (e === "station" && t) {
+    match = allQs.find(q => q.id === t);
+  }
+  if (!match && e === "bridge") {
+    const plankPool = pool.filter(q => q.id.endsWith(String(plank).padStart(2, "0")));
+    const uncompletedBridge = plankPool.filter(q => !(i.questionStats?.[q.id]?.correct > 0));
+    match = uncompletedBridge[0] || plankPool[0];
+  }
+  if (!match) {
+    const uncompleted = pool.filter(q => !(i.questionStats?.[q.id]?.correct > 0) && q.id !== t);
+    match = uncompleted.length > 0 ? uncompleted[Math.floor(n() * uncompleted.length)] : (pool.find(q => q.id !== t) || pool[0]);
+  }
   const correctOpt = match.options.find(o => o.isCorrect) || match.options[0];
   return {
     id: match.id,
@@ -4074,7 +4084,7 @@ tone(e,t=.15,n=0,r=.06){if(!this.enabled||!this.context)return;const s=this.cont
   }
   ctx.restore();
 }
-function Ql(i,e,t,n,r){const s=n.scale,a=i.createRadialGradient(e/2,t/2,0,e/2,t/2,Math.max(e,t)*.75);a.addColorStop(0,"#86bf62"),a.addColorStop(1,"#5f9a4e"),i.fillStyle=a,i.fillRect(0,0,e,t),i.save(),i.translate(e/2,t/2),i.rotate(n.rotation),i.scale(s,s),i.translate(-n.cx,-n.cz);for(const[g,S,p]of ag())i.fillStyle="#4f8a45",i.beginPath(),i.arc(g+.3,S+.4,p,0,Math.PI*2),i.fill(),i.fillStyle="#65a353",i.beginPath(),i.arc(g,S,p,0,Math.PI*2),i.fill();i.fillStyle="#9ed072",vi(i,fe.west.minX,fe.minZ,fe.west.maxX,fe.maxZ,10),i.fill(),vi(i,fe.east.minX,fe.minZ,fe.east.maxX,fe.maxZ,10),i.fill(),i.fillStyle="#e3d3a4",i.fillRect(Qe.riverMin-.9,fe.minZ-400,Qe.riverMax-Qe.riverMin+1.8,fe.maxZ-fe.minZ+800),i.fillStyle="#5cc0d3",i.fillRect(Qe.riverMin,fe.minZ-400,Qe.riverMax-Qe.riverMin,fe.maxZ-fe.minZ+800),i.fillStyle="#6fcbe0",i.beginPath(),i.arc(-38,-11,4.6,0,Math.PI*2),i.fill();for(const[g,S,p]of og())i.fillStyle="#6fae5a",i.beginPath(),i.arc(g+.25,S+.35,p,0,Math.PI*2),i.fill(),i.fillStyle="#86c46a",i.beginPath(),i.arc(g,S,p,0,Math.PI*2),i.fill();i.lineCap="round",i.lineJoin="round",i.strokeStyle="#f1e2b8",i.lineWidth=2.6;for(const g of Wr)i.beginPath(),g.forEach(([S,p])=>i.lineTo(S,p)),i.stroke();const o=r.bridge/yt;i.fillStyle="#d9c9a0",i.fillRect(Qe.riverMin,-1.7,(Qe.riverMax-Qe.riverMin)*o,3.4),o<1&&(i.setLineDash([.8,.8]),i.strokeStyle="#fffbea",i.lineWidth=.35,i.strokeRect(Qe.riverMin,-1.7,Qe.riverMax-Qe.riverMin,3.4),i.setLineDash([]));for(const g of Dt){if(g.id==="village")continue;const S=Di(g,r.questComplete),[p,d]=g.center,[E,b]=g.size;i.globalAlpha=S?.85:.45,i.fillStyle=S?g.color:"#c9cfbf",vi(i,p-E/2,d-b/2,p+E/2,d+b/2,2.5),i.fill(),i.globalAlpha=1,S||(i.setLineDash([1,1]),i.strokeStyle="#7d8a74",i.lineWidth=.3,i.stroke(),i.setLineDash([])),r.selected===g.id&&(i.strokeStyle="#f3b53d",i.lineWidth=.9,vi(i,p-E/2-.8,d-b/2-.8,p+E/2+.8,d+b/2+.8,3),i.stroke())}i.fillStyle="#e39a67";for(const[g,S,p]of[[-12,-6,2.4],[-17,6,1.8],[-4,-11,2],[-15,-14,1.6]])vi(i,g-p,S-p,g+p,S+p,.6),i.fill();r.selected==="village"&&(i.strokeStyle="#f3b53d",i.lineWidth=.9,vi(i,-30,-20,4,20,3),i.stroke()),i.restore();const l=(g,S)=>{const p=(g-n.cx)*s,d=(S-n.cz)*s,E=Math.cos(n.rotation),b=Math.sin(n.rotation);return{x:e/2+p*E-d*b,y:t/2+p*b+d*E}};i.textAlign="center",i.textBaseline="middle";for(const g of Dt){const S=Di(g,r.questComplete),p=l(g.center[0],g.center[1]),d=r.labels?26:s>2.2?20:15;if(i.globalAlpha=S?1:.7,drawMapVectorIcon(i,S?g.icon:"lock",p.x,p.y-(r.labels?10:0),d,S,g.color),r.labels){i.font='800 14px Nunito, "Trebuchet MS", sans-serif';const E=r.translate(g.name),b=i.measureText(E).width+18;i.fillStyle="#fffbeaee",i.beginPath(),i.roundRect(p.x-b/2,p.y+8,b,24,12),i.fill(),i.fillStyle=sg,i.fillText(E,p.x,p.y+20.5)}i.globalAlpha=1}const c=l(r.milo.x,r.milo.z),u=r.labels?9:6;i.fillStyle="#f4c755",i.strokeStyle="#fff9e6",i.lineWidth=2.5,i.beginPath(),i.arc(c.x,c.y,u,0,Math.PI*2),i.fill(),i.stroke(),i.fillStyle="#6e531a",i.font=`900 ${u*1.4}px Nunito, sans-serif`,i.fillText("!",c.x,c.y+.5);const h=l(r.player.x,r.player.z),f=r.labels?13:10,m=1+Math.sin(r.time*3)*.15;i.fillStyle="#ffffff55",i.beginPath(),i.arc(h.x,h.y,f*1.6*m,0,Math.PI*2),i.fill(),i.save(),i.translate(h.x,h.y),i.rotate(n.rotation-r.player.facing+Math.PI),i.fillStyle="#e8562f",i.strokeStyle="#fff",i.lineWidth=2.5,i.beginPath(),i.moveTo(0,-f),i.lineTo(f*.72,f*.75),i.lineTo(0,f*.38),i.lineTo(-f*.72,f*.75),i.closePath(),i.stroke(),i.fill(),i.restore()}const cl={warehouse:'<path d="M3 10l9-6 9 6v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10z"/><polyline points="3 10 12 4 21 10"/><rect x="8" y="13" width="8" height="8" rx="1"/><line x1="8" y1="17" x2="16" y2="17"/><line x1="12" y1="13" x2="12" y2="21"/>',user_manager:'<path d="M7 8a2.5 2.5 0 0 1 3.5-2.2 3.5 3.5 0 0 1 6 0A2.5 2.5 0 0 1 20 8c0 1.2-.8 2-2 2.2H6C4.8 10 4 9.2 4 8z"/><circle cx="12" cy="13.2" r="3.2"/><path d="M10.8 13.8a1.5 1.5 0 0 0 2.4 0"/><path d="M5.5 21v-1.5a3.5 3.5 0 0 1 3.5-3.5h6a3.5 3.5 0 0 1 3.5 3.5V21"/><line x1="10" y1="16.5" x2="10" y2="21"/><line x1="14" y1="16.5" x2="14" y2="21"/>',user_tech:'<circle cx="12" cy="11.5" r="3.5"/><path d="M7.5 11.5a4.5 4.5 0 0 1 9 0"/><rect x="6.5" y="10" width="2" height="3.5" rx="1"/><rect x="15.5" y="10" width="2" height="3.5" rx="1"/><path d="M16.5 13.5v1a2 2 0 0 1-2 2H13"/><circle cx="12.5" cy="16.5" r="0.6"/><path d="M5 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/><path d="M10 15.5l2 2 2-2"/><rect x="13.5" y="18" width="3" height="3" rx="0.5"/>',box:'<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>',pos:'<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/>',tree:'<path d="M12 2L4 14h5v6h6v-6h5z"/>',city:'<path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/>',tower:'<path d="M12 2l4 5v14H8V7zM9 11h6M9 15h6"/>',leaf:'<path d="M11 20A7 7 0 0 1 4 13C4 8 11 2 11 2s7 6 7 11a7 7 0 0 1-7 7z"/><path d="M11 2v18"/>',crown:'<path d="m3 6 5 4 4-7 4 7 5-4-2 13H5Z"/><path d="M8 15h8"/>',book:'<path d="M12 6c-3-2-7-2-10-1v15c3-1 7-1 10 1 3-2 7-2 10-1V5c-3-1-7-1-10 1Zm0 0v15"/>',star:'<path d="m12 2 3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1Z"/>',sound:'<path d="m11 4-6 5H2v6h3l6 5V4Zm4 4c3 2 3 6 0 8m3-11c5 4 5 10 0 14"/>',mute:'<path d="m11 4-6 5H2v6h3l6 5V4Zm5 5 6 6m0-6-6 6"/>',settings:'<path d="M4 7h16M4 17h16"/><circle cx="8" cy="7" r="3"/><circle cx="16" cy="17" r="3"/>',arrow:'<path d="M4 12h16m-6-6 6 6-6 6"/>',help:'<circle cx="12" cy="12" r="10"/><path d="M9 8a3 3 0 0 1 6 0c0 2-3 2-3 5m0 3v1"/>',coin:'<circle cx="12" cy="12" r="9"/><path d="M12 6v12m3-9c-5-3-7 2-3 3s3 5-3 3"/>',flag:'<path d="M5 22V3m0 1c5-4 9 4 15 0v10c-6 4-10-4-15 0"/>',check:'<path d="m5 12 4 4L19 6"/>',close:'<path d="m6 6 12 12M18 6 6 18"/>',compass:'<circle cx="12" cy="12" r="10"/><path d="m16 8-3 5-5 3 3-5Z"/>',pos:'<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20M7 8h10M7 12h4"/>',scale:'<path d="m12 3v18M6 8l6-2 6 2M6 8v4c0 1.5-1.5 3-3 3s-3-1.5-3-3V8h6Zm12 0v4c0 1.5 1.5 3 3 3s3-1.5 3-3V8h-6Z"/>',pot:'<path d="M4 11h16a1 1 0 0 1 1 1v6a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4v-6a1 1 0 0 1 1-1ZM8 7a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2M2 13h20"/>',truck:'<rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>',clipboard:'<rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2M9 12h6M9 16h4"/>',reset:'<path d="M3 10a9 9 0 1 1 2 8M3 3v7h7"/>',jump:'<path d="M12 21V3m-6 6 6-6 6 6"/>',save:'<path d="M5 3h12l4 4v14H3V3h2Zm2 0v7h10V3M7 21v-7h10v7"/>',map:'<path d="m9 4-6 2v14l6-2 6 2 6-2V4l-6 2-6-2Zm0 0v14m6-12v14"/>',chevron:'<path d="m6 9 6 6 6-6"/>',lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',plus:'<path d="M12 5v14M5 12h14"/>',minus:'<path d="M5 12h14"/>'},Xe=i=>`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${cl[i]??cl.star}</svg>`,Y=i=>document.getElementById(i);let ie=Km();const xt=new ng;let _e,jn,Kt="bridge",Yn=0,ya=!1,ba=0,Xa="",hl=0,ec=!1,ul=0,dl=!1,bi="",Dn=!1,Ei;const qa=Dt.filter(i=>i.id!=="village"),tc=Y("app");tc.innerHTML=`
+function Ql(i,e,t,n,r){const s=n.scale,a=i.createRadialGradient(e/2,t/2,0,e/2,t/2,Math.max(e,t)*.75);a.addColorStop(0,"#86bf62"),a.addColorStop(1,"#5f9a4e"),i.fillStyle=a,i.fillRect(0,0,e,t),i.save(),i.translate(e/2,t/2),i.rotate(n.rotation),i.scale(s,s),i.translate(-n.cx,-n.cz);for(const[g,S,p]of ag())i.fillStyle="#4f8a45",i.beginPath(),i.arc(g+.3,S+.4,p,0,Math.PI*2),i.fill(),i.fillStyle="#65a353",i.beginPath(),i.arc(g,S,p,0,Math.PI*2),i.fill();i.fillStyle="#9ed072",vi(i,fe.west.minX,fe.minZ,fe.west.maxX,fe.maxZ,10),i.fill(),vi(i,fe.east.minX,fe.minZ,fe.east.maxX,fe.maxZ,10),i.fill(),i.fillStyle="#e3d3a4",i.fillRect(Qe.riverMin-.9,fe.minZ-400,Qe.riverMax-Qe.riverMin+1.8,fe.maxZ-fe.minZ+800),i.fillStyle="#5cc0d3",i.fillRect(Qe.riverMin,fe.minZ-400,Qe.riverMax-Qe.riverMin,fe.maxZ-fe.minZ+800),i.fillStyle="#6fcbe0",i.beginPath(),i.arc(-38,-11,4.6,0,Math.PI*2),i.fill();for(const[g,S,p]of og())i.fillStyle="#6fae5a",i.beginPath(),i.arc(g+.25,S+.35,p,0,Math.PI*2),i.fill(),i.fillStyle="#86c46a",i.beginPath(),i.arc(g,S,p,0,Math.PI*2),i.fill();i.lineCap="round",i.lineJoin="round",i.strokeStyle="#f1e2b8",i.lineWidth=2.6;for(const g of Wr)i.beginPath(),g.forEach(([S,p])=>i.lineTo(S,p)),i.stroke();const o=r.bridge/yt;i.fillStyle="#d9c9a0",i.fillRect(Qe.riverMin,-1.7,(Qe.riverMax-Qe.riverMin)*o,3.4),o<1&&(i.setLineDash([.8,.8]),i.strokeStyle="#fffbea",i.lineWidth=.35,i.strokeRect(Qe.riverMin,-1.7,Qe.riverMax-Qe.riverMin,3.4),i.setLineDash([]));for(const g of Dt){if(g.id==="village")continue;const S=Di(g,r.questComplete),[p,d]=g.center,[E,b]=g.size;i.globalAlpha=S?.85:.45,i.fillStyle=S?g.color:"#c9cfbf",vi(i,p-E/2,d-b/2,p+E/2,d+b/2,2.5),i.fill(),i.globalAlpha=1,S||(i.setLineDash([1,1]),i.strokeStyle="#7d8a74",i.lineWidth=.3,i.stroke(),i.setLineDash([])),r.selected===g.id&&(i.strokeStyle="#f3b53d",i.lineWidth=.9,vi(i,p-E/2-.8,d-b/2-.8,p+E/2+.8,d+b/2+.8,3),i.stroke())}i.fillStyle="#e39a67";for(const[g,S,p]of[[-12,-6,2.4],[-17,6,1.8],[-4,-11,2],[-15,-14,1.6]])vi(i,g-p,S-p,g+p,S+p,.6),i.fill();r.selected==="village"&&(i.strokeStyle="#f3b53d",i.lineWidth=.9,vi(i,-30,-20,4,20,3),i.stroke()),i.restore();const l=(g,S)=>{const p=(g-n.cx)*s,d=(S-n.cz)*s,E=Math.cos(n.rotation),b=Math.sin(n.rotation);return{x:e/2+p*E-d*b,y:t/2+p*b+d*E}};i.textAlign="center",i.textBaseline="middle";for(const g of Dt){const S=Di(g,r.questComplete),p=l(g.center[0],g.center[1]),d=r.labels?26:s>2.2?20:15;if(i.globalAlpha=S?1:.7,drawMapVectorIcon(i,S?g.icon:"lock",p.x,p.y-(r.labels?10:0),d,S,g.color),r.labels){i.font='800 14px Nunito, "Trebuchet MS", sans-serif';const E=r.translate(g.name),b=i.measureText(E).width+18;i.fillStyle="#fffbeaee",i.beginPath(),i.roundRect(p.x-b/2,p.y+8,b,24,12),i.fill(),i.fillStyle=sg,i.fillText(E,p.x,p.y+20.5)}i.globalAlpha=1}const c=l(r.milo.x,r.milo.z),u=r.labels?9:6;i.fillStyle="#f4c755",i.strokeStyle="#fff9e6",i.lineWidth=2.5,i.beginPath(),i.arc(c.x,c.y,u,0,Math.PI*2),i.fill(),i.stroke(),i.fillStyle="#6e531a",i.font=`900 ${u*1.4}px Nunito, sans-serif`,i.fillText("!",c.x,c.y+.5);const h=l(r.player.x,r.player.z),f=r.labels?13:10,m=1+Math.sin(r.time*3)*.15;i.fillStyle="#ffffff55",i.beginPath(),i.arc(h.x,h.y,f*1.6*m,0,Math.PI*2),i.fill(),i.save(),i.translate(h.x,h.y),i.rotate(n.rotation-r.player.facing+Math.PI),i.fillStyle="#e8562f",i.strokeStyle="#fff",i.lineWidth=2.5,i.beginPath(),i.moveTo(0,-f),i.lineTo(f*.72,f*.75),i.lineTo(0,f*.38),i.lineTo(-f*.72,f*.75),i.closePath(),i.stroke(),i.fill(),i.restore()}const cl={warehouse:'<path d="M3 10l9-6 9 6v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V10z"/><polyline points="3 10 12 4 21 10"/><rect x="8" y="13" width="8" height="8" rx="1"/><line x1="8" y1="17" x2="16" y2="17"/><line x1="12" y1="13" x2="12" y2="21"/>',user_manager:'<path d="M7 8a2.5 2.5 0 0 1 3.5-2.2 3.5 3.5 0 0 1 6 0A2.5 2.5 0 0 1 20 8c0 1.2-.8 2-2 2.2H6C4.8 10 4 9.2 4 8z"/><circle cx="12" cy="13.2" r="3.2"/><path d="M10.8 13.8a1.5 1.5 0 0 0 2.4 0"/><path d="M5.5 21v-1.5a3.5 3.5 0 0 1 3.5-3.5h6a3.5 3.5 0 0 1 3.5 3.5V21"/><line x1="10" y1="16.5" x2="10" y2="21"/><line x1="14" y1="16.5" x2="14" y2="21"/>',user_tech:'<circle cx="12" cy="11.5" r="3.5"/><path d="M7.5 11.5a4.5 4.5 0 0 1 9 0"/><rect x="6.5" y="10" width="2" height="3.5" rx="1"/><rect x="15.5" y="10" width="2" height="3.5" rx="1"/><path d="M16.5 13.5v1a2 2 0 0 1-2 2H13"/><circle cx="12.5" cy="16.5" r="0.6"/><path d="M5 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/><path d="M10 15.5l2 2 2-2"/><rect x="13.5" y="18" width="3" height="3" rx="0.5"/>',box:'<path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>',pos:'<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8m-4-4v4"/>',tree:'<path d="M12 2L4 14h5v6h6v-6h5z"/>',city:'<path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/>',tower:'<path d="M12 2l4 5v14H8V7zM9 11h6M9 15h6"/>',leaf:'<path d="M11 20A7 7 0 0 1 4 13C4 8 11 2 11 2s7 6 7 11a7 7 0 0 1-7 7z"/><path d="M11 2v18"/>',crown:'<path d="m3 6 5 4 4-7 4 7 5-4-2 13H5Z"/><path d="M8 15h8"/>',book:'<path d="M12 6c-3-2-7-2-10-1v15c3-1 7-1 10 1 3-2 7-2 10-1V5c-3-1-7-1-10 1Zm0 0v15"/>',star:'<path d="m12 2 3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1Z"/>',sound:'<path d="m11 4-6 5H2v6h3l6 5V4Zm4 4c3 2 3 6 0 8m3-11c5 4 5 10 0 14"/>',mute:'<path d="m11 4-6 5H2v6h3l6 5V4Zm5 5 6 6m0-6-6 6"/>',settings:'<path d="M4 7h16M4 17h16"/><circle cx="8" cy="7" r="3"/><circle cx="16" cy="17" r="3"/>',arrow:'<path d="M4 12h16m-6-6 6 6-6 6"/>',help:'<circle cx="12" cy="12" r="10"/><path d="M9 8a3 3 0 0 1 6 0c0 2-3 2-3 5m0 3v1"/>',coin:'<circle cx="12" cy="12" r="9"/><path d="M12 6v12m3-9c-5-3-7 2-3 3s3 5-3 3"/>',flag:'<path d="M5 22V3m0 1c5-4 9 4 15 0v10c-6 4-10-4-15 0"/>',check:'<path d="m5 12 4 4L19 6"/>',close:'<path d="m6 6 12 12M18 6 6 18"/>',compass:'<circle cx="12" cy="12" r="10"/><path d="m16 8-3 5-5 3 3-5Z"/>',pos:'<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20M7 8h10M7 12h4"/>',scale:'<path d="m12 3v18M6 8l6-2 6 2M6 8v4c0 1.5-1.5 3-3 3s-3-1.5-3-3V8h6Zm12 0v4c0 1.5 1.5 3 3 3s3-1.5 3-3V8h-6Z"/>',pot:'<path d="M4 11h16a1 1 0 0 1 1 1v6a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4v-6a1 1 0 0 1 1-1ZM8 7a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2M2 13h20"/>',truck:'<rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>',clipboard:'<rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2M9 12h6M9 16h4"/>',reset:'<path d="M3 10a9 9 0 1 1 2 8M3 3v7h7"/>',jump:'<path d="M12 21V3m-6 6 6-6 6 6"/>',save:'<path d="M5 3h12l4 4v14H3V3h2Zm2 0v7h10V3M7 21v-7h10v7"/>',map:'<path d="m9 4-6 2v14l6-2 6 2 6-2V4l-6 2-6-2Zm0 0v14m6-12v14"/>',chevron:'<path d="m6 9 6 6 6-6"/>',lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',plus:'<path d="M12 5v14M5 12h14"/>',minus:'<path d="M5 12h14"/>',scales:'<path d="M12 2v20M4 7h16"/><path d="M2 14c0 2 2 3 4 3s4-1 4-3L6 7"/><path d="M14 14c0 2 2 3 4 3s4-1 4-3L18 7"/>'},Xe=i=>`<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${cl[i]??cl.star}</svg>`,Y=i=>document.getElementById(i);let ie=Km();const xt=new ng;let _e,jn,Kt="bridge",Yn=0,ya=!1,ba=0,Xa="",hl=0,ec=!1,ul=0,dl=!1,bi="",Dn=!1,Ei;const qa=Dt.filter(i=>i.id!=="village"),tc=Y("app");tc.innerHTML=`
   <main class="game-shell">
     <canvas id="world" aria-label="Làng Khởi Đầu 3D. Di chuyển bằng WASD, phím mũi tên hoặc chạm xuống đất."></canvas>
     <div id="loading" class="loading"><span class="loading-crown">${Xe("crown")}</span><strong>Đang mở cánh cổng…</strong></div>
@@ -4114,7 +4124,7 @@ function Ql(i,e,t,n,r){const s=n.scale,a=i.createRadialGradient(e/2,t/2,0,e/2,t/
       <button id="crate3-label" class="world-label workstation-label" aria-label="Rương Cứu Hộ Giá Vốn"><span class="milo-dot mystery-dot">★</span><strong>Rương Cứu Hộ Giá Vốn</strong><small>Bí Quyết Giá Vốn</small></button>
       <div id="bridge-label" class="world-label landmark"><strong>Cây cầu tình bạn</strong><small id="bridge-count">0 / 6 đoạn cầu</small></div>
       ${qa.map(i=>`<div id="${i.id}-label" class="world-label landmark region-label"><span class="region-icon">${Xe(i.icon)}</span><strong>${i.name}</strong><small>${i.subtitle}</small></div>`).join("")}
-      <div class="bottom-bar"><div class="controls-hint"><span class="key-group"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span><span>Di chuyển</span><span class="divider"></span><kbd>Space</kbd><span>Nhảy</span><span class="divider"></span><kbd>M</kbd><span>Bản đồ</span><span class="divider"></span><span>Kéo chuột để xoay</span></div><div class="toolbar"><div class="zoom-group"><button id="zoom-in" class="icon-button" aria-label="Phóng to" title="Phóng to">${Xe("plus")}</button><button id="zoom-out" class="icon-button" aria-label="Thu nhỏ" title="Thu nhỏ">${Xe("minus")}</button></div><button id="open-roadmap" class="tool-button roadmap-tool-btn" title="Lộ trình nhiệm vụ & Tự dẫn đường">${Xe("compass")}<span>Lộ trình</span></button><button id="open-map" class="tool-button">${Xe("map")}<span>Bản đồ</span></button><button id="learn" class="tool-button" title="Mở tài liệu hướng dẫn IVT PRO">${Xe("book")}<span>Tài liệu IVT PRO</span></button><button id="help" class="icon-button" aria-label="Hướng dẫn chơi" title="Hướng dẫn chơi">${Xe("help")}</button></div></div>
+      <div class="bottom-bar"><div class="controls-hint"><span class="key-group"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span><span>Di chuyển</span><span class="divider"></span><kbd>Space</kbd><span>Nhảy</span><span class="divider"></span><kbd>M</kbd><span>Bản đồ</span><span class="divider"></span><span>Kéo chuột để xoay</span></div><div class="toolbar"><div class="zoom-group"><button id="zoom-in" class="icon-button" aria-label="Phóng to" title="Phóng to">${Xe("plus")}</button><button id="zoom-out" class="icon-button" aria-label="Thu nhỏ" title="Thu nhỏ">${Xe("minus")}</button></div><button id="open-roadmap" class="tool-button roadmap-tool-btn" title="Lộ trình nhiệm vụ & Tự dẫn đường">${Xe("compass")}<span>Lộ trình</span></button><button id="open-map" class="tool-button">${Xe("map")}<span>Bản đồ</span></button><button id="learn" class="tool-button" title="Mở tài liệu hướng dẫn IVT PRO">${Xe("book")}<span>Tài liệu IVT PRO</span></button><button id="legal-info" class="icon-button" aria-label="Căn cứ pháp lý & Bản quyền" title="Căn cứ pháp lý & Bản quyền">${Xe("scales")}</button><button id="help" class="icon-button" aria-label="Hướng dẫn chơi" title="Hướng dẫn chơi">${Xe("help")}</button></div></div>
       <button id="interact" class="interact" hidden><kbd>E</kbd> Nói chuyện với Milo ${Xe("arrow")}</button>
       <div id="touch-controls" class="touch-controls"><div id="joystick" class="joystick" role="group" aria-label="Cần điều khiển di chuyển"><div id="joystick-knob"></div></div><button id="jump" class="jump-button" aria-label="Nhảy">${Xe("jump")}</button></div>
     </div>
@@ -4127,20 +4137,57 @@ function Ql(i,e,t,n,r){const s=n.scale,a=i.createRadialGradient(e/2,t/2,0,e/2,t/
     <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
     <footer id="menu-footer" class="menu-footer"><span><b>IVT PRO 3D</b> ADVENTURE</span><span>Dự án mô phỏng giáo dục phi thương mại · Dành riêng cho học tập & đào tạo nội bộ</span><span>Lưu tự động ${Xe("save")}</span></footer>
     <dialog id="dialog" aria-labelledby="dialog-title"><button id="close-dialog" class="dialog-close" aria-label="Đóng">${Xe("close")}</button><div id="dialog-content"></div></dialog>
-  </main>`;Wa(tc);function In(i){Y("toast").textContent=Cn(i),Y("toast").hidden=!1,clearTimeout(hl),hl=window.setTimeout(()=>Y("toast").hidden=!0,4200)}function Xt(){const i=Zm(ie);return!i&&!dl&&(dl=!0,In("Trình duyệt chưa cho phép lưu. Tiến trình chỉ được giữ trong lần chơi này.")),i}function fl(i){const e=Y(i);e.classList.remove("bump"),e.offsetWidth,e.classList.add("bump")}function _n(){const i=kr(ie.xp),e=Sa[i-1],t=Sa[i];Y("level").textContent=String(i),Y("coins").textContent=String(ie.coins),Y("xp-text").textContent=Ln(t?`${ie.xp-e} / ${t-e} XP`:`${ie.xp} XP · Cấp cao nhất`);const n=t?Math.min(100,(ie.xp-e)/(t-e)*100):100;Y("xp-fill").style.width=`${n}%`,Y("xp-fill").parentElement.setAttribute("aria-valuenow",String(Math.round(n))),Y("avatar-face").textContent=ie.avatar==="girl"?"👩‍💻":"🧑‍💼",Y("player-name").textContent=ie.avatar==="girl"?"Kỹ Thuật Viên Triển Khai":"Thủ Kho F&B";if(_e&&_e.updatePlayerVisuals){const role=(ie.avatar==="girl"||ie.avatar==="tech")?"tech":"manager";_e.updatePlayerVisuals(i,role);};Y("boy").setAttribute("aria-pressed",String(ie.avatar==="boy")),Y("girl").setAttribute("aria-pressed",String(ie.avatar==="girl")),Y("play").innerHTML=Ln(`${ie.started?"Tiếp tục phiêu lưu":"Bắt đầu phiêu lưu"} ${Xe("arrow")}`);const nqObj=getNextSuggestedQuest();Y("quest-copy").innerHTML=ie.questComplete?`Bạn đã hoàn thành Cây Cầu! Hãy khám phá tiếp <strong>${nqObj.name}</strong> bên Bờ Đông.`:(ie.bridge===yt?"Cây cầu đã sẵn sàng! Bấm 'Tự dẫn đường' để sang Đảo Bếp Trung Tâm.":`Đích đến gợi ý: <strong>${nqObj.name}</strong> (${nqObj.zone}). Bấm nút dưới để tự chạy tới nơi!`);Y("quest-title").textContent=ie.questComplete?"Cây cầu tình bạn đã hoàn thành!":"Một cây cầu, ngàn niềm vui",Y("quest-progress").textContent=ie.questComplete?"✓ Hoàn thành":ie.bridge===yt?"Đi qua cầu để hoàn thành":ie.questAccepted?`${ie.bridge} / ${yt} đoạn cầu`:"Gặp người dẫn đường",Y("quest-steps").innerHTML=Array.from({length:yt},(r,s)=>`<span class="${s<ie.bridge?"done":""}" aria-label="Đoạn ${s+1}: ${s<ie.bridge?"đã xây":"chưa xây"}">${s<ie.bridge?Xe("check"):s+1}</span>`).join(""),Y("bridge-count").textContent=`${ie.bridge} / ${yt} đoạn cầu`;for(const r of qa){const s=Y(`${r.id}-label`),a=Di(r,ie.questComplete);s.classList.toggle("locked",!a),s.querySelector(".region-icon").innerHTML=Xe(a?r.icon:"lock")}Y("sound").innerHTML=Xe(ie.sound?"sound":"mute"),Y("sound").setAttribute("aria-label",ie.sound?"Tắt âm thanh":"Bật âm thanh"),xt.enabled=ie.sound,Wa(Y("hud"))}function nc(i){Y("quest-card").classList.toggle("collapsed",i),Y("quest-toggle").setAttribute("aria-expanded",String(!i));try{localStorage.setItem("aigame3d_quest_collapsed",i?"1":"0")}catch{}}Y("quest-toggle").onclick=()=>nc(!Y("quest-card").classList.contains("collapsed"));try{(localStorage.getItem("aigame3d_quest_collapsed")==="1"||matchMedia("(max-width: 700px)").matches)&&nc(!0)}catch{}function Jn(i,e,t){Dn&&Kr(),_e.paused=!0,_e.clearInput(),Xa=t,Y("dialog-content").innerHTML=Ln(`<h2 id="dialog-title">${i}</h2>${e}`);const n=Y("dialog");n.open||n.showModal()}function cr(){Y("dialog").close()}Y("dialog").addEventListener("close",()=>{_e.paused=Dn,_e.clearInput(),Xa="",jn=void 0});Y("close-dialog").onclick=cr;Y("language").onclick=()=>{rg(Va()==="vi"?"en":"vi"),location.reload()};function ug(){xt.unlock(),xt.music(ie.music),ie.started=!0,_e.active=!0,_e.paused=!1,_e.setAvatar(ie.avatar),Y("welcome").hidden=!0,Y("hud").hidden=!1,Y("area-label").hidden=!1,Y("world-caption").hidden=!0,Y("menu-footer").hidden=!0,document.body.classList.add("playing"),Xt(),_n(),bi="",cc(),requestAnimationFrame(sc),In("Chào bạn! Di chuyển đến Milo, hoặc chạm xuống đất để đi.")}function pl(){cr(),Kr(),_e.active=!1,_e.clearInput(),Y("welcome").hidden=!1,Y("hud").hidden=!0,Y("area-label").hidden=!0,Y("world-caption").hidden=!1,Y("menu-footer").hidden=!1,document.body.classList.remove("playing"),_n(),xt.music(!1)}Y("play").onclick=ug;for(const i of["boy","girl"])Y(i).onclick=()=>{ie.avatar=i,_e.setAvatar(i),_n(),Xt()};function Yr(){
+  </main>`;Wa(tc);function In(i){Y("toast").textContent=Cn(i),Y("toast").hidden=!1,clearTimeout(hl),hl=window.setTimeout(()=>Y("toast").hidden=!0,4200)}function Xt(){const i=Zm(ie);return!i&&!dl&&(dl=!0,In("Trình duyệt chưa cho phép lưu. Tiến trình chỉ được giữ trong lần chơi này.")),i}function fl(i){const e=Y(i);e.classList.remove("bump"),e.offsetWidth,e.classList.add("bump")}function _n(){const i=kr(ie.xp),e=Sa[i-1],t=Sa[i];Y("level").textContent=String(i),Y("coins").textContent=String(ie.coins),Y("xp-text").textContent=Ln(t?`${ie.xp-e} / ${t-e} XP`:`${ie.xp} XP · Cấp cao nhất`);const n=t?Math.min(100,(ie.xp-e)/(t-e)*100):100;Y("xp-fill").style.width=`${n}%`,Y("xp-fill").parentElement.setAttribute("aria-valuenow",String(Math.round(n))),Y("avatar-face").textContent=ie.avatar==="girl"?"👩‍💻":"🧑‍💼",Y("player-name").textContent=ie.avatar==="girl"?"Kỹ Thuật Viên Triển Khai":"Thủ Kho F&B";if(_e&&_e.updatePlayerVisuals){const role=(ie.avatar==="girl"||ie.avatar==="tech")?"tech":"manager";_e.updatePlayerVisuals(i,role);};Y("boy").setAttribute("aria-pressed",String(ie.avatar==="boy")),Y("girl").setAttribute("aria-pressed",String(ie.avatar==="girl")),Y("play").innerHTML=Ln(`${ie.started?"Tiếp tục phiêu lưu":"Bắt đầu phiêu lưu"} ${Xe("arrow")}`);const nqObj=getNextSuggestedQuest();Y("quest-copy").innerHTML=ie.questComplete?`Bạn đã hoàn thành Cây Cầu! Hãy khám phá tiếp <strong>${nqObj.name}</strong> bên Bờ Đông.`:(ie.bridge===yt?"Cây cầu đã sẵn sàng! Bấm 'Tự dẫn đường' để sang Đảo Bếp Trung Tâm.":`Đích đến gợi ý: <strong>${nqObj.name}</strong> (${nqObj.zone}). Bấm nút dưới để tự chạy tới nơi!`);Y("quest-title").textContent=ie.questComplete?"Cây cầu tình bạn đã hoàn thành!":"Một cây cầu, ngàn niềm vui",Y("quest-progress").textContent=ie.questComplete?"✓ Hoàn thành":ie.bridge===yt?"Đi qua cầu để hoàn thành":ie.questAccepted?`${ie.bridge} / ${yt} đoạn cầu`:"Gặp người dẫn đường",Y("quest-steps").innerHTML=Array.from({length:yt},(r,s)=>`<span class="${s<ie.bridge?"done":""}" aria-label="Đoạn ${s+1}: ${s<ie.bridge?"đã xây":"chưa xây"}">${s<ie.bridge?Xe("check"):s+1}</span>`).join(""),Y("bridge-count").textContent=`${ie.bridge} / ${yt} đoạn cầu`;for(const r of qa){const s=Y(`${r.id}-label`),a=Di(r,ie.questComplete);s.classList.toggle("locked",!a),s.querySelector(".region-icon").innerHTML=Xe(a?r.icon:"lock")}Y("sound").innerHTML=Xe(ie.sound?"sound":"mute"),Y("sound").setAttribute("aria-label",ie.sound?"Tắt âm thanh":"Bật âm thanh"),xt.enabled=ie.sound,Wa(Y("hud"))}function nc(i){Y("quest-card").classList.toggle("collapsed",i),Y("quest-toggle").setAttribute("aria-expanded",String(!i));try{localStorage.setItem("aigame3d_quest_collapsed",i?"1":"0")}catch{}}Y("quest-toggle").onclick=()=>nc(!Y("quest-card").classList.contains("collapsed"));try{(localStorage.getItem("aigame3d_quest_collapsed")==="1"||matchMedia("(max-width: 700px)").matches)&&nc(!0)}catch{}function Jn(i,e,t){Dn&&Kr(),_e.paused=!0,_e.clearInput(),Xa=t,Y("dialog-content").innerHTML=Ln(`<h2 id="dialog-title">${i}</h2>${e}`);const n=Y("dialog");n.open||n.showModal()}function cr(){Y("dialog").close()}Y("dialog").addEventListener("close",()=>{_e.paused=Dn,_e.clearInput(),Xa="",jn=void 0});Y("close-dialog").onclick=cr;Y("language").onclick=()=>{rg(Va()==="vi"?"en":"vi"),location.reload()};function ug(){xt.unlock(),xt.music(ie.music),ie.started=!0,_e.active=!0,_e.paused=!1,_e.setAvatar(ie.avatar),Y("welcome").hidden=!0,Y("hud").hidden=!1,Y("area-label").hidden=!1,Y("world-caption").hidden=!0,Y("menu-footer").hidden=!0,document.body.classList.add("playing"),Xt(),_n(),bi="",cc(),requestAnimationFrame(sc),In("Chào bạn! Di chuyển đến Milo, hoặc chạm xuống đất để đi.")}function pl(){cr(),Kr(),_e.active=!1,_e.clearInput(),Y("welcome").hidden=!1,Y("hud").hidden=!0,Y("area-label").hidden=!0,Y("world-caption").hidden=!1,Y("menu-footer").hidden=!1,document.body.classList.remove("playing"),_n(),xt.music(!1)}Y("play").onclick=ug;for(const i of["boy","girl"])Y(i).onclick=()=>{ie.avatar=i,_e.setAvatar(i),_n(),Xt()};function getStationQuestionPool(ws, role) {
+  if (!ws || !ws.subs) return [];
+  const allQs = window.IVT_QUESTIONS || [];
+  let pool = allQs.filter(q => q.role === role && ws.subs.some(s => q.subsystem === s || (typeof q.subsystem === "string" && q.subsystem.startsWith(s))));
+  if (!pool.length) {
+    pool = allQs.filter(q => ws.subs.some(s => q.subsystem === s || (typeof q.subsystem === "string" && q.subsystem.startsWith(s))));
+  }
+  return pool;
+}
+function Yr(){
   if(!_e.active||_e.paused)return;
   const ws = window._currentStation;
   if(ws){
     xt.unlock();
-    const role = ie.avatar==="girl"?"tech":"manager";
-    const pool = (window.IVT_QUESTIONS||[]).filter(q=>q.role===role && ws.subs.includes(q.subsystem));
-    const selected = pool.length > 0 ? pool[Math.floor(Math.random() * pool.length)] : null;
-    if(selected){
-      Xr("station", selected.id);
+    const role = (ie.avatar==="girl"||ie.avatar==="tech")?"tech":"manager";
+    const pool = getStationQuestionPool(ws, role);
+    if(!pool.length){
+      In("Chưa có câu hỏi cho trạm này!");
       return;
     }
+    const uncompleted = pool.filter(q => !(ie.questionStats?.[q.id]?.correct > 0));
+    if(uncompleted.length === 0){
+      Jn("Trạm đã thành thạo!",
+        `<div class="completion-medal">${Xe("crown")}</div>
+         <p class="dialog-copy centered">
+           Bạn đã hoàn thành xuất sắc toàn bộ <strong>${pool.length}/${pool.length} câu hỏi</strong> tại <strong>${ws.name}</strong>!<br>
+           Nghiệp vụ tại trạm này đã được bạn nắm vững hoàn toàn.
+         </p>
+         <div class="completion-rewards">
+           <span>✓ Đã thành thạo 100%</span>
+           <span>⭐ Không cộng dồn EXP</span>
+         </div>
+         <button id="station-done-btn" class="primary wide">Khám phá trạm tiếp theo ${Xe("arrow")}</button>`,
+        "complete"
+      );
+      const sdb = Y("station-done-btn");
+      if(sdb) sdb.onclick = cr;
+      return;
+    }
+    window._activeStation = ws;
+    Xr("station", uncompleted[0].id);
+    return;
   }
-  if(!ec){In("Hãy đến gần Milo hoặc một Trạm Nghiệp Vụ (Quầy POS, Bàn Cân, Bếp BTP, Kệ Kho, Tháp Ticket).");return}xt.unlock();const i=ie.bridge===yt;Jn("Chào bạn, mình là Milo!",`<div class="dialog-eyebrow">NGƯỜI DẪN ĐƯỜNG CỦA BẠN</div><p class="dialog-copy">${i?"Cây cầu của chúng mình thật đẹp! "+(ie.questComplete?"Bạn muốn cùng mình luyện thêm nghiệp vụ kho không?":"Bạn hãy đi qua cầu đến khu vườn bên kia nhé. Mình cũng luôn sẵn sàng luyện tập cùng bạn!"):"Khu vườn bên kia sông đang chờ chúng mình. Hãy giúp mình xây <strong>6 đoạn cầu</strong> bằng những nhịp cầu phép thuật nhé!"}</p><div class="milo-tip"><span>✦</span><p>${i?"Cứ thong thả, không cần vội. Mỗi lần thử là một lần bạn tiến bộ!":"Chọn nghiệp vụ kho cho đúng số nhịp cầu. Mỗi câu đúng: <b>+10 XP, +5 xu</b>. Nếu chưa đúng, chúng mình cùng đếm lại!"}</p></div><button id="accept-quest" class="primary wide">${i?"Cùng luyện tập":"Cùng xây cầu nào!"} ${Xe("arrow")}</button>`,"milo"),Y("accept-quest").onclick=()=>{ie.questAccepted=!0,Xt(),_n(),Xr(i?"practice":"bridge")}}Y("interact").onclick=Yr;Y("milo-label").onclick=Yr;
+  if(!ec){In("Hãy đến gần Milo hoặc một Trạm Nghiệp Vụ (Quầy POS, Bàn Cân, Bếp BTP, Kệ Kho, Tháp Ticket).");return;}
+  xt.unlock();
+  const i=ie.bridge===yt;
+  Jn("Chào bạn, mình là Milo!",`<div class="dialog-eyebrow">NGƯỜI DẪN ĐƯỜNG CỦA BẠN</div><p class="dialog-copy">${i?"Cây cầu của chúng mình thật đẹp! "+(ie.questComplete?"Bạn muốn cùng mình luyện thêm nghiệp vụ kho không?":"Bạn hãy đi qua cầu đến khu vườn bên kia nhé. Mình cũng luôn sẵn sàng luyện tập cùng bạn!"):"Khu vườn bên kia sông đang chờ chúng mình. Hãy giúp mình xây <strong>6 đoạn cầu</strong> bằng những nhịp cầu phép thuật nhé!"}</p><div class="milo-tip"><span>✦</span><p>${i?"Cứ thong thả, không cần vội. Mỗi lần thử là một lần bạn tiến bộ!":"Chọn nghiệp vụ kho cho đúng số nhịp cầu. Mỗi câu đúng: <b>+10 XP, +5 xu</b>. Nếu chưa đúng, chúng mình cùng đếm lại!"}</p></div><button id="accept-quest" class="primary wide">${i?"Cùng luyện tập":"Cùng xây cầu nào!"} ${Xe("arrow")}</button>`,"milo");
+  Y("accept-quest").onclick=()=>{ie.questAccepted=!0;Xt();_n();window._activeStation=null;Xr(i?"practice":"bridge");};
+}
+Y("interact").onclick=Yr;
+Y("milo-label").onclick=()=>{window._currentStation=null;Yr();};
 
 
 const QUEST_JOURNEY=[
@@ -4156,21 +4203,26 @@ const QUEST_JOURNEY=[
 ];
 
 function getNextSuggestedQuest(){
-  if(ie.bridge<yt){
-    const posStats=Object.keys(ie.questionStats||{}).some(k=>k.includes("pos")||k.includes("01")||k.includes("05"));
-    const weighStats=Object.keys(ie.questionStats||{}).some(k=>k.includes("weigh")||k.includes("02")||k.includes("03"));
-    if(!posStats) return QUEST_JOURNEY[0];
-    if(!weighStats) return QUEST_JOURNEY[1];
-    return QUEST_JOURNEY[2]; // Milo building bridge
-  }
-  // Eastern bank
-  const kitchenDone=Object.keys(ie.questionStats||{}).some(k=>k.includes("kitchen")||k.includes("06"));
-  const truckDone=Object.keys(ie.questionStats||{}).some(k=>k.includes("truck")||k.includes("04"));
-  const auditDone=Object.keys(ie.questionStats||{}).some(k=>k.includes("audit")||k.includes("07"));
-  if(!kitchenDone) return QUEST_JOURNEY[3];
-  if(!truckDone) return QUEST_JOURNEY[4];
-  if(!auditDone) return QUEST_JOURNEY[5];
-  return QUEST_JOURNEY[6]; // Server tower
+  const role = (ie.avatar === "girl" || ie.avatar === "tech") ? "tech" : "manager";
+  const isDone = (stId) => {
+    const stDef = _stationsDef.find(s => s.id === `${stId}-label` || s.type === stId);
+    if (!stDef) return false;
+    const pool = getStationQuestionPool(stDef, role);
+    return pool.length > 0 && pool.some(q => ie.questionStats?.[q.id]?.correct > 0);
+  };
+
+  // West bank
+  if (!isDone("house")) return QUEST_JOURNEY[0]; // house (step 1)
+  if (!isDone("pond")) return QUEST_JOURNEY[1];  // pond (step 2)
+  if (!isDone("pos")) return QUEST_JOURNEY[2];   // pos (step 3)
+  if (!isDone("weigh")) return QUEST_JOURNEY[3]; // weigh (step 4)
+  if (ie.bridge < yt) return QUEST_JOURNEY[4];   // milo (step 5)
+
+  // East bank (cross bridge)
+  if (!isDone("kitchen")) return QUEST_JOURNEY[5]; // kitchen (step 6)
+  if (!isDone("truck")) return QUEST_JOURNEY[6];   // truck (step 7)
+  if (!isDone("audit")) return QUEST_JOURNEY[7];   // audit (step 8)
+  return QUEST_JOURNEY[8]; // server (step 9)
 }
 
 function navigateToTarget(targetId){
@@ -4191,8 +4243,20 @@ function navigateToTarget(targetId){
 function openRoadmapModal(){
   xt.unlock();
   const nextQ=getNextSuggestedQuest();
+  const role = (ie.avatar === "girl" || ie.avatar === "tech") ? "tech" : "manager";
   const listHtml=QUEST_JOURNEY.map((st,idx)=>{
     const isCurrent=st.id===nextQ.id;
+    let isFinished = false;
+    if(st.id === "milo") {
+      isFinished = ie.bridge >= yt;
+    } else {
+      const stDef = _stationsDef.find(s => s.id === `${st.id}-label` || s.type === st.id);
+      if(stDef) {
+        const pool = getStationQuestionPool(stDef, role);
+        isFinished = pool.length > 0 && pool.every(q => ie.questionStats?.[q.id]?.correct > 0);
+      }
+    }
+    const statusBadge = isFinished ? `<span style="display:inline-flex;align-items:center;gap:3px;color:#10b981;font-weight:700;font-size:12px">${Xe("check")} Đã xong</span>` : (isCurrent ? `<span style="color:#f59e0b;font-weight:700;font-size:12px">⚡ Đang làm</span>` : `<span style="color:#9ca3af;font-size:12px">Chưa xong</span>`);
     return `
       <div class="roadmap-step-card ${isCurrent?'current':''}">
         <div class="step-num">${st.step}</div>
@@ -4200,7 +4264,10 @@ function openRoadmapModal(){
         <div class="step-info">
           <div class="step-header">
             <strong>${st.name}</strong>
-            <span class="step-tag">${st.tag}</span>
+            <div style="display:flex;align-items:center;gap:8px">
+              ${statusBadge}
+              <span class="step-tag">${st.tag}</span>
+            </div>
           </div>
           <p class="step-desc">${st.desc}</p>
           <small class="step-zone"><span class="inline-svg">${Xe("map")}</span>${st.zone}</small>
@@ -4222,7 +4289,7 @@ function openRoadmapModal(){
             <span class="rm-icon">${Xe("compass")}</span>
             <div>
               <h3>LỘ TRÌNH NHIỆM VỤ KHO IVT PRO</h3>
-              <small>Hành trình 7 chặng từ Khởi đầu đến Master Quản Trị Kho</small>
+              <small>Hành trình 9 chặng từ Khởi đầu đến Master Quản Trị Kho F&B</small>
             </div>
           </div>
           <button id="close-roadmap-btn" class="roadmap-close-btn">&times;</button>
@@ -4268,11 +4335,27 @@ const _stationsDef=[
   {id:"crate3-label",type:"crate",name:"Rương Cứu Hộ Giá Vốn",subs:["PHAN_HE_08_GIA_VON","PHAN_HE_12_CHAN_DOAN_TICKET"]}
 ];
 _stationsDef.forEach(s=>{const el=Y(s.id);if(el)el.onclick=()=>{window._currentStation=s;Yr();}});function Xr(i,e=""){
-  Kt=i,jn=Jm(ie,Kt,e),Yn=0,ya=!1,ba=performance.now();
+  Kt=i;
+  jn=Jm(ie,Kt,e);
+  Yn=0;
+  ya=!1;
+  ba=performance.now();
   const t=jn;
+  const ws=window._activeStation;
+  const role=(ie.avatar==="girl"||ie.avatar==="tech")?"tech":"manager";
+  let eyebrow="";
+  if(Kt==="station"&&ws){
+    const pool=getStationQuestionPool(ws,role);
+    const completedCount=pool.filter(q=>ie.questionStats?.[q.id]?.correct>0).length;
+    eyebrow=`${ws.name} · Câu ${Math.min(pool.length, completedCount+1)} / ${pool.length} · ${t.subsystemName||""}`;
+  } else if(Kt==="bridge"){
+    eyebrow=`ĐOẠN CẦU ${ie.bridge+1} / ${yt} · ${t.subsystemName||"IVT PRO"}`;
+  } else {
+    eyebrow=`LUYỆN TẬP TỰ DO · ${t.subsystemName||"IVT PRO"}`;
+  }
   Jn(
     t.title||"TÌNH HUỐNG THỰC CHIẾN IVT PRO",
-    `<div class="dialog-eyebrow">${Kt==="bridge"?`ĐOẠN CẦU ${ie.bridge+1} / ${yt}`:Kt==="station"?`THỬ THÁCH TRẠM NGHIỆP VỤ`:"LUYỆN TẬP"} · ${t.subsystemName||"IVT PRO"}</div>
+    `<div class="dialog-eyebrow">${eyebrow}</div>
      <p class="question-intro"><strong>${t.ticketCode||"#TK"}</strong>: ${t.prompt}</p>
      <div class="answers">
        ${t.options.map((n,r)=>`<button class="answer" data-value="${n.value}"><kbd>${r+1}</kbd><span>${n.label}</span></button>`).join("")}
@@ -4280,7 +4363,7 @@ _stationsDef.forEach(s=>{const el=Y(s.id);if(el)el.onclick=()=>{window._currentS
      <div id="feedback" class="feedback" aria-live="polite"></div>
      <div id="hint-area" class="hint-area" hidden></div>
      <div class="quiz-footer">
-       <button id="hint" class="text-button">${Xe("help")} Gợi ý cho mình</button>
+       <button id="hint" class="text-button">${Xe("help")} Gợi ý nghiệp vụ</button>
        <span>Không giới hạn thời gian</span>
      </div>
      <button id="next-question" class="primary wide" hidden>Tiếp tục ${Xe("arrow")}</button>`,
@@ -4289,24 +4372,160 @@ _stationsDef.forEach(s=>{const el=Y(s.id);if(el)el.onclick=()=>{window._currentS
   document.querySelectorAll(".answer").forEach(n=>n.onclick=()=>fg(n.dataset.value,n));
   Y("hint").onclick=()=>{
     Yn=Math.min(3,Yn+1);
-    const ha=Y("hint-area");
-    if(ha&&jn){
-      ha.hidden=!1;
-      ha.innerHTML=`<p><strong>Gợi ý:</strong> ${jn.hint}</p>`;
-    }
+    ic();
   };
-  Y("next-question").onclick=()=>{
-    if(Kt==="bridge"&&ie.bridge===yt){
-      cr();
-      In("Tuyệt vời! Cầu đã xây xong. Cùng đi qua cầu sang Đảo Bếp Trung Tâm nhé!");
+}
+
+function ic(){
+  if(!jn)return;
+  const i=jn,e=Y("hint-area");
+  if(!e)return;
+  e.hidden=!1;
+  const hintText=i.hint||"Hãy lưu ý kỹ đề bài và đối chiếu với quy trình chuẩn.";
+  e.innerHTML=Ln(`
+    <div style="background:rgba(234,179,8,0.12);border:1px solid rgba(234,179,8,0.4);border-radius:10px;padding:12px 14px;margin-top:10px;text-align:left">
+      <div style="display:flex;align-items:center;gap:6px;font-weight:700;color:#b45309;font-size:13px;margin-bottom:4px">
+        ${Xe("help")} <span>GỢI Ý NGHIỆP VỤ (LẦN ${Yn})</span>
+      </div>
+      <p style="margin:0;font-size:14px;line-height:1.5;color:#374151"><strong>Gợi ý:</strong> ${hintText}</p>
+      ${Yn>=2 && i.category ? `<small style="display:block;margin-top:6px;color:#6b7280">Phân hệ: <b>${i.subsystemName||i.category}</b> · Mã: <b>${i.ticketCode||""}</b></small>` : ""}
+      <small style="display:block;margin-top:4px;color:#0284c7;font-weight:600">💡 Bạn hãy suy luận và bấm chọn lại một đáp án khác nhé!</small>
+    </div>
+  `);
+}
+
+function dg(i){
+  const e=document.createElement("b");
+  e.className="reward-pop";
+  e.textContent="+10 XP · +5";
+  e.insertAdjacentHTML("beforeend",Xe("coin"));
+  i.append(e);
+  e.addEventListener("animationend",()=>e.remove());
+}
+
+function fg(i,e){
+  if(!jn||ya||e.disabled)return;
+  xt.unlock();
+  const t=jn,n=Qm(t,i);
+  eg(ie,t,n,performance.now()-ba);
+  ba=performance.now();
+
+  if(n){
+    ya=!0;
+    if(Yn===0)ie.review=ie.review.filter(s=>s!==t.id);
+    const isFirstCorrect=(ie.questionStats[t.id]?.correct===1);
+    const r=kr(ie.xp);
+
+    if(isFirstCorrect){
+      ie.xp+=10;
+      ie.coins+=5;
+      dg(e);
+      if(Kt==="bridge"){
+        ie.bridge=Math.min(yt,ie.bridge+1);
+        _e.setBridge(ie.bridge,!0);
+      }
+    }
+
+    document.querySelectorAll(".answer").forEach(s=>s.disabled=!0);
+    e.classList.add("correct");
+
+    const rewardNotice=isFirstCorrect?"+10 XP · +5 xu":"(Đã hoàn thành trước đó · Không cộng thêm EXP)";
+    Y("feedback").className="feedback success";
+    Y("feedback").innerHTML=Ln(`✓ Chính xác! ${rewardNotice}<br><small style="display:block;margin-top:6px;opacity:0.9">${t.explanation}</small>`);
+    Y("hint").hidden=!0;
+    xt.correct();
+    _e.burst(_e.player.position.clone().add(new F(0,1,0)));
+    fl("wallet");
+    fl("xp-fill");
+
+    const newLvl=kr(ie.xp);
+    if(newLvl>r){
+      xt.celebrate();
+      In(`⭐ Chúc mừng bạn đã thăng Cấp ${newLvl}! Hãy tiếp tục khám phá nhé.`);
+    }
+
+    const nqBtn=Y("next-question");
+    nqBtn.hidden=!1;
+
+    if(Kt==="bridge"){
+      if(ie.bridge===yt){
+        nqBtn.innerHTML=Ln(`Khám phá bên kia cầu! ${Xe("arrow")}`);
+        nqBtn.onclick=()=>{
+          cr();
+          In("Tuyệt vời! Cầu đã xây xong. Cùng đi qua cầu sang Đảo Bếp Trung Tâm nhé!");
+        };
+      } else {
+        nqBtn.innerHTML=Ln(`Xây đoạn cầu tiếp theo (${ie.bridge+1}/${yt}) ${Xe("arrow")}`);
+        nqBtn.onclick=()=>Xr("bridge");
+      }
+    } else if(Kt==="station"){
+      const ws=window._activeStation;
+      const role=(ie.avatar==="girl"||ie.avatar==="tech")?"tech":"manager";
+      const pool=ws?getStationQuestionPool(ws,role):[];
+      const remaining=pool.filter(q=>q.id!==t.id && !(ie.questionStats?.[q.id]?.correct>0));
+      if(remaining.length>0){
+        nqBtn.innerHTML=Ln(`Câu kế tiếp (${remaining.length} câu còn lại) ${Xe("arrow")}`);
+        nqBtn.onclick=()=>Xr("station",remaining[0].id);
+      } else {
+        nqBtn.innerHTML=Ln(`Hoàn thành trạm này! ${Xe("check")}`);
+        nqBtn.onclick=()=>{
+          cr();
+          xt.celebrate();
+          _e.burst(_e.player.position.clone().add(new F(0,1,0)));
+          In(`🎉 Xuất sắc! Bạn đã hoàn thành 100% câu hỏi tại ${ws?ws.name:"trạm"}!`);
+        };
+      }
     } else {
-      Xr(Kt,t.id);
+      nqBtn.innerHTML=Ln(`Thử câu tiếp theo ${Xe("arrow")}`);
+      nqBtn.onclick=()=>Xr("practice");
     }
-  };
-}function ic(){if(!jn)return;const i=jn,e=Y("hint-area");e.hidden=!1,e.innerHTML=Ln(`<p>${tg(i,Yn)}</p><div class="stone-groups" aria-label="${i.a} nhóm, mỗi nhóm có ${i.b} nhịp cầu">${Array.from({length:i.a},()=>`<div class="stone-group">${"<i></i>".repeat(i.b)}</div>`).join("")}</div>`)}function dg(i){const e=document.createElement("b");e.className="reward-pop",e.textContent="+10 XP · +5",e.insertAdjacentHTML("beforeend",Xe("coin")),i.append(e),e.addEventListener("animationend",()=>e.remove())}function fg(i,e){if(!jn||ya||e.disabled)return;xt.unlock();const t=jn,n=Qm(t,i);if(eg(ie,t,n,performance.now()-ba),ba=performance.now(),n){ya=!0,Yn===0&&(ie.review=ie.review.filter(s=>s!==t.id));const r=kr(ie.xp);ie.xp+=10,ie.coins+=5,Kt==="bridge"&&(ie.bridge=Math.min(yt,ie.bridge+1),_e.setBridge(ie.bridge,!0)),document.querySelectorAll(".answer").forEach(s=>s.disabled=!0),e.classList.add("correct"),dg(e),Y("feedback").className="feedback success",Y("feedback").innerHTML=Ln(`✓ Chính xác! +20 XP · +10 xu<br><small style="display:block;margin-top:6px;opacity:0.9">${t.explanation}</small>`),Y("next-question").hidden=!1,Y("next-question").innerHTML=Ln(`${Kt==="bridge"&&ie.bridge===yt?"Khám phá bên kia cầu!":Kt==="bridge"?"Xây đoạn cầu tiếp theo":"Thử thêm một câu"} ${Xe("arrow")}`),Y("hint").hidden=!0,xt.correct(),_e.burst(_e.player.position.clone().add(new F(0,1,0))),fl("wallet"),fl("xp-fill");const newLvl=kr(ie.xp);if(newLvl>r){xt.celebrate();In(`⭐ Chúc mừng bạn đã thăng Cấp ${newLvl}! Hãy tiếp tục khám phá nhé.`);}Y("next-question").focus();}else Yn=Math.min(3,Yn+1),e.classList.add("incorrect"),e.disabled=!0,Y("feedback").className="feedback gentle",Y("feedback").textContent=Cn("↻ Chưa đúng rồi. Mình cùng đếm lại nhé!"),ic(),xt.hint();_n(),Xt()}function $a(i=ie.table||2){Jn("Sổ cửu chương",`<div class="dialog-eyebrow">HỌC TỪNG CHÚT, NHỚ THẬT LÂU</div><div class="table-tabs" role="group" aria-label="Chọn kho IVT Pro">${Ha.map(e=>`<button data-table="${e}" aria-pressed="${e===i}">×${e}</button>`).join("")}</div><div class="multiplication-grid">${Array.from({length:10},(e,t)=>{const n=ie.questionStats[`m${i}_${t+1}`];return`<div class="${n?.correct?"known":""}"><span>${i} × ${t+1}</span><b>= ${i*(t+1)}</b><small>${n?.correct?"✓":""}</small></div>`}).join("")}</div><p class="book-note">Dấu ✓ là nghiệp vụ kho bạn đã trả lời đúng. Mình luyện thêm nhé?</p><button id="practice-table" class="primary wide">Luyện bảng ×${i} ${Xe("arrow")}</button><button id="practice-all" class="text-button centered">Trộn các bảng ×2 – ×10</button>`,"book"),document.querySelectorAll("[data-table]").forEach(e=>e.onclick=()=>$a(Number(e.dataset.table))),Y("practice-table").onclick=()=>{ie.table=i,Xt(),Xr("practice")},Y("practice-all").onclick=()=>{ie.table=0,Xt(),Xr("practice")}}
+
+    nqBtn.focus();
+  } else {
+    // WRONG ANSWER: Keep other options enabled so user can try again!
+    Yn=Math.min(3,Yn+1);
+    e.classList.add("incorrect");
+    e.disabled=!0;
+    Y("feedback").className="feedback gentle";
+    Y("feedback").innerHTML=Ln("↻ Chưa chính xác! Hãy đọc gợi ý bên dưới và chọn lại phương án khác nhé.");
+    ic();
+    xt.hint();
+  }
+  _n();
+  Xt();
+}function $a(i=ie.table||2){Jn("Sổ cửu chương",`<div class="dialog-eyebrow">HỌC TỪNG CHÚT, NHỚ THẬT LÂU</div><div class="table-tabs" role="group" aria-label="Chọn kho IVT Pro">${Ha.map(e=>`<button data-table="${e}" aria-pressed="${e===i}">×${e}</button>`).join("")}</div><div class="multiplication-grid">${Array.from({length:10},(e,t)=>{const n=ie.questionStats[`m${i}_${t+1}`];return`<div class="${n?.correct?"known":""}"><span>${i} × ${t+1}</span><b>= ${i*(t+1)}</b><small>${n?.correct?"✓":""}</small></div>`}).join("")}</div><p class="book-note">Dấu ✓ là nghiệp vụ kho bạn đã trả lời đúng. Mình luyện thêm nhé?</p><button id="practice-table" class="primary wide">Luyện bảng ×${i} ${Xe("arrow")}</button><button id="practice-all" class="text-button centered">Trộn các bảng ×2 – ×10</button>`,"book"),document.querySelectorAll("[data-table]").forEach(e=>e.onclick=()=>$a(Number(e.dataset.table))),Y("practice-table").onclick=()=>{ie.table=i,Xt(),Xr("practice")},Y("practice-all").onclick=()=>{ie.table=0,Xt(),Xr("practice")}}
 const rmBtn=Y("open-roadmap");if(rmBtn)rmBtn.onclick=()=>openRoadmapModal();
 const qNavBtn=Y("quest-nav-btn");if(qNavBtn)qNavBtn.onclick=()=>{const nq=getNextSuggestedQuest();navigateToTarget(nq.id);};
-Y("learn").onclick=()=>window.open("https://iposvni.gitbook.io/inventory/","_blank","noopener,noreferrer");Y("learn-welcome").onclick=()=>window.open("https://iposvni.gitbook.io/inventory/","_blank","noopener,noreferrer");function pg(){Jn("Sẵn sàng phiêu lưu?",`<div class="help-list"><div><b>1</b><p><strong>Khám phá ngôi làng</strong>Nhấn WASD / phím mũi tên, hoặc chạm xuống đất để di chuyển. Trên màn hình cảm ứng, dùng cần điều khiển.</p></div><div><b>2</b><p><strong>Làm quen với Milo</strong>Đến gần chiếc mũ xanh rồi nhấn E hoặc nút “Nói chuyện”.</p></div><div><b>3</b><p><strong>Xây cầu bằng nghiệp vụ kho</strong>Chọn 1 trong 3 đáp án. Cần giúp đỡ? Nhấn “Gợi ý cho mình”.</p></div><div><b>4</b><p><strong>Mở bản đồ thế giới</strong>Nhấn M hoặc chạm vào bản đồ nhỏ ở góc màn hình để xem các vùng đất.</p></div></div><div class="milo-tip"><p><b>Space</b>: nhảy · <b>Kéo trên làng</b>: xoay camera · <b>Lăn chuột</b>: phóng to / thu nhỏ · <b>Esc</b>: tạm dừng.</p></div><button id="understood" class="primary wide">Mình hiểu rồi! ${Xe("check")}</button>`,"help"),Y("understood").onclick=cr}Y("help").onclick=pg;function Ti(){const i=Object.values(ie.questionStats),e=i.reduce((n,r)=>n+r.attempts,0),t=i.reduce((n,r)=>n+r.correct,0);Jn("Một chút cài đặt",`<div class="settings-row"><span>Hiệu ứng âm thanh</span><button id="toggle-sound" class="switch" role="switch" aria-checked="${ie.sound}" aria-label="Hiệu ứng âm thanh"><i></i></button></div><div class="settings-row"><span>Nhạc nền nhẹ nhàng</span><button id="toggle-music" class="switch" role="switch" aria-checked="${ie.music}" aria-label="Nhạc nền"><i></i></button></div><div class="progress-summary"><span><strong>${ie.xp}</strong>XP tích lũy</span><span><strong>${e}</strong>Lượt trả lời</span><span><strong>${e?Math.round(t/e*100):0}%</strong>Trả lời đúng</span></div><p class="book-note">Tiến trình tự lưu trên trình duyệt này, không cần tài khoản. Xóa dữ liệu trình duyệt sẽ xóa tiến trình.</p><button id="save-now" class="secondary wide">${Xe("save")} Lưu tiến trình</button><button id="return-menu" class="text-button centered">Về màn hình chính</button><button id="reset-progress" class="text-button danger centered">${Xe("reset")} Chơi lại từ đầu</button>`,"settings"),Y("toggle-sound").onclick=()=>{xt.unlock(),ie.sound=!ie.sound,xt.enabled=ie.sound,Xt(),_n(),Ti()},Y("toggle-music").onclick=()=>{xt.unlock(),ie.music=!ie.music,xt.music(ie.music),Xt(),Ti()},Y("save-now").onclick=()=>{Xt()&&In("Đã lưu hành trình của bạn trên thiết bị này.")},Y("return-menu").onclick=pl,Y("reset-progress").onclick=()=>{Jn("Bắt đầu lại hành trình?",'<p class="dialog-copy">XP, xu, cây cầu và lịch sử luyện tập trên thiết bị này sẽ bị xóa. Không thể hoàn tác.</p><button id="confirm-reset" class="primary danger-bg wide">Xóa tiến trình và chơi lại</button><button id="cancel-reset" class="text-button centered">Giữ lại hành trình</button>',"reset"),Y("cancel-reset").onclick=Ti,Y("confirm-reset").onclick=()=>{ie=Ga(),Xt(),_e.setBridge(0),_e.player.position.set(-6,0,6),_e.setAvatar(ie.avatar),_e.resetCamera(),pl(),In("Một hành trình mới đang chờ bạn!")}}}Y("settings").onclick=Ti;Y("sound").onclick=()=>{xt.unlock(),ie.sound=!ie.sound,_n(),Xt()};Y("jump").onclick=()=>_e.jump();Y("zoom-in").onclick=()=>_e.zoom(-8);Y("zoom-out").onclick=()=>_e.zoom(8);function rc(i,e=i){const t=_e.player.position;return{player:{x:t.x,z:t.z,facing:_e.player.rotation.y},milo:{x:_e.milo.position.x,z:_e.milo.position.z},bridge:ie.bridge,questComplete:ie.questComplete,selected:e?Ei:void 0,labels:i,translate:Cn,time:performance.now()/1e3}}function sc(){const{ctx:i,w:e,h:t}=Jl(Y("minimap-canvas")),n=_e.player.position;Ql(i,e,t,{cx:n.x,cz:n.z,scale:e/70,rotation:_e.heading},rc(!1))}function ac(){if(!Dn)return;const i=Y("map-canvas"),{ctx:e,w:t,h:n}=Jl(i);Ql(e,t,n,oc(t,n),rc(t>600,!0)),requestAnimationFrame(ac)}function oc(i,e){const t=i>820,n=lg(t?i-360:i,t?e:e*.62,t?56:22);return t?n.cx+=180/n.scale:n.cz+=e*.19/n.scale,n}function Ya(){Y("map-regions").innerHTML=Ln(Dt.map(e=>{const t=Di(e,ie.questComplete);return`<button class="map-region${t?"":" locked"}" data-region="${e.id}" aria-pressed="${Ei===e.id}"><span class="map-region-icon" style="--tint:${e.color}">${Xe(t?e.icon:"lock")}</span><span><strong>${e.name}</strong><small>${e.subtitle}</small></span>${bi===e.id?"<em>Bạn ở đây</em>":""}</button>`}).join(""));const i=Dt.find(e=>e.id===Ei);Y("map-detail").innerHTML=i?Ln(`<strong>${Xe(i.icon)} ${i.name}</strong><p>${i.blurb}</p>${Di(i,ie.questComplete)?"":`<p class="map-locked">${Xe("lock")} Mở khóa khi hoàn thành Cây cầu tình bạn</p>`}`):"",document.querySelectorAll("[data-region]").forEach(e=>e.onclick=()=>{Ei=e.dataset.region,Ya()})}function Ka(){!_e.active||Y("dialog").open||(Dn=!0,_e.paused=!0,_e.clearInput(),Ei=bi||void 0,Y("world-map").hidden=!1,Ya(),Wa(Y("world-map")),Y("close-map").focus(),requestAnimationFrame(ac))}function Kr(){Dn&&(Dn=!1,Y("world-map").hidden=!0,_e.paused=!1,_e.clearInput())}Y("minimap").onclick=Ka;Y("open-map").onclick=Ka;Y("close-map").onclick=Kr;Y("map-canvas").addEventListener("click",i=>{const e=i.currentTarget,t=e.getBoundingClientRect(),n=oc(t.width,t.height),r=cg(n,t.width,t.height,i.clientX-t.left,i.clientY-t.top);Ei=hg(r.x,r.z)?.id,Ya()});document.addEventListener("keydown",i=>{if(i.repeat&&["e"," ","Escape","m","M"].includes(i.key))return;if(Y("dialog").open){if(Xa==="quiz"&&/^[123]$/.test(i.key)){const t=document.querySelectorAll(".answer")[Number(i.key)-1];t&&!t.disabled&&t.click()}return}if(Dn){(i.key==="Escape"||i.key.toLowerCase()==="m")&&(i.preventDefault(),Kr());return}if(!_e?.active)return;const e=i.key.toLowerCase();["w","a","s","d","arrowup","arrowdown","arrowleft","arrowright"," "].includes(e)&&(i.preventDefault(),_e.keys.add(e)),e===" "&&_e.jump(),e==="e"&&Yr(),e==="m"&&Ka(),e==="escape"&&(i.preventDefault(),Ti())});document.addEventListener("keyup",i=>_e?.keys.delete(i.key.toLowerCase()));window.addEventListener("blur",()=>{_e?.clearInput(),_e?.active&&!Dn&&!Y("dialog").open&&Ti()});document.addEventListener("visibilitychange",()=>{_e?.clearInput(),document.hidden?xt.music(!1):_e?.active&&xt.music(ie.music)});const nr=Y("joystick");let Za=-1;function lc(i){if(i.pointerId!==Za)return;const e=nr.getBoundingClientRect();let t=(i.clientX-e.left-e.width/2)/34,n=(i.clientY-e.top-e.height/2)/34;const r=Math.max(1,Math.hypot(t,n));t/=r,n/=r,_e.joystick={x:t,y:n},Y("joystick-knob").style.transform=`translate(${t*30}px,${n*30}px)`}nr.addEventListener("pointerdown",i=>{Za=i.pointerId,nr.setPointerCapture(i.pointerId),lc(i)});nr.addEventListener("pointermove",lc);for(const i of["pointerup","pointercancel"])nr.addEventListener(i,()=>{Za=-1,_e.joystick={x:0,y:0},Y("joystick-knob").style.transform=""});function Ls(i,e,t,n){const r=_e.project(e),s=Math.max(0,Math.min(1,1-(r.distance-70)/70));i.hidden=n||!r.visible||s<=0,!i.hidden&&(i.style.transform=`translate(${r.x}px,${r.y}px) ${t}`,i.style.opacity=String(s))}function cc(){const i=_e.player.position,e=Xm(i.x,i.z);if(e.id===bi)return;const t=bi==="";bi=e.id,Y("area-icon").innerHTML=Xe(e.icon),Y("area-name").textContent=Cn(e.name),Y("area-sub").textContent=Cn(e.subtitle);const n=Y("area-label");n.classList.remove("arrive"),n.offsetWidth,n.classList.add("arrive"),!t&&_e.active&&e.id!=="village"&&e.id!=="garden"&&Di(e,ie.questComplete)&&In(Va()==="vi"?`Chào mừng đến ${e.name}!`:`Welcome to ${Cn(e.name)}!`)}try{_e=new $m(Y("world")),_e.setBridge(ie.bridge),_e.setAvatar(ie.avatar),_e.onJump=()=>xt.jump(),_e.onSceneClick=()=>Yr(),_e.onFrame=(i,e)=>{if(ec=i,!(++ul%2!==0||!_e.active)){const ws=_e.nearWorkstation();window._currentStation=ws;const canInteract=i||!!ws;Y("interact").hidden=!canInteract||_e.paused;if(ws){Y("interact").innerHTML=`<kbd>E</kbd> ${ws.hint} ${Xe("arrow")}`}else if(i){Y("interact").innerHTML=`<kbd>E</kbd> Nói chuyện với Milo ${Xe("arrow")}`};Ls(Y("milo-label"),new F(-3,3.5,1.5),"translate(-50%,-100%)",_e.paused);Ls(Y("house-label"),new F(-4.0,2.6,-9.5),"translate(-50%,-100%)",_e.paused);
+Y("learn").onclick=()=>window.open("https://iposvni.gitbook.io/inventory/","_blank","noopener,noreferrer");Y("learn-welcome").onclick=()=>window.open("https://iposvni.gitbook.io/inventory/","_blank","noopener,noreferrer");function pg(){Jn("Sẵn sàng phiêu lưu?",`<div class="help-list"><div><b>1</b><p><strong>Khám phá ngôi làng</strong>Nhấn WASD / phím mũi tên, hoặc chạm xuống đất để di chuyển. Trên màn hình cảm ứng, dùng cần điều khiển.</p></div><div><b>2</b><p><strong>Làm quen với Milo</strong>Đến gần chiếc mũ xanh rồi nhấn E hoặc nút “Nói chuyện”.</p></div><div><b>3</b><p><strong>Xây cầu bằng nghiệp vụ kho</strong>Chọn 1 trong 3 đáp án. Cần giúp đỡ? Nhấn “Gợi ý cho mình”.</p></div><div><b>4</b><p><strong>Mở bản đồ thế giới</strong>Nhấn M hoặc chạm vào bản đồ nhỏ ở góc màn hình để xem các vùng đất.</p></div></div><div class="milo-tip"><p><b>Space</b>: nhảy · <b>Kéo trên làng</b>: xoay camera · <b>Lăn chuột</b>: phóng to / thu nhỏ · <b>Esc</b>: tạm dừng.</p></div><button id="understood" class="primary wide">Mình hiểu rồi! ${Xe("check")}</button>`,"help"),Y("understood").onclick=cr}function showLegalModal(){
+  Jn(
+    "Căn cứ Pháp lý & Bản quyền",
+    `<div class="help-list">
+      <div>
+        <b style="font-size:16px">⚖️</b>
+        <p><strong>Mục đích Giáo dục & Đào tạo Nội bộ Phi thương mại</strong>Dự án mô phỏng 3D được phát triển nhằm phục vụ học tập, đào tạo nội bộ và kiểm tra kiến thức nghiệp vụ quản trị kho F&B. Trò chơi phi thương mại, không kinh doanh, không bán hàng và không thu bất kỳ khoản phí nào từ người chơi.</p>
+      </div>
+      <div>
+        <b style="font-size:16px">🌐</b>
+        <p><strong>Nguồn gốc Kiến trúc & Bản quyền Mã nguồn</strong>Môi trường 3D Engine và cơ chế tương tác thế giới ảo được kế thừa, chuyển thể từ dự án giáo dục mã nguồn mở tại <code>https://math.aigame3d.com/</code>. Toàn bộ hình ảnh, nhân vật, cây cối, mặt nước được dựng bằng thuật toán Procedural qua thư viện Three.js.</p>
+      </div>
+      <div>
+        <b style="font-size:16px">📦</b>
+        <p><strong>Bản chất Bộ câu hỏi & Tri thức Nghiệp vụ</strong>Các câu hỏi, tình huống xử lý ticket và giải thích được biên soạn dựa trên kiến thức quản trị kho tổng quát ngành F&B (FIFO, BOM định mức tiêu hao, kiểm kê cân đối, luân chuyển kho, giá vốn bình quân gia quyền).</p>
+      </div>
+      <div>
+        <b style="font-size:16px">🔒</b>
+        <p><strong>Bảo mật & Quyền riêng tư (100% Client-side)</strong>Hệ thống hoạt động hoàn toàn trên trình duyệt người dùng (Offline Client-side), không truyền dữ liệu cá nhân hay dữ liệu doanh nghiệp lên bất kỳ máy chủ nào. Điểm số và cấp độ được lưu trên LocalStorage thiết bị của bạn.</p>
+      </div>
+    </div>
+    <button id="legal-confirm" class="primary wide">Tôi đã hiểu & Yên tâm trải nghiệm ${Xe("check")}</button>`,
+    "legal"
+  );
+  const lc=Y("legal-confirm");
+  if(lc)lc.onclick=cr;
+}
+const legalBtn=Y("legal-info");
+if(legalBtn)legalBtn.onclick=showLegalModal;
+Y("help").onclick=pg;function Ti(){const i=Object.values(ie.questionStats),e=i.reduce((n,r)=>n+r.attempts,0),t=i.reduce((n,r)=>n+r.correct,0);Jn("Một chút cài đặt",`<div class="settings-row"><span>Hiệu ứng âm thanh</span><button id="toggle-sound" class="switch" role="switch" aria-checked="${ie.sound}" aria-label="Hiệu ứng âm thanh"><i></i></button></div><div class="settings-row"><span>Nhạc nền nhẹ nhàng</span><button id="toggle-music" class="switch" role="switch" aria-checked="${ie.music}" aria-label="Nhạc nền"><i></i></button></div><div class="progress-summary"><span><strong>${ie.xp}</strong>XP tích lũy</span><span><strong>${e}</strong>Lượt trả lời</span><span><strong>${e?Math.round(t/e*100):0}%</strong>Trả lời đúng</span></div><p class="book-note">Tiến trình tự lưu trên trình duyệt này, không cần tài khoản. Xóa dữ liệu trình duyệt sẽ xóa tiến trình.</p><button id="save-now" class="secondary wide">${Xe("save")} Lưu tiến trình</button><button id="return-menu" class="text-button centered">Về màn hình chính</button><button id="reset-progress" class="text-button danger centered">${Xe("reset")} Chơi lại từ đầu</button>`,"settings"),Y("toggle-sound").onclick=()=>{xt.unlock(),ie.sound=!ie.sound,xt.enabled=ie.sound,Xt(),_n(),Ti()},Y("toggle-music").onclick=()=>{xt.unlock(),ie.music=!ie.music,xt.music(ie.music),Xt(),Ti()},Y("save-now").onclick=()=>{Xt()&&In("Đã lưu hành trình của bạn trên thiết bị này.")},Y("return-menu").onclick=pl,Y("reset-progress").onclick=()=>{Jn("Bắt đầu lại hành trình?",'<p class="dialog-copy">XP, xu, cây cầu và lịch sử luyện tập trên thiết bị này sẽ bị xóa. Không thể hoàn tác.</p><button id="confirm-reset" class="primary danger-bg wide">Xóa tiến trình và chơi lại</button><button id="cancel-reset" class="text-button centered">Giữ lại hành trình</button>',"reset"),Y("cancel-reset").onclick=Ti,Y("confirm-reset").onclick=()=>{ie=Ga(),Xt(),_e.setBridge(0),_e.player.position.set(-6,0,6),_e.setAvatar(ie.avatar),_e.resetCamera(),pl(),In("Một hành trình mới đang chờ bạn!")}}}Y("settings").onclick=Ti;Y("sound").onclick=()=>{xt.unlock(),ie.sound=!ie.sound,_n(),Xt()};Y("jump").onclick=()=>_e.jump();Y("zoom-in").onclick=()=>_e.zoom(-8);Y("zoom-out").onclick=()=>_e.zoom(8);function rc(i,e=i){const t=_e.player.position;return{player:{x:t.x,z:t.z,facing:_e.player.rotation.y},milo:{x:_e.milo.position.x,z:_e.milo.position.z},bridge:ie.bridge,questComplete:ie.questComplete,selected:e?Ei:void 0,labels:i,translate:Cn,time:performance.now()/1e3}}function sc(){const{ctx:i,w:e,h:t}=Jl(Y("minimap-canvas")),n=_e.player.position;Ql(i,e,t,{cx:n.x,cz:n.z,scale:e/70,rotation:_e.heading},rc(!1))}function ac(){if(!Dn)return;const i=Y("map-canvas"),{ctx:e,w:t,h:n}=Jl(i);Ql(e,t,n,oc(t,n),rc(t>600,!0)),requestAnimationFrame(ac)}function oc(i,e){const t=i>820,n=lg(t?i-360:i,t?e:e*.62,t?56:22);return t?n.cx+=180/n.scale:n.cz+=e*.19/n.scale,n}function Ya(){Y("map-regions").innerHTML=Ln(Dt.map(e=>{const t=Di(e,ie.questComplete);return`<button class="map-region${t?"":" locked"}" data-region="${e.id}" aria-pressed="${Ei===e.id}"><span class="map-region-icon" style="--tint:${e.color}">${Xe(t?e.icon:"lock")}</span><span><strong>${e.name}</strong><small>${e.subtitle}</small></span>${bi===e.id?"<em>Bạn ở đây</em>":""}</button>`}).join(""));const i=Dt.find(e=>e.id===Ei);Y("map-detail").innerHTML=i?Ln(`<strong>${Xe(i.icon)} ${i.name}</strong><p>${i.blurb}</p>${Di(i,ie.questComplete)?"":`<p class="map-locked">${Xe("lock")} Mở khóa khi hoàn thành Cây cầu tình bạn</p>`}`):"",document.querySelectorAll("[data-region]").forEach(e=>e.onclick=()=>{Ei=e.dataset.region,Ya()})}function Ka(){!_e.active||Y("dialog").open||(Dn=!0,_e.paused=!0,_e.clearInput(),Ei=bi||void 0,Y("world-map").hidden=!1,Ya(),Wa(Y("world-map")),Y("close-map").focus(),requestAnimationFrame(ac))}function Kr(){Dn&&(Dn=!1,Y("world-map").hidden=!0,_e.paused=!1,_e.clearInput())}Y("minimap").onclick=Ka;Y("open-map").onclick=Ka;Y("close-map").onclick=Kr;Y("map-canvas").addEventListener("click",i=>{const e=i.currentTarget,t=e.getBoundingClientRect(),n=oc(t.width,t.height),r=cg(n,t.width,t.height,i.clientX-t.left,i.clientY-t.top);Ei=hg(r.x,r.z)?.id,Ya()});document.addEventListener("keydown",i=>{if(i.repeat&&["e"," ","Escape","m","M"].includes(i.key))return;if(Y("dialog").open){if(Xa==="quiz"&&/^[123]$/.test(i.key)){const t=document.querySelectorAll(".answer")[Number(i.key)-1];t&&!t.disabled&&t.click()}return}if(Dn){(i.key==="Escape"||i.key.toLowerCase()==="m")&&(i.preventDefault(),Kr());return}if(!_e?.active)return;const e=i.key.toLowerCase();["w","a","s","d","arrowup","arrowdown","arrowleft","arrowright"," "].includes(e)&&(i.preventDefault(),_e.keys.add(e)),e===" "&&_e.jump(),e==="e"&&Yr(),e==="m"&&Ka(),e==="escape"&&(i.preventDefault(),Ti())});document.addEventListener("keyup",i=>_e?.keys.delete(i.key.toLowerCase()));window.addEventListener("blur",()=>{_e?.clearInput(),_e?.active&&!Dn&&!Y("dialog").open&&Ti()});document.addEventListener("visibilitychange",()=>{_e?.clearInput(),document.hidden?xt.music(!1):_e?.active&&xt.music(ie.music)});const nr=Y("joystick");let Za=-1;function lc(i){if(i.pointerId!==Za)return;const e=nr.getBoundingClientRect();let t=(i.clientX-e.left-e.width/2)/34,n=(i.clientY-e.top-e.height/2)/34;const r=Math.max(1,Math.hypot(t,n));t/=r,n/=r,_e.joystick={x:t,y:n},Y("joystick-knob").style.transform=`translate(${t*30}px,${n*30}px)`}nr.addEventListener("pointerdown",i=>{Za=i.pointerId,nr.setPointerCapture(i.pointerId),lc(i)});nr.addEventListener("pointermove",lc);for(const i of["pointerup","pointercancel"])nr.addEventListener(i,()=>{Za=-1,_e.joystick={x:0,y:0},Y("joystick-knob").style.transform=""});function Ls(i,e,t,n){const r=_e.project(e),s=Math.max(0,Math.min(1,1-(r.distance-70)/70));i.hidden=n||!r.visible||s<=0,!i.hidden&&(i.style.transform=`translate(${r.x}px,${r.y}px) ${t}`,i.style.opacity=String(s))}function cc(){const i=_e.player.position,e=Xm(i.x,i.z);if(e.id===bi)return;const t=bi==="";bi=e.id,Y("area-icon").innerHTML=Xe(e.icon),Y("area-name").textContent=Cn(e.name),Y("area-sub").textContent=Cn(e.subtitle);const n=Y("area-label");n.classList.remove("arrive"),n.offsetWidth,n.classList.add("arrive"),!t&&_e.active&&e.id!=="village"&&e.id!=="garden"&&Di(e,ie.questComplete)&&In(Va()==="vi"?`Chào mừng đến ${e.name}!`:`Welcome to ${Cn(e.name)}!`)}try{_e=new $m(Y("world")),_e.setBridge(ie.bridge),_e.setAvatar(ie.avatar),_e.onJump=()=>xt.jump(),_e.onSceneClick=()=>Yr(),_e.onFrame=(i,e)=>{if(ec=i,!(++ul%2!==0||!_e.active)){const ws=_e.nearWorkstation();window._currentStation=ws;const canInteract=i||!!ws;Y("interact").hidden=!canInteract||_e.paused;if(ws){Y("interact").innerHTML=`<kbd>E</kbd> ${ws.hint} ${Xe("arrow")}`}else if(i){Y("interact").innerHTML=`<kbd>E</kbd> Nói chuyện với Milo ${Xe("arrow")}`};Ls(Y("milo-label"),new F(-3,3.5,1.5),"translate(-50%,-100%)",_e.paused);Ls(Y("house-label"),new F(-4.0,2.6,-9.5),"translate(-50%,-100%)",_e.paused);
     Ls(Y("pond-label"),new F(-36.5,2.2,-7.5),"translate(-50%,-100%)",_e.paused);
     Ls(Y("pos-label"),new F(-8.5,2.2,-2.5),"translate(-50%,-100%)",_e.paused);Ls(Y("weigh-label"),new F(-1.5,2.2,7.5),"translate(-50%,-100%)",_e.paused);Ls(Y("kitchen-label"),new F(18,2.4,-6),"translate(-50%,-100%)",_e.paused);Ls(Y("audit-label"),new F(33,2.7,16),"translate(-50%,-100%)",_e.paused);Ls(Y("server-label"),new F(54,2.8,-18),"translate(-50%,-100%)",_e.paused);for(const t of qa)Ls(Y(`${t.id}-label`),new F(t.center[0],t.labelHeight,t.center[1]),"translate(-50%,-100%)",_e.paused);Ls(Y("bridge-label"),new F(7,.8,0),"translate(-50%,15px)",_e.paused);Y("milo-label").classList.toggle("near",i);Y("house-label").classList.toggle("near",ws?.type==="house");
     Y("pond-label").classList.toggle("near",ws?.type==="pond");
