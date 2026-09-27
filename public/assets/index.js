@@ -4580,7 +4580,27 @@ function Yr(){
   Y("accept-quest").onclick=()=>{ie.questAccepted=!0;Xt();_n();window._activeStation=null;Xr(i?"practice":"bridge");};
 }
 Y("interact").onclick=Yr;
-Y("milo-label").onclick=()=>{window._currentStation=null;Yr();};
+function handleStationClick(s){
+  if(!_e||_e.paused)return;
+  const isMilo=(!s||s==="milo"||s.id==="milo-label");
+  const ws=isMilo?null:(typeof s==="object"?s:_stationsDef.find(item=>item.id===s||item.type===s||item.id===`${s}-label`));
+  const targetCoords=isMilo?[-3.0,0,1.5]:ws.pos;
+  const targetPos=new F(targetCoords[0],0,targetCoords[2]);
+  const pPos=_e.player.position;
+  const dist=Math.hypot(pPos.x-targetPos.x,pPos.z-targetPos.z);
+
+  // If character is ALREADY NEAR (< 3.2m): Open challenge immediately!
+  if(dist<3.2 || (isMilo&&_e.nearMilo()) || (!isMilo&&_e.nearWorkstation()?.type===ws?.type)){
+    window._currentStation=ws;
+    Yr();
+  } else {
+    // If far away: Navigate to station first! Only open when arrived!
+    const targetId=isMilo?"milo":(ws.type||ws.id.replace("-label",""));
+    navigateToTarget(targetId);
+  }
+}
+
+Y("milo-label").onclick=()=>handleStationClick("milo");
 
 
 const QUEST_JOURNEY=[
@@ -4733,7 +4753,7 @@ function openRoadmapModal(){
 }
 
 
-_stationsDef.forEach(s=>{const el=Y(s.id);if(el)el.onclick=()=>{window._currentStation=s;Yr();}});function Xr(i,e=""){
+_stationsDef.forEach(s=>{const el=Y(s.id);if(el)el.onclick=()=>handleStationClick(s);});function Xr(i,e=""){
   Kt=i;
   jn=Jm(ie,Kt,e);
   Yn=0;
@@ -5022,18 +5042,77 @@ if(perfBtn){
 }
 Y("help").onclick=pg;function Ti(){const i=Object.values(ie.questionStats),e=i.reduce((n,r)=>n+r.attempts,0),t=i.reduce((n,r)=>n+r.correct,0);Jn("Một chút cài đặt",`<div class="settings-row"><span>Hiệu ứng âm thanh</span><button id="toggle-sound" class="switch" role="switch" aria-checked="${ie.sound}" aria-label="Hiệu ứng âm thanh"><i></i></button></div><div class="settings-row"><span>Nhạc nền nhẹ nhàng</span><button id="toggle-music" class="switch" role="switch" aria-checked="${ie.music}" aria-label="Nhạc nền"><i></i></button></div><div class="progress-summary"><span><strong>${ie.xp}</strong>XP tích lũy</span><span><strong>${e}</strong>Lượt trả lời</span><span><strong>${e?Math.round(t/e*100):0}%</strong>Trả lời đúng</span></div><p class="book-note">Tiến trình tự lưu trên trình duyệt này, không cần tài khoản. Xóa dữ liệu trình duyệt sẽ xóa tiến trình.</p><button id="save-now" class="secondary wide">${Xe("save")} Lưu tiến trình</button><button id="return-menu" class="text-button centered">Về màn hình chính</button><button id="reset-progress" class="text-button danger centered">${Xe("reset")} Chơi lại từ đầu</button>`,"settings"),Y("toggle-sound").onclick=()=>{xt.unlock(),ie.sound=!ie.sound,xt.enabled=ie.sound,Xt(),_n(),Ti()},Y("toggle-music").onclick=()=>{xt.unlock(),ie.music=!ie.music,xt.music(ie.music),Xt(),Ti()},Y("save-now").onclick=()=>{Xt()&&In("Đã lưu hành trình của bạn trên thiết bị này.")},Y("return-menu").onclick=pl,Y("reset-progress").onclick=()=>{Jn("Bắt đầu lại hành trình?",'<p class="dialog-copy">XP, xu, cây cầu và lịch sử luyện tập trên thiết bị này sẽ bị xóa. Không thể hoàn tác.</p><button id="confirm-reset" class="primary danger-bg wide">Xóa tiến trình và chơi lại</button><button id="cancel-reset" class="text-button centered">Giữ lại hành trình</button>',"reset"),Y("cancel-reset").onclick=Ti,Y("confirm-reset").onclick=()=>{ie=Ga(),Xt(),_e.setBridge(0),_e.player.position.set(-6,0,6),_e.setAvatar(ie.avatar),_e.resetCamera(),pl(),In("Một hành trình mới đang chờ bạn!")}}}Y("settings").onclick=Ti;Y("sound").onclick=()=>{xt.unlock(),ie.sound=!ie.sound,_n(),Xt()};Y("jump").onclick=()=>_e.jump();Y("zoom-in").onclick=()=>_e.zoom(-8);Y("zoom-out").onclick=()=>_e.zoom(8);function rc(i,e=i){const t=_e.player.position;return{player:{x:t.x,z:t.z,facing:_e.player.rotation.y},milo:{x:_e.milo.position.x,z:_e.milo.position.z},bridge:ie.bridge,questComplete:ie.questComplete,selected:e?Ei:void 0,labels:i,translate:Cn,time:performance.now()/1e3}}function sc(){const{ctx:i,w:e,h:t}=Jl(Y("minimap-canvas")),n=_e.player.position;Ql(i,e,t,{cx:n.x,cz:n.z,scale:e/70,rotation:_e.heading},rc(!1))}function ac(){if(!Dn)return;const i=Y("map-canvas"),{ctx:e,w:t,h:n}=Jl(i);Ql(e,t,n,oc(t,n),rc(t>600,!0)),requestAnimationFrame(ac)}function oc(i,e){const t=i>820,n=lg(t?i-360:i,t?e:e*.62,t?56:22);return t?n.cx+=180/n.scale:n.cz+=e*.19/n.scale,n}function Ya(){Y("map-regions").innerHTML=Ln(Dt.map(e=>{const t=Di(e,ie.questComplete);return`<button class="map-region${t?"":" locked"}" data-region="${e.id}" aria-pressed="${Ei===e.id}"><span class="map-region-icon" style="--tint:${e.color}">${Xe(t?e.icon:"lock")}</span><span><strong>${e.name}</strong><small>${e.subtitle}</small></span>${bi===e.id?"<em>Bạn ở đây</em>":""}</button>`}).join(""));const i=Dt.find(e=>e.id===Ei);Y("map-detail").innerHTML=i?Ln(`<strong>${Xe(i.icon)} ${i.name}</strong><p>${i.blurb}</p>${Di(i,ie.questComplete)?"":`<p class="map-locked">${Xe("lock")} Mở khóa khi hoàn thành Cây cầu tình bạn</p>`}`):"",document.querySelectorAll("[data-region]").forEach(e=>e.onclick=()=>{Ei=e.dataset.region,Ya()})}function Ka(){!_e.active||Y("dialog").open||(Dn=!0,_e.paused=!0,_e.clearInput(),Ei=bi||void 0,Y("world-map").hidden=!1,Ya(),Wa(Y("world-map")),Y("close-map").focus(),requestAnimationFrame(ac))}function Kr(){Dn&&(Dn=!1,Y("world-map").hidden=!0,_e.paused=!1,_e.clearInput())}Y("minimap").onclick=Ka;Y("open-map").onclick=Ka;Y("close-map").onclick=Kr;Y("map-canvas").addEventListener("click",i=>{const e=i.currentTarget,t=e.getBoundingClientRect(),n=oc(t.width,t.height),r=cg(n,t.width,t.height,i.clientX-t.left,i.clientY-t.top);Ei=hg(r.x,r.z)?.id,Ya()});document.addEventListener("keydown",i=>{if(i.repeat&&["e"," ","Escape","m","M"].includes(i.key))return;if(Y("dialog").open){if(Xa==="quiz"&&/^[1-4]$/.test(i.key)){const t=document.querySelectorAll(".answer")[Number(i.key)-1];t&&!t.disabled&&t.click()}return}if(Dn){(i.key==="Escape"||i.key.toLowerCase()==="m")&&(i.preventDefault(),Kr());return}if(!_e?.active)return;const e=i.key.toLowerCase();["w","a","s","d","arrowup","arrowdown","arrowleft","arrowright"," "].includes(e)&&(i.preventDefault(),_e.keys.add(e)),e===" "&&_e.jump(),e==="e"&&Yr(),e==="m"&&Ka(),e==="escape"&&(i.preventDefault(),Ti())});document.addEventListener("keyup",i=>_e?.keys.delete(i.key.toLowerCase()));window.addEventListener("blur",()=>{_e?.clearInput(),_e?.active&&!Dn&&!Y("dialog").open&&Ti()});document.addEventListener("visibilitychange",()=>{_e?.clearInput(),document.hidden?xt.music(!1):_e?.active&&xt.music(ie.music)});const nr=Y("joystick");let Za=-1;function lc(i){if(i.pointerId!==Za)return;const e=nr.getBoundingClientRect();let t=(i.clientX-e.left-e.width/2)/34,n=(i.clientY-e.top-e.height/2)/34;const r=Math.max(1,Math.hypot(t,n));t/=r,n/=r,_e.joystick={x:t,y:n},Y("joystick-knob").style.transform=`translate(${t*30}px,${n*30}px)`}nr.addEventListener("pointerdown",i=>{Za=i.pointerId,nr.setPointerCapture(i.pointerId),lc(i)});nr.addEventListener("pointermove",lc);for(const i of["pointerup","pointercancel"])nr.addEventListener(i,()=>{Za=-1,_e.joystick={x:0,y:0},Y("joystick-knob").style.transform=""});function Ls(i,e,t,n){
   if(!i)return;
-  const isZoomed=(_e&&_e.distance<36);
-  const cutoff=isZoomed?52:75;
+  const isNear=i.classList.contains("near")||i.classList.contains("gps-focus");
   const r=_e.project(e);
-  const s=Math.max(0,Math.min(1,1-(r.distance-cutoff)/30));
-  const hide=n||!r.visible||s<=0;
+
+  // Active / Near Station: NEVER HIDE! Always visible and prominent when character is near!
+  if(isNear){
+    const hideNear=!r.visible;
+    if(i.hidden!==hideNear)i.hidden=hideNear;
+    if(!hideNear){
+      i.style.transform=`translate(${r.x.toFixed(1)}px,${r.y.toFixed(1)}px) ${t}`;
+      i.style.opacity="1";
+    }
+    return;
+  }
+
+  // Distant stations: hide when modal dialog is open so nothing clashes
+  if(n){
+    if(!i.hidden)i.hidden=!0;
+    return;
+  }
+
+  // Distant stations: distance culling & transparent ghost opacity
+  const isZoomed=(_e&&_e.distance<36);
+  const cutoff=isZoomed?48:68;
+  const s=Math.max(0,Math.min(1,1-(r.distance-cutoff)/25));
+  const hide=!r.visible||s<=0;
+
   if(i.hidden!==hide)i.hidden=hide;
   if(!hide){
     i.style.transform=`translate(${r.x.toFixed(1)}px,${r.y.toFixed(1)}px) ${t}`;
-    i.style.opacity=s.toFixed(2);
+    const ghostOpacity=(s*0.42).toFixed(2);
+    i.style.opacity=ghostOpacity;
   }
-}function cc(){const i=_e.player.position,e=Xm(i.x,i.z);if(e.id===bi)return;const t=bi==="";bi=e.id,Y("area-icon").innerHTML=Xe(e.icon),Y("area-name").textContent=Cn(e.name),Y("area-sub").textContent=Cn(e.subtitle);const n=Y("area-label");n.classList.remove("arrive"),n.offsetWidth,n.classList.add("arrive"),!t&&_e.active&&e.id!=="village"&&e.id!=="garden"&&Di(e,ie.questComplete)&&In(Va()==="vi"?`Chào mừng đến ${e.name}!`:`Welcome to ${Cn(e.name)}!`)}try{_e=new $m(Y("world")),_e.setBridge(ie.bridge),_e.setAvatar(ie.avatar),_e.onJump=()=>xt.jump(),_e.onSceneClick=()=>Yr(),_e.onFrame=(i,e)=>{if(ec=i,!(++ul%2!==0||!_e.active)){const ws=_e.nearWorkstation();window._currentStation=ws;const canInteract=i||!!ws;Y("interact").hidden=!canInteract||_e.paused;if(ws){Y("interact").innerHTML=`<kbd>E</kbd> ${ws.hint} ${Xe("arrow")}`}else if(i){Y("interact").innerHTML=`<kbd>E</kbd> Nói chuyện với Milo ${Xe("arrow")}`};Ls(Y("milo-label"),new F(-3,3.5,1.5),"translate(-50%,-100%)",_e.paused);Ls(Y("house-label"),new F(-4.0,2.6,-9.5),"translate(-50%,-100%)",_e.paused);
-    Ls(Y("pond-label"),new F(-36.5,2.2,-7.5),"translate(-50%,-100%)",_e.paused);
-    Ls(Y("pos-label"),new F(-8.5,2.2,-2.5),"translate(-50%,-100%)",_e.paused);Ls(Y("weigh-label"),new F(-1.5,2.2,7.5),"translate(-50%,-100%)",_e.paused);Ls(Y("kitchen-label"),new F(18,2.4,-6),"translate(-50%,-100%)",_e.paused);Ls(Y("audit-label"),new F(33,2.7,16),"translate(-50%,-100%)",_e.paused);Ls(Y("server-label"),new F(54,2.8,-18),"translate(-50%,-100%)",_e.paused);const hideRegions=_e.paused||(_e.distance<36);for(const t of qa)Ls(Y(`${t.id}-label`),new F(t.center[0],t.labelHeight,t.center[1]),"translate(-50%,-100%)",hideRegions);Ls(Y("bridge-label"),new F(7,.8,0),"translate(-50%,15px)",_e.paused);Y("milo-label").classList.toggle("near",i);Y("house-label").classList.toggle("near",ws?.type==="house");
+}function cc(){const i=_e.player.position,e=Xm(i.x,i.z);if(e.id===bi)return;const t=bi==="";bi=e.id,Y("area-icon").innerHTML=Xe(e.icon),Y("area-name").textContent=Cn(e.name),Y("area-sub").textContent=Cn(e.subtitle);const n=Y("area-label");n.classList.remove("arrive"),n.offsetWidth,n.classList.add("arrive"),!t&&_e.active&&e.id!=="village"&&e.id!=="garden"&&Di(e,ie.questComplete)&&In(Va()==="vi"?`Chào mừng đến ${e.name}!`:`Welcome to ${Cn(e.name)}!`)}try{_e=new $m(Y("world")),_e.setBridge(ie.bridge),_e.setAvatar(ie.avatar),_e.onJump=()=>xt.jump(),_e.onSceneClick=()=>Yr(),_e.onFrame=(i,e)=>{if(ec=i,!(++ul%2!==0||!_e.active)){
+    const ws=_e.nearWorkstation();
+    window._currentStation=ws;
+    const canInteract=i||!!ws;
+    Y("interact").hidden=!canInteract||_e.paused;
+    if(ws){
+      Y("interact").innerHTML=`<kbd>E</kbd> ${ws.hint} ${Xe("arrow")}`;
+    }else if(i){
+      Y("interact").innerHTML=`<kbd>E</kbd> Nói chuyện với Milo ${Xe("arrow")}`;
+    }
+
+    // 1. Update .near class for all stations FIRST so Ls immediately knows which station is active
+    Y("milo-label").classList.toggle("near",!!i);
+    Y("house-label").classList.toggle("near",ws?.type==="house");
     Y("pond-label").classList.toggle("near",ws?.type==="pond");
-    Y("pos-label").classList.toggle("near",ws?.type==="pos");Y("weigh-label").classList.toggle("near",ws?.type==="weigh");Y("kitchen-label").classList.toggle("near",ws?.type==="kitchen");Y("audit-label").classList.toggle("near",ws?.type==="audit");Y("server-label").classList.toggle("near",ws?.type==="server");Ls(Y("truck-label"),new F(12,2.4,-8),"translate(-50%,-100%)",_e.paused);Ls(Y("crate1-label"),new F(24,1.8,-12),"translate(-50%,-100%)",_e.paused);Ls(Y("crate2-label"),new F(38,1.8,8),"translate(-50%,-100%)",_e.paused);Ls(Y("crate3-label"),new F(48,1.8,-8),"translate(-50%,-100%)",_e.paused);Y("truck-label").classList.toggle("near",ws?.type==="truck");Y("crate1-label").classList.toggle("near",ws?.type==="crate"&&ws?.name.includes("BTP"));Y("crate2-label").classList.toggle("near",ws?.type==="crate"&&ws?.name.includes("Date"));Y("crate3-label").classList.toggle("near",ws?.type==="crate"&&ws?.name.includes("Giá Vốn")),cc(),ul%6===0&&sc(),_e.active&&!_e.paused&&ie.bridge===yt&&!ie.questComplete&&e&&(ie.questComplete=!0,ie.xp+=50,ie.coins+=10,Xt(),_n(),xt.celebrate(),_e.burst(_e.player.position.clone().add(new F(0,1,0))),Jn("Bạn đã làm được rồi!",`<div class="completion-medal">${Xe("crown")}</div><p class="dialog-copy centered">Nhờ bạn, hai bờ đã được nối liền.<br><b>Cây cầu tình bạn</b> đã hoàn thành!</p><div class="completion-rewards"><span>★ +50 XP</span><span>◉ +10 xu</span></div><p class="book-note centered">4 vùng đất mới đã mở trên bản đồ. Nhấn M để xem!</p><button id="keep-playing" class="primary wide">Tiếp tục khám phá ${Xe("arrow")}</button>`,"complete"),Y("keep-playing").onclick=cr)}},Y("loading").hidden=!0,_n()}catch(i){Y("loading").innerHTML='<strong>Chưa mở được thế giới 3D</strong><p>Hãy bật tăng tốc đồ họa trong trình duyệt, hoặc thử Chrome / Edge mới hơn.</p><button class="primary" onclick="location.reload()">Thử lại</button>',console.error(i)}const ml=document.modelContext,hc=new AbortController;if(ml?.registerTool)try{Promise.resolve(ml.registerTool({name:"read_adventure_progress",description:"Read local progress in Multiplication Kingdom: XP, coins, completed bridge segments and review count.",inputSchema:{type:"object",properties:{},additionalProperties:!1},annotations:{readOnlyHint:!0},execute:async i=>{if(!i||typeof i!="object"||Array.isArray(i)||Object.keys(i).length)throw new Error("Expected an empty object");return{xp:ie.xp,coins:ie.coins,bridgeSegments:ie.bridge,questComplete:ie.questComplete,reviewCount:ie.review.length}}},{signal:hc.signal})).catch(()=>{})}catch{}window.addEventListener("pagehide",()=>hc.abort(),{once:!0});
+    Y("pos-label").classList.toggle("near",ws?.type==="pos");
+    Y("weigh-label").classList.toggle("near",ws?.type==="weigh");
+    Y("kitchen-label").classList.toggle("near",ws?.type==="kitchen");
+    Y("audit-label").classList.toggle("near",ws?.type==="audit");
+    Y("server-label").classList.toggle("near",ws?.type==="server");
+    Y("truck-label").classList.toggle("near",ws?.type==="truck");
+    Y("crate1-label").classList.toggle("near",ws?.type==="crate");
+    Y("crate2-label").classList.toggle("near",ws?.type==="crate");
+    Y("crate3-label").classList.toggle("near",ws?.type==="crate");
+
+    // 2. Project and position station labels
+    Ls(Y("milo-label"),new F(-3,3.5,1.5),"translate(-50%,-100%)",_e.paused);
+    Ls(Y("house-label"),new F(-4.0,2.6,-9.5),"translate(-50%,-100%)",_e.paused);
+    Ls(Y("pond-label"),new F(-36.5,2.2,-7.5),"translate(-50%,-100%)",_e.paused);
+    Ls(Y("pos-label"),new F(-8.5,2.2,-2.5),"translate(-50%,-100%)",_e.paused);
+    Ls(Y("weigh-label"),new F(-1.5,2.2,7.5),"translate(-50%,-100%)",_e.paused);
+    Ls(Y("kitchen-label"),new F(18,2.4,-6),"translate(-50%,-100%)",_e.paused);
+    Ls(Y("audit-label"),new F(33,2.7,16),"translate(-50%,-100%)",_e.paused);
+    Ls(Y("server-label"),new F(54,2.8,-18),"translate(-50%,-100%)",_e.paused);
+    Ls(Y("truck-label"),new F(12,2.4,-8),"translate(-50%,-100%)",_e.paused);
+    Ls(Y("crate1-label"),new F(24,1.8,-12),"translate(-50%,-100%)",_e.paused);
+    Ls(Y("crate2-label"),new F(38,1.8,8),"translate(-50%,-100%)",_e.paused);
+    Ls(Y("crate3-label"),new F(48,1.8,-8),"translate(-50%,-100%)",_e.paused);
+
+    const hideRegions=_e.paused||(_e.distance<36);
+    for(const t of qa)Ls(Y(`${t.id}-label`),new F(t.center[0],t.labelHeight,t.center[1]),"translate(-50%,-100%)",hideRegions);
+    Ls(Y("bridge-label"),new F(7,.8,0),"translate(-50%,15px)",_e.paused);Y("truck-label").classList.toggle("near",ws?.type==="truck");Y("crate1-label").classList.toggle("near",ws?.type==="crate"&&ws?.name.includes("BTP"));Y("crate2-label").classList.toggle("near",ws?.type==="crate"&&ws?.name.includes("Date"));Y("crate3-label").classList.toggle("near",ws?.type==="crate"&&ws?.name.includes("Giá Vốn")),cc(),ul%6===0&&sc(),_e.active&&!_e.paused&&ie.bridge===yt&&!ie.questComplete&&e&&(ie.questComplete=!0,ie.xp+=50,ie.coins+=10,Xt(),_n(),xt.celebrate(),_e.burst(_e.player.position.clone().add(new F(0,1,0))),Jn("Bạn đã làm được rồi!",`<div class="completion-medal">${Xe("crown")}</div><p class="dialog-copy centered">Nhờ bạn, hai bờ đã được nối liền.<br><b>Cây cầu tình bạn</b> đã hoàn thành!</p><div class="completion-rewards"><span>★ +50 XP</span><span>◉ +10 xu</span></div><p class="book-note centered">4 vùng đất mới đã mở trên bản đồ. Nhấn M để xem!</p><button id="keep-playing" class="primary wide">Tiếp tục khám phá ${Xe("arrow")}</button>`,"complete"),Y("keep-playing").onclick=cr)}},Y("loading").hidden=!0,_n()}catch(i){Y("loading").innerHTML='<strong>Chưa mở được thế giới 3D</strong><p>Hãy bật tăng tốc đồ họa trong trình duyệt, hoặc thử Chrome / Edge mới hơn.</p><button class="primary" onclick="location.reload()">Thử lại</button>',console.error(i)}const ml=document.modelContext,hc=new AbortController;if(ml?.registerTool)try{Promise.resolve(ml.registerTool({name:"read_adventure_progress",description:"Read local progress in Multiplication Kingdom: XP, coins, completed bridge segments and review count.",inputSchema:{type:"object",properties:{},additionalProperties:!1},annotations:{readOnlyHint:!0},execute:async i=>{if(!i||typeof i!="object"||Array.isArray(i)||Object.keys(i).length)throw new Error("Expected an empty object");return{xp:ie.xp,coins:ie.coins,bridgeSegments:ie.bridge,questComplete:ie.questComplete,reviewCount:ie.review.length}}},{signal:hc.signal})).catch(()=>{})}catch{}window.addEventListener("pagehide",()=>hc.abort(),{once:!0});

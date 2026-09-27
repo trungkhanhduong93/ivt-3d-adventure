@@ -730,23 +730,334 @@ dialog h2 {
   pointer-events: none;
 }
 
-/* === ULTRA PERFORMANCE GRAPHICS FIX === */
-.world-label, .workstation-label, .region-label {
+/* === WORKSTATION LABELS: TRANSLUCENT GHOST PIN -> FULL PROMINENT === */
+.region-label {
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
-  background: #fffdf5 !important;
-  border: 1.5px solid rgba(25, 79, 66, 0.2) !important;
-  box-shadow: 0 4px 14px rgba(37, 80, 53, 0.2) !important;
+  background: rgba(255, 253, 245, 0.6) !important;
+  border: 1px solid rgba(25, 79, 66, 0.15) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
 }
 
-.world-label:after {
-  background: #fffdf5 !important;
+.workstation-label,
+#milo-label {
+  cursor: pointer !important;
+  user-select: none !important;
+  pointer-events: auto !important;
+  min-width: 80px !important;
+  max-width: 155px !important;
+  padding: 4px 8px !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(255, 255, 255, 0.55) !important;
+  background: rgba(255, 253, 245, 0.45) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
+  opacity: 0.42 !important;
+  transform-origin: center bottom !important;
+  transition: opacity 0.25s ease, transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease !important;
 }
 
-.workstation-label.station-mastered {
-  border: 1.5px solid #f59e0b !important;
-  background: #fffdf5 !important;
-  box-shadow: 0 0 16px rgba(245, 158, 11, 0.4), 0 8px 24px rgba(0, 0, 0, 0.2) !important;
+.workstation-label strong,
+#milo-label strong {
+  display: block !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  color: #1e293b !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Distant stations: hide small description to keep pins compact and transparent, preventing landscape clutter */
+.workstation-label small,
+#milo-label small {
+  display: none !important;
+}
+
+.workstation-label:after,
+#milo-label:after {
+  content: "" !important;
+  position: absolute !important;
+  bottom: -4px !important;
+  left: calc(50% - 4px) !important;
+  width: 8px !important;
+  height: 8px !important;
+  background: rgba(255, 253, 245, 0.45) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.55) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.55) !important;
+  transform: rotate(45deg) !important;
+  transition: all 0.25s ease !important;
+}
+
+.workstation-label:hover,
+#milo-label:hover {
+  opacity: 0.88 !important;
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-color: rgba(16, 185, 129, 0.6) !important;
+  transform: scale(1.05) translateY(-2px) !important;
+}
+
+/* === KHI ĐẾN NƠI / Ở GẦN TRẠM: HIỆN LÊN ĐẦY ĐỦ, NỔI BẬT, RỰC RỠ === */
+.workstation-label.near,
+#milo-label.near,
+.workstation-label.gps-focus,
+#milo-label.gps-focus {
+  opacity: 1 !important;
+  z-index: 99999 !important;
+  min-width: 140px !important;
+  max-width: 220px !important;
+  padding: 8px 14px !important;
+  border-radius: 14px !important;
+  background: #ffffff !important;
+  border: 2px solid #059669 !important;
+  box-shadow: 0 0 0 5px rgba(16, 185, 129, 0.35), 0 12px 28px rgba(0, 0, 0, 0.22) !important;
+  transform: scale(1.12) translateY(-4px) !important;
+}
+
+.workstation-label.near strong,
+#milo-label.near strong,
+.workstation-label.gps-focus strong,
+#milo-label.gps-focus strong {
+  font-size: 13.5px !important;
+  font-weight: 900 !important;
+  color: #064e3b !important;
+}
+
+.workstation-label.near small,
+#milo-label.near small,
+.workstation-label.gps-focus small,
+#milo-label.gps-focus small {
+  display: block !important;
+  font-size: 10.5px !important;
+  font-weight: 700 !important;
+  color: #047857 !important;
+  margin-top: 2px !important;
+}
+
+.workstation-label.near .station-dot,
+#milo-label.near .station-dot,
+.workstation-label.gps-focus .station-dot,
+#milo-label.gps-focus .station-dot {
+  width: 20px !important;
+  height: 20px !important;
+  font-size: 11px !important;
+  border-width: 2px !important;
+  top: -10px !important;
+  left: calc(50% - 10px) !important;
+  animation: stationPulse 1.2s infinite ease-in-out !important;
+}
+
+.workstation-label.near:after,
+#milo-label.near:after,
+.workstation-label.gps-focus:after,
+#milo-label.gps-focus:after {
+  bottom: -6px !important;
+  left: calc(50% - 5px) !important;
+  width: 10px !important;
+  height: 10px !important;
+  background: #ffffff !important;
+  border-right: 2px solid #059669 !important;
+  border-bottom: 2px solid #059669 !important;
+  opacity: 1 !important;
+}
+
+/* Mastered station when near */
+.workstation-label.station-mastered.near,
+.workstation-label.station-mastered.gps-focus {
+  border: 2px solid #f59e0b !important;
+  background: linear-gradient(135deg, #ffffff, #fef3c7) !important;
+  box-shadow: 0 0 0 5px rgba(245, 158, 11, 0.4), 0 14px 30px rgba(0, 0, 0, 0.25) !important;
+}
+
+.workstation-label.station-mastered.near strong {
+  color: #92400e !important;
+}
+
+.workstation-label.station-mastered.near small {
+  color: #b45309 !important;
+}
+
+.workstation-label.station-mastered.near:after {
+  background: #fef3c7 !important;
+  border-right: 2px solid #f59e0b !important;
+  border-bottom: 2px solid #f59e0b !important;
+}
+
+/* Toolbar Perf Button */
+.perf-tool-btn {
+  display: flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  padding: 0 11px !important;
+  height: 42px !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  border-radius: 12px !important;
+  border: 1.5px solid rgba(56, 189, 248, 0.45) !important;
+  background: rgba(15, 23, 42, 0.5) !important;
+  color: #38bdf8 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+.perf-tool-btn:hover {
+  background: rgba(56, 189, 248, 0.18) !important;
+  border-color: #38bdf8 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* === WORKSTATION LABELS: TRANSLUCENT GHOST PIN -> FULL PROMINENT === */
+.region-label {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: rgba(255, 253, 245, 0.6) !important;
+  border: 1px solid rgba(25, 79, 66, 0.15) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.workstation-label,
+#milo-label {
+  cursor: pointer !important;
+  user-select: none !important;
+  pointer-events: auto !important;
+  min-width: 80px !important;
+  max-width: 155px !important;
+  padding: 4px 8px !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(255, 255, 255, 0.55) !important;
+  background: rgba(255, 253, 245, 0.45) !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1) !important;
+  opacity: 0.42 !important;
+  transform-origin: center bottom !important;
+  transition: opacity 0.25s ease, transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease !important;
+}
+
+.workstation-label strong,
+#milo-label strong {
+  display: block !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  color: #1e293b !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Distant stations: hide small description to keep pins compact and transparent, preventing landscape clutter */
+.workstation-label small,
+#milo-label small {
+  display: none !important;
+}
+
+.workstation-label:after,
+#milo-label:after {
+  content: "" !important;
+  position: absolute !important;
+  bottom: -4px !important;
+  left: calc(50% - 4px) !important;
+  width: 8px !important;
+  height: 8px !important;
+  background: rgba(255, 253, 245, 0.45) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.55) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.55) !important;
+  transform: rotate(45deg) !important;
+  transition: all 0.25s ease !important;
+}
+
+.workstation-label:hover,
+#milo-label:hover {
+  opacity: 0.88 !important;
+  background: rgba(255, 255, 255, 0.92) !important;
+  border-color: rgba(16, 185, 129, 0.6) !important;
+  transform: scale(1.05) translateY(-2px) !important;
+}
+
+/* === KHI ĐẾN NƠI / Ở GẦN TRẠM: HIỆN LÊN ĐẦY ĐỦ, NỔI BẬT, RỰC RỠ === */
+.workstation-label.near,
+#milo-label.near,
+.workstation-label.gps-focus,
+#milo-label.gps-focus {
+  opacity: 1 !important;
+  z-index: 99999 !important;
+  min-width: 140px !important;
+  max-width: 220px !important;
+  padding: 8px 14px !important;
+  border-radius: 14px !important;
+  background: #ffffff !important;
+  border: 2px solid #059669 !important;
+  box-shadow: 0 0 0 5px rgba(16, 185, 129, 0.35), 0 12px 28px rgba(0, 0, 0, 0.22) !important;
+  transform: scale(1.12) translateY(-4px) !important;
+}
+
+.workstation-label.near strong,
+#milo-label.near strong,
+.workstation-label.gps-focus strong,
+#milo-label.gps-focus strong {
+  font-size: 13.5px !important;
+  font-weight: 900 !important;
+  color: #064e3b !important;
+}
+
+.workstation-label.near small,
+#milo-label.near small,
+.workstation-label.gps-focus small,
+#milo-label.gps-focus small {
+  display: block !important;
+  font-size: 10.5px !important;
+  font-weight: 700 !important;
+  color: #047857 !important;
+  margin-top: 2px !important;
+}
+
+.workstation-label.near .station-dot,
+#milo-label.near .station-dot,
+.workstation-label.gps-focus .station-dot,
+#milo-label.gps-focus .station-dot {
+  width: 20px !important;
+  height: 20px !important;
+  font-size: 11px !important;
+  border-width: 2px !important;
+  top: -10px !important;
+  left: calc(50% - 10px) !important;
+  animation: stationPulse 1.2s infinite ease-in-out !important;
+}
+
+.workstation-label.near:after,
+#milo-label.near:after,
+.workstation-label.gps-focus:after,
+#milo-label.gps-focus:after {
+  bottom: -6px !important;
+  left: calc(50% - 5px) !important;
+  width: 10px !important;
+  height: 10px !important;
+  background: #ffffff !important;
+  border-right: 2px solid #059669 !important;
+  border-bottom: 2px solid #059669 !important;
+  opacity: 1 !important;
+}
+
+/* Mastered station when near */
+.workstation-label.station-mastered.near,
+.workstation-label.station-mastered.gps-focus {
+  border: 2px solid #f59e0b !important;
+  background: linear-gradient(135deg, #ffffff, #fef3c7) !important;
+  box-shadow: 0 0 0 5px rgba(245, 158, 11, 0.4), 0 14px 30px rgba(0, 0, 0, 0.25) !important;
+}
+
+.workstation-label.station-mastered.near strong {
+  color: #92400e !important;
+}
+
+.workstation-label.station-mastered.near small {
+  color: #b45309 !important;
+}
+
+.workstation-label.station-mastered.near:after {
+  background: #fef3c7 !important;
+  border-right: 2px solid #f59e0b !important;
+  border-bottom: 2px solid #f59e0b !important;
 }
 
 /* Toolbar Perf Button */
