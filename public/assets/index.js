@@ -4504,6 +4504,28 @@ Y("play").onclick=startAdventure;for(const i of["boy","girl"])Y(i).onclick=()=>{
   {id:"crate2-label",type:"crate",name:"Rương Sự Cố Date",pos:[38.0,1.5,8.0],subs:["PHAN_HE_04_DIEU_CHUYEN","PHAN_HE_11_BAO_CAO"]},
   {id:"crate3-label",type:"crate",name:"Rương Cứu Hộ Giá Vốn",pos:[48.0,1.5,-8.0],subs:["PHAN_HE_08_GIA_VON","PHAN_HE_12_CHAN_DOAN_TICKET"]}
 ];
+const WEST_STATION_IDS = ["house", "pond", "pos", "weigh"];
+function getWestStationsStatus(role) {
+  return WEST_STATION_IDS.map(id => {
+    const ws = _stationsDef.find(s => s.type === id || s.id === `${id}-label`);
+    if (!ws) return { id, name: id, completed: false, count: 0, total: 0 };
+    const pool = getStationQuestionPool(ws, role);
+    const completedCount = pool.filter(q => ie.questionStats?.[q.id]?.correct > 0).length;
+    const isDone = pool.length > 0 && completedCount === pool.length;
+    return {
+      id,
+      name: ws.name,
+      completed: isDone,
+      count: completedCount,
+      total: pool.length
+    };
+  });
+}
+function areWestStationsCompleted(role) {
+  const list = getWestStationsStatus(role);
+  return list.every(s => s.completed);
+}
+
 function getStationQuestionPool(ws, role) {
   if (!ws || !ws.subs) return [];
   const allQs = window.IVT_QUESTIONS || [];
@@ -4573,17 +4595,108 @@ function Yr(){
     Xr("station", uncompleted[0].id);
     return;
   }
-  if(!ec){In("Hãy đến gần Milo hoặc một Trạm Nghiệp Vụ (Quầy POS, Bàn Cân, Bếp BTP, Kệ Kho, Tháp Ticket).");return;}
+
+  // GẶP MILO: Kiểm tra điều kiện phải hoàn thành hết các trạm bên bờ Milo trước!
+  const role = (ie.avatar==="girl"||ie.avatar==="tech")?"tech":"manager";
+  const westStatus = getWestStationsStatus(role);
+  const uncompletedWest = westStatus.filter(s => !s.completed);
+
+  if(uncompletedWest.length > 0){
+    const nextWest = uncompletedWest[0];
+    xt.unlock();
+    Jn(
+      "Người Dẫn Đường Milo",
+      `<div class="dialog-eyebrow" style="color:#d97706;font-weight:800;letter-spacing:1px;text-align:center">
+        CHƯA ĐỦ ĐIỀU KIỆN XÂY CẦU (ĐÃ XONG ${4 - uncompletedWest.length}/4 TRẠM)
+      </div>
+      <p class="dialog-copy centered" style="margin:10px 0 14px;color:#1e293b">
+        Chào bạn! Để đủ kiến thức ghép <strong>Cây Cầu Dữ Liệu</strong> vượt sông sang Đảo Bếp, bạn cần <strong>hoàn thành đầy đủ 4 trạm nghiệp vụ bên Làng Khởi Đầu</strong> trước nhé!
+      </p>
+      <div style="display:flex;flex-direction:column;gap:7px;background:rgba(245,158,11,0.06);border:1.5px solid rgba(245,158,11,0.25);border-radius:12px;padding:12px 14px;margin-bottom:16px">
+        ${westStatus.map(st => `
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13px">
+            <span style="font-weight:700;color:${st.completed ? '#059669' : '#374151'}">
+              ${st.completed ? '✅' : '⏳'} ${st.name}
+            </span>
+            <span style="font-weight:800;font-size:12px;padding:2px 8px;border-radius:6px;background:${st.completed ? 'rgba(16,185,129,0.15)' : 'rgba(245,158,11,0.15)'};color:${st.completed ? '#047857' : '#b45309'}">
+              ${st.completed ? 'Thành thạo' : `${st.count}/${st.total} câu`}
+            </span>
+          </div>
+        `).join('')}
+      </div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <button id="guide-to-next-west-btn" class="primary wide" style="background:linear-gradient(135deg,#059669,#10b981);box-shadow:0 4px 14px rgba(16,185,129,0.35)">
+          🧭 Dẫn đường đến ${nextWest.name} ${Xe("arrow")}
+        </button>
+        <button id="close-milo-dialog-btn" class="secondary wide">
+          Tôi hiểu rồi, để mình đi làm trước
+        </button>
+      </div>`,
+      "milo"
+    );
+    const gBtn = Y("guide-to-next-west-btn");
+    if(gBtn){
+      gBtn.onclick = () => {
+        cr();
+        navigateToTarget(nextWest.id);
+      };
+    }
+    const cBtn = Y("close-milo-dialog-btn");
+    if(cBtn) cBtn.onclick = cr;
+    return;
+  }
+
+  // ĐÃ HOÀN THÀNH ĐỦ 4 TRẠM BÊN BỜ MILO: MỞ KHÓA NHIỆM VỤ XÂY CẦU!
   xt.unlock();
-  const i=ie.bridge===yt;
-  Jn("Chào bạn, mình là Milo!",`<div class="dialog-eyebrow">NGƯỜI DẪN ĐƯỜNG CỦA BẠN</div><p class="dialog-copy">${i?"Cây cầu của chúng mình thật đẹp! "+(ie.questComplete?"Bạn muốn cùng mình luyện thêm nghiệp vụ kho không?":"Bạn hãy đi qua cầu đến khu vườn bên kia nhé. Mình cũng luôn sẵn sàng luyện tập cùng bạn!"):"Khu vườn bên kia sông đang chờ chúng mình. Hãy giúp mình xây <strong>6 đoạn cầu</strong> bằng những nhịp cầu phép thuật nhé!"}</p><div class="milo-tip"><span>✦</span><p>${i?"Cứ thong thả, không cần vội. Mỗi lần thử là một lần bạn tiến bộ!":"Chọn nghiệp vụ kho cho đúng số nhịp cầu. Mỗi câu đúng: <b>+10 XP, +5 xu</b>. Nếu chưa đúng, chúng mình cùng đếm lại!"}</p></div><button id="accept-quest" class="primary wide">${i?"Cùng luyện tập":"Cùng xây cầu nào!"} ${Xe("arrow")}</button>`,"milo");
-  Y("accept-quest").onclick=()=>{ie.questAccepted=!0;Xt();_n();window._activeStation=null;Xr(i?"practice":"bridge");};
+  const isBridgeFinished = (ie.bridge === yt);
+  Jn(
+    "Người Dẫn Đường Milo",
+    `<div class="dialog-eyebrow" style="color:#059669;font-weight:800;letter-spacing:1px;text-align:center">
+      ĐÃ MỞ KHÓA: NHIỆM VỤ XÂY CẦU VƯỢT SÔNG
+    </div>
+    <div style="text-align:center;font-size:32px;margin:8px 0">🌉</div>
+    <p class="dialog-copy centered" style="margin:10px 0 14px">
+      🎉 Xuất sắc! Bạn đã chinh phục trọn vẹn <strong>4/4 trạm nghiệp vụ bên Làng Khởi Đầu</strong>.<br>
+      ${isBridgeFinished ? "Cây cầu dữ liệu đã hoàn thành 6/6 nhịp! Bạn có thể tự do qua sông sang Đảo Bếp Trung Tâm hoặc luyện tập thêm." : `Hãy trả lời câu hỏi của Milo để ghép từng nhịp cầu dữ liệu (${ie.bridge}/${yt} nhịp đã xong)!`}
+    </p>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <button id="start-bridge-mission-btn" class="primary wide" style="background:linear-gradient(135deg,#059669,#10b981);box-shadow:0 4px 14px rgba(16,185,129,0.35)">
+        ${isBridgeFinished ? "Luyện tập thêm câu hỏi xây cầu" : `Bắt đầu ghép nhịp cầu số ${ie.bridge + 1}/${yt}`} ${Xe("arrow")}
+      </button>
+      <button id="close-milo-bridge-btn" class="secondary wide">Để sau</button>
+    </div>`,
+    "milo"
+  );
+  const sBtn = Y("start-bridge-mission-btn");
+  if(sBtn){
+    sBtn.onclick = () => {
+      cr();
+      window._activeStation = null;
+      Xr(isBridgeFinished ? "practice" : "bridge");
+    };
+  }
+  const cbBtn = Y("close-milo-bridge-btn");
+  if(cbBtn) cbBtn.onclick = cr;
 }
+
 Y("interact").onclick=Yr;
+
 function handleStationClick(s){
   if(!_e||_e.paused)return;
   const isMilo=(!s||s==="milo"||s.id==="milo-label");
   const ws=isMilo?null:(typeof s==="object"?s:_stationsDef.find(item=>item.id===s||item.type===s||item.id===`${s}-label`));
+
+  if(isMilo){
+    const role=(ie.avatar==="girl"||ie.avatar==="tech")?"tech":"manager";
+    const westStatus=getWestStationsStatus(role);
+    const uncompletedWest=westStatus.filter(item=>!item.completed);
+    if(uncompletedWest.length>0){
+      window._currentStation=null;
+      Yr();
+      return;
+    }
+  }
+
   const targetCoords=isMilo?[-3.0,0,1.5]:ws.pos;
   const targetPos=new F(targetCoords[0],0,targetCoords[2]);
   const pPos=_e.player.position;
@@ -4601,7 +4714,10 @@ function handleStationClick(s){
 }
 
 Y("milo-label").onclick=()=>handleStationClick("milo");
-
+_stationsDef.forEach(s=>{
+  const el=Y(s.id);
+  if(el)el.onclick=()=>handleStationClick(s);
+});
 
 const QUEST_JOURNEY=[
   {step:1,id:"house",name:"Nhà Bên Milo - Danh Mục Gốc",desc:"Khai báo Base UOM (gam/ml) & 4 trường hành vi",zone:"Làng Khởi Đầu (Bên Milo)",pos:[-4.0,0,-8.5],icon:"warehouse",tag:"DANH MỤC GỐC"},
@@ -5042,37 +5158,27 @@ if(perfBtn){
 }
 Y("help").onclick=pg;function Ti(){const i=Object.values(ie.questionStats),e=i.reduce((n,r)=>n+r.attempts,0),t=i.reduce((n,r)=>n+r.correct,0);Jn("Một chút cài đặt",`<div class="settings-row"><span>Hiệu ứng âm thanh</span><button id="toggle-sound" class="switch" role="switch" aria-checked="${ie.sound}" aria-label="Hiệu ứng âm thanh"><i></i></button></div><div class="settings-row"><span>Nhạc nền nhẹ nhàng</span><button id="toggle-music" class="switch" role="switch" aria-checked="${ie.music}" aria-label="Nhạc nền"><i></i></button></div><div class="progress-summary"><span><strong>${ie.xp}</strong>XP tích lũy</span><span><strong>${e}</strong>Lượt trả lời</span><span><strong>${e?Math.round(t/e*100):0}%</strong>Trả lời đúng</span></div><p class="book-note">Tiến trình tự lưu trên trình duyệt này, không cần tài khoản. Xóa dữ liệu trình duyệt sẽ xóa tiến trình.</p><button id="save-now" class="secondary wide">${Xe("save")} Lưu tiến trình</button><button id="return-menu" class="text-button centered">Về màn hình chính</button><button id="reset-progress" class="text-button danger centered">${Xe("reset")} Chơi lại từ đầu</button>`,"settings"),Y("toggle-sound").onclick=()=>{xt.unlock(),ie.sound=!ie.sound,xt.enabled=ie.sound,Xt(),_n(),Ti()},Y("toggle-music").onclick=()=>{xt.unlock(),ie.music=!ie.music,xt.music(ie.music),Xt(),Ti()},Y("save-now").onclick=()=>{Xt()&&In("Đã lưu hành trình của bạn trên thiết bị này.")},Y("return-menu").onclick=pl,Y("reset-progress").onclick=()=>{Jn("Bắt đầu lại hành trình?",'<p class="dialog-copy">XP, xu, cây cầu và lịch sử luyện tập trên thiết bị này sẽ bị xóa. Không thể hoàn tác.</p><button id="confirm-reset" class="primary danger-bg wide">Xóa tiến trình và chơi lại</button><button id="cancel-reset" class="text-button centered">Giữ lại hành trình</button>',"reset"),Y("cancel-reset").onclick=Ti,Y("confirm-reset").onclick=()=>{ie=Ga(),Xt(),_e.setBridge(0),_e.player.position.set(-6,0,6),_e.setAvatar(ie.avatar),_e.resetCamera(),pl(),In("Một hành trình mới đang chờ bạn!")}}}Y("settings").onclick=Ti;Y("sound").onclick=()=>{xt.unlock(),ie.sound=!ie.sound,_n(),Xt()};Y("jump").onclick=()=>_e.jump();Y("zoom-in").onclick=()=>_e.zoom(-8);Y("zoom-out").onclick=()=>_e.zoom(8);function rc(i,e=i){const t=_e.player.position;return{player:{x:t.x,z:t.z,facing:_e.player.rotation.y},milo:{x:_e.milo.position.x,z:_e.milo.position.z},bridge:ie.bridge,questComplete:ie.questComplete,selected:e?Ei:void 0,labels:i,translate:Cn,time:performance.now()/1e3}}function sc(){const{ctx:i,w:e,h:t}=Jl(Y("minimap-canvas")),n=_e.player.position;Ql(i,e,t,{cx:n.x,cz:n.z,scale:e/70,rotation:_e.heading},rc(!1))}function ac(){if(!Dn)return;const i=Y("map-canvas"),{ctx:e,w:t,h:n}=Jl(i);Ql(e,t,n,oc(t,n),rc(t>600,!0)),requestAnimationFrame(ac)}function oc(i,e){const t=i>820,n=lg(t?i-360:i,t?e:e*.62,t?56:22);return t?n.cx+=180/n.scale:n.cz+=e*.19/n.scale,n}function Ya(){Y("map-regions").innerHTML=Ln(Dt.map(e=>{const t=Di(e,ie.questComplete);return`<button class="map-region${t?"":" locked"}" data-region="${e.id}" aria-pressed="${Ei===e.id}"><span class="map-region-icon" style="--tint:${e.color}">${Xe(t?e.icon:"lock")}</span><span><strong>${e.name}</strong><small>${e.subtitle}</small></span>${bi===e.id?"<em>Bạn ở đây</em>":""}</button>`}).join(""));const i=Dt.find(e=>e.id===Ei);Y("map-detail").innerHTML=i?Ln(`<strong>${Xe(i.icon)} ${i.name}</strong><p>${i.blurb}</p>${Di(i,ie.questComplete)?"":`<p class="map-locked">${Xe("lock")} Mở khóa khi hoàn thành Cây cầu tình bạn</p>`}`):"",document.querySelectorAll("[data-region]").forEach(e=>e.onclick=()=>{Ei=e.dataset.region,Ya()})}function Ka(){!_e.active||Y("dialog").open||(Dn=!0,_e.paused=!0,_e.clearInput(),Ei=bi||void 0,Y("world-map").hidden=!1,Ya(),Wa(Y("world-map")),Y("close-map").focus(),requestAnimationFrame(ac))}function Kr(){Dn&&(Dn=!1,Y("world-map").hidden=!0,_e.paused=!1,_e.clearInput())}Y("minimap").onclick=Ka;Y("open-map").onclick=Ka;Y("close-map").onclick=Kr;Y("map-canvas").addEventListener("click",i=>{const e=i.currentTarget,t=e.getBoundingClientRect(),n=oc(t.width,t.height),r=cg(n,t.width,t.height,i.clientX-t.left,i.clientY-t.top);Ei=hg(r.x,r.z)?.id,Ya()});document.addEventListener("keydown",i=>{if(i.repeat&&["e"," ","Escape","m","M"].includes(i.key))return;if(Y("dialog").open){if(Xa==="quiz"&&/^[1-4]$/.test(i.key)){const t=document.querySelectorAll(".answer")[Number(i.key)-1];t&&!t.disabled&&t.click()}return}if(Dn){(i.key==="Escape"||i.key.toLowerCase()==="m")&&(i.preventDefault(),Kr());return}if(!_e?.active)return;const e=i.key.toLowerCase();["w","a","s","d","arrowup","arrowdown","arrowleft","arrowright"," "].includes(e)&&(i.preventDefault(),_e.keys.add(e)),e===" "&&_e.jump(),e==="e"&&Yr(),e==="m"&&Ka(),e==="escape"&&(i.preventDefault(),Ti())});document.addEventListener("keyup",i=>_e?.keys.delete(i.key.toLowerCase()));window.addEventListener("blur",()=>{_e?.clearInput(),_e?.active&&!Dn&&!Y("dialog").open&&Ti()});document.addEventListener("visibilitychange",()=>{_e?.clearInput(),document.hidden?xt.music(!1):_e?.active&&xt.music(ie.music)});const nr=Y("joystick");let Za=-1;function lc(i){if(i.pointerId!==Za)return;const e=nr.getBoundingClientRect();let t=(i.clientX-e.left-e.width/2)/34,n=(i.clientY-e.top-e.height/2)/34;const r=Math.max(1,Math.hypot(t,n));t/=r,n/=r,_e.joystick={x:t,y:n},Y("joystick-knob").style.transform=`translate(${t*30}px,${n*30}px)`}nr.addEventListener("pointerdown",i=>{Za=i.pointerId,nr.setPointerCapture(i.pointerId),lc(i)});nr.addEventListener("pointermove",lc);for(const i of["pointerup","pointercancel"])nr.addEventListener(i,()=>{Za=-1,_e.joystick={x:0,y:0},Y("joystick-knob").style.transform=""});function Ls(i,e,t,n){
   if(!i)return;
-  const isNear=i.classList.contains("near")||i.classList.contains("gps-focus");
   const r=_e.project(e);
 
-  // Active / Near Station: NEVER HIDE! Always visible and prominent when character is near!
-  if(isNear){
-    const hideNear=!r.visible;
-    if(i.hidden!==hideNear)i.hidden=hideNear;
-    if(!hideNear){
-      i.style.transform=`translate(${r.x.toFixed(1)}px,${r.y.toFixed(1)}px) ${t} scale(1.08)`;
-      i.style.opacity="1";
-    }
-    return;
-  }
-
-  // Distant stations: hide when modal dialog is open so nothing clashes
-  if(n){
+  // Chỉ ẩn khi vật thể nằm phía sau lưng camera (r.visible === false)
+  if(!r.visible){
     if(!i.hidden)i.hidden=!0;
     return;
   }
 
-  // Distant stations: distance culling & transparent ghost opacity
-  const isZoomed=(_e&&_e.distance<36);
-  const cutoff=isZoomed?48:68;
-  const s=Math.max(0,Math.min(1,1-(r.distance-cutoff)/25));
-  const hide=!r.visible||s<=0;
+  // BẢNG TÊN LUÔN LUÔN HIỆN, KHÔNG BAO GIỜ BỊ ẨN KHI Ở TRONG TẦM MẮT!
+  if(i.hidden)i.hidden=!1;
 
-  if(i.hidden!==hide)i.hidden=hide;
-  if(!hide){
+  const isNear=i.classList.contains("near")||i.classList.contains("gps-focus");
+  if(isNear){
+    i.style.transform=`translate(${r.x.toFixed(1)}px,${r.y.toFixed(1)}px) ${t} scale(1.08)`;
+    i.style.opacity="1";
+    i.style.zIndex="9999";
+  } else {
     i.style.transform=`translate(${r.x.toFixed(1)}px,${r.y.toFixed(1)}px) ${t}`;
-    const ghostOpacity=(s*0.42).toFixed(2);
-    i.style.opacity=ghostOpacity;
+    // Các trạm ở xa bán trong suốt tinh tế (0.42) để không che phong cảnh
+    i.style.opacity="0.42";
+    i.style.zIndex="10";
   }
 }function cc(){const i=_e.player.position,e=Xm(i.x,i.z);if(e.id===bi)return;const t=bi==="";bi=e.id,Y("area-icon").innerHTML=Xe(e.icon),Y("area-name").textContent=Cn(e.name),Y("area-sub").textContent=Cn(e.subtitle);const n=Y("area-label");n.classList.remove("arrive"),n.offsetWidth,n.classList.add("arrive"),!t&&_e.active&&e.id!=="village"&&e.id!=="garden"&&Di(e,ie.questComplete)&&In(Va()==="vi"?`Chào mừng đến ${e.name}!`:`Welcome to ${Cn(e.name)}!`)}try{_e=new $m(Y("world")),_e.setBridge(ie.bridge),_e.setAvatar(ie.avatar),_e.onJump=()=>xt.jump(),_e.onSceneClick=()=>Yr(),_e.onFrame=(i,e)=>{if(ec=i,!(++ul%2!==0||!_e.active)){
     const ws=_e.nearWorkstation();
