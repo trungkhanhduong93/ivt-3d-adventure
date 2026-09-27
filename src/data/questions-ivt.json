@@ -2842,5 +2842,401 @@
     ],
     "hint": "Xem Cẩm nang kỹ thuật iPOS: Tối ưu hiệu năng và xử lý chậm treo hệ thống.",
     "explanation": "Kiểm kê phân đoạn (Sectional Inventory) là giải pháp vận hành thông minh: Giảm dung lượng payload của từng transaction, tránh tình trạng Database Lock bảng và nâng tốc độ lưu phiếu lên gấp 5 lần."
+  },
+  {
+    "id": "M10_01",
+    "role": "manager",
+    "level": 2,
+    "zone": "Tổng Kho Logistics",
+    "ticketCode": "#FRAN-201",
+    "subsystem": "PHAN_HE_10_NHUONG_QUYEN",
+    "subsystemName": "Quản Trị Chuỗi & Nhượng Quyền",
+    "category": "NHƯỢNG QUYỀN",
+    "title": "Chính sách giá bán nội bộ cho chi nhánh nhượng quyền",
+    "prompt": "Khi Tổng kho xuất hàng cho các chi nhánh nhượng quyền (Franchise), chủ quán muốn áp dụng bảng giá xuất bán buôn có cộng biên lợi nhuận thay vì xuất theo giá vốn bình quân. Trong IVT Pro, thiết lập này được cấu hình ở đâu?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Vào Danh mục > Bảng giá bán buôn chi nhánh > Gán bảng giá riêng cho kho nhượng quyền",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Gõ tay sửa lại đơn giá trên từng dòng của phiếu xuất điều chuyển",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "IVT Pro chỉ cho phép xuất theo đúng giá vốn gốc, không hỗ trợ giá bán buôn",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Tạo một nhà cung cấp giả để xuất bán ra ngoài rồi nhập lại",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Chuyên đề 010: Cấu hình Bảng giá chi nhánh và chính sách xuất kho Franchise.",
+    "explanation": "IVT Pro cho phép thiết lập đa bảng giá xuất điều chuyển theo từng nhóm chi nhánh. Kho nhượng quyền sẽ tự động được áp bảng giá bán buôn có biên lợi nhuận mà không cần nhân viên gõ tay."
+  },
+  {
+    "id": "M10_02",
+    "role": "manager",
+    "level": 3,
+    "zone": "Tổng Kho Logistics",
+    "ticketCode": "#FRAN-301",
+    "subsystem": "PHAN_HE_10_NHUONG_QUYEN",
+    "subsystemName": "Quản Trị Chuỗi & Nhượng Quyền",
+    "category": "NHƯỢNG QUYỀN",
+    "title": "Báo cáo doanh thu và công nợ chi nhánh nhượng quyền",
+    "prompt": "Báo cáo nào trên IVT Pro cho phép chủ chuỗi đối soát nhanh toàn bộ lượng hàng đã giao, doanh thu xuất buôn và số tiền chi nhánh nhượng quyền còn nợ tổng kho trong tháng?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Báo cáo đối soát công nợ đại lý & Sổ tổng hợp xuất bán chi nhánh",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Chỉ xem được trên sổ quỹ tiền mặt của thu ngân POS",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Báo cáo tồn kho tối thiểu A08",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Xem trong bảng kê phiếu nhập kho từ nhà cung cấp",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Nhóm báo cáo chuỗi nhượng quyền: Phân hệ Công nợ & Báo cáo tổng hợp xuất kho.",
+    "explanation": "Báo cáo đối soát công nợ chi nhánh nhượng quyền tổng hợp toàn bộ các phiếu xuất kho điều chuyển/bán buôn, số tiền đã thanh toán và dư nợ cuối kỳ của từng điểm bán."
+  },
+  {
+    "id": "T10_01",
+    "role": "tech",
+    "level": 3,
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#TECH-FRAN-302",
+    "subsystem": "PHAN_HE_10_NHUONG_QUYEN",
+    "subsystemName": "Quản Trị Chuỗi & Nhượng Quyền",
+    "category": "PHÂN QUYỀN",
+    "title": "Phân quyền dữ liệu kho độc lập cho chi nhánh Franchise",
+    "prompt": "KTV nhận ticket: Chủ quán muốn chủ chi nhánh nhượng quyền chỉ được xem tồn kho và báo cáo của riêng cửa hàng họ, tuyệt đối không được xem tồn kho tổng và các chi nhánh khác. KTV cấu hình như thế nào?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Vào Phân quyền tài khoản > Gán phạm vi dữ liệu (Data Scope) chỉ định đích danh Chi nhánh đó",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Tạo cơ sở dữ liệu riêng biệt không liên quan đến chuỗi",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Xoá tài khoản admin của chi nhánh",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Bảo khách hàng cài phần mềm offline khác cho chi nhánh đó",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Cơ chế phân quyền nhiều cấp (Role-based Data Scope) trong quản trị chuỗi IVT Pro.",
+    "explanation": "Trong IVT Pro, tính năng Data Scope cho phép giới hạn quyền hạn của tài khoản chỉ được truy xuất kho và các phiếu phát sinh thuộc chi nhánh được gán."
+  },
+  {
+    "id": "M08_01",
+    "role": "manager",
+    "level": 2,
+    "zone": "Bàn Cân & Pallet Kho",
+    "ticketCode": "#COST-201",
+    "subsystem": "PHAN_HE_08_GIA_VON",
+    "subsystemName": "Tính Giá Vốn & Giá Thành",
+    "category": "GIÁ VỐN",
+    "title": "Tác động của phương pháp tính giá vốn Bình quân gia quyền",
+    "prompt": "Quán nhập lô cà phê thứ nhất giá 200.000đ/kg (10kg), lô thứ hai giá 260.000đ/kg (10kg). Khi xuất bán 5kg, đơn giá vốn xuất kho theo phương pháp bình quân gia quyền là bao nhiêu?",
+    "options": [
+      {
+        "id": "A",
+        "label": "230.000 đ/kg ((200.000*10 + 260.000*10) / 20)",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "200.000 đ/kg (lấy giá của lô cũ nhất)",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "260.000 đ/kg (lấy giá của lô mới nhất)",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "460.000 đ/kg (cộng dồn cả hai lô)",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Công thức bình quân gia quyền = Tổng tiền tồn + nhập / Tổng lượng tồn + nhập.",
+    "explanation": "Giá vốn bình quân gia quyền liên hoàn lấy tổng giá trị tồn kho chia cho tổng số lượng tồn kho tại thời điểm tính toán: (2tr + 2.6tr) / 20kg = 230.000 đ/kg."
+  },
+  {
+    "id": "M08_02",
+    "role": "manager",
+    "level": 3,
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#COST-302",
+    "subsystem": "PHAN_HE_08_GIA_VON",
+    "subsystemName": "Tính Giá Vốn & Giá Thành",
+    "category": "GIÁ VỐN",
+    "title": "Xử lý chi phí vận chuyển phân bổ vào giá vốn hàng nhập",
+    "prompt": "Chủ quán nhập 100 thùng bia giá 30 triệu và trả thêm 1 triệu tiền cước xe tải vận chuyển. Muốn giá vốn của từng thùng bia gánh luôn 10.000đ tiền cước thì phải làm sao trên IVT Pro?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Nhập chi phí vận chuyển vào mục 'Chi phí mua hàng' trên phiếu nhập kho để hệ thống tự phân bổ",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Hạch toán tiền cước xe vào sổ quỹ thu chi chứ không được đưa vào kho",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Tự lấy máy tính bấm rồi tăng giá từng thùng bia lên 10.000đ trên hoá đơn NCC",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Tạo một mã nguyên liệu mang tên 'Cước xe' nhập kho",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Tính năng Phân bổ chi phí phụ mua hàng (Land-ed Cost) vào giá nhập kho.",
+    "explanation": "Tính năng Chi phí mua hàng trên IVT Pro cho phép phân bổ chi phí vận chuyển/bốc xếp vào giá vốn nguyên liệu theo tỷ lệ số lượng hoặc giá trị hàng hoá."
+  },
+  {
+    "id": "T08_01",
+    "role": "tech",
+    "level": 3,
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#TECH-COST-303",
+    "subsystem": "PHAN_HE_08_GIA_VON",
+    "subsystemName": "Tính Giá Vốn & Giá Thành",
+    "category": "THUẬT TOÁN",
+    "title": "Thứ tự chạy hàm tính lại giá vốn khi có chứng từ điều chuyển vòng",
+    "prompt": "KTV xử lý sự cố chuỗi F&B có điều chuyển qua lại giữa Kho Tổng -> Bếp Trung Tâm -> Cửa Hàng. Để giá vốn không bị sai dây chuyền, KTV phải chạy tính giá vốn theo thứ tự nào?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Tính từ Kho đầu nguồn (Tổng kho) -> Bếp Trung Tâm (BTP) -> Kho Cửa Hàng (Đích)",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Tính ngược từ Kho Cửa Hàng lên Bếp rồi mới về Kho Tổng",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Tính đồng thời tất cả các kho trong một giây",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Chỉ cần tính kho Cửa Hàng, các kho khác tự động chuẩn",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Nguyên tắc dòng chảy giá trị (Value Stream Flow) trong hạch toán đa kho IVT Pro.",
+    "explanation": "Giá vốn BTP phụ thuộc giá NVL thô ở kho tổng, và giá vốn tại cửa hàng lại phụ thuộc giá BTP ở bếp. Do đó phải chạy tính lại giá vốn tuần tự từ kho nguồn đến kho đích."
+  },
+  {
+    "id": "M06_01",
+    "role": "manager",
+    "level": 2,
+    "zone": "Nồi Nấu Bán Thành Phẩm",
+    "ticketCode": "#CK-201",
+    "subsystem": "PHAN_HE_06_SAN_XUAT_BEP_TRUNG_TAM",
+    "subsystemName": "Bếp Trung Tâm & Sản Xuất BTP",
+    "category": "SẢN XUẤT",
+    "title": "Quy trình lập Lệnh sản xuất BTP tại Bếp Trung Tâm",
+    "prompt": "Bếp trung tâm muốn nấu 50 lít Cốt Trà Sữa để đóng can giao cho 5 chi nhánh. Quy trình chuẩn trên phân hệ Sản xuất của IVT Pro gồm những bước nào?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Tạo Lệnh sản xuất > Tự động sinh phiếu Xuất kho NVL nấu > Nghiệm thu sinh phiếu Nhập kho BTP",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Chỉ cần tạo phiếu xuất kho NVL là hệ thống tự biết có trà sữa",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Gõ trực tiếp phiếu nhập kho trà sữa và để giá vốn bằng 0 đ",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Nhân viên tự ghi sổ tay cuối tháng kế toán mới vào phần mềm",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Quy trình Lệnh sản xuất khép kín: Xuất nguyên liệu -> Chế biến -> Nhập kho thành phẩm.",
+    "explanation": "Lệnh sản xuất trên IVT Pro kết nối 2 luồng: giảm tồn nguyên liệu thô (trà, đường, sữa) và tăng tồn bán thành phẩm (cốt trà) với giá vốn được gộp tự động."
+  },
+  {
+    "id": "T06_01",
+    "role": "tech",
+    "level": 2,
+    "zone": "Nồi Nấu Bán Thành Phẩm",
+    "ticketCode": "#TECH-CK-202",
+    "subsystem": "PHAN_HE_06_SAN_XUAT_BEP_TRUNG_TAM",
+    "subsystemName": "Bếp Trung Tâm & Sản Xuất BTP",
+    "category": "CẤU HÌNH",
+    "title": "Cấu hình tự động kết chuyển chi phí nhân công vào giá thành BTP",
+    "prompt": "Khi sản xuất BTP ở Bếp Trung Tâm, ngoài tiền nguyên liệu, khách hàng muốn cộng thêm 2.000đ chi phí điện nước/nhân công vào mỗi lít nước cốt. KTV cấu hình ở mục nào trong IVT Pro?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Định mức chi phí phụ sản xuất (Overhead Cost) trong công thức chế biến BOM",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Tạo một mặt hàng mang tên 'Tiền Điện' đem trừ dần",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "IVT Pro không hỗ trợ tính chi phí phụ ngoài nguyên vật liệu",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Cộng trực tiếp vào giá bán của ly trà sữa ở máy POS",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Cấu hình chi phí nhân công/khấu hao máy móc trong phân hệ BOM sản xuất BTP.",
+    "explanation": "Trong cấu hình công thức BOM sản xuất, IVT Pro cung cấp trường Chi phí sản xuất phụ để cộng gộp vào giá thành đơn vị của BTP nhập kho."
+  },
+  {
+    "id": "M12_01",
+    "role": "manager",
+    "level": 3,
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#SYS-305",
+    "subsystem": "PHAN_HE_12_CHAN_DOAN_TICKET",
+    "subsystemName": "Chẩn Đoán Triệu Chứng & Cứu Hộ Ticket",
+    "category": "CHẨN ĐOÁN",
+    "title": "Xử lý khi phát hiện số tồn trên báo cáo BC008 lệch với thực tế kiểm đếm",
+    "prompt": "Chủ quán vào Báo cáo Sổ chi tiết hàng hoá (BC008) thấy tồn cuối kỳ lệch so với số đếm trên kệ. Bước đầu tiên chủ quán cần kiểm tra là gì?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Lọc lịch sử xuất nhập xem có phiếu nào đang ở trạng thái 'Lưu tạm' chưa duyệt hoặc phiếu xuất âm không",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Xoá luôn mặt hàng đó đi và tạo mã mới",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Cài lại toàn bộ hệ điều hành Windows trên máy chủ",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Tự động đổi số lượng trên hoá đơn nhà cung cấp cho khớp",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Quy tắc kiểm tra chứng từ treo và giao dịch dở dang trước khi kết luận lỗi hệ thống.",
+    "explanation": "Nguyên nhân hàng đầu gây lệch tồn là các chứng từ kiểm kê hoặc xuất nhập đang ở trạng thái Lưu nháp/Chờ duyệt, chưa thực sự trừ vào số dư sổ cái."
+  },
+  {
+    "id": "T12_01",
+    "role": "tech",
+    "level": 3,
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#TECH-SYS-306",
+    "subsystem": "PHAN_HE_12_CHAN_DOAN_TICKET",
+    "subsystemName": "Chẩn Đoán Triệu Chứng & Cứu Hộ Ticket",
+    "category": "BẢO TRÌ",
+    "title": "Khắc phục lỗi treo đồng bộ do dữ liệu POS đẩy lên quá tải",
+    "prompt": "Vào ngày lễ, 20 máy POS đồng loạt gửi bill kết ca lên server IVT Pro khiến tiến trình trừ kho bị nghẽn (Queued). KTV xử lý thế nào để hệ thống hoạt động bình thường?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Vào Trình quản lý tác vụ IVT Sync Service > Kiểm tra hàng đợi và cho chạy xử lý theo lô (Batch Processing)",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Rút phích cắm mạng máy chủ",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Bảo thu ngân huỷ hết các hoá đơn bán của ngày lễ",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Xoá toàn bộ nhật ký ca bán hàng trên POS",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Cơ chế xử lý hàng đợi Worker Queue và tác vụ đồng bộ nền của IVT Pro Cloud.",
+    "explanation": "IVT Sync Service quản lý hàng đợi xuất bán theo cơ chế Batching. KTV có thể kích hoạt tiến trình xử lý ưu tiên để giải phóng nghẽn mạng mà không mất dữ liệu bill."
+  },
+  {
+    "id": "T12_02",
+    "role": "tech",
+    "level": 3,
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#TECH-MIG-307",
+    "subsystem": "PHAN_HE_12_CHAN_DOAN_TICKET",
+    "subsystemName": "Chẩn Đoán Triệu Chứng & Cứu Hộ Ticket",
+    "category": "NÂNG CẤP",
+    "title": "Kiểm tra toàn vẹn dữ liệu sau khi nâng cấp từ IVT V1 lên IVT Pro",
+    "prompt": "Sau khi KTV hoàn tất chuyển đổi (Migration) cơ sở dữ liệu từ IVT V1 lên IVT Pro cho chuỗi 15 quán trà sữa, 3 bảng báo cáo bắt buộc phải đối soát số dư đầu kỳ là gì?",
+    "options": [
+      {
+        "id": "A",
+        "label": "BC008 (Sổ chi tiết tồn kho), BC014 (Tổng giá trị kho) và Báo cáo công nợ nhà cung cấp",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Chỉ cần in thử 1 hoá đơn tính tiền ở máy thu ngân",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Báo cáo chấm công nhân viên và doanh thu bán hàng",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Không cần kiểm tra vì phần mềm tự động đúng 100%",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Tam giác vàng đối soát số dư: Số lượng tồn - Giá trị tồn - Công nợ đối tác.",
+    "explanation": "Sau migration, KTV bắt buộc phải in biên bản đối soát 3 chỉ số cốt lõi: số lượng từng mã hàng (BC008), tổng tiền giá vốn kho (BC014) và số dư nợ đối tác để bàn giao cho kế toán."
   }
 ]
