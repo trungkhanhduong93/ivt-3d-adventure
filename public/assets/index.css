@@ -234,3 +234,34 @@ dialog h2 {
     font-size: 13.5px !important;
   }
 }
+
+
+/* Căn chỉnh Avatar nhân vật và Logo Brand */
+.avatar-face {
+  background: linear-gradient(160deg, #f7ecd2, #e5cf9c) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.7), 0 3px 6px rgba(0,0,0,0.1) !important;
+  border: 1.5px solid #d8be86 !important;
+}
+.avatar-face svg {
+  width: 32px !important;
+  height: 32px !important;
+  color: #244b36 !important;
+}
+.brand-mark {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: linear-gradient(145deg, #1f503a, #113324) !important;
+  border: 1px solid #3d795a !important;
+  box-shadow: 0 4px 10px rgba(18, 51, 36, 0.25) !important;
+}
+.brand-mark svg {
+  width: 22px !important;
+  height: 22px !important;
+  color: #ffd875 !important;
+}
+.avatar-svg svg {
+  width: 26px !important;
+  height: 26px !important;
+  vertical-align: middle !important;
+}
