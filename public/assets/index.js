@@ -3949,6 +3949,40 @@ navigateToPoint(target){
   this.showClickEffect(target.x,target.z);
   if(typeof xt!=="undefined"&&xt.tone) xt.tone(659.25,0.08,0,0.04);
 }
+updateMasteredStationAuras(masteredList){
+  if(!masteredList||!Array.isArray(masteredList))return;
+  masteredList.forEach(st=>{
+    if(!this.masteredAuras.has(st.id)){
+      const coords=st.pos;
+      if(!coords)return;
+      const g=new ut;
+      g.position.set(coords[0],0.04,coords[2]);
+      const groundRingMat=new Ss({color:0xf59e0b,emissive:0xd97706,roughness:0.2,metalness:0.2,transparent:!0,opacity:0.85});
+      const groundRing=new St(new tr(1.65,1.65,0.04,32),groundRingMat);
+      groundRing.position.y=0.02;
+      g.add(groundRing);
+      const innerSealMat=new Ss({color:0xfbbf24,emissive:0xf59e0b,roughness:0.3,transparent:!0,opacity:0.75});
+      const innerSeal=new St(new tr(1.1,1.1,0.05,16),innerSealMat);
+      innerSeal.position.y=0.03;
+      g.add(innerSeal);
+      const haloMat=new Ss({color:0xfde047,emissive:0xf59e0b,roughness:0.1,transparent:!0,opacity:0.95});
+      const halo=new St(new tr(0.7,0.7,0.06,16),haloMat);
+      halo.position.y=coords[1]+0.8;
+      g.add(halo);
+      const jewelMat=new Ss({color:0xfef08a,emissive:0xf59e0b,roughness:0.1});
+      const jewels=[];
+      for(let j=0;j<4;j++){
+        const jm=new St(new Yi(0.12,1),jewelMat);
+        jm.position.y=coords[1]-0.2;
+        g.add(jm);
+        jewels.push(jm);
+      }
+      g.userData={groundRing,innerSeal,halo,jewels,baseY:coords[1]};
+      this.scene.add(g);
+      this.masteredAuras.set(st.id,g);
+    }
+  });
+}
 moveToScreen(e,t){
   const n=this.canvas.getBoundingClientRect(),
         r=new We((e-n.left)/n.width*2-1,-(t-n.top)/n.height*2+1),
@@ -4187,6 +4221,28 @@ if(this.targetMarker&&this.targetMarker.visible){
   if(this.targetMarker.scale.x<0.99){
     this.targetMarker.scale.lerp(new F(1,1,1),0.25);
   }
+};
+if(this.masteredAuras&&this.masteredAuras.size>0){
+  const t=this.time;
+  this.masteredAuras.forEach(aura=>{
+    if(aura.userData.halo){
+      aura.userData.halo.rotation.y+=e*1.5;
+      aura.userData.halo.position.y=(aura.userData.baseY||2.0)+0.8+0.12*Math.sin(t*3.5);
+    }
+    if(aura.userData.innerSeal){
+      aura.userData.innerSeal.rotation.y-=e*0.8;
+      const s=1+0.08*Math.sin(t*4);
+      aura.userData.innerSeal.scale.set(s,1,s);
+    }
+    if(aura.userData.jewels){
+      aura.userData.jewels.forEach((jMesh,idx)=>{
+        const angle=t*1.8+(idx*Math.PI/2);
+        jMesh.position.x=Math.cos(angle)*1.35;
+        jMesh.position.z=Math.sin(angle)*1.35;
+        jMesh.position.y=(aura.userData.baseY||2.0)-0.2+0.15*Math.sin(t*4+idx);
+      });
+    }
+  });
 };this.active&&!this.paused&&this.movement(e),this.active?this.wanted.copy(this.player.position).setY(0):(this.wanted.set(8,0,0),this.yaw+=e*.03),this.target.lerp(this.wanted,1-Math.exp(-e*3));const t=1-Math.exp(-e*2.2),tDist=1-Math.exp(-e*5.5);this.viewDistance+=((this.active?this.distance:this.camera.aspect<.85?175:120)-this.viewDistance)*tDist,this.viewPitch+=((this.active?this.pitch:.72)-this.viewPitch)*t,this.viewShift+=((!this.active&&this.camera.aspect>1.25?.16:0)-this.viewShift)*t;const{clientWidth:n,clientHeight:r}=this.canvas;this.viewShift>.001?this.camera.setViewOffset(n,r,-this.viewShift*n,0,n,r):this.camera.view?.enabled&&this.camera.clearViewOffset();const s=this.viewDistance,a=this.viewPitch;this.camera.position.set(this.target.x+Math.sin(this.yaw)*Math.cos(a)*s,this.target.y+Math.sin(a)*s,this.target.z+Math.cos(this.yaw)*Math.cos(a)*s),this.camera.lookAt(this.target),this.sky.position.copy(this.camera.position),this.updateShadows(),this.windmill.rotation.z-=e*.25,this.bridge.children.forEach(o=>o.position.y=Math.max(0,o.position.y-e*5)),this.clouds.forEach((o,l)=>{o.position.x+=e*.35,o.position.x>210&&(o.position.x=-190),o.position.y+=Math.sin(this.time*.2+l)*.002}),this.floaters.forEach(o=>{o.object.position.y=o.baseY+Math.sin(this.time*o.speed)*.25,o.object.rotation.y+=e*o.spin}),this.milo.children.forEach(o=>{o.userData.beacon&&(o.position.y=3+Math.sin(this.time*2)*.15)});for(let o=this.sparks.length-1;o>=0;o--){const l=this.sparks[o];l.life-=e,l.velocity.y-=e*6,l.mesh.position.addScaledVector(l.velocity,e),l.mesh.scale.setScalar(Math.max(0,l.life)),l.life<=0&&(this.scene.remove(l.mesh),l.mesh.geometry.dispose(),this.sparks.splice(o,1))}this.ripples.forEach(o=>{o.position.z+=e*.25,o.position.z>43&&(o.position.z=-43)}),this.renderer.render(this.scene,this.camera),this.onFrame?.(this.nearMilo(),this.player.position.x>12&&Math.abs(this.player.position.z)<4,1/Math.max(e,.001))};dispose(){cancelAnimationFrame(this.frame),this.observer.disconnect(),this.renderer.dispose()}}const Ga=()=>({version:1,xp:0,coins:0,bridge:0,questAccepted:!1,questComplete:!1,avatar:"boy",table:0,sound:!0,music:!1,combo:0,questionStats:{},review:[],started:!1,inventory:["item_pos"],equipped:{hat:"item_pos",tool:null,armor:null}}),Gn=(i,e=1e7)=>typeof i=="number"&&Number.isFinite(i)?Math.max(0,Math.min(e,Math.floor(i))):0;function Ym(i){const e=Ga();if(!i)return e;try{const parsed=JSON.parse(i);if(parsed&&typeof parsed==="object"){if(Array.isArray(parsed.inventory))e.inventory=parsed.inventory;if(parsed.equipped&&typeof parsed.equipped==="object")e.equipped=parsed.equipped;}const t=JSON.parse(i);if(!t||typeof t!="object"||!("version"in t)||t.version!==1)return e;const n=t;if(e.xp=Gn(n.xp),e.coins=Gn(n.coins),e.bridge=Gn(n.bridge,yt),e.questAccepted=n.questAccepted===!0||e.bridge>0,e.questComplete=n.questComplete===!0&&e.bridge===yt,e.avatar=n.avatar==="girl"?"girl":"boy",e.table=Ha.includes(n.table)?n.table:0,e.sound=n.sound!==!1,e.music=n.music===!0,e.started=n.started===!0,e.combo=Gn(n.combo,1e4),n.questionStats&&typeof n.questionStats=="object")for(const[r,s]of Object.entries(n.questionStats).slice(0,30)){if(!/^m([2-9]|10)_([1-9]|10)$/.test(r)||!s||typeof s!="object")continue;const a=s,o=Gn(a.correct),l=Gn(a.wrong);e.questionStats[r]={attempts:o+l,correct:o,wrong:l,responseTime:Gn(a.responseTime),lastAnsweredAt:typeof a.lastAnsweredAt=="string"?a.lastAnsweredAt.slice(0,40):""}}return Array.isArray(n.review)&&(e.review=[...new Set(n.review.filter(r=>typeof r=="string"&&/^m([2-9]|10)_([1-9]|10)$/.test(r)))].slice(0,30)),e}catch{return e}}function Km(){try{return Ym(localStorage.getItem(Kl))}catch{return Ga()}}function Zm(i){try{return localStorage.setItem(Kl,JSON.stringify(i)),!0}catch{return!1}}function jm(i,e=Math.random){const t=[...i];for(let n=t.length-1;n>0;n--){const r=Math.floor(e()*(n+1));[t[n],t[r]]=[t[r],t[n]]}return t}function ll(i,e,t,n=Math.random){const r=i*e,s=[e>1?e-1:e+2,e<10?e+1:e-2],a=[e,...s].map(o=>({value:i*o,label:t==="bridge"?`${i} × ${o}`:`${i*o}`}));return{id:`m${i}_${e}`,a:i,b:e,answer:r,options:jm(a,n),review:!1}}function Jm(i,e,t="",n=Math.random){
   const role = (i.avatar === "girl" || i.avatar === "tech" || window.__currentRole === "tech") ? "tech" : "manager";
   const level = (i.bridge >= 4) ? 2 : 1;
@@ -4377,7 +4433,26 @@ function Ql(i,e,t,n,r){const s=n.scale,a=i.createRadialGradient(e/2,t/2,0,e/2,t/
     <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
     <footer id="menu-footer" class="menu-footer"><span><b>IVT PRO 3D</b> ADVENTURE</span><span>Dự án mô phỏng giáo dục phi thương mại · Dành riêng cho học tập & đào tạo nội bộ</span><span>Lưu tự động ${Xe("save")}</span></footer>
     <dialog id="dialog" aria-labelledby="dialog-title"><button id="close-dialog" class="dialog-close" aria-label="Đóng">${Xe("close")}</button><div id="dialog-content"></div></dialog>
-  </main>`;Wa(tc);function In(i){Y("toast").textContent=Cn(i),Y("toast").hidden=!1,clearTimeout(hl),hl=window.setTimeout(()=>Y("toast").hidden=!0,4200)}function Xt(){const i=Zm(ie);return!i&&!dl&&(dl=!0,In("Trình duyệt chưa cho phép lưu. Tiến trình chỉ được giữ trong lần chơi này.")),i}function fl(i){const e=Y(i);e.classList.remove("bump"),e.offsetWidth,e.classList.add("bump")}function _n(){const i=kr(ie.xp),e=Sa[i-1],t=Sa[i];Y("level").textContent=String(i),Y("coins").textContent=String(ie.coins),Y("xp-text").textContent=Ln(t?`${ie.xp-e} / ${t-e} XP`:`${ie.xp} XP · Cấp cao nhất`);const n=t?Math.min(100,(ie.xp-e)/(t-e)*100):100;Y("xp-fill").style.width=`${n}%`,Y("xp-fill").parentElement.setAttribute("aria-valuenow",String(Math.round(n))),Y("avatar-face").textContent=ie.avatar==="girl"?"👩‍💻":"🧑‍💼",Y("player-name").textContent=ie.avatar==="girl"?"Kỹ Thuật Viên Triển Khai":"Thủ Kho F&B";if(_e&&_e.updatePlayerVisuals){const role=(ie.avatar==="girl"||ie.avatar==="tech")?"tech":"manager";_e.updatePlayerVisuals(i,role);};Y("boy").setAttribute("aria-pressed",String(ie.avatar==="boy")),Y("girl").setAttribute("aria-pressed",String(ie.avatar==="girl")),Y("play").innerHTML=Ln(`${ie.started?"Tiếp tục phiêu lưu":"Bắt đầu phiêu lưu"} ${Xe("arrow")}`);const nqObj=getNextSuggestedQuest();Y("quest-copy").innerHTML=ie.questComplete?`Bạn đã hoàn thành Cây Cầu! Hãy khám phá tiếp <strong>${nqObj.name}</strong> bên Bờ Đông.`:(ie.bridge===yt?"Cây cầu đã sẵn sàng! Bấm 'Tự dẫn đường' để sang Đảo Bếp Trung Tâm.":`Đích đến gợi ý: <strong>${nqObj.name}</strong> (${nqObj.zone}). Bấm nút dưới để tự chạy tới nơi!`);Y("quest-title").textContent=ie.questComplete?"Cây cầu tình bạn đã hoàn thành!":"Một cây cầu, ngàn niềm vui",Y("quest-progress").textContent=ie.questComplete?"✓ Hoàn thành":ie.bridge===yt?"Đi qua cầu để hoàn thành":ie.questAccepted?`${ie.bridge} / ${yt} đoạn cầu`:"Gặp người dẫn đường",Y("quest-steps").innerHTML=Array.from({length:yt},(r,s)=>`<span class="${s<ie.bridge?"done":""}" aria-label="Đoạn ${s+1}: ${s<ie.bridge?"đã xây":"chưa xây"}">${s<ie.bridge?Xe("check"):s+1}</span>`).join(""),Y("bridge-count").textContent=`${ie.bridge} / ${yt} đoạn cầu`;for(const r of qa){const s=Y(`${r.id}-label`),a=Di(r,ie.questComplete);s.classList.toggle("locked",!a),s.querySelector(".region-icon").innerHTML=Xe(a?r.icon:"lock")}Y("sound").innerHTML=Xe(ie.sound?"sound":"mute"),Y("sound").setAttribute("aria-label",ie.sound?"Tắt âm thanh":"Bật âm thanh"),xt.enabled=ie.sound,Wa(Y("hud"))}function nc(i){Y("quest-card").classList.toggle("collapsed",i),Y("quest-toggle").setAttribute("aria-expanded",String(!i));try{localStorage.setItem("aigame3d_quest_collapsed",i?"1":"0")}catch{}}Y("quest-toggle").onclick=()=>nc(!Y("quest-card").classList.contains("collapsed"));try{(localStorage.getItem("aigame3d_quest_collapsed")==="1"||matchMedia("(max-width: 700px)").matches)&&nc(!0)}catch{}function Jn(i,e,t){Dn&&Kr(),_e.paused=!0,_e.clearInput(),Xa=t,Y("dialog-content").innerHTML=Ln(`<h2 id="dialog-title">${i}</h2>${e}`);const n=Y("dialog");n.open||n.showModal()}function cr(){Y("dialog").close()}Y("dialog").addEventListener("close",()=>{_e.paused=Dn,_e.clearInput(),Xa="",jn=void 0});Y("close-dialog").onclick=cr;Y("language").onclick=()=>{rg(Va()==="vi"?"en":"vi"),location.reload()};function ug(){xt.unlock(),xt.music(ie.music),ie.started=!0,_e.active=!0,_e.paused=!1,_e.setAvatar(ie.avatar),Y("welcome").hidden=!0,Y("hud").hidden=!1,Y("area-label").hidden=!1,Y("world-caption").hidden=!0,Y("menu-footer").hidden=!0,document.body.classList.add("playing"),Xt(),_n(),bi="",cc(),requestAnimationFrame(sc),In("Chào bạn! Di chuyển đến Milo, hoặc chạm xuống đất để đi.")}function pl(){cr(),Kr(),_e.active=!1,_e.clearInput(),Y("welcome").hidden=!1,Y("hud").hidden=!0,Y("area-label").hidden=!0,Y("world-caption").hidden=!1,Y("menu-footer").hidden=!1,document.body.classList.remove("playing"),_n(),xt.music(!1)}function startAdventure(){
+  </main>`;Wa(tc);function In(i){Y("toast").textContent=Cn(i),Y("toast").hidden=!1,clearTimeout(hl),hl=window.setTimeout(()=>Y("toast").hidden=!0,4200)}function Xt(){const i=Zm(ie);return!i&&!dl&&(dl=!0,In("Trình duyệt chưa cho phép lưu. Tiến trình chỉ được giữ trong lần chơi này.")),i}function fl(i){const e=Y(i);e.classList.remove("bump"),e.offsetWidth,e.classList.add("bump")}function _n(){const i=kr(ie.xp),e=Sa[i-1],t=Sa[i];Y("level").textContent=String(i),Y("coins").textContent=String(ie.coins),Y("xp-text").textContent=Ln(t?`${ie.xp-e} / ${t-e} XP`:`${ie.xp} XP · Cấp cao nhất`);const n=t?Math.min(100,(ie.xp-e)/(t-e)*100):100;Y("xp-fill").style.width=`${n}%`,Y("xp-fill").parentElement.setAttribute("aria-valuenow",String(Math.round(n))),Y("avatar-face").textContent=ie.avatar==="girl"?"👩‍💻":"🧑‍💼",Y("player-name").textContent=ie.avatar==="girl"?"Kỹ Thuật Viên Triển Khai":"Thủ Kho F&B";if(_e&&_e.updatePlayerVisuals){const role=(ie.avatar==="girl"||ie.avatar==="tech")?"tech":"manager";_e.updatePlayerVisuals(i,role);};Y("boy").setAttribute("aria-pressed",String(ie.avatar==="boy")),Y("girl").setAttribute("aria-pressed",String(ie.avatar==="girl")),Y("play").innerHTML=Ln(`${ie.started?"Tiếp tục phiêu lưu":"Bắt đầu phiêu lưu"} ${Xe("arrow")}`);const nqObj=getNextSuggestedQuest();Y("quest-copy").innerHTML=ie.questComplete?`Bạn đã hoàn thành Cây Cầu! Hãy khám phá tiếp <strong>${nqObj.name}</strong> bên Bờ Đông.`:(ie.bridge===yt?"Cây cầu đã sẵn sàng! Bấm 'Tự dẫn đường' để sang Đảo Bếp Trung Tâm.":`Đích đến gợi ý: <strong>${nqObj.name}</strong> (${nqObj.zone}). Bấm nút dưới để tự chạy tới nơi!`);Y("quest-title").textContent=ie.questComplete?"Cây cầu tình bạn đã hoàn thành!":"Một cây cầu, ngàn niềm vui",Y("quest-progress").textContent=ie.questComplete?"✓ Hoàn thành":ie.bridge===yt?"Đi qua cầu để hoàn thành":ie.questAccepted?`${ie.bridge} / ${yt} đoạn cầu`:"Gặp người dẫn đường",Y("quest-steps").innerHTML=Array.from({length:yt},(r,s)=>`<span class="${s<ie.bridge?"done":""}" aria-label="Đoạn ${s+1}: ${s<ie.bridge?"đã xây":"chưa xây"}">${s<ie.bridge?Xe("check"):s+1}</span>`).join(""),Y("bridge-count").textContent=`${ie.bridge} / ${yt} đoạn cầu`;for(const r of qa){const s=Y(`${r.id}-label`),a=Di(r,ie.questComplete);s.classList.toggle("locked",!a),s.querySelector(".region-icon").innerHTML=Xe(a?r.icon:"lock")}Y("sound").innerHTML=Xe(ie.sound?"sound":"mute"),Y("sound").setAttribute("aria-label",ie.sound?"Tắt âm thanh":"Bật âm thanh"),xt.enabled=ie.sound,Wa(Y("hud"));
+  if(typeof _stationsDef!=="undefined"){
+    const rRole=(ie.avatar==="girl"||ie.avatar==="tech")?"tech":"manager";
+    const mList=[];
+    _stationsDef.forEach(st=>{
+      const el=Y(st.id);
+      if(el){
+        const p=getStationQuestionPool(st,rRole);
+        const isM=p.length>0&&p.every(q=>ie.questionStats?.[q.id]?.correct>0);
+        el.classList.toggle("station-mastered",isM);
+        if(isM){
+          mList.push(st);
+          const d=el.querySelector(".station-dot, .mystery-dot");
+          if(d)d.textContent="👑";
+        }
+      }
+    });
+    if(_e&&_e.updateMasteredStationAuras)_e.updateMasteredStationAuras(mList);
+  }
+}function nc(i){Y("quest-card").classList.toggle("collapsed",i),Y("quest-toggle").setAttribute("aria-expanded",String(!i));try{localStorage.setItem("aigame3d_quest_collapsed",i?"1":"0")}catch{}}Y("quest-toggle").onclick=()=>nc(!Y("quest-card").classList.contains("collapsed"));try{(localStorage.getItem("aigame3d_quest_collapsed")==="1"||matchMedia("(max-width: 700px)").matches)&&nc(!0)}catch{}function Jn(i,e,t){Dn&&Kr(),_e.paused=!0,_e.clearInput(),Xa=t,Y("dialog-content").innerHTML=Ln(`<h2 id="dialog-title">${i}</h2>${e}`);const n=Y("dialog");n.open||n.showModal()}function cr(){Y("dialog").close()}Y("dialog").addEventListener("close",()=>{_e.paused=Dn,_e.clearInput(),Xa="",jn=void 0});Y("close-dialog").onclick=cr;Y("language").onclick=()=>{rg(Va()==="vi"?"en":"vi"),location.reload()};function ug(){xt.unlock(),xt.music(ie.music),ie.started=!0,_e.active=!0,_e.paused=!1,_e.setAvatar(ie.avatar),Y("welcome").hidden=!0,Y("hud").hidden=!1,Y("area-label").hidden=!1,Y("world-caption").hidden=!0,Y("menu-footer").hidden=!0,document.body.classList.add("playing"),Xt(),_n(),bi="",cc(),requestAnimationFrame(sc),In("Chào bạn! Di chuyển đến Milo, hoặc chạm xuống đất để đi.")}function pl(){cr(),Kr(),_e.active=!1,_e.clearInput(),Y("welcome").hidden=!1,Y("hud").hidden=!0,Y("area-label").hidden=!0,Y("world-caption").hidden=!1,Y("menu-footer").hidden=!1,document.body.classList.remove("playing"),_n(),xt.music(!1)}function startAdventure(){
   let seen=!1;
   try{seen=sessionStorage.getItem("ivt_legal_seen")==="1"}catch(e){}
   if(!seen){
@@ -4386,7 +4461,20 @@ function Ql(i,e,t,n,r){const s=n.scale,a=i.createRadialGradient(e/2,t/2,0,e/2,t/
     ug();
   }
 }
-Y("play").onclick=startAdventure;for(const i of["boy","girl"])Y(i).onclick=()=>{ie.avatar=i,_e.setAvatar(i),_n(),Xt()};function getStationQuestionPool(ws, role) {
+Y("play").onclick=startAdventure;for(const i of["boy","girl"])Y(i).onclick=()=>{ie.avatar=i,_e.setAvatar(i),_n(),Xt()};const _stationsDef=[
+  {id:"house-label",type:"house",name:"Nhà Bên Milo - Danh Mục Gốc",pos:[-4.0,2.0,-9.5],subs:["PHAN_HE_02_DANH_MUC","PHAN_HE_01_CAU_HINH"]},
+  {id:"pond-label",type:"pond",name:"Bến Hồ Cá - Cấu Hình & Nghiệm Thu",pos:[-36.5,1.5,-7.5],subs:["PHAN_HE_01_CAU_HINH","PHAN_HE_01_KHOI_TAO","PHAN_HE_01_RESET_DATA"]},
+  {id:"pos-label",type:"pos",name:"Quầy Thu Ngân POS",pos:[-8.5,1.8,-2.5],subs:["PHAN_HE_01_CAU_HINH","PHAN_HE_05_XUAT_BAN_DINH_LUONG"]},
+  {id:"weigh-label",type:"weigh",name:"Bàn Cân & Pallet Kho",pos:[-1.5,1.8,7.5],subs:["PHAN_HE_02_DANH_MUC","PHAN_HE_03_DAT_HANG_CUNG_UNG"]},
+  {id:"kitchen-label",type:"kitchen",name:"Nồi Nấu Bếp Trung Tâm",pos:[18.0,2.0,-6.0],subs:["PHAN_HE_06_SAN_XUAT_BEP_TRUNG_TAM","PHAN_HE_04_DIEU_CHUYEN"]},
+  {id:"audit-label",type:"audit",name:"Kệ Kho & Quét Barcode",pos:[33.0,2.2,16.0],subs:["PHAN_HE_07_KIEM_KE","PHAN_HE_11_BAO_CAO"]},
+  {id:"server-label",type:"server",name:"Tháp Ticket Cứu Hộ",pos:[54.0,2.5,-18.0],subs:["PHAN_HE_08_GIA_VON","PHAN_HE_12_CHAN_DOAN_TICKET"]},
+  {id:"truck-label",type:"truck",name:"Xe Tải Điều Chuyển",pos:[12.0,2.0,-8.0],subs:["PHAN_HE_04_DIEU_CHUYEN","PHAN_HE_03_DAT_HANG_CUNG_UNG"]},
+  {id:"crate1-label",type:"crate",name:"Rương Bí Ẩn BTP",pos:[24.0,1.5,-12.0],subs:["PHAN_HE_06_SAN_XUAT_BEP_TRUNG_TAM","PHAN_HE_05_XUAT_BAN_DINH_LUONG"]},
+  {id:"crate2-label",type:"crate",name:"Rương Sự Cố Date",pos:[38.0,1.5,8.0],subs:["PHAN_HE_04_DIEU_CHUYEN","PHAN_HE_11_BAO_CAO"]},
+  {id:"crate3-label",type:"crate",name:"Rương Cứu Hộ Giá Vốn",pos:[48.0,1.5,-8.0],subs:["PHAN_HE_08_GIA_VON","PHAN_HE_12_CHAN_DOAN_TICKET"]}
+];
+function getStationQuestionPool(ws, role) {
   if (!ws || !ws.subs) return [];
   const allQs = window.IVT_QUESTIONS || [];
   let pool = allQs.filter(q => q.role === role && ws.subs.some(s => q.subsystem === s || (typeof q.subsystem === "string" && q.subsystem.startsWith(s))));
@@ -4408,23 +4496,49 @@ function Yr(){
     }
     const uncompleted = pool.filter(q => !(ie.questionStats?.[q.id]?.correct > 0));
     if(uncompleted.length === 0){
-      Jn("Trạm đã thành thạo!",
-        `<div class="completion-medal">${Xe("crown")}</div>
-         <p class="dialog-copy centered">
-           Bạn đã hoàn thành xuất sắc toàn bộ <strong>${pool.length}/${pool.length} câu hỏi</strong> tại <strong>${ws.name}</strong>!<br>
-           Nghiệp vụ tại trạm này đã được bạn nắm vững hoàn toàn.
+      Jn(
+        `👑 ${ws.name}`,
+        `<div class="completion-medal" style="font-size:36px;margin:8px auto;display:flex;justify-content:center">👑</div>
+         <div class="dialog-eyebrow" style="color:#d97706;font-weight:800;letter-spacing:1px;text-align:center">TRẠM ĐÃ THÀNH THẠO 100%</div>
+         <p class="dialog-copy centered" style="margin:10px 0 14px">
+           Chúc mừng! Bạn đã chinh phục trọn vẹn <strong>${pool.length}/${pool.length} câu hỏi</strong> tại trạm này.<br>
+           Toàn bộ nghiệp vụ đã được bạn nắm vững hoàn hảo!
          </p>
-         <div class="completion-rewards">
-           <span>✓ Đã thành thạo 100%</span>
-           <span>⭐ Không cộng dồn EXP</span>
+         <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:12px;padding:12px 16px;margin:12px 0 18px;display:flex;align-items:center;justify-content:space-around;gap:12px;text-align:center">
+           <div>
+             <span style="display:block;font-size:16px;font-weight:800;color:#10b981">✓ Đã Hoàn Thành</span>
+             <small style="color:#6b7280;font-size:12px">${pool.length}/${pool.length} câu chuẩn xác</small>
+           </div>
+           <div style="width:1px;height:30px;background:rgba(0,0,0,0.12)"></div>
+           <div>
+             <span style="display:block;font-size:16px;font-weight:800;color:#d97706">📚 Chế Độ Ôn Tập</span>
+             <small style="color:#6b7280;font-size:12px">Không cộng thêm EXP</small>
+           </div>
          </div>
-         <button id="station-done-btn" class="primary wide">Khám phá trạm tiếp theo ${Xe("arrow")}</button>`,
+         <div style="display:flex;flex-direction:column;gap:10px">
+           <button id="replay-station-btn" class="primary wide" style="background:linear-gradient(135deg,#f59e0b,#d97706);box-shadow:0 4px 14px rgba(245,158,11,0.35)">
+             ${Xe("book")} Ôn Tập Lại Câu Hỏi Tại Trạm Này
+           </button>
+           <button id="leave-station-btn" class="secondary wide">
+             Khám Phá Vị Trí Khác ${Xe("arrow")}
+           </button>
+         </div>`,
         "complete"
       );
-      const sdb = Y("station-done-btn");
-      if(sdb) sdb.onclick = cr;
+      const rsb = Y("replay-station-btn");
+      if(rsb){
+        rsb.onclick = () => {
+          cr();
+          window._activeStation = ws;
+          window._isReviewMode = true;
+          Xr("station", pool[0].id);
+        };
+      }
+      const lsb = Y("leave-station-btn");
+      if(lsb) lsb.onclick = cr;
       return;
     }
+    window._isReviewMode = false;
     window._activeStation = ws;
     Xr("station", uncompleted[0].id);
     return;
@@ -4575,19 +4689,7 @@ function openRoadmapModal(){
   });
 }
 
-const _stationsDef=[
-  {id:"house-label",type:"house",name:"Nhà Bên Milo - Danh Mục Gốc",subs:["PHAN_HE_02_DANH_MUC","PHAN_HE_01_CAU_HINH"]},
-  {id:"pond-label",type:"pond",name:"Bến Hồ Cá - Cấu Hình & Nghiệm Thu",subs:["PHAN_HE_01_CAU_HINH","PHAN_HE_01_KHOI_TAO","PHAN_HE_01_RESET_DATA"]},
-  {id:"pos-label",type:"pos",name:"Quầy Thu Ngân POS",subs:["PHAN_HE_01_CAU_HINH","PHAN_HE_05_XUAT_BAN_DINH_LUONG"]},
-  {id:"weigh-label",type:"weigh",name:"Bàn Cân & Pallet Kho",subs:["PHAN_HE_02_DANH_MUC","PHAN_HE_03_DAT_HANG_CUNG_UNG"]},
-  {id:"kitchen-label",type:"kitchen",name:"Nồi Nấu Bếp Trung Tâm",subs:["PHAN_HE_06_SAN_XUAT_BEP_TRUNG_TAM","PHAN_HE_04_DIEU_CHUYEN"]},
-  {id:"audit-label",type:"audit",name:"Kệ Kho & Quét Barcode",subs:["PHAN_HE_07_KIEM_KE","PHAN_HE_11_BAO_CAO"]},
-  {id:"server-label",type:"server",name:"Tháp Ticket Cứu Hộ",subs:["PHAN_HE_08_GIA_VON","PHAN_HE_12_CHAN_DOAN_TICKET"]},
-  {id:"truck-label",type:"truck",name:"Xe Tải Điều Chuyển",subs:["PHAN_HE_04_DIEU_CHUYEN","PHAN_HE_03_DAT_HANG_CUNG_UNG"]},
-  {id:"crate1-label",type:"crate",name:"Rương Bí Ẩn BTP",subs:["PHAN_HE_06_SAN_XUAT_BEP_TRUNG_TAM","PHAN_HE_05_XUAT_BAN_DINH_LUONG"]},
-  {id:"crate2-label",type:"crate",name:"Rương Sự Cố Date",subs:["PHAN_HE_04_DIEU_CHUYEN","PHAN_HE_11_BAO_CAO"]},
-  {id:"crate3-label",type:"crate",name:"Rương Cứu Hộ Giá Vốn",subs:["PHAN_HE_08_GIA_VON","PHAN_HE_12_CHAN_DOAN_TICKET"]}
-];
+
 _stationsDef.forEach(s=>{const el=Y(s.id);if(el)el.onclick=()=>{window._currentStation=s;Yr();}});function Xr(i,e=""){
   Kt=i;
   jn=Jm(ie,Kt,e);
@@ -4600,8 +4702,12 @@ _stationsDef.forEach(s=>{const el=Y(s.id);if(el)el.onclick=()=>{window._currentS
   let eyebrow="";
   if(Kt==="station"&&ws){
     const pool=getStationQuestionPool(ws,role);
-    const completedCount=pool.filter(q=>ie.questionStats?.[q.id]?.correct>0).length;
-    eyebrow=`${ws.name} · Câu ${Math.min(pool.length, completedCount+1)} / ${pool.length} · ${t.subsystemName||""}`;
+    const qIdx=pool.findIndex(q=>q.id===t.id);
+    const currentNum=qIdx>=0?qIdx+1:1;
+    const isReview=window._isReviewMode||pool.every(q=>ie.questionStats?.[q.id]?.correct>0);
+    eyebrow=isReview
+      ? `👑 ${ws.name} · ÔN TẬP KIẾN THỨC (CÂU ${currentNum}/${pool.length}) · KHÔNG CỘNG EXP`
+      : `${ws.name} · Câu ${currentNum}/${pool.length} · ${t.subsystemName||""}`;
   } else if(Kt==="bridge"){
     eyebrow=`ĐOẠN CẦU ${ie.bridge+1} / ${yt} · ${t.subsystemName||"IVT PRO"}`;
   } else {
@@ -4716,17 +4822,33 @@ function fg(i,e){
       const ws=window._activeStation;
       const role=(ie.avatar==="girl"||ie.avatar==="tech")?"tech":"manager";
       const pool=ws?getStationQuestionPool(ws,role):[];
-      const remaining=pool.filter(q=>q.id!==t.id && !(ie.questionStats?.[q.id]?.correct>0));
-      if(remaining.length>0){
-        nqBtn.innerHTML=Ln(`Câu kế tiếp (${remaining.length} câu còn lại) ${Xe("arrow")}`);
-        nqBtn.onclick=()=>Xr("station",remaining[0].id);
+      const uncompleted=pool.filter(q=>q.id!==t.id && !(ie.questionStats?.[q.id]?.correct>0));
+      if(uncompleted.length>0 && !window._isReviewMode){
+        nqBtn.innerHTML=Ln(`Câu kế tiếp (${uncompleted.length} câu còn lại) ${Xe("arrow")}`);
+        nqBtn.onclick=()=>Xr("station",uncompleted[0].id);
+      } else if(window._isReviewMode){
+        const currIdx=pool.findIndex(q=>q.id===t.id);
+        if(currIdx>=0 && currIdx<pool.length-1){
+          const nextQ=pool[currIdx+1];
+          nqBtn.innerHTML=Ln(`Câu kế tiếp (${currIdx+2}/${pool.length}) ${Xe("arrow")}`);
+          nqBtn.onclick=()=>Xr("station",nextQ.id);
+        } else {
+          nqBtn.innerHTML=Ln(`Hoàn thành đợt ôn tập! ${Xe("check")}`);
+          nqBtn.onclick=()=>{
+            cr();
+            xt.celebrate();
+            window._isReviewMode=!1;
+            In(`🎉 Bạn đã ôn tập xong toàn bộ câu hỏi tại ${ws?ws.name:"trạm"}!`);
+          };
+        }
       } else {
         nqBtn.innerHTML=Ln(`Hoàn thành trạm này! ${Xe("check")}`);
         nqBtn.onclick=()=>{
           cr();
           xt.celebrate();
           _e.burst(_e.player.position.clone().add(new F(0,1,0)));
-          In(`🎉 Xuất sắc! Bạn đã hoàn thành 100% câu hỏi tại ${ws?ws.name:"trạm"}!`);
+          In(`🎉 Xuất sắc! Bạn đã hoàn thành 100% câu hỏi tại ${ws?ws.name:"trạm"}! Trạm đã được nâng cấp hoàng gia.`);
+          _n();
         };
       }
     } else {

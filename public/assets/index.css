@@ -687,3 +687,45 @@ dialog h2 {
   height: 15px;
   margin-left: 4px;
 }
+
+/* Mastered Station Transformation */
+.workstation-label.station-mastered {
+  border: 1.5px solid #f59e0b !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(254, 243, 199, 0.92)) !important;
+  box-shadow: 0 0 16px rgba(245, 158, 11, 0.4), 0 8px 24px rgba(0, 0, 0, 0.2) !important;
+}
+
+.workstation-label.station-mastered strong {
+  color: #92400e !important;
+}
+
+.workstation-label.station-mastered small {
+  color: #b45309 !important;
+  font-weight: 700 !important;
+}
+
+.workstation-label.station-mastered .station-dot,
+.workstation-label.station-mastered .mystery-dot {
+  background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+  color: #ffffff !important;
+  font-size: 13px !important;
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.6) !important;
+  border-color: #fef3c7 !important;
+}
+
+.workstation-label.station-mastered::after {
+  content: '👑 THÀNH THẠO';
+  position: absolute;
+  top: -11px;
+  right: -6px;
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 900;
+  padding: 2px 7px;
+  border-radius: 999px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 8px rgba(245, 158, 11, 0.5);
+  border: 1px solid #fef3c7;
+  pointer-events: none;
+}
