@@ -3,1224 +3,2844 @@
     "id": "M1_01",
     "role": "manager",
     "level": 1,
-    "zone": "Cổng Chào Làng Khởi Đầu - Quầy Thu Ngân POS",
-    "ticketCode": "MGR-L1-01",
-    "category": "Đơn vị tính cơ bản",
-    "title": "Thiết lập Đơn Vị Tính Chính cho Cà Phê Hạt",
-    "prompt": "Khi tạo mới mặt hàng \"Cà phê hạt Robusta\" trong Danh mục hàng hóa để vừa nhập theo bao 25kg, vừa pha chế espresso (theo gram), chủ quán nên thiết lập Đơn vị tính chính là gì để thuận tiện nhất cho việc lập công thức chế biến (BOM) và theo dõi tồn kho?",
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#SYS-101",
+    "subsystem": "PHAN_HE_01_CAU_HINH",
+    "subsystemName": "Khởi Tạo & Cài Đặt Hệ Thống",
+    "category": "CẤU HÌNH",
+    "title": "Quy tắc ẩn Đơn giá và Thành tiền với nhân viên",
+    "prompt": "Chủ quán muốn nhân viên kho chỉ kiểm đếm số lượng hàng hoá thực tế khi nhập xuất mà không được nhìn thấy giá tiền nhập từ nhà cung cấp để bảo mật kinh doanh. Trong IVT Pro, tính năng này được cấu hình ở đâu?",
     "options": [
       {
         "id": "A",
-        "text": "Bao (25kg) để dễ kiểm đếm số bao trong kho",
-        "isCorrect": false
+        "label": "Vào Cài đặt chứng từ > Bật 'Quy tắc ẩn Đơn giá, Tiền' theo chức vụ tài khoản",
+        "isCorrect": true
       },
       {
         "id": "B",
-        "text": "Kilogram (Kg) theo đơn vị đo lường phổ thông",
+        "label": "Bảo nhân viên lấy băng dính dán che cột giá tiền trên màn hình",
         "isCorrect": false
       },
       {
         "id": "C",
-        "text": "Gram (g) - đơn vị nhỏ nhất đo lường được sử dụng trực tiếp trong công thức chế biến",
-        "isCorrect": true
+        "label": "Xoá toàn bộ đơn giá trong danh mục nhà cung cấp về 0 đ",
+        "isCorrect": false
       },
       {
         "id": "D",
-        "text": "Ly pha chế theo số lượng thành phẩm bán ra",
+        "label": "Tính năng này phần mềm IVT Pro chưa hỗ trợ",
         "isCorrect": false
       }
     ],
-    "hint": "Chuyên đề 015 & 016 cẩm nang đề xuất chọn ĐVT chính là đơn vị nhỏ nhất đo lường được sử dụng trực tiếp trong công thức chế biến món ăn/đồ uống.",
-    "explanation": "Cẩm nang IVT khuyên nên khai báo Đơn vị tính chính là đơn vị đo lường nhỏ nhất được dùng trực tiếp trong công thức chế biến (ở đây là Gram). Sau đó thiết lập Hệ số quy đổi: 1 Kg = 1000g, 1 Bao = 25000g. Làm như vậy khi nhập hàng bằng Bao hay Kg hệ thống sẽ tự quy đổi chính xác về Gram, và khi bán ly cà phê (tiêu hao 18g - 20g), hệ thống sẽ trừ trực tiếp mà không bị sai số làm tròn thập phân. Lưu ý: Đơn vị tính chính đã phát sinh giao dịch thì KHÔNG THỂ thay đổi."
+    "hint": "Xem Chuyên đề 009: Cài đặt chứng từ - Mục 4 Quy tắc ẩn Đơn giá, Tiền.",
+    "explanation": "IVT Pro cho phép phân quyền chi tiết tại Cài đặt chứng từ: Có thể ẩn đơn giá và thành tiền trên từng loại phiếu (Nhập, Xuất, Kiểm kê) đối với các nhóm chức vụ nhân viên kho, giúp bảo mật dữ liệu giá vốn của nhà hàng."
   },
   {
     "id": "M1_02",
     "role": "manager",
     "level": 1,
-    "zone": "Kho Nguyên Liệu Khô Làng Khởi Đầu",
-    "ticketCode": "MGR-L1-02",
-    "category": "Theo dõi tồn kho",
-    "title": "Quy tắc bật/tắt Theo dõi tồn kho cho Thành phẩm vs Nguyên liệu",
-    "prompt": "Cửa hàng mới mở bán món \"Trà Đào Cam Sả\" và nhập nguyên liệu \"Đào hộp Kronos\". Trong Danh mục hàng hóa IVT Pro, bạn cần thiết lập thuộc tính \"Theo dõi tồn kho\" cho 2 mặt hàng này như thế nào?",
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#SYS-102",
+    "subsystem": "PHAN_HE_01_CAU_HINH",
+    "subsystemName": "Khởi Tạo & Cài Đặt Hệ Thống",
+    "category": "VẬN HÀNH",
+    "title": "Lựa chọn Mô hình vận hành cho thương hiệu có Kho tổng",
+    "prompt": "Một chuỗi F&B có 5 chi nhánh bán lẻ và 1 Tổng kho lưu trữ nguyên liệu tập trung. Khi bắt đầu cài đặt IVT Pro, quản trị viên cần thiết lập Mô hình vận hành nào?",
     "options": [
       {
         "id": "A",
-        "text": "Bật theo dõi tồn kho cho cả Trà Đào Cam Sả và Đào hộp Kronos",
+        "label": "Mô hình chỉ có kho cửa hàng độc lập",
         "isCorrect": false
       },
       {
         "id": "B",
-        "text": "Tắt theo dõi tồn kho cho Trà Đào Cam Sả; Bật theo dõi tồn kho cho Đào hộp Kronos",
+        "label": "Mô hình có Kho tổng và Kho cửa hàng (Mô hình chuỗi tập trung)",
         "isCorrect": true
       },
       {
         "id": "C",
-        "text": "Bật theo dõi tồn kho cho Trà Đào Cam Sả; Tắt theo dõi tồn kho cho Đào hộp Kronos",
+        "label": "Mô hình phi tập trung không kết nối mạng",
         "isCorrect": false
       },
       {
         "id": "D",
-        "text": "Tắt theo dõi tồn kho cho cả 2 mặt hàng vì đã có POS quản lý",
+        "label": "Mô hình đại lý nhượng quyền không quản lý kho",
         "isCorrect": false
       }
     ],
-    "hint": "Món menu bán ra tại POS được chế biến tại chỗ, còn đào hộp là nguyên vật liệu nhập mua tích trữ trong kho.",
-    "explanation": "Theo quy tắc sống còn của IVT Pro: Món thành phẩm bán qua POS phải TẮT \"Theo dõi tồn kho\". Nếu bật theo dõi tồn kho cho thành phẩm, khi bán tại POS hệ thống sẽ dừng lại ở mã món và đòi trừ tồn kho thành phẩm, không phân rã xuống trừ các nguyên vật liệu cấu thành (đào hộp, trà, sả). Ngược lại, nguyên vật liệu (như Đào hộp) phải BẬT \"Theo dõi tồn kho\" để theo dõi số lượng nhập - xuất - tồn."
-  },
-  {
-    "id": "M1_03",
-    "role": "manager",
-    "level": 1,
-    "zone": "Bàn Giao Nhận Hàng Cửa Khẩu",
-    "ticketCode": "MGR-L1-03",
-    "category": "Nhập kho mua hàng",
-    "title": "Xử lý đơn Đặt hàng Nhà Cung Cấp giao nhiều đợt",
-    "prompt": "Nhà cung cấp sữa Vinamilk giao đợt 1 gồm 10 thùng sữa tươi trên tổng số 30 thùng đã đặt trong đơn mua hàng PO-001. Thủ kho cần thao tác như thế nào trên phần mềm IVT Pro để ghi nhận chính xác công nợ và số lượng thực nhận?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Huỷ đơn đặt hàng cũ và tạo đơn đặt hàng mới chỉ gồm 10 thùng",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Tạo phiếu Nhập mua hàng từ đơn PO-001, sửa số lượng thực nhận thành 10 thùng; hệ thống lưu vết còn thiếu 20 thùng để nhận tiếp đợt sau",
-        "isCorrect": true
-      },
-      {
-        "id": "C",
-        "text": "Xác nhận hoàn thành toàn bộ 30 thùng để nhà cung cấp xuất hoá đơn một lần",
-        "isCorrect": false
-      },
-      {
-        "id": "D",
-        "text": "Không tạo phiếu nhập trên phần mềm, đợi khi nào giao đủ 30 thùng mới tạo phiếu nhập một thể",
-        "isCorrect": false
-      }
-    ],
-    "hint": "IVT Pro hỗ trợ tính năng \"Nhập hàng từ đơn mua hàng (giao một hoặc nhiều lần)\" theo Chuyên đề 037.",
-    "explanation": "IVT Pro hỗ trợ quy trình giao hàng nhiều lần cho một đơn mua hàng (PO). Khi nhận đợt 1, thủ kho vào Nhập mua hàng -> Chọn đơn mua hàng PO-001 -> Nhập số lượng thực nhận là 10 thùng. Phần mềm sẽ trừ số lượng còn lại của PO (còn 20 thùng) và chỉ ghi nhận công nợ cùng tồn kho cho đúng 10 thùng thực nhập. Khi đợt 2 giao tiếp, tiếp tục chọn đơn PO-001 để nhập nốt."
-  },
-  {
-    "id": "M1_04",
-    "role": "manager",
-    "level": 1,
-    "zone": "Quầy Bar Pha Chế Thử Nghiệm",
-    "ticketCode": "MGR-L1-04",
-    "category": "Định lượng BOM",
-    "title": "Hiệu lực ngày áp dụng của Công Thức Chế Biến",
-    "prompt": "Ngày 15/09 quán bắt đầu bán món mới \"Trà Sữa Oolong Nướng\" trên máy POS. Tuy nhiên đến ngày 18/09 quản lý mới lên IVT Pro tạo Công thức chế biến (BOM) và để \"Ngày áp dụng\" mặc định là ngày tạo phiếu (18/09). Hiện tượng gì sẽ xảy ra với các order đã bán từ ngày 15 đến 17/09?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Hệ thống tự động trừ kho hồi tố từ ngày 15/09 mà không cần thao tác gì",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Các hoá đơn bán từ 15 đến 17/09 rơi vào tab \"Chưa đồng bộ\" với lỗi \"Không tìm thấy công thức chế biến\"",
-        "isCorrect": true
-      },
-      {
-        "id": "C",
-        "text": "Máy POS báo lỗi không cho in hoá đơn bán hàng từ ngày 15/09",
-        "isCorrect": false
-      },
-      {
-        "id": "D",
-        "text": "Toàn bộ kho bị khoá và không cho thực hiện kiểm kê cuối tháng",
-        "isCorrect": false
-      }
-    ],
-    "hint": "Món bán ở POS chỉ trừ kho khi có công thức chế biến CÒN HIỆU LỰC tại chính thời điểm bán.",
-    "explanation": "Điều kiện tiên quyết để trừ kho là ngày hiệu lực của BOM phải nhỏ hơn hoặc bằng ngày giờ hoá đơn phát sinh tại POS. Vì BOM khai ngày áp dụng 18/09 nên các hoá đơn từ 15-17/09 bị coi là \"chưa có công thức tại thời điểm bán\" và dạt vào tab \"Chưa đồng bộ\". Cách khắc phục: Sửa ngày áp dụng của BOM lùi về ngày 15/09 (hoặc sớm hơn), sau đó dùng tiện ích \"Đồng bộ lại hoá đơn\"."
-  },
-  {
-    "id": "M1_05",
-    "role": "manager",
-    "level": 1,
-    "zone": "Trạm Kiểm Kê Cuối Ca Làng Khởi Đầu",
-    "ticketCode": "MGR-L1-05",
-    "category": "Kiểm kê hàng hoá",
-    "title": "Phân biệt Nhập số 0 vs Xoá dòng khi kiểm kê kho",
-    "prompt": "Cuối ngày, thủ kho kiểm kê nguyên vật liệu: Hộp \"Bột Matcha\" trong kho đã cạn sạch hoàn toàn, còn nguyên liệu \"Hạt Chia\" thì hôm nay không nằm trong danh sách cần kiểm đếm. Thao tác đúng trên phiếu Kiểm kê IVT Pro là gì?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Bột Matcha để trống ô số lượng; Hạt Chia gõ số lượng 0",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Bột Matcha gõ số lượng bằng 0; Hạt Chia click chuột phải chọn \"Bỏ dòng\" (xoá khỏi phiếu kiểm kê)",
-        "isCorrect": true
-      },
-      {
-        "id": "C",
-        "text": "Cả hai nguyên liệu đều xoá dòng để không làm biến động kho",
-        "isCorrect": false
-      },
-      {
-        "id": "D",
-        "text": "Cả hai nguyên liệu đều điền số 0",
-        "isCorrect": false
-      }
-    ],
-    "hint": "Nhập 0 nghĩa là kiểm kê thực tế đã hết sạch; còn không kiểm kê đến thì phải bỏ dòng để hệ thống giữ nguyên tồn hiện tại.",
-    "explanation": "Đây là quy tắc kiểm kê cốt tử được nêu rõ trong Chuyên đề 053 & 101: Nếu hàng hóa thực tế đã hết, BẮT BUỘC phải gõ số 0 (hệ thống sẽ tạo phiếu Xuất điều chỉnh hao hụt để đưa tồn về 0). Nếu mặt hàng không kiểm đếm trong đợt này, BẮT BUỘC phải Bỏ dòng (xoá dòng). Nếu để số 0 cho hàng không kiểm kê, hệ thống sẽ hiểu là đã mất sạch và xuất sạch kho!"
-  },
-  {
-    "id": "M1_06",
-    "role": "manager",
-    "level": 1,
-    "zone": "Vọng Lầu Báo Cáo - Bờ Vực Làng Khởi Đầu",
-    "ticketCode": "MGR-L1-06",
-    "category": "Báo cáo A06 Thẻ kho",
-    "title": "Truy vết sai lệch tồn bằng Báo cáo A06 và Thẻ Kho",
-    "prompt": "Cuối tháng xem Báo cáo A06 (Xuất Nhập Tồn), chủ quán thấy mặt hàng \"Siro Bạc Hà\" hiển thị tồn cuối kỳ bị lệch nghiêm trọng so với thực tế và số tiền giá trị tồn rất lớn. Để truy tìm nguồn gốc sai sót, thao tác chuẩn xác nhất trên IVT Pro là gì?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Bấm trực tiếp vào mã hàng Siro Bạc Hà trên báo cáo A06 để mở \"Thẻ kho\", kiểm tra từng phiếu nhập xuất xem có phiếu nào nhập nhầm ĐVT hoặc sai đơn giá",
-        "isCorrect": true
-      },
-      {
-        "id": "B",
-        "text": "Tạo ngay một phiếu Kiểm kê điều chỉnh cưỡng bức mà không cần kiểm tra nguyên nhân",
-        "isCorrect": false
-      },
-      {
-        "id": "C",
-        "text": "Xoá mặt hàng Siro Bạc Hà khỏi danh mục rồi tạo mã hàng mới",
-        "isCorrect": false
-      },
-      {
-        "id": "D",
-        "text": "Chạy lại Tiện ích tính giá vốn 5 lần liên tiếp",
-        "isCorrect": false
-      }
-    ],
-    "hint": "Báo cáo A06 là báo cáo trung tâm; bấm vào mã hàng sẽ bung Thẻ kho xem toàn bộ lịch sử biến động.",
-    "explanation": "Báo cáo A06 là trung tâm của mọi đối soát kho. Nhấp chuột vào mã hàng trên A06 sẽ mở ra Thẻ kho chi tiết, hiển thị từng dòng nhập, xuất, điều chuyển, kèm mã chứng từ, đơn vị tính và đơn giá. Tại đây sẽ phát hiện ngay các lỗi kinh điển như: nhập 10 thùng nhưng quên quy đổi nên ghi 10 chai, hoặc gõ nhầm đơn giá từ 150,000đ thành 1,500,000đ. Sau khi sửa/huỷ phiếu sai và tạo lại, chạy lại tính giá vốn thì số liệu sẽ chuẩn xác."
-  },
-  {
-    "id": "T1_01",
-    "role": "tech",
-    "level": 1,
-    "zone": "Trạm Kỹ Thuật Server POS Làng Khởi Đầu",
-    "ticketCode": "TCK-L1-01",
-    "category": "Xuất bán POS",
-    "title": "Quy tắc vàng 1st Action khi khách báo Bán hàng không trừ kho",
-    "prompt": "Khách hàng gọi hotline báo: \"Hôm nay quán em bán cả trăm ly cà phê trên máy POS mà vào IVT Pro thấy kho không suy suyển gì cả!\". Là một kỹ thuật viên iPOS Pro, hành động đầu tiên bạn PHẢI thực hiện trước khi đoán bất kỳ điều gì là gì?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Vào cấu hình Cài đặt hệ thống để khởi động lại dịch vụ đồng bộ Cloud",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Mở \"Menu -> Xuất kho -> Xuất bán POS\", chọn ngày và kho tương ứng, chuyển sang tab \"Chưa đồng bộ\" và đọc cột \"Lý do lỗi\"",
-        "isCorrect": true
-      },
-      {
-        "id": "C",
-        "text": "Hướng dẫn khách huỷ toàn bộ hoá đơn trong ngày trên máy POS rồi in lại",
-        "isCorrect": false
-      },
-      {
-        "id": "D",
-        "text": "Kết nối TeamViewer vào máy tính tiền POS để cài lại SQL Server",
-        "isCorrect": false
-      }
-    ],
-    "hint": "Đừng bao giờ đoán mò khi phần mềm đã có màn hình tự nói ra nguyên nhân lỗi cụ thể.",
-    "explanation": "Nguyên tắc số 1 của support IVT Pro: Truy cập ngay `Xuất kho -> Xuất bán POS -> tab Chưa đồng bộ` và đọc cột \"Lý do lỗi\". Hệ thống đã chỉ rõ nguyên nhân tại đây (Hết hạn bản quyền, Chưa có công thức chế biến, Món chưa đồng bộ từ POS, Sai ĐVT chính...). Đọc đúng lý do lỗi sẽ giải quyết ticket trong 1 phút thay vì đoán mò mất hàng giờ."
-  },
-  {
-    "id": "T1_02",
-    "role": "tech",
-    "level": 1,
-    "zone": "Bàn Cấu Hình Menu POS-IVT",
-    "ticketCode": "TCK-L1-02",
-    "category": "Đồng bộ danh mục POS",
-    "title": "Món mới tạo trên POS không hiển thị trong danh mục IVT",
-    "prompt": "Quán vừa tạo món mới trên POS nhưng quản lý không tìm thấy trong Danh mục hàng hoá IVT. Khi kiểm tra cấu hình \"Tự động đồng bộ danh mục hàng hoá từ POS\", bạn thấy cấu hình này đang BẬT. Vậy món mới thực chất đang nằm ở đâu trong IVT?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Nằm ở tab \"Chưa phân loại\" trong Danh mục hàng hoá",
-        "isCorrect": true
-      },
-      {
-        "id": "B",
-        "text": "Nằm ở tab \"Chưa đồng bộ\" trong Danh mục hàng hoá",
-        "isCorrect": false
-      },
-      {
-        "id": "C",
-        "text": "Đã bị xóa do trùng mã hàng trên máy chủ POS",
-        "isCorrect": false
-      },
-      {
-        "id": "D",
-        "text": "Nằm ở thùng rác của hệ thống chờ quản trị viên phê duyệt",
-        "isCorrect": false
-      }
-    ],
-    "hint": "Hãy nhớ sự khác biệt giữa Bật và Tắt cấu hình \"Tự động đồng bộ danh mục hàng hoá từ POS\".",
-    "explanation": "Khi cấu hình \"Tự động đồng bộ danh mục hàng hoá từ POS\" được BẬT, món mới tạo từ POS sẽ tự động được kéo về và nằm tại tab \"Chưa phân loại\" của Danh mục hàng hoá. Khách hàng thường chỉ tìm ở tab danh mục chính nên tưởng món bị mất. Nếu cấu hình này TẮT, món sẽ nằm ở tab \"Chưa đồng bộ\" và cần bấm nút \"Đồng bộ\" thủ công."
-  },
-  {
-    "id": "T1_03",
-    "role": "tech",
-    "level": 1,
-    "zone": "Trạm Barcode & Cân Điện Tử",
-    "ticketCode": "TCK-L1-03",
-    "category": "Phân loại món Ghi chú",
-    "title": "Món phụ/Ghi chú báo lỗi liên tục Chưa có công thức chế biến",
-    "prompt": "Màn hình Xuất bán POS tab \"Chưa đồng bộ\" ngập tràn hàng trăm dòng lỗi \"Không tìm thấy công thức chế biến\" cho các món như: \"30% Đường\", \"Ít đá\", \"Không hành\", \"Mang về\". Giải pháp chuẩn kỹ thuật để giải quyết triệt để vấn đề này là gì?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Tạo công thức chế biến rỗng (0 gram) cho từng món ghi chú này",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Vào Danh mục hàng hoá, sửa Loại hàng hoá của các mã này thành Loại \"Ghi chú\"",
-        "isCorrect": true
-      },
-      {
-        "id": "C",
-        "text": "Bật tuỳ chọn \"Bỏ qua kiểm tra công thức\" trong Cài đặt hệ thống",
-        "isCorrect": false
-      },
-      {
-        "id": "D",
-        "text": "Xoá toàn bộ các nút ghi chú trên giao diện máy POS bán hàng",
-        "isCorrect": false
-      }
-    ],
-    "hint": "IVT Pro có một Loại hàng hoá chuyên dụng dành riêng cho các lệnh pha chế/bếp mà không cần quản lý định lượng.",
-    "explanation": "Trong IVT Pro, Loại hàng hoá \"Ghi chú\" (ví dụ % đường đá, độ cay, ghi chú bếp) mặc định không theo dõi tồn kho và ĐẶC BIỆT là hệ thống sẽ KHÔNG quét lỗi \"Chưa có công thức chế biến\" trên màn hình Xuất bán POS nữa. Việc tạo BOM rỗng là sai quy chuẩn và làm phình to dữ liệu không cần thiết."
-  },
-  {
-    "id": "T1_04",
-    "role": "tech",
-    "level": 1,
-    "zone": "Tháp Lưu Vết Dữ Liệu Làng Khởi Đầu",
-    "ticketCode": "TCK-L1-04",
-    "category": "Ràng buộc hệ thống",
-    "title": "3 Loại khai báo CẤM sửa/xoá để bảo toàn tính toàn vẹn",
-    "prompt": "Khách hàng yêu cầu KTV xoá một Hệ số quy đổi ĐVT bị khai sai tháng trước và xoá một Mã hàng hoá đã từng phát sinh nhập kho để tạo lại cho đẹp mã. Phản hồi kỹ thuật nào sau đây là CHUẨN XÁC theo kiến trúc IVT Pro?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Có thể dùng tài khoản Admin can thiệp cơ sở dữ liệu để xoá hoàn toàn",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Hệ thống thiết kế lưu vết lịch sử: Hệ số quy đổi, Bảng giá và Mã hàng đã phát sinh KHÔNG ĐƯỢC sửa/xoá; chỉ có thể tắt trạng thái \"Hoạt động\" và tạo khai báo mới",
-        "isCorrect": true
-      },
-      {
-        "id": "C",
-        "text": "Sửa trực tiếp số quy đổi cũ vì hệ thống sẽ tự cập nhật hồi tố lại tất cả các phiếu cũ",
-        "isCorrect": false
-      },
-      {
-        "id": "D",
-        "text": "Phải cài đặt lại phần mềm từ đầu mới xoá được các khai báo này",
-        "isCorrect": false
-      }
-    ],
-    "hint": "3 đối tượng không bao giờ sửa/xoá được: Hệ số quy đổi ĐVT, Bảng giá, Mã hàng đã phát sinh. Hệ thống sẽ luôn lấy bản ghi mới nhất.",
-    "explanation": "Theo thiết kế kiến trúc bảo toàn lịch sử dữ liệu của IVT Pro: 3 loại khai báo tuyệt đối không sửa và không xoá được gồm: (1) Hệ số quy đổi ĐVT, (2) Bảng giá, (3) Mã hàng đã có phát sinh. Xử lý chuẩn: Tắt trạng thái Hoạt động (Inactive) của bản ghi cũ, sau đó tạo bản ghi mới. Đối với ĐVT, hệ thống sẽ luôn lấy khai báo active mới nhất để áp dụng cho các giao dịch mới."
-  },
-  {
-    "id": "T1_05",
-    "role": "tech",
-    "level": 1,
-    "zone": "Đài Quan Sát Nhập Xuất Làng Khởi Đầu",
-    "ticketCode": "TCK-L1-05",
-    "category": "Lỗi Thành phẩm bật tồn kho",
-    "title": "Món đã nằm tab Đã đồng bộ nhưng nguyên liệu vẫn không bị trừ",
-    "prompt": "Khách hàng mở tab \"Đã đồng bộ\" trên Xuất bán POS thấy hoá đơn bán \"Cà phê nâu sữa\" đã chuyển sang trạng thái thành công, nhưng mở Thẻ kho của Sữa đặc và Cà phê hạt thì không hề thấy phát sinh dòng xuất kho nào. Đâu là nguyên nhân cốt lõi?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Do máy POS bị mất mạng trong lúc in hoá đơn",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Mã món thành phẩm \"Cà phê nâu sữa\" đang bị BẬT \"Theo dõi tồn kho\" trong Danh mục hàng hoá",
-        "isCorrect": true
-      },
-      {
-        "id": "C",
-        "text": "Do chưa chạy tiện ích khoá sổ kỳ kế toán",
-        "isCorrect": false
-      },
-      {
-        "id": "D",
-        "text": "Do ngày bán rơi vào ngày nghỉ cuối tuần",
-        "isCorrect": false
-      }
-    ],
-    "hint": "Xem Chẩn đoán A1 Bước 3 trong tài liệu 10: Nếu thành phẩm bật theo dõi tồn kho, hệ thống dừng lại ở lớp thành phẩm.",
-    "explanation": "Đây là \"bẫy\" kỹ thuật rất phổ biến: Khi món Thành phẩm được bật \"Theo dõi tồn kho\", cơ chế xử lý của IVT sẽ coi món đó là hàng có sẵn và dừng lại ở lớp thành phẩm, không kích hoạt cơ chế phân rã BOM xuống nguyên liệu gốc. Cách khắc phục: Vào Danh mục hàng hoá -> Tìm món thành phẩm -> Tắt \"Theo dõi tồn kho\" -> Vào Xuất bán POS dùng tiện ích \"Đồng bộ lại hoá đơn\"."
-  },
-  {
-    "id": "T1_06",
-    "role": "tech",
-    "level": 1,
-    "zone": "Nhịp Cầu Số 6 Làng Khởi Đầu",
-    "ticketCode": "TCK-L1-06",
-    "category": "Kho theo dõi tồn",
-    "title": "Bẫy cấu hình Kho theo dõi tồn trong Danh mục hàng hoá",
-    "prompt": "Một chuỗi có 3 chi nhánh (Kho 1, Kho 2, Kho 3). Nhân viên tạo mã nguyên liệu \"Trà Đen\" và tại trường \"Kho theo dõi tồn\" đã chọn đích danh \"Kho 1\". Khi Kho 2 nhập mua và bán Trà Đen thì trên Báo cáo A06 của Kho 2 hoàn toàn không hiển thị mặt hàng này. Lời khuyên chuẩn từ cẩm nang triển khai IVT Pro là gì?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Phải tạo thêm 2 mã hàng Trà Đen riêng biệt cho Kho 2 và Kho 3",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Để TRỐNG trường \"Kho theo dõi tồn\" trong Danh mục hàng hoá để mặt hàng được theo dõi ở tất cả các kho",
-        "isCorrect": true
-      },
-      {
-        "id": "C",
-        "text": "Kho 2 phải làm phiếu mượn hàng từ Kho 1 mỗi ngày",
-        "isCorrect": false
-      },
-      {
-        "id": "D",
-        "text": "Tắt tính năng quản trị đa kho trong Cài đặt hệ thống",
-        "isCorrect": false
-      }
-    ],
-    "hint": "Chuyên đề 015 & Cẩm nang kiến trúc khuyến nghị cách điền trường \"Kho theo dõi tồn\".",
-    "explanation": "Cẩm nang IVT Pro ghi rõ: Nếu điền mã kho cụ thể vào trường \"Kho theo dõi tồn\", mặt hàng CHỈ ĐƯỢC theo dõi tồn tại đúng kho đó, các kho khác sẽ không thấy tồn hoặc không thể xem báo cáo. Để thuận tiện nhất trong vận hành chuỗi và kho, cẩm nang ĐỀ XUẤT ĐỂ TRỐNG trường này, khi đó mặt hàng sẽ tự động áp dụng theo dõi cho tất cả các kho hiện tại và tương lai."
+    "hint": "Xem Chuyên đề 005 & 040: Mô hình vận hành có Kho tổng và Kho cửa hàng.",
+    "explanation": "Chọn đúng mô hình 'Có Kho tổng và Kho cửa hàng' sẽ mở khóa đầy đủ quy trình Đặt hàng nội bộ (Store Order), Duyệt cung ứng, Xuất điều chuyển từ kho tổng và Nhập nhận tại các điểm bán."
   },
   {
     "id": "M2_01",
     "role": "manager",
     "level": 2,
-    "zone": "Bến Tàu Bếp Trung Tâm",
-    "ticketCode": "MGR-L2-01",
-    "category": "Sơ chế vs Chế biến",
-    "title": "Phân biệt Quy trình Sơ chế vs Quy trình Chế biến BTP",
-    "prompt": "Bếp trung tâm nhập 50 con gà sống nguyên con về pha lóc thành đùi gà, ức gà, cánh gà; đồng thời dùng chanh dây và đường để nấu thành 20 lít \"Sốt chanh dây\". Quản lý kho cần áp dụng 2 quy trình nào trên phân hệ Sản xuất IVT Pro?",
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#SYS-103",
+    "subsystem": "PHAN_HE_01_CAU_HINH",
+    "subsystemName": "Khởi Tạo & Cài Đặt Hệ Thống",
+    "category": "PHÂN QUYỀN",
+    "title": "Phân quyền tài khoản theo Chi nhánh và Chức vụ",
+    "prompt": "Thủ kho Chi nhánh Quận 1 phản ánh vào phần mềm nhìn thấy cả phiếu nhập kho và số tồn của Chi nhánh Cầu Giấy. Làm thế nào để giới hạn người dùng chỉ thao tác đúng kho của mình?",
     "options": [
       {
         "id": "A",
-        "text": "Gà: Quy trình Sơ chế (1 vào nhiều ra); Sốt chanh dây: Quy trình Chế biến BTP (nhiều vào 1 ra)",
+        "label": "Vào Quản lý tài khoản > Phân quyền phạm vi dữ liệu theo đúng Chi nhánh và Kho trực thuộc",
         "isCorrect": true
       },
       {
         "id": "B",
-        "text": "Gà: Quy trình Chế biến BTP; Sốt chanh dây: Quy trình Sơ chế",
+        "label": "Đổi mật khẩu tài khoản của thủ kho Cầu Giấy",
         "isCorrect": false
       },
       {
         "id": "C",
-        "text": "Cả 2 đều dùng phiếu Xuất Huỷ và Nhập Mua Khác",
+        "label": "Yêu cầu thủ kho Quận 1 tự giác không bấm xem kho khác",
         "isCorrect": false
       },
       {
         "id": "D",
-        "text": "Cả 2 đều dùng tính năng Định mức biến thiên",
+        "label": "Xoá toàn bộ dữ liệu của chi nhánh Cầu Giấy đi",
         "isCorrect": false
       }
     ],
-    "hint": "Sơ chế là \"Tách ra\" (1 đầu vào -> nhiều đầu ra). Chế biến là \"Gộp vào\" (nhiều đầu vào -> 1 thành phẩm/BTP).",
-    "explanation": "Nguyên lý thiết kế phân hệ Sản xuất trong IVT Pro phân định rất rõ ràng: Quy trình Sơ chế dùng cho nghiệp vụ \"1 vào nhiều ra\" (Ví dụ: 1 con gà/con bò tách ra nhiều phần thịt với tỉ lệ % thu hồi). Quy trình Chế biến Bán thành phẩm dùng cho nghiệp vụ \"Nhiều vào 1 ra\" (Ví dụ: đường, chanh dây, phụ gia kết hợp nấu ra Sốt chanh dây lưu kho)."
+    "hint": "Xem Chuyên đề 010: Chức vụ & Tài khoản trong IVT Pro.",
+    "explanation": "Hệ thống phân quyền của IVT Pro cho phép gắn tài khoản người dùng với một hoặc nhiều chi nhánh/kho xác định. Nhân viên chỉ xem và tạo chứng từ trong phạm vi kho được cấp quyền."
   },
   {
-    "id": "M2_02",
-    "role": "manager",
-    "level": 2,
-    "zone": "Trạm Điều Phối Đơn Cung Ứng",
-    "ticketCode": "MGR-L2-02",
-    "category": "Cung ứng hàng hoá",
-    "title": "Đặt hàng nội bộ khi cửa hàng không có người duyệt yêu cầu mua",
-    "prompt": "Các cửa hàng chi nhánh cần đặt bánh mì và sốt từ Bếp Trung Tâm mỗi sáng. Quán không bố trí người duyệt đơn mua hàng mà muốn cửa hàng đặt là đơn tự động điều hướng về Bếp. Người quản lý chuỗi cần khai báo danh mục nào trên IVT Pro?",
+    "id": "T1_01",
+    "role": "tech",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#SYS-201",
+    "subsystem": "PHAN_HE_01_CAU_HINH",
+    "subsystemName": "Khởi Tạo & Cài Đặt Hệ Thống",
+    "category": "CẤU HÌNH",
+    "title": "Cấu trúc tạo mã chứng từ tự động và quy tắc chống trùng lặp",
+    "prompt": "Trong mục Cài đặt chứng từ của IVT Pro, cấu trúc tạo mã tự động gồm những thành phần nào và có vai trò gì trong quản trị hệ thống?",
     "options": [
       {
         "id": "A",
-        "text": "Khai báo Danh mục Bảng giá nội bộ",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Khai báo \"Danh mục -> Cung ứng hàng hoá\", chọn hàng hoá nào được cung ứng từ Bếp Trung Tâm",
+        "label": "Tiền tố (Prefix) + Mã chi nhánh/kho + Định dạng ngày tháng năm + Số thứ tự tăng dần",
         "isCorrect": true
       },
       {
+        "id": "B",
+        "label": "Tên người tạo phiếu viết tắt + Số ngẫu nhiên do hệ thống tự sinh",
+        "isCorrect": false
+      },
+      {
         "id": "C",
-        "text": "Thiết lập tài khoản nhân viên chi nhánh có quyền Admin tối cao",
+        "label": "Mã số thuế của nhà hàng + Số điện thoại nhà cung cấp",
         "isCorrect": false
       },
       {
         "id": "D",
-        "text": "Bật tính năng Nhượng quyền vận hành tách biệt",
+        "label": "Hệ thống chỉ cho phép người dùng tự gõ tay mã số phiếu",
         "isCorrect": false
       }
     ],
-    "hint": "Chuyên đề 025 & Chẩn đoán D1: Khi không có người duyệt PO, danh mục nào giúp hệ thống tự định tuyến đích đến của đơn đặt hàng?",
-    "explanation": "Tại `Danh mục -> Cung ứng hàng hoá`, hệ thống cho phép chỉ định rõ mặt hàng nào do Kho tổng / Bếp trung tâm nào cung ứng. Khi cửa hàng tạo yêu cầu đặt hàng, nếu không dùng luồng xét duyệt thì IVT Pro sẽ dựa vào bảng Cung ứng hàng hoá này để tự động sinh phiếu đặt hàng nội bộ chuyển thẳng đến kho bếp trung tâm tương ứng."
-  },
-  {
-    "id": "M2_03",
-    "role": "manager",
-    "level": 2,
-    "zone": "Cầu Cân Xe Tải Giao Nhận",
-    "ticketCode": "MGR-L2-03",
-    "category": "Điều chuyển hàng hoá",
-    "title": "Sự cố chênh lệch số lượng thực nhận khi nhập điều chuyển",
-    "prompt": "Bếp trung tâm xuất điều chuyển 50 kg thịt bò tới Chi nhánh Quận 1, nhưng khi mở thùng cân thực tế tại chi nhánh thì chỉ có 47 kg (hao hụt hoặc thất thoát 3 kg dọc đường). Để thủ kho chi nhánh có thể sửa số lượng thực nhận trên phiếu nhập điều chuyển, cấu hình nào phải được bật trước đó?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Cho phép bán âm kho không giới hạn",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Cấu hình \"Cho phép sửa số lượng thực nhận khi nhập điều chuyển\" trong Cài đặt hệ thống",
-        "isCorrect": true
-      },
-      {
-        "id": "C",
-        "text": "Tự động huỷ phiếu xuất điều chuyển nếu thiếu hàng",
-        "isCorrect": false
-      },
-      {
-        "id": "D",
-        "text": "Bật cấu hình Định mức biến thiên",
-        "isCorrect": false
-      }
-    ],
-    "hint": "Cấu hình hệ thống mục Vận hành kho hàng cho phép bên nhận chỉnh sửa số lượng thực nhận (nhỏ hơn số xuất).",
-    "explanation": "Trong `Thiết lập -> Hệ thống`, có tuỳ chọn \"Cho phép sửa số lượng thực nhận khi nhập điều chuyển\". Khi bật tuỳ chọn này, bên nhận được quyền nhập số thực tế (47 kg, nhỏ hơn số trên phiếu xuất 50 kg). Phần chênh lệch 3 kg sẽ được ghi nhận rõ ràng để quản lý đối soát quy trách nhiệm vận chuyển."
-  },
-  {
-    "id": "M2_04",
-    "role": "manager",
-    "level": 2,
-    "zone": "Xưởng Pha Chế Siêu Cấp Đảo Bếp",
-    "ticketCode": "MGR-L2-04",
-    "category": "Trừ kho 2 cấp",
-    "title": "Vận hành Bán thành phẩm không muốn theo dõi quy trình nấu nướng",
-    "prompt": "Quầy bar nấu \"Nước cốt trà đen\" mỗi sáng từ trà khô và nước sôi. Bar không muốn làm phiếu xuất nhập chế biến rườm rà mỗi ngày nhưng khi bán ly \"Trà đào\" (dùng 100ml cốt trà) ở POS thì kho vẫn phải tự trừ ra đúng số gam Trà khô ban đầu. Quản lý cần đề xuất giải pháp nghiệp vụ nào?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Hàng ngày cuối ca làm phiếu xuất hao hụt trà khô bằng tay",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Kích hoạt giải pháp \"Trừ kho 2 cấp (định lượng 2 cấp)\" và tắt theo dõi tồn kho cho Nước cốt trà đen",
-        "isCorrect": true
-      },
-      {
-        "id": "C",
-        "text": "Khai báo Nước cốt trà đen là hàng bán thẳng",
-        "isCorrect": false
-      },
-      {
-        "id": "D",
-        "text": "Đổi đơn vị tính của trà khô thành Mililit",
-        "isCorrect": false
-      }
-    ],
-    "hint": "Xem Chuyên đề 007 & Chẩn đoán A4: Dùng khi có BTP nhưng không muốn quản lý quy trình chế biến của BTP đó.",
-    "explanation": "Giải pháp \"Trừ kho 2 cấp\" là cứu tinh cho các mô hình quầy bar/bếp: Quán có BTP trung gian nhưng không muốn nhân viên phải mất công bấm phiếu chế biến hàng ngày. Khi bật Trừ kho 2 cấp, khai BOM cho Cốt trà (từ trà khô) và BOM cho Trà đào (từ Cốt trà), đồng thời TẮT theo dõi tồn kho của Cốt trà -> Khi bán Trà đào, IVT tự động phân rã xuyên qua 2 tầng BOM để trừ thẳng vào Trà khô gốc."
-  },
-  {
-    "id": "M2_05",
-    "role": "manager",
-    "level": 2,
-    "zone": "Phòng Kế Toán Bếp Chuỗi",
-    "ticketCode": "MGR-L2-05",
-    "category": "Hình thức điều chuyển & Công nợ",
-    "title": "Điều chuyển nội bộ vs Bán nội bộ giữa các chi nhánh",
-    "prompt": "Công ty mẹ có mô hình chuỗi gồm các chi nhánh hạch toán độc lập (nhượng quyền hoặc góp vốn riêng). Khi Bếp trung tâm xuất nguyên liệu cho các chi nhánh này, loại phiếu nào PHẢI được chọn để hệ thống tự động ghi nhận công nợ nội bộ phải thu?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Phiếu Xuất điều chuyển nội bộ thông thường",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Phiếu Xuất điều chuyển với hình thức \"Bán nội bộ\"",
-        "isCorrect": true
-      },
-      {
-        "id": "C",
-        "text": "Phiếu Xuất huỷ hàng hết hạn",
-        "isCorrect": false
-      },
-      {
-        "id": "D",
-        "text": "Phiếu Xuất trả lại nhà cung cấp",
-        "isCorrect": false
-      }
-    ],
-    "hint": "Xem bảng so sánh 3 hình thức điều chuyển trong Chuyên đề 048 & Chẩn đoán D3.",
-    "explanation": "IVT Pro phân biệt 3 hình thức điều chuyển: (1) Điều chuyển nội bộ: chỉ chuyển hàng, không ghi nhận công nợ (dùng cho các chi nhánh cùng hạch toán phụ thuộc); (2) Bán nội bộ: vừa chuyển hàng vừa tự động hạch toán công nợ nội bộ phải thu/phải trả (dùng cho chi nhánh độc lập, nhượng quyền); (3) Trả hàng nội bộ: điều chỉnh giảm công nợ khi trả lại hàng."
-  },
-  {
-    "id": "M2_06",
-    "role": "manager",
-    "level": 2,
-    "zone": "Trạm Giám Sát Hao Hụt - Đỉnh Đảo Bếp",
-    "ticketCode": "MGR-L2-06",
-    "category": "Báo cáo A08",
-    "title": "Đọc và kiểm soát Tỷ lệ hao hụt trên Báo cáo A08",
-    "prompt": "Khi xem Báo cáo A08 (Hao hụt nguyên vật liệu), quản lý thấy dòng nguyên liệu \"Thịt thăn bò\" hiển thị chênh lệch tỷ lệ màu đỏ (vượt hạn mức báo động). Bản chất công thức tính tỷ lệ hao hụt trên A08 lấy những số liệu nào?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Tử số là Tổng giá trị xuất kho mọi loại; Mẫu số là Giá trị hàng tồn đầu kỳ",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Tử số là Tổng giá trị hao hụt (chỉ gồm Xuất điều chỉnh kiểm kê thiếu và Xuất huỷ); Mẫu số là Tổng giá trị xuất kho mọi loại",
-        "isCorrect": true
-      },
-      {
-        "id": "C",
-        "text": "Tử số là Tổng tiền nhập mua; Mẫu số là Doanh thu bán hàng tại POS",
-        "isCorrect": false
-      },
-      {
-        "id": "D",
-        "text": "Tử số là Số lượng hàng lỗi; Mẫu số là Hạn mức hao hụt danh mục kho",
-        "isCorrect": false
-      }
-    ],
-    "hint": "Chuyên đề 058 & Tài liệu 09 mục 10: Tử số chỉ gồm 2 loại chứng từ hao hụt thực sự, mẫu số là tổng xuất.",
-    "explanation": "Công thức chuẩn của Báo cáo A08: Tỷ lệ hao hụt thực tế = (Tổng giá trị hao hụt / Tổng giá trị xuất kho) * 100%. Trong đó: Tử số CHỈ GỒM phiếu Xuất điều chỉnh kiểm kê (do kiểm kê thiếu) và phiếu Xuất huỷ bỏ; Mẫu số là Tổng giá trị của TẤT CẢ các phiếu xuất kho trong kỳ. Nếu tỷ lệ thực tế lớn hơn Hạn mức hao hụt khai trong Danh mục kho, hệ thống sẽ hiện cảnh báo Chênh lệch dương màu đỏ!"
+    "hint": "Xem Chuyên đề 009: Cài đặt chứng từ - Cấu trúc tạo mã chứng từ.",
+    "explanation": "Cấu trúc tạo mã tự động chuẩn (VD: `NK_CN01_2609_0001`) giúp định danh rõ loại chứng từ, chi nhánh phát sinh, thời gian và số thứ tự, ngăn ngừa triệt để lỗi trùng mã khi đồng bộ đa chi nhánh."
   },
   {
     "id": "T2_01",
     "role": "tech",
     "level": 2,
-    "zone": "Trạm Kỹ Thuật Định Lượng Nâng Cao",
-    "ticketCode": "TCK-L2-01",
-    "category": "Cấu hình trừ kho 2 cấp",
-    "title": "3 Điều kiện bắt buộc để Trừ kho 2 cấp vận hành thành công",
-    "prompt": "Một khách hàng chuỗi trà sữa phàn nàn: \"Tôi đã nhờ tổng đài bật tính năng Trừ kho 2 cấp rồi, và đã khai công thức cho cả Cốt trà lẫn Trà sữa, nhưng khi bán Trà sữa trên POS thì Trà khô vẫn không hề suy giảm!\". KTV kiểm tra ngay điều kiện thứ 3 còn thiếu là gì?",
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#SYS-202",
+    "subsystem": "PHAN_HE_01_CAU_HINH",
+    "subsystemName": "Khởi Tạo & Cài Đặt Hệ Thống",
+    "category": "BẢO TRÌ",
+    "title": "Hệ quả của chức năng 'Đặt lại dữ liệu' (Reset Data)",
+    "prompt": "Khách hàng bấm vào tính năng 'Đặt lại dữ liệu' trong menu Cài đặt hệ thống. Kỹ thuật viên cần cảnh báo khách điều gì quan trọng nhất?",
     "options": [
       {
         "id": "A",
-        "text": "Chưa bật tính năng in hoá đơn VAT tại quầy thu ngân",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Mã hàng Bán thành phẩm (Cốt trà) vẫn đang BẬT \"Theo dõi tồn kho\" trong Danh mục hàng hoá",
+        "label": "Chức năng này sẽ xoá sạch toàn bộ chứng từ phát sinh và đưa tồn kho về 0, chỉ giữ lại danh mục (nếu chọn)",
         "isCorrect": true
       },
       {
-        "id": "C",
-        "text": "Chưa tạo bảng giá bán sỉ cho chi nhánh",
-        "isCorrect": false
-      },
-      {
-        "id": "D",
-        "text": "Chưa cắm thẻ nhớ mở rộng vào máy POS",
-        "isCorrect": false
-      }
-    ],
-    "hint": "Xem Chuyên đề 007 & Chẩn đoán A4: 3 điều kiện: Bật cấu hình -> Khai 2 BOM -> TẮT theo dõi tồn kho cho BTP.",
-    "explanation": "3 điều kiện bắt buộc của Trừ kho 2 cấp: (1) Bật cấu hình \"Có sử dụng định lượng 2 cấp\"; (2) Khai BOM đầy đủ cho cả BTP và món menu; (3) TẮT \"Theo dõi tồn kho\" cho BTP. Nếu BTP vẫn bật theo dõi tồn kho, hệ thống sẽ hiểu là khách muốn quản lý tồn kho BTP bằng quy trình chế biến thực tế, nên nó dừng lại ở lớp BTP và không tự động trừ nguyên liệu thô bên dưới."
-  },
-  {
-    "id": "T2_02",
-    "role": "tech",
-    "level": 2,
-    "zone": "Trạm Topping & Option Biến Thiên",
-    "ticketCode": "TCK-L2-02",
-    "category": "Định mức biến thiên",
-    "title": "Quy tắc khai báo Số lượng biến thiên (Tăng/Giảm)",
-    "prompt": "Khi cấu hình \"Định mức biến thiên\" cho món Trà Sữa khi khách chọn \"Size L\" (tăng thêm 10g bột sữa và giảm 5g đường cát so với Size M chuẩn), KTV phải nhập giá trị vào cột \"Số lượng biến thiên\" như thế nào?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Bột sữa nhập 10, Đường cát nhập 5",
-        "isCorrect": false
-      },
-      {
         "id": "B",
-        "text": "Bột sữa nhập +10, Đường cát nhập -5 (tăng là số dương, giảm là số âm)",
-        "isCorrect": true
-      },
-      {
-        "id": "C",
-        "text": "Bột sữa nhập tổng lượng mới (ví dụ 40g), Đường cát nhập tổng lượng mới (15g)",
-        "isCorrect": false
-      },
-      {
-        "id": "D",
-        "text": "Không thể nhập số âm trên hệ thống IVT Pro",
-        "isCorrect": false
-      }
-    ],
-    "hint": "Chuyên đề 008 & Chẩn đoán A5: Cột \"Số lượng gốc\" là cố định không sửa được; cột \"Số lượng biến thiên\" là phần chênh lệch tăng (+) hoặc giảm (-).",
-    "explanation": "Trong màn hình Định mức biến thiên: Cột \"Số lượng gốc\" hiển thị định mức theo BOM chuẩn và bị khoá không sửa. Cột \"Số lượng biến thiên\" là phần tuỳ chỉnh delta: phần nguyên liệu tiêu hao thêm phải nhập số DƯƠNG (+), phần nguyên liệu giảm bớt đi bắt buộc phải nhập số ÂM (-). Nếu nhập nhầm dấu âm/dương sẽ làm sai lệch toàn bộ tồn kho thực tế khi khách order size/topping."
-  },
-  {
-    "id": "T2_03",
-    "role": "tech",
-    "level": 2,
-    "zone": "Phòng An Ninh Quản Lý Date & Lô",
-    "ticketCode": "TCK-L2-03",
-    "category": "Quản lý Lô & Hạn sử dụng",
-    "title": "Ràng buộc Một đi không trở lại của Cấu hình Lô / Date",
-    "prompt": "Chủ nhà hàng yêu cầu: \"Bật cấu hình Quản lý theo Lô / Hạn sử dụng cho mặt hàng Sữa chua thử nghiệm vài hôm xem thế nào, nếu nhân viên lười nhập date thì tắt đi\". Cảnh báo tối quan trọng nào KTV PHẢI thông báo rõ trước khi bật?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Khi bật cấu hình lô/date sẽ bị tính thêm phí bản quyền hàng tháng",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Một khi mặt hàng đã phát sinh tồn kho thì TUYỆT ĐỐI KHÔNG THỂ TẮT LẠI cấu hình Lô/Hạn sử dụng cho mặt hàng đó",
-        "isCorrect": true
-      },
-      {
-        "id": "C",
-        "text": "Phần mềm sẽ tự động xoá toàn bộ hoá đơn bán hàng cũ",
-        "isCorrect": false
-      },
-      {
-        "id": "D",
-        "text": "Chỉ áp dụng được cho các mặt hàng bán mang về",
-        "isCorrect": false
-      }
-    ],
-    "hint": "Xem Chuyên đề 005 & Chẩn đoán F2: Ràng buộc sắt đá không thể hoàn tác của tính năng Lô/Hạn sử dụng.",
-    "explanation": "Cẩm nang IVT Pro quy định rõ 3 ràng buộc sắt đá: (1) Chỉ khai báo được lô/date cho mặt hàng CHƯA PHÁT SINH tồn kho; (2) Mặt hàng ĐÃ PHÁT SINH TỒN KHO thì KHÔNG THỂ TẮT LẠI cấu hình này; (3) Mọi thao tác nhập - xuất - kiểm kê mặt hàng này sau đó đều BẮT BUỘC phải điền số lô và hạn sử dụng. Do đó KTV phải cảnh báo rất kỹ để tránh khách hàng bị kẹt quy trình."
-  },
-  {
-    "id": "T2_04",
-    "role": "tech",
-    "level": 2,
-    "zone": "Trạm Quản Trị Nhượng Quyền Chuỗi",
-    "ticketCode": "TCK-L2-04",
-    "category": "Cấu hình Nhượng quyền",
-    "title": "Phân biệt 2 cấp độ Cấu hình Nhượng Quyền",
-    "prompt": "Khách hàng là chủ thương hiệu phàn nàn: \"Tại sao trên tài khoản công ty mẹ tôi hoàn toàn không xem được số liệu nguyên vật liệu và công nợ của các cơ sở nhượng quyền?\". KTV cần kiểm tra cấu hình nhượng quyền đang ở mức nào?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Khách hàng đang ở mức \"Có nhượng quyền thương hiệu\" thông thường",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Khách hàng đang bị bật mức \"Nhượng quyền vận hành tách biệt\"",
-        "isCorrect": true
-      },
-      {
-        "id": "C",
-        "text": "Chi nhánh nhượng quyền chưa kết nối mạng internet",
-        "isCorrect": false
-      },
-      {
-        "id": "D",
-        "text": "Do máy chủ cloud iPOS bị quá tải vào giờ cao điểm",
-        "isCorrect": false
-      }
-    ],
-    "hint": "Xem Tài liệu 09 mục 5.4: Nhượng quyền vận hành tách biệt khiến công ty không kiểm soát được kho và công nợ.",
-    "explanation": "IVT Pro có 2 mức nhượng quyền: (1) \"Có nhượng quyền thương hiệu\": Công ty mẹ và điểm nhượng quyền vận hành chung cơ sở dữ liệu, công ty kiểm soát được tồn kho, mức dùng nguyên liệu và công nợ; (2) \"Nhượng quyền vận hành tách biệt\": Vận hành cô lập hoàn toàn, công ty mẹ KHÔNG THỂ xem hay kiểm soát nguyên vật liệu và công nợ của bên nhượng quyền. Ticket xảy ra do khách bị bật nhầm sang mức tách biệt."
-  },
-  {
-    "id": "T2_05",
-    "role": "tech",
-    "level": 2,
-    "zone": "Trạm Điều Phối Phiếu Nhập Xuất Chuỗi",
-    "ticketCode": "TCK-L2-05",
-    "category": "Cơ chế sinh phiếu điều chuyển",
-    "title": "Cơ chế sinh phiếu Nhập điều chuyển tự động theo Đơn tham chiếu",
-    "prompt": "Khi Kho tổng lưu phiếu \"Xuất điều chuyển\" hàng tới Cửa hàng số 2, cơ chế dữ liệu ngầm của IVT Pro sẽ thực hiện hành động gì tiếp theo?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Gửi email cảnh báo và đợi thủ kho Cửa hàng số 2 tạo mới phiếu Nhập bằng tay từ đầu",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Hệ thống tự động sinh một phiếu \"Nhập điều chuyển\" tương ứng tại Cửa hàng số 2 liên kết theo Mã tham chiếu",
-        "isCorrect": true
-      },
-      {
-        "id": "C",
-        "text": "Tự động trừ tiền trong tài khoản ngân hàng của Cửa hàng số 2",
-        "isCorrect": false
-      },
-      {
-        "id": "D",
-        "text": "Khoá sổ kiểm kê của cả 2 kho cho đến khi hàng đến nơi",
-        "isCorrect": false
-      }
-    ],
-    "hint": "Xem Chuyên đề 048 & Chẩn đoán D3: Cơ chế tự động liên kết giữa Xuất điều chuyển và Nhập điều chuyển.",
-    "explanation": "Trong cơ chế vận hành điều chuyển của IVT Pro: Ngay khi phiếu Xuất điều chuyển được lưu, hệ thống sẽ tự động sinh một phiếu Nhập điều chuyển tương ứng tại kho đích theo Đơn tham chiếu. Thủ kho bên nhận chỉ việc mở danh sách Nhập điều chuyển, bấm vào phiếu chờ và xác nhận số lượng thực nhận, không cần phải tạo lại phiếu từ đầu."
-  },
-  {
-    "id": "T2_06",
-    "role": "tech",
-    "level": 2,
-    "zone": "Nhịp Cầu Số 6 Đảo Bếp Trung Tâm",
-    "ticketCode": "TCK-L2-06",
-    "category": "Quy chuẩn chuyển tuyến Hotline",
-    "title": "Các trường hợp BẮT BUỘC chuyển Kỹ thuật tổng đài (1900 4766 nhánh 3)",
-    "prompt": "Theo tài liệu đào tạo triển khai IVT Pro, trường hợp nào sau đây nhân viên triển khai/support cơ bản KHÔNG ĐƯỢC tự ý thao tác mà phải chuyển lên bộ phận Kỹ thuật chuyên sâu (1900 4766 phím 3)?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Thay đổi mật khẩu người dùng hoặc in lại bảng kiểm kê kho",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Bật cấu hình Trừ kho 2 cấp, Định mức biến thiên, Quản lý Lô/Date, hoặc sửa cấu hình tính giá vốn nâng cao",
-        "isCorrect": true
-      },
-      {
-        "id": "C",
-        "text": "Lọc báo cáo A06 theo khoảng thời gian từ ngày 1 đến ngày 30",
-        "isCorrect": false
-      },
-      {
-        "id": "D",
-        "text": "Nhập thông tin nhà cung cấp mới vào danh mục",
-        "isCorrect": false
-      }
-    ],
-    "hint": "Xem Tài liệu 09 mục 5 và Tài liệu 10 mục I: 4 cấu hình nâng cao cần liên hệ 1900 4766 nhánh 3.",
-    "explanation": "Cẩm nang IVT Pro quy định rõ các cấu hình nâng cao có tác động sâu sắc đến toàn bộ logic tính toán và không thể đảo ngược (như Trừ kho 2 cấp, Định mức biến thiên, Quản lý theo Lô/Hạn sử dụng, Nhượng quyền tách biệt, hoặc sửa danh sách loại chứng từ tính giá vốn) đều bắt buộc phải chuyển lên Hotline Kỹ thuật chuyên sâu (1900 4766 phím 3) để thẩm định mô hình và trực tiếp bật cấu hình."
-  },
-  {
-    "id": "M3_01",
-    "role": "manager",
-    "level": 3,
-    "zone": "Sảnh Tầng 1 Tháp Chẩn Đoán",
-    "ticketCode": "MGR-L3-01",
-    "category": "Bẫy huỷ phiếu kiểm kê",
-    "title": "Thao tác ĐÚNG khi phát hiện Phiếu Kiểm Kê bị sai số",
-    "prompt": "Cuối tháng quản lý lập phiếu kiểm kê kho và đã bấm lưu hoàn thành, nhưng sau đó phát hiện nhân viên đếm sót 1 bao đường. Để làm lại phiếu kiểm kê mới chuẩn xác mà số tồn hệ thống trên phiếu không bị lệch so với báo cáo, thứ tự thao tác ĐÚNG là gì?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Bấm \"Sao chép\" phiếu kiểm kê cũ ra phiếu mới -> rồi mới bấm \"Huỷ\" phiếu cũ",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Bấm \"Huỷ\" phiếu kiểm kê sai trước -> Tìm phiếu vừa huỷ trong danh sách -> Bấm \"Sao chép lại\" để sửa số",
-        "isCorrect": true
-      },
-      {
-        "id": "C",
-        "text": "Tạo một phiếu xuất bán lẻ khống để bù trừ lượng bao đường đếm sót",
-        "isCorrect": false
-      },
-      {
-        "id": "D",
-        "text": "Xoá cơ sở dữ liệu kho của tháng đó và làm lại từ đầu",
-        "isCorrect": false
-      }
-    ],
-    "hint": "Xem Chẩn đoán C1: Đây là lỗi thao tác kinh điển nhất. Sao chép trước hay Huỷ trước?",
-    "explanation": "Lỗi thao tác kinh điển: Nếu bấm Sao chép trước khi Huỷ, phiếu mới sẽ lấy số tồn hệ thống tại thời điểm phiếu cũ còn hiệu lực (tồn đã bị điều chỉnh sai). Thứ tự CHUẨN XÁC: Huỷ phiếu kiểm kê sai trước (để hệ thống hoàn lại số tồn nguyên trạng ban đầu) -> Lọc phiếu ở trạng thái Đã huỷ -> Bấm Sao chép -> Sửa lại số lượng thực tế chính xác -> Lưu phiếu."
-  },
-  {
-    "id": "M3_02",
-    "role": "manager",
-    "level": 3,
-    "zone": "Phòng Giám Sát Thời Gian Kiểm Kê",
-    "ticketCode": "MGR-L3-02",
-    "category": "Thời gian ghi nhận kiểm kê",
-    "title": "Cơ chế chốt số tồn khi kiểm kê lùi ngày quá khứ",
-    "prompt": "Hôm nay là ngày 02/10, quản lý mở IVT Pro tạo phiếu kiểm kê lùi ngày cho ngày 30/09 (ngày cuối tháng trước). Hệ thống sẽ chốt số tồn lý thuyết đến thời điểm nào của ngày 30/09?",
-    "options": [
-      {
-        "id": "A",
-        "text": "00h00 sáng ngày 30/09",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "12h00 trưa ngày 30/09",
+        "label": "Chỉ làm mới giao diện trình duyệt web mà không mất số liệu",
         "isCorrect": false
       },
       {
         "id": "C",
-        "text": "23h59 đêm ngày 30/09 (bao gồm toàn bộ phát sinh nhập xuất trong ngày 30/09)",
-        "isCorrect": true
-      },
-      {
-        "id": "D",
-        "text": "Đúng giờ tạo phiếu của ngày 02/10",
-        "isCorrect": false
-      }
-    ],
-    "hint": "Xem Chuyên đề 053 & Chẩn đoán C2: Cơ chế ghi nhận thời gian khi kiểm kê thời gian thực vs lùi ngày quá khứ.",
-    "explanation": "Quy tắc của IVT Pro: Khi kiểm kê thời gian thực, hệ thống chốt tồn đến đúng phút thao tác. Khi kiểm kê lùi ngày quá khứ (ví dụ ngày 30/09), hệ thống sẽ MẶC ĐỊNH chốt tồn đến 23h59 ngày đó (nghĩa là đã bao gồm toàn bộ các hoá đơn bán và phiếu nhập xuất phát sinh trong cả ngày hôm đó). Hiểu điều này giúp quản lý không bị hoang mang khi đối chiếu số liệu."
-  },
-  {
-    "id": "M3_03",
-    "role": "manager",
-    "level": 3,
-    "zone": "Phòng Thu Ngân & Công Nợ Nhà Cung Cấp",
-    "ticketCode": "MGR-L3-03",
-    "category": "Thanh toán công nợ NCC",
-    "title": "Thanh toán từng hoá đơn vs Thanh toán vo (không theo hoá đơn)",
-    "prompt": "Quán đang nợ Nhà cung cấp rau củ quả 3 hoá đơn: HĐ 1 (tháng trước): 2 triệu; HĐ 2 (tuần trước): 3 triệu; HĐ 3 (hôm qua): 5 triệu. Thủ quỹ chuyển khoản 4 triệu và chọn hình thức \"Thanh toán vo\" (điền vào ô Tổng tiền thanh toán). Hệ thống IVT Pro sẽ cấn trừ công nợ như thế nào?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Trừ toàn bộ 4 triệu vào HĐ 3 gần nhất",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Chia đều 4 triệu cho cả 3 hoá đơn",
-        "isCorrect": false
-      },
-      {
-        "id": "C",
-        "text": "Tự động phân bổ ưu tiên nợ cũ: Trả hết 2 triệu của HĐ 1, và trả 2 triệu vào HĐ 2 (HĐ 2 còn nợ 1 triệu, HĐ 3 còn nguyên 5 triệu)",
-        "isCorrect": true
-      },
-      {
-        "id": "D",
-        "text": "Báo lỗi và từ chối xử lý khoản tiền thanh toán",
-        "isCorrect": false
-      }
-    ],
-    "hint": "Xem Chuyên đề 051 & Chẩn đoán E1: Cơ chế phân bổ nợ cũ khi thanh toán vo.",
-    "explanation": "Khi sử dụng hình thức \"Thanh toán vo\" (không chỉ định hoá đơn), IVT Pro áp dụng cơ chế FIFO công nợ: ưu tiên cấn trừ từ hoá đơn xa nhất đến gần nhất. Nếu chủ quán muốn trả đích danh cho hoá đơn số 3 thì BẮT BUỘC phải chọn hình thức \"Thanh toán theo từng hoá đơn\" và nhập số tiền vào dòng của hoá đơn số 3."
-  },
-  {
-    "id": "M3_04",
-    "role": "manager",
-    "level": 3,
-    "zone": "Trạm Quản Trị Tài Sản & CCDC",
-    "ticketCode": "MGR-L3-04",
-    "category": "Tình trạng hàng hoá",
-    "title": "Quản trị tình trạng tồn kho Công Cụ Dụng Cụ (CCDC)",
-    "prompt": "Trong kho tồn 10 chiếc máy tính bảng cầm tay order, quản lý muốn ghi nhận chi tiết: 5 chiếc đang dùng tốt ở quầy bar, 3 chiếc hư màn hình chờ bảo hành, 2 chiếc hỏng hoàn toàn chờ thanh lý. Tính năng \"Tình trạng hàng hoá\" trên IVT Pro đáp ứng nghiệp vụ này như thế nào?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Áp dụng được cho tất cả các loại hàng hoá từ thịt thăn bò đến trà sữa",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Tính năng này chỉ áp dụng cho hàng hoá thuộc Loại \"Khác (Công cụ dụng cụ)\" và hiển thị tình trạng khi rê chuột vào mã trên Báo cáo A06",
-        "isCorrect": true
-      },
-      {
-        "id": "C",
-        "text": "Phải tạo ra 3 mã hàng hoá khác nhau trên danh mục",
+        "label": "Chỉ đổi tên nhà hàng trên hóa đơn POS",
         "isCorrect": false
       },
       {
         "id": "D",
-        "text": "Bắt buộc phải kết nối với phần mềm kế toán bên ngoài",
+        "label": "Hệ thống tự động sao lưu và khôi phục lại sau 15 phút",
         "isCorrect": false
       }
     ],
-    "hint": "Xem Chuyên đề 055 & Chẩn đoán G2: Phạm vi áp dụng của tính năng Tình trạng hàng hoá.",
-    "explanation": "Tính năng `Kiểm kê -> Tình trạng hàng hoá` được thiết kế đặc thù dành riêng cho hàng hoá thuộc Loại \"Khác (Công cụ dụng cụ)\". Người dùng khai báo số lượng gắn với từng Lý do/Tình trạng (ví dụ hư hỏng, đang bảo trì, vị trí sử dụng). Khi xem Báo cáo A06 Xuất nhập tồn, chỉ cần rê chuột vào mã hàng là xem được chi tiết hiện trạng tài sản."
-  },
-  {
-    "id": "M3_05",
-    "role": "manager",
-    "level": 3,
-    "zone": "Đài Quan Sát Nhịp Công Việc Cuối Kỳ",
-    "ticketCode": "MGR-L3-05",
-    "category": "Quy trình chuẩn cuối kỳ",
-    "title": "Thứ tự 3 bước chuẩn mực khi đóng kỳ kế toán kho cuối tháng",
-    "prompt": "Để có được báo cáo doanh thu, chi phí giá vốn và tồn kho chính xác nhất vào ngày cuối tháng, người quản lý kho F&B cần tuân thủ nghiêm ngặt trình tự các bước nào sau đây?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Tính giá vốn -> Xuất bán POS -> Kiểm kê kho thực tế",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Bước 1: Hoàn tất toàn bộ chứng từ nhập/xuất/huỷ trong kỳ -> Bước 2: Kiểm kê và nhập tồn kho thực tế -> Bước 3: Chạy Tiện ích tính giá vốn",
-        "isCorrect": true
-      },
-      {
-        "id": "C",
-        "text": "Khoá sổ kỳ -> Huỷ toàn bộ hoá đơn chưa khớp -> In báo cáo A06",
-        "isCorrect": false
-      },
-      {
-        "id": "D",
-        "text": "Kiểm kê thực tế -> Khoá sổ -> Bỏ qua bước tính giá vốn nếu không có nguyên liệu mới",
-        "isCorrect": false
-      }
-    ],
-    "hint": "Xem Tài liệu 09 mục 8 & Tài liệu 10 mục C4: Nhịp công việc chuẩn cuối kỳ.",
-    "explanation": "Trình tự đóng kỳ bất di bất dịch: (1) Rà soát nhập đủ mọi chứng từ nhập mua, xuất chuyển, xuất huỷ; (2) Thực hiện kiểm kê thực tế và lưu phiếu kiểm kê để cân đối chênh lệch; (3) Chạy \"Tính giá vốn\" để hệ thống tính giá bình quân và áp ngược đơn giá vào toàn bộ các phiếu xuất kho trong tháng. Nếu làm sai thứ tự (chạy giá vốn trước khi kiểm kê), toàn bộ giá trị phiếu xuất điều chỉnh kiểm kê sẽ bị sai hoặc bằng 0."
-  },
-  {
-    "id": "M3_06",
-    "role": "manager",
-    "level": 3,
-    "zone": "Đỉnh Tháp Chẩn Đoán - Đài Danh Dự Quản Trị",
-    "ticketCode": "MGR-L3-06",
-    "category": "Tối ưu hóa Chi phí F&B",
-    "title": "Báo cáo A06 và ma trận phát hiện thất thoát F&B",
-    "prompt": "Khi phát hiện tỷ lệ cost thực tế vọt lên 42% trong khi định mức chuẩn chỉ cho phép 32%, chủ quán kết hợp Báo cáo A06 (Xuất nhập tồn), Thẻ kho và Báo cáo A08 như thế nào để khoanh vùng thủ phạm thất thoát nhanh nhất?",
-    "options": [
-      {
-        "id": "A",
-        "text": "Chỉ cần giảm lương nhân viên pha chế và đổi sang nhà cung cấp giá rẻ hơn",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Kiểm tra A08 xem có vượt hạn mức xuất huỷ/kiểm kê thiếu không; nếu A08 bình thường thì vào A06 mở Thẻ kho xem các món xuất bán POS có bị âm kho do pha vượt định lượng BOM không",
-        "isCorrect": true
-      },
-      {
-        "id": "C",
-        "text": "Xoá bỏ toàn bộ công thức chế biến để nhân viên tự do định lượng",
-        "isCorrect": false
-      },
-      {
-        "id": "D",
-        "text": "Dừng bán hàng tại chỗ và chỉ bán mang đi",
-        "isCorrect": false
-      }
-    ],
-    "hint": "Phối hợp giữa A08 (thất thoát hữu hình do hủy/thiếu) và A06/Thẻ kho (thất thoát vô hình do hao hụt pha chế/sai BOM).",
-    "explanation": "Chiến lược kiểm soát cost F&B đỉnh cao: A08 phản ánh thất thoát \"hữu hình\" (hàng hỏng, đổ vỡ, kiểm kê thiếu). Nếu A08 không tăng đột biến mà cost vẫn cao ngất, thủ phạm nằm ở thất thoát \"vô hình\" trong quá trình pha chế/chế biến (nhân viên múc quá tay, gian lận làm đồ cho bạn bè, hoặc BOM khai thiếu so với thực tế). Mở Thẻ kho trên A06 sẽ thấy lượng xuất bán thực tế tiêu hao nhanh bất thường so với lượng nhập."
+    "hint": "Xem Chuyên đề 006: Đặt lại dữ liệu - Rủi ro mất số liệu.",
+    "explanation": "Đặt lại dữ liệu (Data Reset) là thao tác chỉ dùng khi nghiệm thu xong giai đoạn test để chạy chính thức (Go-live). Toàn bộ phiếu nhập, xuất, kiểm kê sẽ bị xóa vĩnh viễn không thể hoàn tác nếu không có backup DB."
   },
   {
     "id": "T3_01",
     "role": "tech",
     "level": 3,
-    "zone": "Trạm Cứu Hộ Dữ Liệu Giá Vốn",
-    "ticketCode": "TCK-L3-01",
-    "category": "Lỗi giá vốn bằng 0 / âm",
-    "title": "Hiện tượng Giá vốn bằng 0 hoặc âm do Xuất bán âm trước Nhập sau",
-    "prompt": "Nhà hàng khai trương bán hàng tấp nập trong tuần đầu nhưng nhân viên chưa kịp nhập hoá đơn mua hàng vào phần mềm (kho bị âm). Đến cuối tuần mới tạo dồn phiếu Nhập mua, sau đó chạy Tính giá vốn thì thấy một loạt phiếu xuất có Đơn giá vốn = 0 hoặc Giá trị tồn kho bị âm bất thường. Bản chất hiện tượng này là gì?",
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#SYS-203",
+    "subsystem": "PHAN_HE_01_CAU_HINH",
+    "subsystemName": "Khởi Tạo & Cài Đặt Hệ Thống",
+    "category": "CHUYÊN SÂU",
+    "title": "Cấu hình loại trừ chứng từ khi chạy thuật toán Tính giá vốn",
+    "prompt": "Trong Cài đặt chứng từ nâng cao, việc cấu hình 'Không tham gia tính giá vốn' cho một loại phiếu xuất (ví dụ Xuất huỷ hoặc Xuất biếu tặng) mang lại tác động gì?",
     "options": [
       {
         "id": "A",
-        "text": "Lỗi phần mềm do phiên bản iPOS bị nhiễm virus",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Do xuất bán trước khi có tồn kho (bán âm), hệ thống tại thời điểm xuất không có đơn giá nhập để tính giá bình quân gia quyền",
+        "label": "Số lượng vẫn trừ khỏi kho nhưng giá trị của phiếu xuất này không làm biến động đơn giá bình quân của các lần xuất sau",
         "isCorrect": true
       },
       {
+        "id": "B",
+        "label": "Phiếu xuất đó sẽ không trừ tồn kho",
+        "isCorrect": false
+      },
+      {
         "id": "C",
-        "text": "Do máy POS in hoá đơn với phông chữ không được hỗ trợ",
+        "label": "Làm cho giá vốn toàn bộ hệ thống bị đưa về số 0",
         "isCorrect": false
       },
       {
         "id": "D",
-        "text": "Do chưa thanh toán tiền điện cho nhà hàng",
+        "label": "Bắt buộc người dùng phải gõ thủ công giá vốn từng dòng",
         "isCorrect": false
       }
     ],
-    "hint": "Xem Chuyên đề 056 & 102: Logic tính giá vốn bình quân đòi hỏi tồn đầu kỳ + nhập trong kỳ trước khi phát sinh xuất.",
-    "explanation": "Bản chất phương pháp Giá bình quân trong IVT Pro: Đơn giá vốn bình quân = (Giá trị tồn đầu + Giá trị nhập) / (Số lượng tồn đầu + Số lượng nhập). Khi bán âm kho (xuất kho trước khi có phiếu nhập), tại thời điểm phát sinh xuất, hệ thống không có giá trị cơ sở để tính nên giá vốn tạm tính là 0. Khi bổ sung phiếu nhập sau, nếu không chạy lại tiện ích \"Tính giá vốn\" cho toàn bộ kỳ, hoặc khi tồn kho bị âm lũy kế kéo dài, giá trị tồn có thể bị biến dạng méo mó."
+    "hint": "Xem Chuyên đề 009 & 056: Cài đặt chứng từ và Thuật toán giá vốn.",
+    "explanation": "Cấu hình loại trừ giúp các nghiệp vụ xuất đặc thù (xuất huỷ do thiên tai, hàng mẫu) không làm sai lệch đơn giá vốn bình quân gia quyền của nguyên liệu sử dụng cho kinh doanh bán hàng thông thường."
+  },
+  {
+    "id": "M1_03",
+    "role": "manager",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#CAT-101",
+    "subsystem": "PHAN_HE_02_DANH_MUC",
+    "subsystemName": "Danh Mục Hàng Hóa & 12 Danh Mục",
+    "category": "DANH MỤC",
+    "title": "Xác định Đơn vị tính cơ bản chuẩn cho Nguyên vật liệu",
+    "prompt": "Khi khai báo mặt hàng 'Hạt Cà Phê Espresso' nhập từ nhà cung cấp theo bao 50kg, mỗi lần pha ly cà phê dùng 18 gam. Đơn vị tính cơ bản trên IVT Pro nên để là gì?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Bao 50kg",
+        "isCorrect": false
+      },
+      {
+        "id": "B",
+        "label": "gam (hoặc g) và tạo đơn vị chuyển đổi 1 Bao = 50.000 gam",
+        "isCorrect": true
+      },
+      {
+        "id": "C",
+        "label": "Ly",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Tấn",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 015 & 016: Danh mục hàng hóa và Quy đổi đơn vị tính.",
+    "explanation": "Nguyên tắc cốt tử: Đơn vị tính cơ bản (Base UOM) bắt buộc phải là đơn vị nhỏ nhất dùng trong công thức chế biến (gam, ml). Đơn vị mua hàng lớn hơn sẽ được quy đổi qua bảng chuyển đổi tỷ lệ."
+  },
+  {
+    "id": "M1_04",
+    "role": "manager",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#CAT-102",
+    "subsystem": "PHAN_HE_02_DANH_MUC",
+    "subsystemName": "Danh Mục Hàng Hóa & 12 Danh Mục",
+    "category": "DANH MỤC",
+    "title": "Bảng giá nhà cung cấp và Quy tắc gợi ý giá nhập",
+    "prompt": "Nhà hàng nhập Sữa tươi từ 2 nhà cung cấp khác nhau với giá chênh lệch: NCC A giá 32.000đ/hộp, NCC B giá 30.500đ/hộp. Làm thế nào để khi tạo phiếu nhập chọn NCC B thì hệ thống tự nhảy giá 30.500đ?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Thiết lập Bảng giá theo từng Nhà cung cấp trong Danh mục Bảng giá",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Mỗi lần nhập phải tự nhớ và gõ tay lại giá tiền",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Tạo 2 mã hàng hóa sữa tươi khác nhau cho 2 nhà cung cấp",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Hệ thống chỉ cho phép 1 mặt hàng có duy nhất 1 mức giá mua",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 023: Danh mục Bảng giá.",
+    "explanation": "Danh mục Bảng giá cho phép liên kết 1 mã hàng với nhiều NCC cùng các mức giá và thời gian hiệu lực khác nhau. Khi chọn NCC trên phiếu mua hàng, hệ thống tự động điền đơn giá tương ứng."
+  },
+  {
+    "id": "M2_02",
+    "role": "manager",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#CAT-103",
+    "subsystem": "PHAN_HE_02_DANH_MUC",
+    "subsystemName": "Danh Mục Hàng Hóa & 12 Danh Mục",
+    "category": "ĐỊNH MỨC",
+    "title": "Ý nghĩa của Định mức kho (Tồn kho tối thiểu - tối đa)",
+    "prompt": "Quản lý thiết lập trong Danh mục Định mức kho: Sirô Đào có Tồn tối thiểu = 5 chai, Tồn tối đa = 20 chai. Ý nghĩa nghiệp vụ của cặp chỉ số này là gì?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Hệ thống cảnh báo khi tồn kho dưới 5 chai để đặt mua, và gợi ý lượng đặt mua không vượt quá 20 chai",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Khóa không cho bán món trà đào nếu tồn kho dưới 5 chai",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Bắt buộc mỗi ngày phải xuất bỏ đủ 5 chai",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Chỉ dùng để trang trí báo cáo, không có tác dụng cảnh báo",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 025: Danh mục Định mức kho.",
+    "explanation": "Định mức kho (Min - Max Safety Stock) là căn cứ cốt lõi để phần mềm tính toán tự động 'Yêu cầu mua hàng / Cung ứng hàng': Khi tồn < Min thì hệ thống gợi ý nhập thêm số lượng = Max - Tồn hiện tại."
+  },
+  {
+    "id": "T1_02",
+    "role": "tech",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#CAT-201",
+    "subsystem": "PHAN_HE_02_DANH_MUC",
+    "subsystemName": "Danh Mục Hàng Hóa & 12 Danh Mục",
+    "category": "THIẾT KẾ",
+    "title": "4 trường quyết định hành vi hàng hóa trong IVT Pro",
+    "prompt": "Trong bảng danh mục hàng hoá của IVT Pro, 4 trường dữ liệu nào mang tính quyết định tuyệt đối hành vi trừ kho và tính toán giá trị của phần mềm?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Loại hàng hoá, Trạng thái theo dõi tồn kho, Đơn vị tính cơ bản, Cấu hình tính giá vốn",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Tên viết tắt, Hình ảnh đại diện, Mã vạch Barcode, Vị trí kệ tủ",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Màu sắc nút bấm POS, Thứ tự hiển thị, Tên bếp in bill, Mã số thuế",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Tên người tạo món, Ngày hết hạn nộp thuế, Tên thương hiệu, Khối lượng tịnh",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Tài liệu 09 - Mục 6.1: Bốn trường quyết định hành vi.",
+    "explanation": "Bốn trường: (1) Loại hàng (NVL, TP, BTP, Dịch vụ...), (2) Có theo dõi tồn không, (3) ĐVT cơ bản chuẩn, (4) Có tham gia tính giá vốn không. Khai sai 4 trường này là nguyên nhân của 80% lỗi hệ thống."
+  },
+  {
+    "id": "T2_02",
+    "role": "tech",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#CAT-202",
+    "subsystem": "PHAN_HE_02_DANH_MUC",
+    "subsystemName": "Danh Mục Hàng Hóa & 12 Danh Mục",
+    "category": "RÀNG BUỘC",
+    "title": "Quy tắc khóa cố định '3 Không' bảo toàn dữ liệu",
+    "prompt": "Khi một mã hàng hoá trong IVT Pro đã phát sinh bất kỳ chứng từ nào (nhập, xuất, điều chuyển), hệ thống sẽ khoá không cho phép sửa thông tin nào?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Mã hàng, Đơn vị tính cơ bản, và Phương pháp tính giá vốn",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Tên hàng hoá và Tên nhà cung cấp",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Ghi chú và Nhóm hàng",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Định mức tồn tối thiểu",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Tài liệu 09 - Mục 6.3: Ba loại khai báo không sửa, không xoá được.",
+    "explanation": "Đây là thiết kế cốt lõi của phần mềm kế toán kho: ĐVT cơ bản và Mã hàng là trục toạ độ của toàn bộ thẻ kho lịch sử. Nếu đổi ĐVT (ví dụ từ kg sang hộp), toàn bộ số dư và giá vốn quá khứ sẽ bị gãy vụn."
   },
   {
     "id": "T3_02",
     "role": "tech",
     "level": 3,
-    "zone": "Phòng Phẫu Thuật Dữ Liệu Quá Khứ",
-    "ticketCode": "TCK-L3-02",
-    "category": "Điều chỉnh giá trị tồn kho",
-    "title": "4 Ràng buộc thép khi dùng tính năng Điều chỉnh giá trị tồn kho",
-    "prompt": "Khi hướng dẫn khách hàng dùng tính năng `Menu -> Kiểm kê -> Điều chỉnh giá trị tồn kho` để nắn lại giá vốn bị sai luỹ kế từ các tháng trước, ràng buộc nào sau đây là BẮT BUỘC KTV phải nhấn mạnh để tránh khiếu nại?",
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#CAT-203",
+    "subsystem": "PHAN_HE_02_DANH_MUC",
+    "subsystemName": "Danh Mục Hàng Hóa & 12 Danh Mục",
+    "category": "CHUYÊN SÂU",
+    "title": "Khắc phục sự cố khai nhầm Đơn vị tính cơ bản khi đã phát sinh chứng từ",
+    "prompt": "Khách hàng lỡ khai ĐVT cơ bản của Đường cát là 'Bao 50kg' thay vì 'kg' và đã chạy dữ liệu 1 tháng. Kỹ thuật viên phải xử lý thế nào theo chuẩn quy trình?",
     "options": [
       {
         "id": "A",
-        "text": "Chỉ điều chỉnh được cho kỳ tương lai",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Sau khi điều chỉnh, hệ thống sẽ KHOÁ toàn bộ dữ liệu từ thời điểm điều chỉnh trở về trước và không thể tự ý sửa phiếu cũ",
+        "label": "Không được can thiệp sửa trực tiếp DB. Phải ngừng dùng mã cũ, tạo mã hàng mới với ĐVT 'kg', kiểm kê xuất hết mã cũ và nhập đầu kỳ sang mã mới",
         "isCorrect": true
       },
       {
+        "id": "B",
+        "label": "Chạy lệnh SQL Update trực tiếp bảng Goods đổi chữ 'Bao' thành 'kg'",
+        "isCorrect": false
+      },
+      {
         "id": "C",
-        "text": "Cột Hệ thống có thể tuỳ ý chỉnh sửa số lượng tồn bất kỳ lúc nào",
+        "label": "Bảo khách hàng cứ để nguyên và tự lấy máy tính cầm tay nhân 50",
         "isCorrect": false
       },
       {
         "id": "D",
-        "text": "Không cần phải chạy lại tính giá vốn cho tháng sau",
+        "label": "Xoá phần mềm IVT Pro cài lại từ đầu",
         "isCorrect": false
       }
     ],
-    "hint": "Xem Chuyên đề 054 & Chẩn đoán B3: 4 ràng buộc của Điều chỉnh giá trị tồn kho (Khóa dữ liệu, chỉ chọn kỳ quá khứ...).",
-    "explanation": "Cẩm nang IVT Pro liệt kê 4 ràng buộc sống còn của Điều chỉnh giá trị tồn kho: (1) Chỉ chọn được kỳ quá khứ (mặc định chốt 23h59 ngày cuối kỳ); (2) Cột \"Hệ thống\" KHÔNG THỂ SỬA được (phải kiểm kê chốt số lượng trước); (3) Sau khi lưu, hệ thống KHOÁ DỮ LIỆU từ thời điểm đó trở về trước (không thể can thiệp phiếu cũ bằng cách thông thường); (4) Sau khi điều chỉnh, BẮT BUỘC PHẢI CHẠY TÍNH GIÁ VỐN LẠI CHO THÁNG SAU để giá mới được áp dụng."
+    "hint": "Xem Tài liệu 10 - Mục F1: Ba loại khai báo không sửa được - Đây là thiết kế.",
+    "explanation": "Update thẳng DB sẽ làm sai lệch nghiêm trọng báo cáo quá khứ (1 bao 50kg sẽ bị biến thành 1kg). Quy trình chuẩn là: Đóng mã cũ, mở mã mới, dùng phiếu kiểm kê/điều chỉnh để luân chuyển số tồn sang mã chuẩn."
+  },
+  {
+    "id": "M1_05",
+    "role": "manager",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#ORD-101",
+    "subsystem": "PHAN_HE_03_DAT_HANG_CUNG_UNG",
+    "subsystemName": "Quy Trình Đặt Hàng & Cung Ứng",
+    "category": "ĐẶT HÀNG",
+    "title": "Phân biệt Yêu cầu mua hàng (PR) và Đơn đặt hàng (PO)",
+    "prompt": "Trong quy trình quản trị chuỗi F&B, vai trò khác nhau giữa 'Phiếu yêu cầu mua hàng' và 'Đơn đặt mua hàng' là gì?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Yêu cầu mua hàng do Cửa hàng đề xuất nội bộ; Đơn đặt hàng là chứng từ chính thức do Quản lý/Kho tổng gửi cho Nhà cung cấp",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Hai loại phiếu này giống hệt nhau, chỉ khác tên gọi",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Yêu cầu mua hàng gửi cho khách hàng, Đơn đặt hàng gửi cho nhân viên",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Yêu cầu mua hàng làm tăng tồn kho ngay lập tức",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 028 & 032: Yêu cầu mua hàng và Đặt mua hàng.",
+    "explanation": "Cửa hàng tạo Yêu cầu mua hàng (Purchase Requisition - PR) -> Bộ phận mua hàng/Kho tổng tổng hợp và duyệt thành Đơn đặt hàng (Purchase Order - PO) gửi NCC để được hưởng giá sỉ tốt nhất."
+  },
+  {
+    "id": "M2_03",
+    "role": "manager",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#ORD-102",
+    "subsystem": "PHAN_HE_03_DAT_HANG_CUNG_UNG",
+    "subsystemName": "Quy Trình Đặt Hàng & Cung Ứng",
+    "category": "NHẬP HÀNG",
+    "title": "Xử lý đơn đặt hàng giao nhiều lần (Partial Delivery)",
+    "prompt": "Quán đặt mua 100 thùng bia Tiger (PO-001). Nhà cung cấp giao đợt 1 chỉ có 60 thùng kèm hoá đơn. Thủ kho cần thao tác như thế nào trên IVT Pro?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Tạo phiếu Nhập mua hàng kế thừa từ PO-001, sửa số lượng thực nhận là 60; PO-001 sẽ chuyển trạng thái 'Giao một phần' và cho phép nhập tiếp 40 thùng đợt sau",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Từ chối không nhận hàng, bắt NCC phải chở đủ 100 thùng mới cho nhập",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Nhập đủ 100 thùng trên phần mềm rồi ghi nợ ngoài giấy",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Huỷ đơn PO-001 đi và tạo đơn mới 60 thùng",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 037: Nhập hàng từ đơn mua hàng (Giao một hoặc nhiều lần).",
+    "explanation": "IVT Pro quản lý chặt chẽ chu kỳ đơn hàng: Khi nhập 60 thùng, hệ thống ghi nhận tăng tồn 60 và công nợ 60, đồng thời giữ đơn PO ở trạng thái mở với số lượng còn lại là 40 thùng."
+  },
+  {
+    "id": "M3_03",
+    "role": "manager",
+    "level": 3,
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#ORD-103",
+    "subsystem": "PHAN_HE_03_DAT_HANG_CUNG_UNG",
+    "subsystemName": "Quy Trình Đặt Hàng & Cung Ứng",
+    "category": "CUNG ỨNG",
+    "title": "Cơ chế Tổng hợp yêu cầu mua hàng đa chi nhánh",
+    "prompt": "Kho tổng phụ trách cung ứng cho 20 chi nhánh. Mỗi sáng các điểm đều gửi yêu cầu mua rau củ. Thủ kho Kho tổng dùng tính năng gì để gom thành 1 đơn duy nhất đàm phán với NCC?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Dùng tính năng 'Xử lý tổng hợp yêu cầu mua hàng' để gộp nhu cầu của 20 chi nhánh thành 1 PO tổng",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Ngồi mở từng đơn của 20 quán ra bấm đặt mua 20 lần",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Yêu cầu các quán tự gọi điện trực tiếp cho nhà vườn",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Xuất Excel 20 file rồi copy paste thủ công",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 031 & 036: Xử lý tổng hợp yêu cầu và Gửi đơn tổng hợp đến NCC.",
+    "explanation": "Tính năng Tổng hợp đơn mua hàng tự động nhóm các mặt hàng cùng loại từ nhiều cửa hàng, cộng tổng khối lượng cần đặt, giúp Kho tổng tối ưu chi phí vận chuyển và đạt chiết khấu số lượng lớn."
+  },
+  {
+    "id": "T1_03",
+    "role": "tech",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#ORD-201",
+    "subsystem": "PHAN_HE_03_DAT_HANG_CUNG_UNG",
+    "subsystemName": "Quy Trình Đặt Hàng & Cung Ứng",
+    "category": "HỖ TRỢ",
+    "title": "Lỗi không tạo được phiếu Yêu cầu mua hàng tại chi nhánh",
+    "prompt": "Nhân viên chi nhánh báo lỗi: Vào màn hình Yêu cầu mua hàng nhưng nút 'Thêm mới' bị mờ hoặc không chọn được mặt hàng cần đặt. Kỹ thuật viên kiểm tra điều kiện gì đầu tiên?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Kiểm tra phân quyền tài khoản có quyền 'Tạo đơn đặt' không, và kiểm tra Danh mục hàng hóa đã được gán 'Áp dụng cho chi nhánh' đó chưa",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Bảo khách thay bàn phím máy tính mới",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Do nhà cung cấp chưa mở cửa làm việc",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Do tồn kho tại chi nhánh đó đang lớn hơn 0",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Tài liệu 10 - Mục D1: Không tạo được phiếu yêu cầu mua hàng.",
+    "explanation": "Hai nguyên nhân cốt lõi: (1) Tài khoản chưa được tick quyền tạo chứng từ mua hàng; (2) Mặt hàng đó chưa được phân bổ áp dụng cho chi nhánh tương ứng trong danh mục hàng hóa."
+  },
+  {
+    "id": "T2_03",
+    "role": "tech",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#ORD-202",
+    "subsystem": "PHAN_HE_03_DAT_HANG_CUNG_UNG",
+    "subsystemName": "Quy Trình Đặt Hàng & Cung Ứng",
+    "category": "CẤU HÌNH",
+    "title": "Quy tắc gợi ý giá nhập trên phiếu Đặt hàng",
+    "prompt": "Tại menu Cài đặt chứng từ > Cấu hình Đặt hàng, có những quy tắc gợi ý giá nào khi người dùng chọn mặt hàng cần mua?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Giá nhập gần nhất, Giá theo bảng giá NCC, hoặc Giá vốn bình quân hiện tại",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Giá bán niêm yết trên menu POS",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Giá do hệ thống lấy ngẫu nhiên",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Bắt buộc luôn luôn để trống 0 đ",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 009: Cài đặt chứng từ - Quy tắc gợi ý giá.",
+    "explanation": "Quy tắc gợi ý giá nhập giúp nhân viên lập PO nhanh chóng và phát hiện ngay nếu nhà cung cấp tự ý tăng giá so với hợp đồng bảng giá hoặc so với lần nhập gần nhất."
   },
   {
     "id": "T3_03",
     "role": "tech",
     "level": 3,
-    "zone": "Cổng Nâng Cấp Phiên Bản V1 -> Pro",
-    "ticketCode": "TCK-L3-03",
-    "category": "Migration V1 lên Pro",
-    "title": "Xử lý khiếu nại sai đơn giá sau khi nâng cấp từ IVT V1 lên Pro",
-    "prompt": "Ngay sau khi nâng cấp cửa hàng từ IVT V1 lên IVT Pro (V2), chủ nhà hàng gọi điện gay gắt: \"Kỹ thuật làm ăn kiểu gì mà nâng cấp xong giá vốn một loạt mặt hàng của tôi bị thay đổi khác hẳn lúc trước!\". KTV giải thích và xử lý thế nào cho đúng chuẩn nghiệp vụ?",
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#ORD-203",
+    "subsystem": "PHAN_HE_03_DAT_HANG_CUNG_UNG",
+    "subsystemName": "Quy Trình Đặt Hàng & Cung Ứng",
+    "category": "CHUYÊN SÂU",
+    "title": "Thuật toán Cung ứng tự động căn cứ trên Lead Time (Thời gian giao hàng)",
+    "prompt": "Khi thiết lập Cung ứng hàng hóa tự động, tham số 'Thời gian giao hàng dự kiến (Lead Time)' kết hợp với Định mức Min-Max để tính toán điều gì?",
     "options": [
       {
         "id": "A",
-        "text": "Thừa nhận phần mềm bị lỗi và cài lại bản V1 cho khách dùng tiếp",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Giải thích đây là thay đổi dự kiến vì V1 tính giá theo \"Giá nhập gần nhất\" còn Pro tính theo \"Giá bình quân\"; sau đó hướng dẫn khách dùng công cụ \"Điều chỉnh giá trị tồn kho\" để chuẩn hoá lại đơn giá",
+        "label": "Tính toán Điểm đặt hàng lại (Reorder Point) để phát sinh đề xuất mua hàng trước khi kho cạn kiệt trong thời gian chờ NCC giao",
         "isCorrect": true
       },
       {
+        "id": "B",
+        "label": "Tính tiền phạt nếu NCC giao hàng trễ",
+        "isCorrect": false
+      },
+      {
         "id": "C",
-        "text": "Đề nghị khách xoá toàn bộ dữ liệu kinh doanh cũ đi",
+        "label": "Tự động trừ tiền trong tài khoản ngân hàng của chủ quán",
         "isCorrect": false
       },
       {
         "id": "D",
-        "text": "Báo khách liên hệ sang tổng đài của bên thứ ba",
+        "label": "Dùng để đếm ngược ngày hết hạn hợp đồng phần mềm",
         "isCorrect": false
       }
     ],
-    "hint": "Xem Tài liệu 09 mục 1 & Tài liệu 10 mục H1, H2: Khác biệt cốt lõi về phương pháp tính giá giữa V1 và V2.",
-    "explanation": "Đây là tình huống kinh điển khi triển khai: V1 tính giá vốn theo \"Giá nhập gần nhất\" (Last Purchase Price), còn IVT Pro (V2) chuyển sang phương pháp chuẩn quốc tế là \"Giá bình quân gia quyền\". Do đó, việc lệch đơn giá là hiện tượng hoàn toàn dự kiến. KTV giải thích rõ ràng nguyên lý cho khách, và dùng tiện ích `Kiểm kê -> Điều chỉnh giá trị tồn kho` để cập nhật lại giá vốn kỳ đầu theo bảng giá chuẩn hoặc giá nhập cuối. Nhắc khách rằng V1 đã chính thức ngừng hỗ trợ từ 01/04/2025."
+    "hint": "Xem Chuyên đề 025 & Tài liệu 09 - Mục 6.5: Cung ứng hàng hoá.",
+    "explanation": "Nếu NCC mất 2 ngày để giao hàng (Lead Time = 2), và mỗi ngày quán tiêu thụ 5kg đường, thì khi tồn kho chạm mức 10kg + Min stock, hệ thống phải tự động kích hoạt PO để không bị đứt gãy pha chế."
+  },
+  {
+    "id": "M1_06",
+    "role": "manager",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#TRF-101",
+    "subsystem": "PHAN_HE_04_DIEU_CHUYEN",
+    "subsystemName": "Quy Trình Điều Chuyển Hàng Hóa",
+    "category": "ĐIỀU CHUYỂN",
+    "title": "Bản chất quy trình điều chuyển hàng hóa 2 bước",
+    "prompt": "Khi Kho tổng xuất 20kg cà phê sang Cửa hàng số 1, tại sao ngay khi bấm 'Lưu phiếu xuất điều chuyển', tồn kho tại Cửa hàng số 1 vẫn chưa tăng lên?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Vì hàng đang ở trạng thái 'Hàng đi đường', Cửa hàng số 1 phải vào màn hình bấm 'Xác nhận nhập điều chuyển' thì kho mới chính thức tăng",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Vì hệ thống IVT Pro bị lỗi mất kết nối máy chủ",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Vì thủ kho quên chưa nộp tiền cước vận chuyển",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Phải chờ sau 24 giờ hệ thống mới tự cập nhật",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 048 & 077: Cập nhật quy trình điều chuyển.",
+    "explanation": "Quy trình điều chuyển 2 bước chuẩn kế toán: Bước 1 Xuất điều chuyển (giảm tồn kho xuất, chuyển sang trạng thái đang trung chuyển) -> Bước 2 Nhập điều chuyển (kho nhận kiểm đếm thực tế và xác nhận tăng tồn)."
+  },
+  {
+    "id": "M2_04",
+    "role": "manager",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#TRF-102",
+    "subsystem": "PHAN_HE_04_DIEU_CHUYEN",
+    "subsystemName": "Quy Trình Điều Chuyển Hàng Hóa",
+    "category": "ĐIỀU CHUYỂN",
+    "title": "Xử lý chênh lệch hàng hóa khi nhận điều chuyển (Thực nhận thiếu so với phiếu xuất)",
+    "prompt": "Kho tổng xuất 50 ly thủy tinh, nhưng khi xe giao đến Cửa hàng bị vỡ mất 3 ly, thực nhận chỉ có 47 ly. Thủ kho cửa hàng xử lý thế nào trên phiếu Nhập điều chuyển?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Sửa số lượng thực nhận là 47 ly, ghi chú vỡ 3 ly; hệ thống tự động ghi nhận tồn tăng 47 và chuyển 3 ly thiếu sang xử lý hao hụt vận chuyển",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Vẫn bấm nhận đủ 50 ly rồi tự chịu tiền túi đền",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Từ chối toàn bộ lô hàng, bắt tài xế chở 47 ly về lại kho tổng",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Tự ý sửa lại phiếu xuất của Kho tổng thành 47 ly",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 077: Quy trình điều chuyển cập nhật - Xử lý lệch thực nhận.",
+    "explanation": "IVT Pro cho phép ghi nhận chênh lệch giữa số xuất đi và số thực nhận. Kho nhận chỉ chịu trách nhiệm với 47 ly thực nhận, 3 ly vỡ được truy vết rõ ràng trên báo cáo đối soát điều chuyển."
+  },
+  {
+    "id": "T1_04",
+    "role": "tech",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#TRF-201",
+    "subsystem": "PHAN_HE_04_DIEU_CHUYEN",
+    "subsystemName": "Quy Trình Điều Chuyển Hàng Hóa",
+    "category": "CHẨN ĐOÁN",
+    "title": "Kho nhận không nhìn thấy phiếu điều chuyển để xác nhận nhập",
+    "prompt": "Cửa hàng báo lỗi: Kho tổng đã xuất điều chuyển hàng sang nhưng bên cửa hàng vào màn hình 'Nhập điều chuyển' hoàn toàn trống trơn. Kỹ thuật viên cần kiểm tra gì?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Kiểm tra phiếu xuất ở Kho tổng đã ở trạng thái 'Đã duyệt/Hoàn thành' chưa, và kho nhận trên phiếu có chọn chính xác mã kho của cửa hàng không",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Bảo cửa hàng xoá trình duyệt Chrome cài lại",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Do hàng chưa được xe tải chở đến cổng cửa hàng",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Do máy in hoá đơn của cửa hàng hết giấy",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Tài liệu 10 - Mục D3: Điều chuyển hàng - Kho nhận không thấy phiếu.",
+    "explanation": "Nếu phiếu xuất ở kho chuyển vẫn ở trạng thái 'Tạm lưu' (Draft) hoặc chọn nhầm kho nhận sang chi nhánh khác, kho nhận sẽ không bao giờ nhìn thấy phiếu để xác nhận nhập."
+  },
+  {
+    "id": "T2_04",
+    "role": "tech",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#TRF-202",
+    "subsystem": "PHAN_HE_04_DIEU_CHUYEN",
+    "subsystemName": "Quy Trình Điều Chuyển Hàng Hóa",
+    "category": "HỆ THỐNG",
+    "title": "Giá vốn hàng hóa khi luân chuyển giữa các kho trong cùng hệ thống",
+    "prompt": "Khi thực hiện xuất điều chuyển hàng hóa từ Kho A sang Kho B, đơn giá xuất điều chuyển được hệ thống IVT Pro lấy từ đâu?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Được lấy theo Đơn giá vốn bình quân hiện tại của Kho xuất A tại thời điểm xuất",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Lấy theo giá bán niêm yết trên menu POS",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Do thủ kho tự gõ vào số tiền tuỳ ý",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Luôn luôn bằng 0 đ",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 048 & Tài liệu 09 - Mục 4.3: Vận hành kho hàng.",
+    "explanation": "Điều chuyển nội bộ không sinh ra lợi nhuận mà chỉ dịch chuyển giá trị hàng hóa giữa các kho. Đơn giá nhập tại kho nhận B sẽ bằng đúng đơn giá vốn xuất ra từ kho chuyển A."
   },
   {
     "id": "T3_04",
     "role": "tech",
     "level": 3,
-    "zone": "Trạm Tích Hợp AMIS Kế Toán Doanh Nghiệp",
-    "ticketCode": "TCK-L3-04",
-    "category": "Kết nối hệ thống bên ngoài",
-    "title": "Đồng bộ IVT Pro với AMIS Kế Toán Doanh Nghiệp",
-    "prompt": "Khi thiết lập đồng bộ dữ liệu giữa IVT Pro và phần mềm Kế toán AMIS (Chuyên đề 089), điều kiện tiên quyết nào trong Danh mục hàng hoá và Danh mục kho phải được thoả mãn để dữ liệu chứng từ không bị từ chối?",
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#TRF-203",
+    "subsystem": "PHAN_HE_04_DIEU_CHUYEN",
+    "subsystemName": "Quy Trình Điều Chuyển Hàng Hóa",
+    "category": "CHUYÊN SÂU",
+    "title": "Điều chuyển tự động theo Đơn đặt hàng nội bộ (Store Order to Auto Transfer)",
+    "prompt": "Hệ thống tự động sinh phiếu Xuất điều chuyển dựa trên Đơn đặt hàng nội bộ hoạt động theo cơ chế nào trong phiên bản IVT Pro?",
     "options": [
       {
         "id": "A",
-        "text": "Mã hàng hoá và Mã kho trên IVT Pro phải trùng khớp hoàn toàn với Mã vật tư và Mã kho trên hệ thống kế toán AMIS",
+        "label": "Kho tổng duyệt Đơn đặt hàng nội bộ -> Hệ thống tự động tạo Phiếu xuất điều chuyển với các mặt hàng và số lượng đã duyệt",
         "isCorrect": true
       },
       {
         "id": "B",
-        "text": "Mọi mặt hàng phải có ảnh chụp màu dung lượng trên 5MB",
+        "label": "Hệ thống tự động xuất kho mà không cần ai phê duyệt",
         "isCorrect": false
       },
       {
         "id": "C",
-        "text": "Tất cả nhân viên phải có chứng chỉ kế toán trưởng",
+        "label": "Tự động gửi email sang cho Viettel Post đi lấy hàng",
         "isCorrect": false
       },
       {
         "id": "D",
-        "text": "Phải dùng chung một máy tính cài đặt cả 2 phần mềm",
+        "label": "Bắt buộc thủ kho phải gõ lại từng dòng mặt hàng từ đầu",
         "isCorrect": false
       }
     ],
-    "hint": "Xem Chuyên đề 089: Quy tắc mapping danh mục giữa IVT và AMIS.",
-    "explanation": "Để tích hợp tự động mượt mà giữa IVT Pro và AMIS Kế toán doanh nghiệp, nguyên tắc mapping dữ liệu bất di bất dịch là: Mã hàng hoá (hoặc Mã kế toán khai báo trong chi tiết hàng hoá) và Mã kho trên IVT Pro phải khớp chính xác 1-1 với Mã vật tư hàng hoá và Mã kho đã tạo trên AMIS. Nếu lệch mã, API đồng bộ chứng từ nhập/xuất sẽ bị từ chối với lỗi không tìm thấy đối tượng."
+    "hint": "Xem Chuyên đề 033 & 048: Đặt hàng nội bộ và Quy trình liên kết chứng từ.",
+    "explanation": "Cơ chế liên kết kế thừa chứng từ giúp tiết kiệm 90% thời gian nhập liệu, đảm bảo số lượng xuất kho khớp đúng với số lượng đã được cấp trên phê duyệt trên đơn đặt hàng nội bộ."
+  },
+  {
+    "id": "M1_07",
+    "role": "manager",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#BOM-101",
+    "subsystem": "PHAN_HE_05_XUAT_BAN_DINH_LUONG",
+    "subsystemName": "Xuất Bán POS & Định Lượng BOM",
+    "category": "ĐỊNH LƯỢNG",
+    "title": "Thời điểm và Hiệu lực ngày áp dụng của Công thức chế biến (BOM)",
+    "prompt": "Quán bắt đầu đổi công thức pha 'Trà Chanh Giã Tay' (tăng từ 1 quả chanh lên 1.5 quả) từ ngày 01/10. Quản lý cần cài đặt ngày hiệu lực thế nào để không làm sai số liệu tháng 9?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Tạo phiên bản công thức mới và chọn 'Ngày áp dụng' là 01/10/2026",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Sửa đè trực tiếp lên công thức cũ mà không tạo phiên bản mới",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Xoá món Trà Chanh trên POS đi tạo lại",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Chờ đến đúng nửa đêm ngày 01/10 mới thức dậy sửa",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 018: Công thức chế biến - Quản lý ngày hiệu lực.",
+    "explanation": "IVT Pro quản lý BOM theo phiên bản và ngày hiệu lực. Khi bán hóa đơn ngày nào, hệ thống sẽ đối chiếu với công thức có hiệu lực tại ngày đó, đảm bảo tính đúng đắn cho số liệu lịch sử."
+  },
+  {
+    "id": "M2_05",
+    "role": "manager",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#BOM-102",
+    "subsystem": "PHAN_HE_05_XUAT_BAN_DINH_LUONG",
+    "subsystemName": "Xuất Bán POS & Định Lượng BOM",
+    "category": "ĐỊNH LƯỢNG",
+    "title": "Cơ chế hoạt động của Định mức biến thiên theo Topping và Thuộc tính",
+    "prompt": "Khách gọi 'Trà Sữa Trân Châu' thêm topping 'Thạch Củ Năng' và chọn '50% Đường'. Định mức biến thiên xử lý trừ kho như thế nào?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Lấy công thức gốc trà sữa + Cộng thêm định lượng thạch củ năng + Trừ bớt lượng nước đường tương ứng theo tỷ lệ 50%",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Chỉ trừ trà sữa, bỏ qua hoàn toàn thạch và đường",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Báo lỗi không cho thu ngân thanh toán trên POS",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Trừ gấp đôi toàn bộ nguyên liệu của ly trà sữa",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 008 & Tài liệu 09 - Mục 5.2: Định mức biến thiên.",
+    "explanation": "Định mức biến thiên giải quyết bài toán phức tạp nhất ngành đồ uống: Tự động co giãn lượng NVL theo lựa chọn tùy biến (Modifier/Option/Topping) của khách hàng mà không cần tạo hàng trăm mã món con."
+  },
+  {
+    "id": "T1_05",
+    "role": "tech",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#BOM-201",
+    "subsystem": "PHAN_HE_05_XUAT_BAN_DINH_LUONG",
+    "subsystemName": "Xuất Bán POS & Định Lượng BOM",
+    "category": "CHẨN ĐOÁN",
+    "title": "Bán hàng trên POS nhưng kiểm tra IVT nguyên vật liệu không bị trừ",
+    "prompt": "Khách hàng gọi tổng đài hỗ trợ: Thu ngân bán 100 ly cà phê trên máy POS cả ngày nhưng vào IVT thấy tồn kho hạt cà phê không suy xuyển. Kỹ thuật viên kiểm tra màn hình nào đầu tiên?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Màn hình 'Xuất bán POS' > Kiểm tra tab 'Chưa đồng bộ' và cột 'Lý do lỗi'",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Màn hình Danh mục Nhà cung cấp",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Màn hình Khởi tạo dữ liệu đầu kỳ",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Màn hình Cài đặt in hoá đơn",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Tài liệu 09 - Mục 3 & Tài liệu 10 - Mục A1: Bán món ở POS nhưng NVL không bị trừ.",
+    "explanation": "Màn hình Xuất bán POS là trái tim chẩn đoán: 95% sự cố do hóa đơn bị treo ở đây với các lý do: Chưa có công thức chế biến (BOM), Món chưa được đồng bộ, hoặc Kho bị chặn xuất âm."
+  },
+  {
+    "id": "T2_05",
+    "role": "tech",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#BOM-202",
+    "subsystem": "PHAN_HE_05_XUAT_BAN_DINH_LUONG",
+    "subsystemName": "Xuất Bán POS & Định Lượng BOM",
+    "category": "CẤU HÌNH",
+    "title": "Bẫy cấu hình Bán thành phẩm khi thiết lập Trừ kho 2 cấp",
+    "prompt": "Quán thiết lập: Món Trà Sữa -> Cốt Trà Sữa (BTP) -> Lá trà + Sữa đặc (NVL thô). Khi bán trên POS, hệ thống trừ Cốt trà sữa nhưng KHÔNG phân rã trừ tiếp lá trà và sữa đặc. Lỗi ở đâu?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Mã hàng 'Cốt Trà Sữa' đang BẬT trạng thái 'Theo dõi tồn kho'; muốn hệ thống phân rã tự động xuống NVL thô thì BTP phải TẮT theo dõi tồn kho",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Do quán chưa cài đặt máy in nhiệt nhà bếp",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Do nhân viên pha chế quên khuấy trà sữa",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Do phần mềm IVT Pro không hỗ trợ bán trà sữa",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Tài liệu 09 - Mục 5.1 & Tài liệu 10 - Mục A4: Bán thành phẩm không phân rã xuống nguyên liệu.",
+    "explanation": "Bẫy kỹ thuật kinh điển: Nếu BTP đang BẬT theo dõi tồn kho, IVT hiểu rằng BTP này đã được nấu và cất sẵn trong kho nên chỉ trừ tồn BTP. Muốn trừ xuyên tầng xuống NVL thô, bắt buộc phải TẮT theo dõi tồn ở mã BTP."
   },
   {
     "id": "T3_05",
     "role": "tech",
     "level": 3,
-    "zone": "Trung Tâm Cấu Hình Tính Giá Vốn Nâng Cao",
-    "ticketCode": "TCK-L3-05",
-    "category": "Cấu hình tính giá vốn",
-    "title": "Cấu hình Danh sách chứng từ loại trừ khi chạy tính giá vốn",
-    "prompt": "Trong màn hình `Cấu hình tính giá vốn` (Menu -> Giá vốn -> Cấu hình), cẩm nang triển khai nhấn mạnh điều gì đối với 2 tuỳ chọn: \"Danh sách loại chứng từ nhập áp giá\" và \"Danh sách loại chứng từ xuất không áp giá\"?",
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#BOM-203",
+    "subsystem": "PHAN_HE_05_XUAT_BAN_DINH_LUONG",
+    "subsystemName": "Xuất Bán POS & Định Lượng BOM",
+    "category": "CHUYÊN SÂU",
+    "title": "Xử lý dứt điểm lỗi món ghi chú (Note món) báo 'Chưa có công thức'",
+    "prompt": "Thu ngân POS thường xuyên gõ ghi chú tự do vào bill (ví dụ: 'nhiều đá', 'ít ngọt', 'giao tầng 3') khiến hóa đơn sang IVT liên tục báo đỏ 'Chưa có công thức chế biến'. Giải pháp triệt để là gì?",
     "options": [
       {
         "id": "A",
-        "text": "KTV nên tự do thêm bớt chứng từ theo sở thích của từng chủ quán",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "Ưu tiên GIỮ NGUYÊN MẶC ĐỊNH sẵn có vì công thức tính giá vốn đã được tối ưu loại trừ các chứng từ đặc thù; chỉ thay đổi khi có chỉ định từ cấp Kỹ thuật R&D",
+        "label": "Cấu hình bỏ qua trừ kho với món ghi chú trong Cài đặt hệ thống, đồng thời chuẩn hoá các tuỳ chọn thành Nhóm thuộc tính (Option) trên POS",
         "isCorrect": true
       },
       {
+        "id": "B",
+        "label": "Phạt tiền thu ngân mỗi khi gõ chữ vào hóa đơn",
+        "isCorrect": false
+      },
+      {
         "id": "C",
-        "text": "Bắt buộc phải bỏ hết tất cả các loại chứng từ để chạy cho nhanh",
+        "label": "Tạo hàng trăm mã nguyên liệu mang tên 'nhiều đá', 'giao tầng 3' trong kho",
         "isCorrect": false
       },
       {
         "id": "D",
-        "text": "Phải tích chọn toàn bộ tất cả các loại chứng từ nhập xuất",
+        "label": "Cấm không cho khách dặn pha chế ít ngọt",
         "isCorrect": false
       }
     ],
-    "hint": "Xem Tài liệu 09 mục 5 và Tài liệu 10 mục B2: \"Ưu tiên giữ nguyên mặc định sẵn có\".",
-    "explanation": "Cẩm nang ghi rõ: Các cài đặt ban đầu của IVT Pro về \"Danh sách loại chứng từ nhập áp giá\" và \"Danh sách loại chứng từ xuất không áp giá\" (ví dụ Xuất sơ chế, Xuất trả lại) đã được thiết kế chuẩn mực phù hợp với quy luật giá bình quân. Cẩm nang khuyến cáo \"Ưu tiên giữ nguyên mặc định sẵn có\". KTV không tự ý chỉnh sửa trừ phi có trường hợp ngoại lệ được bộ phận R&D / Hotline 1900 4766 nhánh 3 phê duyệt."
+    "hint": "Xem Tài liệu 10 - Mục A2: Món ghi chú liên tục báo lỗi Chưa có công thức chế biến.",
+    "explanation": "Gõ chữ tự do trên POS dễ biến thành mã con không map được BOM. Giải pháp chuẩn là tick cấu hình 'Không tính trừ kho cho dòng ghi chú món' và tạo Modifier chuẩn hóa trên POS."
+  },
+  {
+    "id": "M1_08",
+    "role": "manager",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#MFG-101",
+    "subsystem": "PHAN_HE_06_SAN_XUAT_BEP_TRUNG_TAM",
+    "subsystemName": "Sản Xuất Bếp Trung Tâm",
+    "category": "SẢN XUẤT",
+    "title": "Bản chất phân biệt giữa Quy trình Sơ chế và Quy trình Chế biến",
+    "prompt": "Trong phân hệ Sản xuất của IVT Pro, sự khác biệt căn bản nhất giữa 'Sơ chế' và 'Chế biến' là gì?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Sơ chế là TÁCH RA (1 nguyên liệu đầu vào thành nhiều thành phẩm đầu ra); Chế biến là GỘP VÀO (nhiều nguyên liệu đầu vào thành 1 thành phẩm đầu ra)",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Sơ chế do phụ bếp làm, Chế biến do bếp trưởng làm",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Sơ chế chỉ làm ban ngày, Chế biến chỉ làm ban đêm",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Hai quy trình này hoàn toàn giống nhau, chỉ khác tên văn bản",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 042 & 045, Tài liệu 09 - Mục 4.2: Vận hành sản xuất.",
+    "explanation": "Ví dụ chuẩn: Sơ chế = 1 con bò 100kg pha lóc thành Thăn, Bắp, Xương; Chế biến = Nước + Cốt trà + Bột béo + Đường nấu gộp thành 1 Nồi trà sữa 20 lít."
+  },
+  {
+    "id": "M2_06",
+    "role": "manager",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#MFG-102",
+    "subsystem": "PHAN_HE_06_SAN_XUAT_BEP_TRUNG_TAM",
+    "subsystemName": "Sản Xuất Bếp Trung Tâm",
+    "category": "GIÁ THÀNH",
+    "title": "Phân bổ tỷ lệ giá trị trong Phiếu sơ chế",
+    "prompt": "Nhập 1 cây thịt bò 10kg giá 2.000.000đ. Sau khi sơ chế thu được 7kg Bò phi-lê loại 1 và 3kg Gân bò vụn. Nếu không cài đặt tỷ lệ phân bổ giá trị, hệ thống sẽ tính giá vốn thế nào?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Hệ thống sẽ chia đều đơn giá 200.000đ/kg cho cả phi-lê và gân vụn (sai lệch thực tế); cần cài đặt Tỷ lệ phân bổ chi phí để phi-lê gánh giá cao hơn gân vụn",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Hệ thống tự động biết giá thị trường của từng loại thịt để điền vào",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Gân bò vụn sẽ được tính giá vốn bằng 0 đ",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Toàn bộ thịt bò sẽ bị biến mất khỏi kho",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 043 & 044: Mẫu sơ chế và Phân bổ giá trị.",
+    "explanation": "Tỷ lệ phân bổ giá trị (Cost Allocation Ratio) trong phiếu sơ chế cho phép nhà hàng gán giá trị hợp lý cho các đầu ra: Thịt phi-lê gánh 85% giá trị, gân vụn gánh 15% giá trị tổng."
+  },
+  {
+    "id": "T1_06",
+    "role": "tech",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#MFG-201",
+    "subsystem": "PHAN_HE_06_SAN_XUAT_BEP_TRUNG_TAM",
+    "subsystemName": "Sản Xuất Bếp Trung Tâm",
+    "category": "CHẨN ĐOÁN",
+    "title": "Không nhìn thấy phân hệ Kho tổng / Bếp trung tâm trên menu",
+    "prompt": "Khách hàng mua gói IVT Pro cho chuỗi nhưng phản ánh đăng nhập vào web không thấy các menu 'Sản xuất', 'Bếp trung tâm' và 'Yêu cầu mua hàng'. Nguyên nhân là gì?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Trong Cài đặt hệ thống > Mô hình vận hành, khách đang để ở 'Mô hình chỉ có kho cửa hàng'; cần chuyển sang mô hình 'Có Kho tổng / Bếp trung tâm'",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Do trình duyệt của khách hàng bị chặn tính năng nấu ăn",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Do bếp trung tâm chưa được lắp đặt camera an ninh",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Bắt buộc phải mua thêm gói bản quyền phần mềm ERP riêng",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Tài liệu 10 - Mục D2: Không thấy chức năng kho tổng / bếp trung tâm.",
+    "explanation": "Mô hình vận hành quyết định cấu trúc menu hiển thị: Khi cấu hình ở mức cửa hàng độc lập, hệ thống tự động ẩn các menu sản xuất chuỗi để giao diện gọn gàng cho khách nhỏ."
+  },
+  {
+    "id": "T2_06",
+    "role": "tech",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#MFG-202",
+    "subsystem": "PHAN_HE_06_SAN_XUAT_BEP_TRUNG_TAM",
+    "subsystemName": "Sản Xuất Bếp Trung Tâm",
+    "category": "CHI PHÍ PHỤ",
+    "title": "Cấu thành Chi phí phụ (Nhân công, điện nước) vào giá thành BTP",
+    "prompt": "Khi tạo Phiếu chế biến Bán thành phẩm (VD: Nấu Sốt BBQ), ngoài tiền nguyên vật liệu thô, làm thế nào để cộng thêm chi phí điện, gas và nhân công vào đơn giá vốn của thành phẩm?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Khai báo và tick chọn 'Chi phí phụ' trên phiếu chế biến, hệ thống sẽ cộng dồn chi phí này vào tổng giá trị thành phẩm nhập kho",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Tự cộng nhẩm bằng tay rồi sửa đơn giá nhập của nguyên liệu thô tăng lên",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "IVT Pro không cho phép tính chi phí phụ ngoài tiền nguyên liệu",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Ghi nhận vào phiếu thanh toán công nợ nhà cung cấp gas",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 046 & 061: Mẫu chế biến và Báo cáo giá thành.",
+    "explanation": "Tính năng Chi phí phụ cấu thành giá thành giúp Bếp trung tâm xác định chính xác Giá thành sản xuất toàn bộ (Full Costing), làm cơ sở tính giá xuất điều chuyển nội bộ cho các chi nhánh."
+  },
+  {
+    "id": "M1_09",
+    "role": "manager",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#INV-101",
+    "subsystem": "PHAN_HE_07_KIEM_KE",
+    "subsystemName": "Quy Trình Kiểm Kê & Xử Lý Chênh Lệch",
+    "category": "KIỂM KÊ",
+    "title": "Sự khác biệt cốt tử giữa 'Nhập số lượng kiểm kê = 0' và 'Bỏ trống dòng'",
+    "prompt": "Khi thực hiện kiểm kê kho cuối tháng trên IVT Pro, nếu một mặt hàng thực tế đã hết sạch trong kho, thao tác nào là ĐÚNG CHUẨN?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Bắt buộc phải điền số 0 vào cột số lượng thực tế; nếu bỏ trống dòng thì hệ thống hiểu là không kiểm kê mặt hàng đó và giữ nguyên tồn cũ",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Xoá dòng mặt hàng đó ra khỏi bảng kiểm kê",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Để trống ô số lượng không gõ gì",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Gõ dấu gạch ngang (-) vào ô kiểm kê",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 053 & 121: Quy trình kiểm kê hàng hóa.",
+    "explanation": "Bẫy thao tác kiểm kê: Điền số 0 = Đã kiểm đếm và kết luận tồn thực tế bằng 0 (hệ thống sẽ tạo phiếu xuất cân đối hết số dư cũ). Bỏ trống dòng = Mặt hàng này đợt này không đếm, tồn sổ sách được giữ nguyên."
+  },
+  {
+    "id": "M2_07",
+    "role": "manager",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#INV-102",
+    "subsystem": "PHAN_HE_07_KIEM_KE",
+    "subsystemName": "Quy Trình Kiểm Kê & Xử Lý Chênh Lệch",
+    "category": "CÂN ĐỐI",
+    "title": "Cơ chế tự động sinh Phiếu cân đối kho sau khi duyệt kiểm kê",
+    "prompt": "Sau khi Quản lý bấm 'Hoàn thành / Phê duyệt' phiếu kiểm kê, hệ thống IVT Pro sẽ tự động sinh ra những chứng từ nào để đưa tồn sổ sách về khớp thực tế?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Phiếu Nhập cân đối kho (cho các mặt hàng thừa) và Phiếu Xuất cân đối kho (cho các mặt hàng thiếu)",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Phiếu chuyển tiền ngân hàng sang tài khoản nhân viên",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Phiếu đặt hàng gửi cho nhà cung cấp",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Hệ thống chỉ lưu biên bản giấy chứ không tạo phiếu gì",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 053: Quy trình kiểm kê và Phiếu cân đối kho.",
+    "explanation": "Bản thân Phiếu kiểm kê chỉ là biên bản đối chiếu. Chính 2 phiếu Nhập cân đối thừa và Xuất cân đối thiếu được sinh ra tự động mới là các chứng từ chính thức làm thay đổi số tồn của thẻ kho."
+  },
+  {
+    "id": "T1_07",
+    "role": "tech",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#INV-201",
+    "subsystem": "PHAN_HE_07_KIEM_KE",
+    "subsystemName": "Quy Trình Kiểm Kê & Xử Lý Chênh Lệch",
+    "category": "CHẨN ĐOÁN",
+    "title": "Thảm họa huỷ phiếu kiểm kê sai quy trình làm sai lệch gấp đôi số tồn",
+    "prompt": "Khách hàng kiểm kê thiếu 10 lon sữa đặc, hệ thống đã sinh phiếu xuất cân đối thiếu 10 lon. Sau đó khách bấm 'Huỷ phiếu kiểm kê' rồi tạo lại phiếu mới, kết quả tồn kho bị trừ tiếp thành âm 20 lon. Lỗi do đâu?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Do khách huỷ phiếu kiểm kê nhưng KHÔNG huỷ Phiếu xuất cân đối kho tương ứng đã được sinh ra trước đó",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Do chuột cắn thủng vỏ lon sữa trong kho",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Do phần mềm IVT Pro tự động trừ thêm số phạt",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Do thu ngân bán thêm 10 lon sữa trên POS",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Tài liệu 10 - Mục C1: Huỷ phiếu kiểm kê sai - Thứ tự thao tác quyết định kết quả.",
+    "explanation": "Nguyên lý quan trọng: Huỷ phiếu kiểm kê không tự động huỷ phiếu cân đối kho liên kết! Khi làm kiểm kê lại, hệ thống lại sinh thêm một phiếu cân đối mới, dẫn tới sai số bị nhân đôi."
+  },
+  {
+    "id": "T2_07",
+    "role": "tech",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#INV-202",
+    "subsystem": "PHAN_HE_07_KIEM_KE",
+    "subsystemName": "Quy Trình Kiểm Kê & Xử Lý Chênh Lệch",
+    "category": "QUY TẮC",
+    "title": "Mốc thời gian 23h59 và Nguyên tắc kiểm kê lùi ngày quá khứ",
+    "prompt": "Khi thực hiện kiểm kê kho cho ngày cuối tháng (ví dụ 30/09), tại sao hệ thống luôn khuyến nghị chọn mốc thời gian là 23:59:59 của ngày kiểm kê?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Để đảm bảo đã gom trọn vẹn toàn bộ các giao dịch nhập xuất và bán hàng phát sinh trong toàn bộ ngày hôm đó trước khi chốt tồn",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Vì sau 24h máy chủ IVT sẽ tự động tắt nguồn",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Để hợp phong thủy kinh doanh của ngành ẩm thực",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Quy định của Bộ Tài Chính bắt buộc kiểm kê lúc nửa đêm",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Tài liệu 10 - Mục C2: Kiểm kê ghi nhận sai thời điểm.",
+    "explanation": "Nếu kiểm kê lúc 15:00 chiều ngày 30/09, thì các bill bán hàng từ 15:01 đến 23:59 sẽ trừ tiếp vào số tồn vừa chốt, dẫn tới sáng ngày 01/10 tồn đầu kỳ bị lệch ngay lập tức."
+  },
+  {
+    "id": "M1_10",
+    "role": "manager",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#CGS-101",
+    "subsystem": "PHAN_HE_08_GIA_VON",
+    "subsystemName": "Tính Giá Vốn & Kế Toán Kho",
+    "category": "GIÁ VỐN",
+    "title": "Nguyên tắc và Thời điểm chạy chức năng 'Tính lại giá vốn' (Recalculate Cost)",
+    "prompt": "Vào cuối mỗi kỳ kế toán (tháng hoặc tuần), tại sao kế toán kho bắt buộc phải chạy tính năng 'Tính lại giá vốn' trên IVT Pro?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Để hệ thống tính toán lại đơn giá vốn bình quân gia quyền chuẩn xác sau khi đã nhập đầy đủ hoá đơn mua hàng và các chứng từ điều chuyển/kiểm kê",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Để xoá sạch công nợ của các nhà cung cấp",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Để tự động tăng giá bán món trên menu POS lên 10%",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Chỉ chạy khi nào phần mềm bị lỗi báo đỏ",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 056: Tính giá vốn & Tài liệu 09 - Mục 8: Nhịp công việc cuối kỳ.",
+    "explanation": "Trong kỳ, các phiếu xuất bán tạm thời lấy giá vốn ước tính. Cuối kỳ, khi đã có đủ toàn bộ chi phí nhập mua thực tế, việc chạy 'Tính lại giá vốn' giúp hồi tố giá vốn chính xác tuyệt đối cho từng đĩa ăn."
+  },
+  {
+    "id": "M2_08",
+    "role": "manager",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#CGS-102",
+    "subsystem": "PHAN_HE_08_GIA_VON",
+    "subsystemName": "Tính Giá Vốn & Kế Toán Kho",
+    "category": "CHẨN ĐOÁN",
+    "title": "Hiện tượng Giá vốn bằng 0 hoặc Lãi gộp tăng vọt bất thường",
+    "prompt": "Xem Báo cáo Lãi gộp món ăn, chủ quán thấy món 'Lẩu Bò' có lãi gộp lên đến 98% vì giá vốn thịt bò bằng 0 đ. Nguyên nhân nghiệp vụ phổ biến nhất là gì?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Quán xuất bán thịt bò từ ngày 01 đến ngày 05 khi kho chưa có số tồn (bán âm), sau đó nhập hàng nhưng chưa bấm 'Tính lại giá vốn'",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Do nhà cung cấp tặng từ thiện thịt bò cho quán",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Do máy POS tính nhầm tiền của khách",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Do thực khách ăn không hết thịt bò trả lại",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Tài liệu 10 - Mục B2: Giá vốn sai - Bán âm trước nhập sau.",
+    "explanation": "Tại thời điểm xuất bán, tồn đầu = 0, chưa có phiếu nhập nên hệ thống không có đơn giá vốn để gán, tạm tính = 0. Sau khi nhập bổ sung hoá đơn mua hàng, bắt buộc phải chạy lệnh Tính lại giá vốn để hồi tố giá cho các phiếu xuất cũ."
+  },
+  {
+    "id": "T1_08",
+    "role": "tech",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#CGS-201",
+    "subsystem": "PHAN_HE_08_GIA_VON",
+    "subsystemName": "Tính Giá Vốn & Kế Toán Kho",
+    "category": "RÀNG BUỘC",
+    "title": "4 nguyên tắc thép khi sử dụng phiếu 'Điều chỉnh giá trị tồn kho'",
+    "prompt": "Tính năng 'Điều chỉnh giá trị tồn kho' (Inventory Value Adjustment) có những ràng buộc khắt khe nào mà kỹ thuật viên bắt buộc phải quán triệt cho khách hàng?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Chỉ điều chỉnh giá trị tiền (không sửa số lượng), làm thay đổi đơn giá bình quân của toàn bộ các kỳ sau, và phải có chứng từ giải trình kế toán rõ ràng",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Thích sửa số tiền bao nhiêu tuỳ ý để làm đẹp báo cáo vay vốn ngân hàng",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Tự động cộng thêm tiền vào tài khoản ngân hàng của chủ nhà hàng",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Không có bất kỳ ràng buộc nào, ai cũng sửa được",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 054 & Tài liệu 10 - Mục B3: Điều chỉnh giá trị tồn kho - Ràng buộc phải nói trước với khách.",
+    "explanation": "Điều chỉnh giá trị tồn kho là con dao hai lưỡi: Can thiệp thẳng vào tổng tiền tồn kho sẽ làm đứt gãy đối soát giữa Sổ kho IVT và Sổ cái Kế toán tài chính nếu không có căn cứ hạch toán chuẩn mực."
+  },
+  {
+    "id": "T2_08",
+    "role": "tech",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#CGS-202",
+    "subsystem": "PHAN_HE_08_GIA_VON",
+    "subsystemName": "Tính Giá Vốn & Kế Toán Kho",
+    "category": "TÍCH HỢP",
+    "title": "Mapping dữ liệu danh mục khi kết nối IVT Pro với AMIS Kế toán (MISA)",
+    "prompt": "Khi triển khai kết nối đồng bộ chứng từ giữa iPOS IVT Pro và phần mềm AMIS Kế toán, điều kiện tiên quyết về danh mục hàng hoá là gì?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Mã vật tư/hàng hoá và Đơn vị tính cơ bản trên IVT Pro phải khớp hoàn toàn 1-1 với Mã vật tư trên AMIS Kế toán",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Hai bên đặt mã thế nào cũng được vì AI tự đoán được",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Phải xoá hết danh mục trên AMIS Kế toán đi để IVT tự sinh lại",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Chỉ cần tên món giống nhau là hệ thống tự khớp",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 089: Kết nối IVT với AMIS Kế toán bản Doanh Nghiệp.",
+    "explanation": "Quy tắc mapping 1-1 qua Mã hàng (Item Code) là chìa khóa để API đẩy phiếu nhập, phiếu xuất và chi phí sang đúng tài khoản 152, 156, 632 trên phần mềm kế toán mà không bị văng lỗi reject."
+  },
+  {
+    "id": "M1_11",
+    "role": "manager",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#AP-101",
+    "subsystem": "PHAN_HE_09_CONG_NO",
+    "subsystemName": "Quản Lý Công Nợ Nhà Cung Cấp",
+    "category": "CÔNG NỢ",
+    "title": "Hai phương thức thanh toán công nợ trên IVT Pro",
+    "prompt": "Khi thanh toán tiền hàng cho Nhà cung cấp, kế toán có thể thực hiện theo 2 phương thức nào trên màn hình Quản lý công nợ?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Thanh toán theo từng Hoá đơn (Bill-by-bill) hoặc Thanh toán gộp theo số tiền (Thanh toán vo tự động cấn trừ hoá đơn cũ trước theo FIFO)",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Thanh toán bằng thẻ cào điện thoại hoặc bằng điểm tích lũy",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Chỉ được phép trả tiền mặt tại quầy POS",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Hệ thống chỉ cho phép nợ, không có chức năng trả tiền",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 051 & 124: Quản lý công nợ nhà cung cấp.",
+    "explanation": "Thanh toán theo hóa đơn giúp đối soát chi tiết từng đợt giao hàng; Thanh toán gộp (FIFO) giúp thanh toán nhanh khi chuyển 1 khoản tiền lớn để dọn dẹp các khoản nợ cũ tồn đọng."
+  },
+  {
+    "id": "M2_09",
+    "role": "manager",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#AP-102",
+    "subsystem": "PHAN_HE_09_CONG_NO",
+    "subsystemName": "Quản Lý Công Nợ Nhà Cung Cấp",
+    "category": "TRẢ HÀNG",
+    "title": "Cơ chế bù trừ công nợ khi thực hiện phiếu 'Xuất trả nhà cung cấp'",
+    "prompt": "Nhập lô hoa quả 5.000.000đ nhưng bị dập nát, cửa hàng tạo phiếu 'Xuất trả hàng cho nhà cung cấp' trị giá 1.500.000đ. Công nợ phải trả NCC sẽ biến động như thế nào?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Hệ thống tự động ghi giảm công nợ phải trả tương ứng 1.500.000đ, số tiền thực tế còn phải trả là 3.500.000đ",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Công nợ vẫn giữ nguyên 5.000.000đ và NCC phải mang tiền mặt đến trả",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Công nợ tự động tăng lên 6.500.000đ do tính phí trả hàng",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Phiếu xuất trả không liên quan gì đến công nợ",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 050 & 051: Phiếu xuất trả và Bù trừ công nợ.",
+    "explanation": "Phiếu xuất trả nhà cung cấp (Purchase Return) trong IVT Pro tự động hạch toán giảm tồn kho và đồng thời sinh bút toán giảm trừ công nợ tương ứng với NCC đó trên sổ đối soát."
+  },
+  {
+    "id": "T1_09",
+    "role": "tech",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#AP-201",
+    "subsystem": "PHAN_HE_09_CONG_NO",
+    "subsystemName": "Quản Lý Công Nợ Nhà Cung Cấp",
+    "category": "HỖ TRỢ",
+    "title": "Khách hàng không nhìn thấy phân hệ Quản lý công nợ",
+    "prompt": "Khách hàng vào IVT Pro tìm kiếm phân hệ Quản lý công nợ nhưng không thấy menu này trên thanh điều hướng. Kỹ thuật viên xử lý thế nào?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Vào Cài đặt hệ thống > Cấu hình khác > Bật tính năng 'Quản lý công nợ nhà cung cấp' và kiểm tra phân quyền tài khoản",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Bảo khách dùng sổ tay ghi nợ bên ngoài vì IVT không có tính năng này",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Do khách hàng chưa trả đủ tiền bản quyền phần mềm",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Khởi động lại modem wifi của nhà hàng",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Tài liệu 10 - Mục E2: Không thấy phần công nợ.",
+    "explanation": "Tại Cài đặt hệ thống có toggle 'Quản lý công nợ'. Nếu toggle này bị tắt (thường ở các quán nhỏ chỉ mua đứt bán đoạn tiền mặt), toàn bộ menu và báo cáo công nợ sẽ được ẩn đi."
+  },
+  {
+    "id": "T2_09",
+    "role": "tech",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#AP-202",
+    "subsystem": "PHAN_HE_09_CONG_NO",
+    "subsystemName": "Quản Lý Công Nợ Nhà Cung Cấp",
+    "category": "CHUYÊN SÂU",
+    "title": "Lộ trình chuyển đổi Module Mua hàng và Công nợ (Nâng cấp 2026)",
+    "prompt": "Theo thông báo nâng cấp chuyển đổi Module Mua hàng và Công nợ của IVT Pro (Chuyên đề 109), cải tiến đột phá nào được áp dụng cho quy trình đối soát?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Tách bạch rõ ràng giữa Chứng từ nhập kho vật lý và Hóa đơn tài chính, hỗ trợ quản lý công nợ đa tiền tệ và đối soát tự động theo biên bản giao nhận",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Tự động trừ tiền từ ví MoMo của thu ngân",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Bỏ hẳn tính năng công nợ chuyển sang dùng file Excel",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Chỉ cho phép thanh toán nợ vào ngày mùng 1 đầu tháng",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 109: Chuyển đổi module mua hàng và công nợ.",
+    "explanation": "Bản nâng cấp phân tách rạch ròi: Thủ kho xác nhận Nhập kho (Goods Receipt) để tăng tồn, Kế toán nhận Hoá đơn VAT (Invoice) để xác nhận công nợ, chuẩn hóa theo thông lệ ERP quốc tế."
+  },
+  {
+    "id": "M2_10",
+    "role": "manager",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#FRN-101",
+    "subsystem": "PHAN_HE_10_NHUONG_QUYEN",
+    "subsystemName": "Nhượng Quyền Franchise & Bán Nội Bộ",
+    "category": "NHƯỢNG QUYỀN",
+    "title": "Bán hàng nội bộ xuất cho Chi nhánh Nhượng quyền (Franchise)",
+    "prompt": "Khi Kho tổng của thương hiệu xuất bán nguyên vật liệu cho một Chi nhánh Nhượng quyền (nhà đầu tư độc lập), nghiệp vụ này được hạch toán như thế nào?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Tạo phiếu 'Xuất bán nội bộ / Bán cho đại lý' kèm bảng giá bán riêng; hệ thống ghi nhận doanh thu nội bộ và sinh công nợ phải thu đại lý",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Tạo phiếu Xuất điều chuyển nội bộ như chi nhánh trực thuộc",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Tạo phiếu Xuất huỷ hao hụt nguyên liệu",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Bảo đại lý tự ra siêu thị mua về dùng",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 057: Nhượng quyền và Tài liệu 09 - Mục 5.4: Nhượng quyền.",
+    "explanation": "Chi nhánh nhượng quyền có tư cách pháp nhân riêng. Xuất hàng cho franchise là quan hệ mua bán thương mại: Kho tổng xuất bán có giá bán sỉ (cao hơn giá vốn), làm phát sinh doanh thu và công nợ phải thu."
+  },
+  {
+    "id": "T2_10",
+    "role": "tech",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#FRN-201",
+    "subsystem": "PHAN_HE_10_NHUONG_QUYEN",
+    "subsystemName": "Nhượng Quyền Franchise & Bán Nội Bộ",
+    "category": "CẤU HÌNH",
+    "title": "Hai mô hình cấu hình Nhượng quyền trong IVT Pro",
+    "prompt": "Tại Cài đặt hệ thống > Nhượng quyền, 2 cấp độ mô hình nhượng quyền được hỗ trợ là gì?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Mô hình có kiểm soát giá vốn (Thương hiệu quản lý toàn bộ kho) và Mô hình đại lý độc lập (Đại lý tự quản lý kho và xem chi nhánh là khách hàng)",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Mô hình nhượng quyền 1 sao và Mô hình nhượng quyền 5 sao",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Mô hình miễn phí và Mô hình có thu phí hàng tháng",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Hệ thống chỉ hỗ trợ duy nhất 1 mô hình chi nhánh công ty",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Tài liệu 09 - Mục 5.4: Nhượng quyền.",
+    "explanation": "Cấp độ 1: Chuỗi kiểm soát chặt chẽ từ công thức đến giá vốn của đại lý; Cấp độ 2: Đại lý tự chủ nhập hàng và hạch toán kho riêng biệt, trụ sở chỉ đóng vai trò nhà cung ứng sỉ."
+  },
+  {
+    "id": "M1_12",
+    "role": "manager",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#RPT-101",
+    "subsystem": "PHAN_HE_11_BAO_CAO",
+    "subsystemName": "Toàn Bộ Hệ Thống Báo Cáo Quản Trị",
+    "category": "BÁO CÁO",
+    "title": "Báo cáo Nhập Xuất Tồn (A01) và Báo cáo Sổ chi tiết vật tư (A02)",
+    "prompt": "Để xem tổng quan Tồn đầu, Tổng nhập, Tổng xuất và Tồn cuối kỳ của toàn bộ mặt hàng thì xem báo cáo nào; và muốn xem chi tiết từng ngày nhập xuất của riêng 1 mặt hàng thì xem báo cáo nào?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Xem tổng quan tại Báo cáo A01 (Nhập Xuất Tồn); xem chi tiết biến động từng ngày của 1 mặt hàng tại Báo cáo A02 (Sổ chi tiết vật tư)",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Xem cả hai tại Báo cáo Danh mục khách hàng",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Chỉ xem được trên máy in bill thu ngân",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Hai báo cáo này giống hệt nhau không có gì khác biệt",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 058 & Tài liệu 09 - Mục 9: Bộ báo cáo.",
+    "explanation": "A01 là báo cáo tổng hợp cấp cao dành cho Giám đốc/Quản lý nhìn bức tranh toàn cảnh; A02 là công cụ sắc bén của kế toán để truy tìm nguồn gốc từng lon sữa, từng kg thịt tăng giảm vào ngày giờ nào."
+  },
+  {
+    "id": "M2_11",
+    "role": "manager",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#RPT-102",
+    "subsystem": "PHAN_HE_11_BAO_CAO",
+    "subsystemName": "Toàn Bộ Hệ Thống Báo Cáo Quản Trị",
+    "category": "HAO HỤT",
+    "title": "Báo cáo Hạn mức hao hụt (A08) và Công thức tính tỷ lệ hao hụt",
+    "prompt": "Báo cáo Hạn mức hao hụt (A08) so sánh giữa 2 đại lượng nào để tìm ra lượng nguyên liệu bị thất thoát vượt ngưỡng tại nhà hàng?",
+    "options": [
+      {
+        "id": "A",
+        "label": "So sánh giữa Lượng xuất lý thuyết (POS bán x Định lượng BOM) với Lượng xuất thực tế sau kiểm kê (Tồn đầu + Nhập - Tồn cuối)",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "So sánh giữa Doanh thu thu ngân thu được với Tiền trong két sắt",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "So sánh giữa Tiền điện tháng này với Tiền điện tháng trước",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "So sánh giữa Số lượng khách vào cửa với Số lượng ghế ngồi",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 058 & Tài liệu 09 - Mục 10: Hạn mức hao hụt và báo cáo A08.",
+    "explanation": "Công thức vàng quản trị F&B: Chênh lệch hao hụt = Lượng xuất thực tế - Lượng xuất lý thuyết. Nếu tỷ lệ hao hụt vượt Hạn mức cho phép (VD > 3%), báo cáo A08 sẽ tô đỏ cảnh báo gian lận hoặc sơ chế hỏng."
+  },
+  {
+    "id": "M3_04",
+    "role": "manager",
+    "level": 3,
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#RPT-103",
+    "subsystem": "PHAN_HE_11_BAO_CAO",
+    "subsystemName": "Toàn Bộ Hệ Thống Báo Cáo Quản Trị",
+    "category": "ĐỐI SOÁT",
+    "title": "Báo cáo Thẻ kho (A06) và Giá trị pháp lý đối soát",
+    "prompt": "Khi có nghi vấn thủ kho biển thủ nguyên liệu hoặc nhập khống hàng hoá, báo cáo nào trong IVT Pro được dùng làm căn cứ pháp lý đối soát từng chứng từ phát sinh theo thời gian thực?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Báo cáo Thẻ kho (A06) chi tiết từng số phiếu, ngày giờ duyệt, người tạo, lượng nhập/xuất và số tồn sau mỗi giao dịch",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Báo cáo Danh sách món ăn bán chạy trên POS",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Báo cáo Chấm công nhân viên",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Nhật ký tin nhắn Zalo nội bộ",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 058: Báo cáo Thẻ kho A06.",
+    "explanation": "Thẻ kho A06 là chứng từ bất khả xâm phạm trong kế toán: Thể hiện dòng chảy liên tục của vật tư, số dư tức thời sau mỗi giao dịch, ghi rõ ai là người duyệt phiếu, không thể làm giả hay chối bỏ trách nhiệm."
+  },
+  {
+    "id": "T1_10",
+    "role": "tech",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#RPT-201",
+    "subsystem": "PHAN_HE_11_BAO_CAO",
+    "subsystemName": "Toàn Bộ Hệ Thống Báo Cáo Quản Trị",
+    "category": "HỖ TRỢ",
+    "title": "Khách hàng thắc mắc Báo cáo tồn kho hiển thị số lượng âm",
+    "prompt": "Xem Báo cáo Nhập Xuất Tồn, khách hàng hoang mang vì thấy tồn cuối kỳ của 'Hạt Cafe' là -15kg. Kỹ thuật viên giải thích nguyên nhân và cách xử lý thế nào?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Do nhà hàng bật cấu hình 'Cho phép xuất âm kho' và đã bán hàng trên POS trước khi nhập hoá đơn mua hàng; cần nhập bổ sung phiếu mua hàng lùi ngày",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Do máy tính của khách hàng bị sai múi giờ quốc tế",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Bảo khách dùng phần mềm khác vì IVT Pro bị lỗi nặng",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Bảo khách đi mua ngay 15kg cafe mang về bù vào két sắt",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Tài liệu 10 - Mục B1: Tồn kho sai.",
+    "explanation": "Xuất âm là cơ chế linh hoạt cho phép quán không bị ngắt quãng bán hàng khi hàng thực tế đã về quầy nhưng kế toán chưa kịp gõ phiếu. Khi nhập phiếu mua bổ sung đúng ngày thực nhận, tồn âm sẽ tự động hết."
+  },
+  {
+    "id": "T2_11",
+    "role": "tech",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#RPT-202",
+    "subsystem": "PHAN_HE_11_BAO_CAO",
+    "subsystemName": "Toàn Bộ Hệ Thống Báo Cáo Quản Trị",
+    "category": "ĐỐI SOÁT",
+    "title": "Báo cáo Đối soát bán hàng POS và Tiêu hao kho (Báo cáo G)",
+    "prompt": "Báo cáo đối soát giữa doanh số bán POS và số lượng trừ kho trong nhóm Báo cáo G nhằm mục đích chẩn đoán sự cố gì?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Phát hiện các món đã bán trên POS nhưng chưa được gán công thức định lượng hoặc bị lỗi trừ kho",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Kiểm tra xem thu ngân có trả thừa tiền cho khách không",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Tính toán tiền tip cho nhân viên phục vụ bàn",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Theo dõi thời gian khách ngồi ăn tại bàn",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 064: Báo cáo đối soát và Kế toán đối soát.",
+    "explanation": "Báo cáo đối soát POS - IVT là công cụ kiểm toán định kỳ cực mạnh: Quét toàn bộ hóa đơn bán trong tháng, so sánh với các phiếu xuất kho tương ứng để phát hiện lỗ hổng thất thoát dữ liệu."
+  },
+  {
+    "id": "M3_05",
+    "role": "manager",
+    "level": 3,
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#TCK-101",
+    "subsystem": "PHAN_HE_12_CHAN_DOAN_TICKET",
+    "subsystemName": "Chẩn Đoán Sự Cố & Nâng Cấp Phiên Bản",
+    "category": "NÂNG CẤP",
+    "title": "Chuyển đổi dữ liệu từ phiên bản cũ IVT V1 lên IVT Pro",
+    "prompt": "Sau khi nâng cấp từ IVT V1 lên bản IVT Pro, kế toán phản ánh 'Báo cáo tồn kho thì đúng số lượng nhưng Giá vốn và Báo cáo lãi gộp bị lệch hoàn toàn'. Thao tác cấp bách cần làm là gì?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Kiểm tra lại giá trị tồn kho đầu kỳ được chuyển đổi và bắt buộc chạy lệnh 'Tính lại giá vốn toàn hệ thống' từ ngày bắt đầu dữ liệu",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Cài lại phiên bản V1 cũ cho quán",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Bảo khách tự tính tay bằng Excel bên ngoài",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Đổi tên toàn bộ các món ăn trên máy POS",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 092 & Tài liệu 10 - Mục H2: Sau khi nâng cấp V1 -> Pro thì giá vốn sai.",
+    "explanation": "Bản Pro sử dụng thuật toán giá vốn đa tầng hiện đại. Khi migrate dữ liệu, nếu chỉ có số lượng tồn mà chưa đồng bộ đầy đủ các tầng giá nhập hoặc chưa chạy tính lại giá vốn, toàn bộ giá xuất kho sẽ bị tính sai."
+  },
+  {
+    "id": "T1_11",
+    "role": "tech",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#TCK-201",
+    "subsystem": "PHAN_HE_12_CHAN_DOAN_TICKET",
+    "subsystemName": "Chẩn Đoán Sự Cố & Nâng Cấp Phiên Bản",
+    "category": "QUY TRÌNH",
+    "title": "Tư duy 4 bước chẩn đoán Ticket theo chuẩn Chuyên gia hỗ trợ iPOS",
+    "prompt": "Khi tiếp nhận một ticket khiếu nại 'Số liệu kho bị sai' từ khách hàng, thứ tự 4 bước chẩn đoán chuyên nghiệp của kỹ thuật viên iPOS là gì?",
+    "options": [
+      {
+        "id": "A",
+        "label": "(1) Xác định mã hàng và khoảng thời gian nghi vấn -> (2) Kiểm tra Thẻ kho A06 truy vết giao dịch gốc -> (3) So sánh với màn hình Xuất bán POS và Báo cáo kiểm kê -> (4) Chạy tính lại giá vốn và kiểm tra cấu hình",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "(1) Đổ lỗi cho thu ngân -> (2) Bảo khách khởi động lại máy -> (3) Tắt máy đi về -> (4) Chặn số điện thoại",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "(1) Vào DB xoá hết chứng từ cũ -> (2) Tạo số tồn giả -> (3) Thu tiền khách -> (4) Đóng ticket",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "(1) Bảo khách cài lại Windows -> (2) Đổi mật khẩu wifi -> (3) Thay dây mạng -> (4) Thay chuột máy tính",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Cẩm nang phương pháp suy luận và chẩn đoán ticket iPOS.",
+    "explanation": "Phương pháp chẩn đoán dựa trên chứng cứ thực nghiệm: Luôn đi từ Thẻ kho A06 (nguồn gốc sự thật) ngược về chứng từ phát sinh gốc, không phán đoán mò mẫm làm mất uy tín dịch vụ."
+  },
+  {
+    "id": "T2_12",
+    "role": "tech",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#TCK-202",
+    "subsystem": "PHAN_HE_12_CHAN_DOAN_TICKET",
+    "subsystemName": "Chẩn Đoán Sự Cố & Nâng Cấp Phiên Bản",
+    "category": "RÀNG BUỘC",
+    "title": "Ràng buộc 'Một đi không trở lại' của Cấu hình Quản lý theo Lô / Hạn sử dụng",
+    "prompt": "Khách hàng yêu cầu: 'Bật tính năng Quản lý theo Lô/Date lên dùng thử vài ngày, nếu thấy nhân viên nhập liệu cực quá thì TẮT đi'. Kỹ thuật viên phải giải thích thế nào?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Tuyệt đối không thể tắt tuỳ tiện: Một khi đã bật Quản lý theo Lô và phát sinh chứng từ có Lô, hệ thống KHÔNG CHO PHÉP tắt cấu hình này vì sẽ phá vỡ toàn bộ cấu trúc dữ liệu tồn kho",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Được chứ, cứ vào Cài đặt hệ thống gạt tắt bất kỳ lúc nào",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Tắt được nhưng sẽ bị hệ thống trừ tiền trong tài khoản",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Chỉ tắt được vào ngày lễ Tết",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Tài liệu 09 - Mục 5.3 & Tài liệu 10 - Mục F2: Không tắt được cấu hình quản lý theo lô / hạn sử dụng.",
+    "explanation": "Quản lý theo Lô (Batch/Lot/Date Tracking) chia nhỏ tồn kho theo từng Lô nhập cụ thể. Một khi dữ liệu đã phân nhánh theo Lô, việc tắt cấu hình sẽ làm hệ thống không biết trừ kho theo cơ chế nào, gây lỗi DB nghiêm trọng."
   },
   {
     "id": "T3_06",
     "role": "tech",
     "level": 3,
-    "zone": "Đỉnh Tháp Chẩn Đoán - Nhịp Cầu Số 6 Tuyệt Đỉnh",
-    "ticketCode": "TCK-L3-06",
-    "category": "Tư duy Cứu Hộ Ticket Hệ Thống",
-    "title": "Tư duy chẩn đoán hệ thống IVT Pro cấp Master",
-    "prompt": "Khi tiếp nhận một ca ticket phức tạp: \"Báo cáo A06 bị lệch số lượng, giá vốn âm, hoá đơn tab Chưa đồng bộ báo lỗi đỏ rực\", một Kỹ sư Triển khai / Support Master sẽ tuần tự giải quyết theo chuỗi tư duy nào?",
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#TCK-203",
+    "subsystem": "PHAN_HE_12_CHAN_DOAN_TICKET",
+    "subsystemName": "Chẩn Đoán Sự Cố & Nâng Cấp Phiên Bản",
+    "category": "CHUYỂN TUYẾN",
+    "title": "Quy chuẩn nhận diện ca bệnh cần chuyển Hotline 1900 4766 (Nhánh 3)",
+    "prompt": "Trong các trường hợp sự cố kho sau đây, trường hợp nào kỹ thuật viên hỗ trợ tuyến 1/2 BẮT BUỘC phải lập biên bản chuyển hồ sơ lên Hotline Kỹ thuật chuyên sâu 1900 4766 (Nhánh 3)?",
     "options": [
       {
         "id": "A",
-        "text": "Báo khách cài lại hệ điều hành Windows và mua máy chủ mới",
-        "isCorrect": false
-      },
-      {
-        "id": "B",
-        "text": "(1) Đọc cột Lý do lỗi tại Xuất bán POS -> (2) Kiểm tra Thẻ kho trên A06 tìm phiếu sai ĐVT/đơn giá -> (3) Xử lý chốt kiểm kê huỷ đúng thứ tự -> (4) Chạy lại Tính giá vốn",
+        "label": "Dữ liệu bị lỗi khoá chết (Deadlock) cơ sở dữ liệu, lỗi gãy cấu trúc cây BOM nhiều cấp không phân rã được, hoặc lỗi sai lệch giá vốn do can thiệp trực tiếp Backend",
         "isCorrect": true
       },
       {
+        "id": "B",
+        "label": "Khách hàng quên mật khẩu đăng nhập tài khoản",
+        "isCorrect": false
+      },
+      {
         "id": "C",
-        "text": "Chạy ngay Tiện ích tính giá vốn 10 lần liên tục mà không cần sửa chứng từ",
+        "label": "Khách hàng muốn đổi màu nền giao diện sang màu hồng",
         "isCorrect": false
       },
       {
         "id": "D",
-        "text": "Huỷ toàn bộ cơ sở dữ liệu và bảo khách nhập lại từ đầu tháng",
+        "label": "Hết giấy in bill hoá đơn tại quầy thu ngân",
         "isCorrect": false
       }
     ],
-    "hint": "Toàn bộ tinh hoa của 3 tài liệu cẩm nang IVT kết tinh trong chuỗi 4 bước logic không nhảy cóc này!",
-    "explanation": "Tư duy chuẩn Master IVT: Không bao giờ phỏng đoán mò mẫm. Bước 1: Mở `Xuất bán POS -> Chưa đồng bộ` để phần mềm tự chỉ ra lý do lỗi hoá đơn; Bước 2: Vào `A06 -> Thẻ kho` để phát hiện các phiếu sai ĐVT quy đổi hoặc gõ nhầm đơn giá; Bước 3: Sửa hoặc huỷ chứng từ sai theo đúng quy trình chuẩn (huỷ trước - sao chép sau); Bước 4: Sau khi dữ liệu thô đã sạch, chạy \"Tính giá vốn\" để tái lập giá trị chuẩn cho toàn bộ hệ thống."
+    "hint": "Xem Tài liệu 10 - Mục I: Khi nào chuyển kỹ thuật (1900 4766 nhánh 3).",
+    "explanation": "Nhánh 3 Kỹ thuật chuyên sâu là tuyến phòng thủ cuối cùng: Chỉ tiếp nhận các ca lỗi cấu trúc dữ liệu, lỗi bug core phần mềm hoặc sự cố đồng bộ API AMIS/iPOS core cần can thiệp script sửa DB."
+  },
+  {
+    "id": "M1_13",
+    "role": "manager",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#SYS-104",
+    "subsystem": "PHAN_HE_01_CAU_HINH",
+    "subsystemName": "Khởi Tạo & Cài Đặt Hệ Thống",
+    "category": "CẤU HÌNH",
+    "title": "Kiểm soát Tồn kho đầu kỳ khi bắt đầu vận hành phần mềm",
+    "prompt": "Khi bắt đầu đưa IVT Pro vào sử dụng chính thức, thao tác nào bắt buộc phải hoàn thành đầu tiên trước khi cho phép thu ngân bán hàng?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Nhập đầy đủ số lượng và giá trị của Phiếu Tồn kho đầu kỳ để hệ thống có số dư ban đầu",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Cứ bán hàng bình thường, tồn kho để 0 cũng được",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Chỉ cần chụp ảnh kho hàng cất vào máy tính",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Đợi 1 năm sau mới cần nhập tồn kho đầu kỳ",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 011 & Tài liệu 09 - Mục 7: Tồn kho đầu kỳ.",
+    "explanation": "Tồn kho đầu kỳ là nền móng của hệ thống: Thiếu số tồn đầu kỳ thì mọi giao dịch xuất bán đều rơi vào tình trạng xuất âm kho, làm sai lệch toàn bộ giá vốn."
+  },
+  {
+    "id": "M1_14",
+    "role": "manager",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#CAT-104",
+    "subsystem": "PHAN_HE_02_DANH_MUC",
+    "subsystemName": "Danh Mục Hàng Hóa & 12 Danh Mục",
+    "category": "DANH MỤC",
+    "title": "Quản lý Danh mục Lý do xuất / nhập kho",
+    "prompt": "Để kiểm soát chặt chẽ nguyên nhân xuất kho (Xuất hủy do hỏng, Xuất dùng thử mẫu, Xuất biếu tặng, Xuất liên hoan), quản lý cần thiết lập danh mục nào?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Danh mục Lý do trong menu Khởi tạo danh mục",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Gõ tay vào ô ghi chú mỗi lần xuất hàng",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Danh mục Khách hàng thân thiết",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Không cần phân loại, xuất loại nào cũng như nhau",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 024: Danh mục Lý do.",
+    "explanation": "Chuẩn hóa Danh mục Lý do giúp báo cáo quản trị tổng hợp được chính xác: Trong tháng quán đã xuất hủy bao nhiêu tiền hàng hỏng, xuất bao nhiêu tiền cho marketing."
+  },
+  {
+    "id": "M2_12",
+    "role": "manager",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#ORD-104",
+    "subsystem": "PHAN_HE_03_DAT_HANG_CUNG_UNG",
+    "subsystemName": "Quy Trình Đặt Hàng & Cung Ứng",
+    "category": "CUNG ỨNG",
+    "title": "Mẫu đặt hàng (Order Template) dành cho cửa hàng",
+    "prompt": "Mỗi ngày cửa hàng đều đặt cố định 15 loại nguyên vật liệu từ kho tổng. Làm thế nào để nhân viên không phải mất công tìm kiếm chọn lại 15 món này mỗi sáng?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Tạo 'Mẫu đặt hàng' chứa sẵn danh sách 15 món, mỗi sáng chỉ cần mở mẫu ra điền số lượng cần lấy",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Bắt nhân viên gõ tìm kiếm từng món từ đầu",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Chụp ảnh gửi qua Zalo cho thủ kho tổng",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Viết giấy dán lên cánh cửa kho",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 027: Mẫu đặt hàng.",
+    "explanation": "Mẫu đặt hàng (Order Template) giúp chuẩn hóa danh mục đặt theo từng ca, từng ngày, tăng tốc độ đặt hàng lên 80% và tránh tình trạng nhân viên quên đặt mặt hàng thiết yếu."
+  },
+  {
+    "id": "M2_13",
+    "role": "manager",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#TRF-103",
+    "subsystem": "PHAN_HE_04_DIEU_CHUYEN",
+    "subsystemName": "Quy Trình Điều Chuyển Hàng Hóa",
+    "category": "ĐIỀU CHUYỂN",
+    "title": "Điều chuyển hàng hóa giữa 2 kho trực thuộc cùng 1 chi nhánh (Chuyển kho nội bộ)",
+    "prompt": "Nhà hàng có 2 kho: 'Kho Bếp' và 'Kho Pha Chế'. Hàng ngày Bếp xuất chuyển 5 hộp sữa sang Quầy bar. Quy trình điều chuyển nội bộ chi nhánh có gì khác so với điều chuyển giữa 2 chi nhánh xa nhau?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Có thể cấu hình duyệt chuyển nhận tức thì (1 bước) để giảm bớt thao tác xác nhận rườm rà trong cùng một mặt bằng",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Vẫn bắt buộc phải thuê xe tải chở ra đường lớn rồi quay vào",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Phải xuất hóa đơn đỏ VAT",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Không được phép chuyển hàng giữa các kho trong cùng quán",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 048 & Cài đặt hệ thống: Vận hành kho hàng.",
+    "explanation": "IVT Pro cho phép linh hoạt cấu hình: Điều chuyển giữa các kho trong cùng chi nhánh có thể chọn cơ chế xác nhận nhanh để phù hợp với tốc độ vận hành F&B."
+  },
+  {
+    "id": "M3_07",
+    "role": "manager",
+    "level": 3,
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#BOM-103",
+    "subsystem": "PHAN_HE_05_XUAT_BAN_DINH_LUONG",
+    "subsystemName": "Xuất Bán POS & Định Lượng BOM",
+    "category": "ĐỊNH LƯỢNG",
+    "title": "Định lượng theo Combo và Set Menu",
+    "prompt": "Món 'Combo Sinh Nhật' gồm: 1 Bánh sinh nhật, 6 Ly Trà đào và 1 Đĩa Khoai tây chiên. Công thức định lượng trên IVT Pro được thiết lập thế nào?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Định lượng thành phần của Combo gồm trực tiếp các món con (hoặc các NVL thô cấu thành các món con)",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Không thể định lượng được Combo trên phần mềm",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Bắt thu ngân phải bấm order rời từng món trên POS",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Chỉ định lượng bánh sinh nhật, bỏ qua nước và khoai tây",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 018: Công thức chế biến món Combo.",
+    "explanation": "Cơ chế BOM Combo của IVT Pro cho phép bóc tách cấu trúc đa tầng: Khách mua 1 mã Combo trên POS nhưng kho tự động phân rã trừ đúng định lượng của từng món thành phần."
+  },
+  {
+    "id": "M3_08",
+    "role": "manager",
+    "level": 3,
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#MFG-103",
+    "subsystem": "PHAN_HE_06_SAN_XUAT_BEP_TRUNG_TAM",
+    "subsystemName": "Sản Xuất Bếp Trung Tâm",
+    "category": "SẢN XUẤT",
+    "title": "Quản lý Hao hụt trong quy trình nấu Bán thành phẩm",
+    "prompt": "Công thức nấu 10 lít 'Nước Sốt Cay' cần 12kg cà chua tươi (hao hụt 20% do bỏ vỏ và bay hơi). Hao hụt trong chế biến được khai báo ở đâu?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Khai báo trực tiếp Tỷ lệ hao hụt (%) trong bảng Công thức chế biến của món BTP đó",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Mỗi lần nấu xong phải tạo thêm 1 phiếu xuất hủy 2kg cà chua",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Đổ thêm 2kg nước lọc vào cho đủ 12kg",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Không cần khai báo hao hụt",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 045 & 046: Công thức chế biến BTP và Hao hụt sản xuất.",
+    "explanation": "Tỷ lệ hao hụt định mức trong công thức giúp hệ thống tự động tính lượng NVL thô cần chuẩn bị và tính đúng giá thành 1 lít sốt thành phẩm sau khi đã bù trừ hao hụt chế biến."
+  },
+  {
+    "id": "M3_09",
+    "role": "manager",
+    "level": 3,
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#INV-103",
+    "subsystem": "PHAN_HE_07_KIEM_KE",
+    "subsystemName": "Quy Trình Kiểm Kê & Xử Lý Chênh Lệch",
+    "category": "HẠN DÙNG",
+    "title": "Theo dõi Tình trạng hàng hóa và Cảnh báo cận Date",
+    "prompt": "Tính năng 'Tình trạng hàng hoá' (Chuyên đề 055) giúp người quản lý kho theo dõi và giải quyết vấn đề gì?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Ghi nhận phân loại hàng hoá theo trạng thái: Bình thường, Hỏng hóc, Hết hạn sử dụng, Chờ thanh lý để có phương án xử lý kịp thời",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Chỉ để ghi chú thời tiết hôm nay nắng hay mưa",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Dùng để đánh giá xếp loại thi đua nhân viên",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Tự động đổi tên món ăn thành món mới",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 055: Tình trạng hàng hoá.",
+    "explanation": "Phân loại tình trạng hàng tồn giúp tách riêng hàng lỗi/hỏng ra khỏi khu vực kinh doanh, ngăn chặn việc nhân viên lấy nhầm nguyên liệu quá đát để phục vụ khách hàng."
+  },
+  {
+    "id": "T3_07",
+    "role": "tech",
+    "level": 3,
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#CGS-204",
+    "subsystem": "PHAN_HE_08_GIA_VON",
+    "subsystemName": "Tính Giá Vốn & Kế Toán Kho",
+    "category": "THUẬT TOÁN",
+    "title": "Thuật toán Giá vốn Bình quân gia quyền liên hoàn (Moving Average)",
+    "prompt": "Bản chất của thuật toán tính giá vốn Bình quân gia quyền tức thời (liên hoàn) trong IVT Pro là gì?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Mỗi khi có một phiếu nhập kho mới, đơn giá bình quân của mặt hàng được tính toán lại ngay lập tức: Đơn giá mới = (Giá trị tồn trước + Giá trị nhập mới) / (Số lượng tồn trước + Số lượng nhập mới)",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Lấy giá của lần nhập đầu tiên trong đời dùng mãi mãi",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Lấy giá cao nhất nhân với số lượng tồn",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Lấy giá trung bình cộng đơn giản của các nhà cung cấp",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 056 & Tài liệu 09 - Mục 4.3: Vận hành kho hàng.",
+    "explanation": "Bình quân liên hoàn phản ánh chính xác nhất giá trị thị trường của tồn kho F&B: Đơn giá xuất kho của từng ly đồ uống sẽ bám sát theo biến động giá của các đợt nhập hàng gần nhất."
+  },
+  {
+    "id": "T3_08",
+    "role": "tech",
+    "level": 3,
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#AP-203",
+    "subsystem": "PHAN_HE_09_CONG_NO",
+    "subsystemName": "Quản Lý Công Nợ Nhà Cung Cấp",
+    "category": "ĐỐI SOÁT",
+    "title": "Xử lý lệch công nợ do huỷ phiếu nhập kho đã thanh toán",
+    "prompt": "Kế toán lỡ bấm huỷ một Phiếu nhập kho mua hàng trong khi phiếu này đã được tạo chứng từ Chi tiền thanh toán công nợ. Hệ thống IVT Pro xử lý ràng buộc này như thế nào?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Hệ thống khoá không cho huỷ phiếu nhập; bắt buộc người dùng phải vào huỷ Phiếu chi thanh toán công nợ trước rồi mới được huỷ phiếu nhập",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Hệ thống cho huỷ thoải mái và tự động làm mất số tiền đã chi",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Phần mềm tự động trừ tiền trong tài khoản của nhân viên kế toán",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Tự động tạo ra một nhà cung cấp mới",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Tài liệu 10 - Mục E1: Thanh toán công nợ nhà cung cấp không khớp.",
+    "explanation": "Ràng buộc toàn vẹn kế toán: Chứng từ sinh sau (Phiếu chi) ràng buộc chứng từ sinh trước (Phiếu nhập). Muốn huỷ chứng từ gốc, bắt buộc phải hồi tố huỷ các chứng từ phái sinh theo đúng thứ tự."
+  },
+  {
+    "id": "T3_09",
+    "role": "tech",
+    "level": 3,
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#FRN-202",
+    "subsystem": "PHAN_HE_10_NHUONG_QUYEN",
+    "subsystemName": "Nhượng Quyền Franchise & Bán Nội Bộ",
+    "category": "BẢN QUYỀN",
+    "title": "Chính sách giá sản phẩm và Bán quyền sử dụng kho cho đại lý nhượng quyền",
+    "prompt": "Theo Chuyên đề 108: Chính sách giá sản phẩm iPOS Inventory, khi chuỗi mở thêm chi nhánh nhượng quyền thì mô hình cấp bản quyền được tính như thế nào?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Mỗi chi nhánh nhượng quyền được cấp một tài khoản kho riêng theo từng điểm kinh doanh (Point of Sale / Warehouse License)",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Dùng chung một tài khoản cho toàn bộ 100 chi nhánh",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Được miễn phí vĩnh viễn không cần đăng ký",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Phải mua cả hệ thống máy chủ vật lý đặt tại chi nhánh",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 108: Chính sách giá sản phẩm iPOS Inventory.",
+    "explanation": "Mỗi điểm kinh doanh được cấp bản quyền tương ứng để đảm bảo tính độc lập về dữ liệu, bảo mật số liệu tài chính giữa các chủ đầu tư nhượng quyền khác nhau trong cùng hệ sinh thái thương hiệu."
+  },
+  {
+    "id": "T3_10",
+    "role": "tech",
+    "level": 3,
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#RPT-203",
+    "subsystem": "PHAN_HE_11_BAO_CAO",
+    "subsystemName": "Toàn Bộ Hệ Thống Báo Cáo Quản Trị",
+    "category": "BÁO CÁO F",
+    "title": "Nhóm Báo cáo Phân tích (Nhóm F) và Hệ số Giá vốn / Doanh thu (Cost of Goods Sold %)",
+    "prompt": "Trong nhóm Báo cáo Phân tích (Chuyên đề 063), chỉ số Tỷ lệ Cost món (% Giá vốn / Giá bán) giúp nhà hàng đưa ra quyết định gì về thực đơn?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Xác định món nào có chi phí nguyên liệu quá cao để điều chỉnh giá bán hoặc tối ưu lại định lượng công thức pha chế",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Quyết định sa thải nhân viên phục vụ bàn",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Tính xem có nên đổi địa điểm nhà hàng không",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Báo cáo này chỉ dành cho cơ quan thuế",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 063: Báo cáo phân tích F&B.",
+    "explanation": "Chỉ số Food Cost % chuẩn ngành F&B thường dao động từ 25% - 35%. Báo cáo phân tích nhóm F soi rõ từng món ăn để ban giám đốc tối ưu ma trận menu (Menu Engineering)."
+  },
+  {
+    "id": "T3_11",
+    "role": "tech",
+    "level": 3,
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#TCK-204",
+    "subsystem": "PHAN_HE_12_CHAN_DOAN_TICKET",
+    "subsystemName": "Chẩn Đoán Sự Cố & Nâng Cấp Phiên Bản",
+    "category": "LỘ TRÌNH V3",
+    "title": "Lộ trình phiên bản IVT V3 (Dự kiến 2026) có những đột phá gì?",
+    "prompt": "Theo Chuyên đề 090: IVT V3 — Gọn hơn, Nhanh hơn, Thông minh hơn, những cải tiến công nghệ then chốt nào được đưa vào hệ thống?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Giao diện tối giản mới, Tối ưu tốc độ xử lý dữ liệu lớn đa chuỗi, Tự động hóa gợi ý đặt hàng bằng AI, và Nâng cấp kiến trúc Microservices",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Chuyển toàn bộ phần mềm sang chạy trên máy nhắn tin",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Bỏ hẳn tính năng quản lý kho chỉ giữ lại máy tính tiền",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Không có bất kỳ nâng cấp nào",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 090: IVT V3 — Gọn hơn, Nhanh hơn, Thông minh hơn.",
+    "explanation": "Thế hệ V3 giải quyết bài toán hiệu năng cao cho các chuỗi hàng trăm cửa hàng: Xử lý dữ liệu song song cực nhanh, giảm tải thời gian chốt sổ cuối kỳ và tích hợp trợ lý AI gợi ý nhập hàng thông minh."
+  },
+  {
+    "id": "M1_15",
+    "role": "manager",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#SYS-105",
+    "subsystem": "PHAN_HE_01_CAU_HINH",
+    "subsystemName": "Khởi Tạo & Cài Đặt Hệ Thống",
+    "category": "KHO HÀNG",
+    "title": "Phân biệt Kho Bán Hàng và Kho Phế Liệu / Xuất Hủy",
+    "prompt": "Tại sao nhà hàng nên tạo riêng một 'Kho Hủy / Kho Phế Liệu' trong Danh mục Kho hàng?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Để điều chuyển các nguyên liệu hỏng, hết date vào kho này trước khi tiêu huỷ, giúp tách bạch hàng kinh doanh và hàng chờ hủy",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Để cất đồ dùng cá nhân của nhân viên",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Để giấu hàng trốn thuế",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Hệ thống IVT không cho phép tạo nhiều kho",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 019: Danh mục kho hàng.",
+    "explanation": "Tách riêng Kho Hủy giúp thủ kho kiểm soát chặt chẽ hàng phế liệu, chụp ảnh lập biên bản huỷ rõ ràng mà không làm lẫn lộn vào tồn kho khả dụng của quầy pha chế."
+  },
+  {
+    "id": "T1_12",
+    "role": "tech",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#CAT-204",
+    "subsystem": "PHAN_HE_02_DANH_MUC",
+    "subsystemName": "Danh Mục Hàng Hóa & 12 Danh Mục",
+    "category": "ĐỒNG BỘ",
+    "title": "Nguyên tắc Đồng bộ danh mục từ POS sang IVT",
+    "prompt": "Khi bấm nút 'Đồng bộ từ POS' trong IVT Pro, những dữ liệu nào sẽ được kéo từ POS về và những dữ liệu nào cần phải thiết lập bổ sung trong IVT?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Kéo Tên món, Mã món, Nhóm món và Giá bán từ POS về; người dùng phải tự khai báo tiếp ĐVT cơ bản, Công thức định lượng (BOM) và cấu hình tồn kho trong IVT",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Kéo về toàn bộ cả công thức nấu ăn mà không cần làm gì thêm",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Đồng bộ cả số tiền trong két sắt của thu ngân",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Chỉ kéo hình ảnh của món ăn",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Tài liệu 09 - Mục 6.2: Đồng bộ danh mục từ POS.",
+    "explanation": "POS chỉ quản lý thông tin bán hàng cho thu ngân (tên món, giá bán). IVT Pro quản lý tầng sâu hậu cần, nên sau khi sync món về, thủ kho bắt buộc phải liên kết món đó với các nguyên vật liệu cấu thành."
+  },
+  {
+    "id": "M2_14",
+    "role": "manager",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#ORD-105",
+    "subsystem": "PHAN_HE_03_DAT_HANG_CUNG_UNG",
+    "subsystemName": "Quy Trình Đặt Hàng & Cung Ứng",
+    "category": "CUNG ỨNG",
+    "title": "Kiểm soát thời hạn giao hàng và Cảnh báo đơn đặt hàng quá hạn",
+    "prompt": "Đơn đặt hàng gửi NCC từ 3 ngày trước nhưng đến nay chưa thấy giao. Báo cáo nào giúp quản lý lọc ra toàn bộ các PO đang bị trễ hạn?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Báo cáo Đặt hàng (Nhóm B) > Báo cáo Tiến độ thực hiện đơn hàng",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Báo cáo Danh sách khách hàng sinh nhật",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Báo cáo Bảng lương nhân viên",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Báo cáo Đánh giá món ăn",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 059: Báo cáo đặt hàng.",
+    "explanation": "Báo cáo tiến độ đặt hàng theo dõi chi tiết trạng thái từng PO: Chưa giao, Giao một phần, Giao trễ hạn, giúp bộ phận mua hàng chủ động đôn đốc hoặc tìm nguồn hàng thay thế."
+  },
+  {
+    "id": "T2_13",
+    "role": "tech",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#TRF-204",
+    "subsystem": "PHAN_HE_04_DIEU_CHUYEN",
+    "subsystemName": "Quy Trình Điều Chuyển Hàng Hóa",
+    "category": "ĐIỀU CHUYỂN",
+    "title": "Huỷ phiếu điều chuyển hàng hoá khi hàng đã đi đường",
+    "prompt": "Kho A đã xuất điều chuyển hàng sang Kho B. Khi xe đang đi trên đường, Kho A muốn huỷ phiếu xuất này thì điều kiện hệ thống là gì?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Chỉ huỷ được khi Kho B CHƯA bấm 'Xác nhận nhập điều chuyển'; nếu Kho B đã nhận hàng thì phải làm phiếu điều chuyển ngược lại từ B về A",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Kho A có thể huỷ bất cứ lúc nào kể cả khi Kho B đã bán hết hàng",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Phải xoá cả 2 kho đi tạo lại",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Hệ thống cấm tuyệt đối không cho huỷ phiếu điều chuyển",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 077: Cập nhật quy trình điều chuyển.",
+    "explanation": "Tính toàn vẹn của chu trình điều chuyển: Khi kho nhận đã nhập kho thì số tồn đã hòa vào kho B. Lúc này không thể huỷ đơn phương từ kho A mà phải dùng nghiệp vụ điều chuyển trả ngược lại."
+  },
+  {
+    "id": "M3_10",
+    "role": "manager",
+    "level": 3,
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#BOM-104",
+    "subsystem": "PHAN_HE_05_XUAT_BAN_DINH_LUONG",
+    "subsystemName": "Xuất Bán POS & Định Lượng BOM",
+    "category": "ĐỊNH LƯỢNG",
+    "title": "Định lượng nguyên liệu phụ không đáng kể (Gia vị, tăm, khăn giấy)",
+    "prompt": "Các nguyên liệu như Muối tinh, Tiêu đen, Tăm tre có giá trị rất nhỏ và dùng vài hạt mỗi đĩa. Quản lý nên định lượng như thế nào để vừa kiểm soát được vừa không gây áp lực nhập liệu?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Quy về đơn vị gói/hũ và xuất kho định kỳ (Xuất sử dụng nội bộ đầu tháng) tính thẳng vào chi phí vận hành thay vì trừ lắt nhắt từng hạt trên từng đĩa",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Bắt đầu bếp đếm từng hạt muối để gõ vào BOM",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Bỏ mặc không mua các loại gia vị này nữa",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Tăng giá món ăn lên gấp 3 lần",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Cẩm nang quản lý kho F&B thực chiến - Tối ưu hóa BOM.",
+    "explanation": "Nguyên tắc 80/20 trong F&B: 80% giá trị nằm ở 20% nguyên liệu chính (Thịt, Hải sản, Trà, Cà phê, Sữa) cần quản lý chặt từng gam; các gia vị nhỏ nên xuất chi phí định kỳ để tinh gọn bộ máy."
+  },
+  {
+    "id": "T3_12",
+    "role": "tech",
+    "level": 3,
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#MFG-203",
+    "subsystem": "PHAN_HE_06_SAN_XUAT_BEP_TRUNG_TAM",
+    "subsystemName": "Sản Xuất Bếp Trung Tâm",
+    "category": "SẢN XUẤT",
+    "title": "Cơ chế Lệnh sản xuất tự động theo Nhu cầu đặt hàng từ các chi nhánh (Make to Order)",
+    "prompt": "Bếp trung tâm nhận được đơn đặt hàng của 15 quán: Tổng cần 300kg sốt lẩu. Hệ thống IVT Pro hỗ trợ lập Lệnh sản xuất như thế nào?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Dùng tính năng 'Lập kế hoạch sản xuất từ Đơn đặt hàng nội bộ', hệ thống tự động bóc tách tổng nguyên liệu thô cần dùng và sinh Phiếu sản xuất tương ứng",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Bếp trưởng tự lấy giấy bút ra tính nhẩm",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Hệ thống từ chối không cho nấu quá 50kg",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Bắt các quán tự nấu",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 041 & 060: Báo cáo sản xuất và Lập kế hoạch Bếp trung tâm.",
+    "explanation": "Quy trình sản xuất tinh gọn (Lean Kitchen): Hệ thống tự động nhân số lượng BTP cần giao với định mức BOM chế biến để ra bảng tổng nhu cầu NVL cần xuất kho nấu, tránh tồn đọng lãng phí."
+  },
+  {
+    "id": "M1_16",
+    "role": "manager",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#INV-104",
+    "subsystem": "PHAN_HE_07_KIEM_KE",
+    "subsystemName": "Quy Trình Kiểm Kê & Xử Lý Chênh Lệch",
+    "category": "KIỂM KÊ",
+    "title": "Sử dụng Ứng dụng Di Động (App Mobile) để quét mã vạch kiểm kê kho",
+    "prompt": "Thủ kho dùng điện thoại di động cài App iPOS Inventory Pro để kiểm kê. Lợi ích lớn nhất so với ghi chép sổ giấy là gì?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Dùng camera quét mã vạch trên thùng hàng, nhập số lượng đếm được trực tiếp tại kệ kho và đồng bộ tức thì lên hệ thống",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Để vừa đếm kho vừa xem phim giải trí",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Không có lợi ích gì, sổ giấy vẫn tốt hơn",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "App di động chỉ dùng để gọi điện thoại",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 112 & 122: Phiên bản App kiểm kê hàng hóa.",
+    "explanation": "Kiểm kê bằng App di động loại bỏ hoàn toàn khâu trung gian gõ lại số liệu từ giấy vào máy tính, giảm thiểu 100% lỗi đọc nhầm chữ viết tay và tiết kiệm nửa ngày công kiểm kê."
+  },
+  {
+    "id": "T1_13",
+    "role": "tech",
+    "level": 1,
+    "zone": "Làng Khởi Đầu",
+    "ticketCode": "#CGS-205",
+    "subsystem": "PHAN_HE_08_GIA_VON",
+    "subsystemName": "Tính Giá Vốn & Kế Toán Kho",
+    "category": "GIÁ VỐN",
+    "title": "Khắc phục sự cố đơn giá vốn bị biến động nhảy vọt do nhập nhầm Đơn vị tính",
+    "prompt": "Nhân viên nhập kho 1 Thùng sữa (12 hộp) giá 360.000đ nhưng lại chọn ĐVT là 'Hộp' và gõ số tiền 360.000đ. Hệ quả đối với giá vốn và cách khắc phục?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Đơn giá vốn của 1 hộp sữa bị đội lên gấp 12 lần (từ 30.000đ thành 360.000đ); phải vào sửa lại phiếu nhập đúng ĐVT là Thùng hoặc sửa đơn giá về 30.000đ rồi chạy lại giá vốn",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Không ảnh hưởng gì vì phần mềm tự hiểu",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Hệ thống sẽ tự động trừ bớt tiền của nhà cung cấp",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Sữa sẽ bị chua hỏng",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Tài liệu 10 - Mục B2: Giá vốn sai do nhập sai đơn vị tính.",
+    "explanation": "Lỗi nhập nhầm ĐVT trên phiếu mua hàng là nguyên nhân hàng đầu khiến báo cáo giá vốn nhảy số bất thường. Sửa chứng từ gốc và chạy lại giá vốn là bước chuẩn mực để phục hồi số liệu."
+  },
+  {
+    "id": "M2_15",
+    "role": "manager",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#AP-103",
+    "subsystem": "PHAN_HE_09_CONG_NO",
+    "subsystemName": "Quản Lý Công Nợ Nhà Cung Cấp",
+    "category": "CÔNG NỢ",
+    "title": "Thỏa thuận Hạn mức công nợ và Cảnh báo vượt trần nợ NCC",
+    "prompt": "Nhà cung cấp rau sạch ký hợp đồng cho quán nợ tối đa 30 triệu đồng hoặc 15 ngày. IVT Pro hỗ trợ kiểm soát hạn mức này thế nào?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Thiết lập Hạn mức nợ và Số ngày được nợ trong Danh mục NCC; hệ thống sẽ cảnh báo khi tạo đơn đặt hàng mới nếu quán đã nợ quá hạn mức",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Phần mềm tự động khoá cửa nhà hàng không cho khách vào",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Tự động gửi tin nhắn đòi nợ tới điện thoại của khách hàng",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Hệ thống không hỗ trợ quản lý hạn mức",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 022: Danh mục nhà cung cấp & Hạn mức công nợ.",
+    "explanation": "Cảnh báo hạn mức công nợ giúp chủ nhà hàng duy trì uy tín tín dụng với đối tác cung ứng, tránh việc bị NCC cắt nguồn hàng đột ngột vào giờ cao điểm kinh doanh."
+  },
+  {
+    "id": "T2_14",
+    "role": "tech",
+    "level": 2,
+    "zone": "Đảo Bếp Trung Tâm",
+    "ticketCode": "#FRN-203",
+    "subsystem": "PHAN_HE_10_NHUONG_QUYEN",
+    "subsystemName": "Nhượng Quyền Franchise & Bán Nội Bộ",
+    "category": "CẤU HÌNH",
+    "title": "Bảo mật công thức bí mật gia truyền của thương hiệu với đại lý nhượng quyền",
+    "prompt": "Chủ chuỗi trà sữa không muốn các chi nhánh nhượng quyền nhìn thấy công thức pha chế chi tiết của 'Cốt Trà Hoàng Gia'. IVT Pro giải quyết bài toán này như thế nào?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Sản xuất đóng gói Cốt Trà thành Bán thành phẩm tại Bếp trung tâm và xuất điều chuyển cho đại lý; đại lý chỉ nhìn thấy mã BTP và định lượng 1 cấp (ly trà = cốt trà + đá)",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Xoá toàn bộ công thức trên hệ thống không cho ai xem",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Bắt đại lý ký cam kết không được tò mò",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Không thể giấu được công thức trên phần mềm",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 057: Quản trị nhượng quyền & Bảo vệ công thức F&B.",
+    "explanation": "Đây là mô hình chuẩn của mọi chuỗi F&B lớn (KFC, Highlands, Phúc Long): Trừ kho 2 cấp kết hợp Bếp trung tâm giúp bảo vệ bí quyết thương hiệu tuyệt đối trước các đối tác nhượng quyền."
+  },
+  {
+    "id": "M3_11",
+    "role": "manager",
+    "level": 3,
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#RPT-104",
+    "subsystem": "PHAN_HE_11_BAO_CAO",
+    "subsystemName": "Toàn Bộ Hệ Thống Báo Cáo Quản Trị",
+    "category": "ĐỐI SOÁT",
+    "title": "Báo cáo Chi phí Hủy hàng và Hao hụt theo Lý do xuất",
+    "prompt": "Cuối tháng, Giám đốc yêu cầu báo cáo tổng kết: Bao nhiêu tiền nguyên liệu bị hủy do 'Hết hạn sử dụng', bao nhiêu do 'Nhân viên làm rơi vỡ', bao nhiêu do 'Khách chê đổi trả'. Xem ở đâu?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Báo cáo Xuất kho theo Lý do xuất trong phân hệ Báo cáo Quản trị kho",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Báo cáo Danh mục bảng giá",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Xem trong mục Cài đặt tài khoản",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Không thể xem được báo cáo này",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Chuyên đề 058 & 063: Báo cáo xuất kho theo lý do.",
+    "explanation": "Báo cáo chi phí hủy theo lý do bóc trần những điểm rò rỉ lợi nhuận ngầm: Giúp ban giám đốc chấn chỉnh quy trình bảo quản nếu hàng hết date nhiều, hoặc đào tạo lại tay nghề nếu bếp làm hỏng nhiều."
+  },
+  {
+    "id": "T3_13",
+    "role": "tech",
+    "level": 3,
+    "zone": "Tháp Chẩn Đoán",
+    "ticketCode": "#TCK-205",
+    "subsystem": "PHAN_HE_12_CHAN_DOAN_TICKET",
+    "subsystemName": "Chẩn Đoán Sự Cố & Nâng Cấp Phiên Bản",
+    "category": "TỐI ƯU",
+    "title": "Tối ưu hoá hiệu năng cơ sở dữ liệu khi hệ thống kho chạy chậm vào ngày cuối tháng",
+    "prompt": "Vào ngày 30 hàng tháng, hàng trăm chi nhánh cùng chốt kiểm kê khiến thao tác lưu phiếu bị quay tròn (loading lâu). Kỹ thuật viên hướng dẫn giải pháp tối ưu là gì?",
+    "options": [
+      {
+        "id": "A",
+        "label": "Chia nhỏ phiếu kiểm kê theo từng nhóm hàng (thay vì 1 phiếu gom hàng ngàn món), và kiểm kê cuốn chiếu các kho phụ trước giờ cao điểm",
+        "isCorrect": true
+      },
+      {
+        "id": "B",
+        "label": "Bảo khách đập máy tính đi mua máy khác",
+        "isCorrect": false
+      },
+      {
+        "id": "C",
+        "label": "Tắt hết internet của cả chuỗi",
+        "isCorrect": false
+      },
+      {
+        "id": "D",
+        "label": "Không làm kiểm kê nữa để máy chạy cho nhanh",
+        "isCorrect": false
+      }
+    ],
+    "hint": "Xem Cẩm nang kỹ thuật iPOS: Tối ưu hiệu năng và xử lý chậm treo hệ thống.",
+    "explanation": "Kiểm kê phân đoạn (Sectional Inventory) là giải pháp vận hành thông minh: Giảm dung lượng payload của từng transaction, tránh tình trạng Database Lock bảng và nâng tốc độ lưu phiếu lên gấp 5 lần."
   }
 ]
