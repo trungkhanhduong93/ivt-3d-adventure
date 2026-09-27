@@ -5050,7 +5050,7 @@ Y("help").onclick=pg;function Ti(){const i=Object.values(ie.questionStats),e=i.r
     const hideNear=!r.visible;
     if(i.hidden!==hideNear)i.hidden=hideNear;
     if(!hideNear){
-      i.style.transform=`translate(${r.x.toFixed(1)}px,${r.y.toFixed(1)}px) ${t}`;
+      i.style.transform=`translate(${r.x.toFixed(1)}px,${r.y.toFixed(1)}px) ${t} scale(1.08)`;
       i.style.opacity="1";
     }
     return;
