@@ -4508,17 +4508,17 @@ function Ql(i,e,t,n,r){const s=n.scale,a=i.createRadialGradient(e/2,t/2,0,e/2,t/
   }
 }
 Y("play").onclick=startAdventure;for(const i of["boy","girl"])Y(i).onclick=()=>{ie.avatar=i,_e.setAvatar(i),_n(),Xt()};const _stationsDef=[
-  {id:"house-label",type:"house",name:"Nhà Bên Milo - Danh Mục Gốc",pos:[-4.0,2.0,-9.5],subs:["PHAN_HE_02_DANH_MUC","PHAN_HE_01_CAU_HINH"]},
-  {id:"pond-label",type:"pond",name:"Bến Hồ Cá - Cấu Hình & Nghiệm Thu",pos:[-36.5,1.5,-7.5],subs:["PHAN_HE_01_CAU_HINH","PHAN_HE_01_KHOI_TAO","PHAN_HE_01_RESET_DATA"]},
-  {id:"pos-label",type:"pos",name:"Quầy Thu Ngân POS",pos:[-8.5,1.8,-2.5],subs:["PHAN_HE_01_CAU_HINH","PHAN_HE_05_XUAT_BAN_DINH_LUONG"]},
-  {id:"weigh-label",type:"weigh",name:"Bàn Cân & Pallet Kho",pos:[-1.5,1.8,7.5],subs:["PHAN_HE_02_DANH_MUC","PHAN_HE_03_DAT_HANG_CUNG_UNG"]},
-  {id:"kitchen-label",type:"kitchen",name:"Nồi Nấu Bếp Trung Tâm",pos:[18.0,2.0,-6.0],subs:["PHAN_HE_06_SAN_XUAT_BEP_TRUNG_TAM","PHAN_HE_04_DIEU_CHUYEN"]},
-  {id:"audit-label",type:"audit",name:"Kệ Kho & Quét Barcode",pos:[33.0,2.2,16.0],subs:["PHAN_HE_07_KIEM_KE","PHAN_HE_11_BAO_CAO"]},
-  {id:"server-label",type:"server",name:"Tháp Ticket Cứu Hộ",pos:[54.0,2.5,-18.0],subs:["PHAN_HE_08_GIA_VON","PHAN_HE_12_CHAN_DOAN_TICKET"]},
-  {id:"truck-label",type:"truck",name:"Xe Tải Điều Chuyển",pos:[12.0,2.0,-8.0],subs:["PHAN_HE_04_DIEU_CHUYEN","PHAN_HE_03_DAT_HANG_CUNG_UNG"]},
-  {id:"crate1-label",type:"crate",name:"Rương Bí Ẩn BTP",pos:[24.0,1.5,-12.0],subs:["PHAN_HE_06_SAN_XUAT_BEP_TRUNG_TAM","PHAN_HE_05_XUAT_BAN_DINH_LUONG"]},
-  {id:"crate2-label",type:"crate",name:"Rương Sự Cố Date",pos:[38.0,1.5,8.0],subs:["PHAN_HE_04_DIEU_CHUYEN","PHAN_HE_11_BAO_CAO"]},
-  {id:"crate3-label",type:"crate",name:"Rương Cứu Hộ Giá Vốn",pos:[48.0,1.5,-8.0],subs:["PHAN_HE_08_GIA_VON","PHAN_HE_12_CHAN_DOAN_TICKET"]}
+  {id:"house-label",type:"house",name:"Nhà Bên Milo - Danh Mục Gốc",pos:[-4.0,2.0,-9.5],subs:["PHAN_HE_02_DANH_MUC"]},
+  {id:"pond-label",type:"pond",name:"Bến Hồ Cá - Cấu Hình & Nghiệm Thu",pos:[-36.5,1.5,-7.5],subs:["PHAN_HE_01_CAU_HINH"]},
+  {id:"pos-label",type:"pos",name:"Quầy Thu Ngân POS",pos:[-8.5,1.8,-2.5],subs:["PHAN_HE_05_XUAT_BAN_DINH_LUONG"]},
+  {id:"weigh-label",type:"weigh",name:"Bàn Cân & Pallet Kho",pos:[-1.5,1.8,7.5],subs:["PHAN_HE_03_DAT_HANG_CUNG_UNG"]},
+  {id:"kitchen-label",type:"kitchen",name:"Nồi Nấu Bếp Trung Tâm",pos:[18.0,2.0,-6.0],subs:["PHAN_HE_06_SAN_XUAT_BEP_TRUNG_TAM"]},
+  {id:"truck-label",type:"truck",name:"Xe Tải Điều Chuyển",pos:[12.0,2.0,-8.0],subs:["PHAN_HE_04_DIEU_CHUYEN"]},
+  {id:"crate1-label",type:"crate",name:"Rương Bí Kíp Nhượng Quyền",pos:[24.0,1.5,-12.0],subs:["PHAN_HE_10_NHUONG_QUYEN"]},
+  {id:"audit-label",type:"audit",name:"Kệ Kho & Quét Barcode",pos:[33.0,2.2,16.0],subs:["PHAN_HE_07_KIEM_KE"]},
+  {id:"crate2-label",type:"crate",name:"Rương Sự Cố Báo Cáo",pos:[38.0,1.5,8.0],subs:["PHAN_HE_11_BAO_CAO"]},
+  {id:"crate3-label",type:"crate",name:"Rương Cứu Hộ Công Nợ",pos:[48.0,1.5,-8.0],subs:["PHAN_HE_09_CONG_NO"]},
+  {id:"server-label",type:"server",name:"Tháp Ticket Cứu Hộ",pos:[54.0,2.5,-18.0],subs:["PHAN_HE_08_GIA_VON","PHAN_HE_12_CHAN_DOAN_TICKET"]}
 ];
 const WEST_STATION_IDS = ["house", "pond", "pos", "weigh"];
 const WEST_STATION_META = {
@@ -4766,7 +4766,7 @@ function getNextSuggestedQuest(){
     const stDef = _stationsDef.find(s => s.id === `${stId}-label` || s.type === stId);
     if (!stDef) return false;
     const pool = getStationQuestionPool(stDef, role);
-    return pool.length > 0 && pool.some(q => ie.questionStats?.[q.id]?.correct > 0);
+    return pool.length > 0 && pool.every(q => ie.questionStats?.[q.id]?.correct > 0);
   };
 
   // West bank
@@ -4909,19 +4909,100 @@ _stationsDef.forEach(s=>{const el=Y(s.id);if(el)el.onclick=()=>handleStationClic
   const ws=window._activeStation;
   const role=(ie.avatar==="girl"||ie.avatar==="tech")?"tech":"manager";
   let eyebrow="";
+  
   if(Kt==="station"&&ws){
     const pool=getStationQuestionPool(ws,role);
     const qIdx=pool.findIndex(q=>q.id===t.id);
     const currentNum=qIdx>=0?qIdx+1:1;
-    const isReview=window._isReviewMode||pool.every(q=>ie.questionStats?.[q.id]?.correct>0);
-    eyebrow=isReview
-      ? `[ÔN TẬP] ${ws.name} · ÔN TẬP KIẾN THỨC (CÂU ${currentNum}/${pool.length}) · KHÔNG CỘNG EXP`
-      : `${ws.name} · Câu ${currentNum}/${pool.length} · ${t.subsystemName||""}`;
+    const isReview=window._isReviewMode||(pool.length>0&&pool.every(q=>ie.questionStats?.[q.id]?.correct>0));
+    
+    if(isReview){
+      eyebrow=`[ÔN TẬP] ${ws.name} · CÂU ${currentNum} / ${pool.length} · ${t.subsystemName||""}`;
+      
+      const answersHtml = t.options.map((n, r) => {
+        if (n.isCorrect) {
+          return `<div class="answer correct review-correct" style="border: 2px solid #059669 !important; background: #ecfdf5 !important; cursor: default !important; display: flex !important; align-items: center !important;">
+            <kbd style="background: #10b981 !important; color: #fff !important; font-weight: 900; border: 0 !important;">${r + 1}</kbd>
+            <span style="color: #065f46 !important; font-weight: 700; flex: 1 !important;">${n.label}</span>
+            <span class="review-correct-badge" style="margin-left: auto; display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 8px; background: #059669; color: #ffffff; font-size: 11.5px; font-weight: 900; white-space: nowrap; flex-shrink: 0;">${Xe("check")} ĐÁP ÁN ĐÚNG</span>
+          </div>`;
+        } else {
+          return `<div class="answer review-option" style="opacity: 0.65; cursor: default !important; border: 1.5px solid #dce4d5 !important; display: flex !important; align-items: center !important;">
+            <kbd>${r + 1}</kbd>
+            <span style="flex: 1 !important;">${n.label}</span>
+          </div>`;
+        }
+      }).join("");
+
+      const explanationHtml = `
+        <div class="feedback success" style="display:block !important; margin-top: 12px !important;">
+          <div style="background:rgba(16,185,129,0.08); border:1.5px solid #10b981; border-radius:14px; padding:14px 16px; text-align:left;">
+            <div style="display:flex; align-items:center; gap:8px; color:#047857; font-weight:900; font-size:14.5px; margin-bottom:6px;">
+              ${Xe("book")} <span>KIẾN THỨC CỐT LÕI (${t.subsystemName || "IVT PRO"} · ${t.ticketCode || "#TK"})</span>
+            </div>
+            <p style="margin:0; font-size:14px; line-height:1.6; color:#1f2937;">
+              ${t.explanation}
+            </p>
+            ${t.hint ? `<div style="margin-top:8px; padding-top:6px; border-top:1px dashed rgba(16,185,129,0.3); font-size:12.5px; color:#065f46;">💡 <b>Căn cứ nghiệp vụ:</b> ${t.hint}</div>` : ""}
+          </div>
+        </div>
+      `;
+
+      const navBarHtml = `
+        <div class="review-nav-bar" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; margin-top:16px; padding-top:14px; border-top:1.5px solid #e7eadc;">
+          ${qIdx > 0 
+            ? `<button id="review-prev-btn" class="secondary" style="padding:10px 16px; font-size:13px; font-weight:800; cursor:pointer; display:inline-flex; align-items:center; gap:6px;"><span style="display:inline-flex; transform:rotate(180deg); margin-right:2px;">${Xe("arrow")}</span> Câu trước</button>` 
+            : `<button class="secondary" style="opacity:0.4; pointer-events:none; padding:10px 16px; font-size:13px; font-weight:800; display:inline-flex; align-items:center; gap:6px;"><span style="display:inline-flex; transform:rotate(180deg); margin-right:2px;">${Xe("arrow")}</span> Câu trước</button>`}
+          
+          <span style="font-size:13px; font-weight:850; color:#166534; background:#f0fdf4; border:1px solid #bbf7d0; padding:6px 14px; border-radius:10px; white-space:nowrap;">
+            Câu ${currentNum} / ${pool.length}
+          </span>
+
+          ${qIdx < pool.length - 1
+            ? `<button id="review-next-btn" class="primary" style="padding:10px 18px; font-size:13px; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:6px;">Câu kế tiếp ${Xe("arrow")}</button>`
+            : `<button id="review-finish-btn" class="primary" style="background:#059669 !important; padding:10px 18px; font-size:13px; font-weight:900; cursor:pointer; display:inline-flex; align-items:center; gap:6px;">${Xe("check")} Xong đợt ôn tập</button>`}
+        </div>
+      `;
+
+      Jn(
+        t.title || "TÌNH HUỐNG THỰC CHIẾN IVT PRO",
+        `<div class="dialog-eyebrow">${eyebrow}</div>
+         <p class="question-intro"><strong>${t.ticketCode || "#TK"}</strong>: ${t.prompt}</p>
+         <div class="answers">
+           ${answersHtml}
+         </div>
+         ${explanationHtml}
+         ${navBarHtml}`,
+        "quiz"
+      );
+
+      const pBtn = Y("review-prev-btn");
+      if (pBtn && qIdx > 0) {
+        pBtn.onclick = () => Xr("station", pool[qIdx - 1].id);
+      }
+      const nBtn = Y("review-next-btn");
+      if (nBtn && qIdx < pool.length - 1) {
+        nBtn.onclick = () => Xr("station", pool[qIdx + 1].id);
+      }
+      const fBtn = Y("review-finish-btn");
+      if (fBtn) {
+        fBtn.onclick = () => {
+          cr();
+          xt.celebrate();
+          window._isReviewMode = false;
+          In(`🎉 Bạn đã ôn tập xong toàn bộ ${pool.length} câu hỏi tại ${ws ? ws.name : "trạm"}!`);
+        };
+      }
+      return;
+    }
+
+    eyebrow=`${ws.name} · Câu ${currentNum}/${pool.length} · ${t.subsystemName||""}`;
   } else if(Kt==="bridge"){
     eyebrow=`ĐOẠN CẦU ${ie.bridge+1} / ${yt} · ${t.subsystemName||"IVT PRO"}`;
   } else {
     eyebrow=`LUYỆN TẬP TỰ DO · ${t.subsystemName||"IVT PRO"}`;
   }
+
   Jn(
     t.title||"TÌNH HUỐNG THỰC CHIẾN IVT PRO",
     `<div class="dialog-eyebrow">${eyebrow}</div>
