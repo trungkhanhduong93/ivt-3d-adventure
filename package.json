@@ -1,0 +1,26 @@
+{
+  "name": "ivt-3d-adventure",
+  "version": "1.0.0",
+  "description": "IVT 3D Adventure - Game RPG 3D Huấn luyện Kho & Kỹ thuật iPOS IVT Pro",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "ipos",
+    "ivt",
+    "threejs",
+    "rpg",
+    "game"
+  ],
+  "author": "IVT UI/UX Team",
+  "license": "MIT",
+  "dependencies": {
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "vite": "^8.3.1"
+  }
+}

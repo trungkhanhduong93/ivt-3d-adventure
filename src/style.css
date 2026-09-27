@@ -1,0 +1,1884 @@
+/* ===================================================================
+   IVT 3D ADVENTURE - MODERN F&B GLASSMORPHISM STYLESHEET
+   Supports Dual Role Themes: role-manager (Emerald/Warm Coffee) &
+                              role-tech (Cyber Navy/Neon Cyan)
+   Designed for Desktop & Mobile Ergonomics (60fps Glassmorphism)
+   =================================================================== */
+
+/* --- ROOT VARIABLES & COLOR PALETTES --- */
+:root {
+  --font-heading: 'Baloo 2', cursive, sans-serif;
+  --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'Space Grotesk', monospace, sans-serif;
+
+  /* Global Dark Glass Backgrounds */
+  --bg-deep-space: #070c14;
+  --glass-bg: rgba(13, 21, 32, 0.78);
+  --glass-bg-subtle: rgba(18, 30, 49, 0.55);
+  --glass-bg-hover: rgba(26, 44, 72, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-border-bright: rgba(255, 255, 255, 0.28);
+  --glass-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  --glass-glow: 0 0 24px rgba(16, 185, 129, 0.25);
+
+  /* Typography Colors */
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+  --text-highlight: #fef08a;
+
+  /* Functional Status Colors */
+  --color-success: #10b981;
+  --color-success-glow: rgba(16, 185, 129, 0.4);
+  --color-danger: #ef4444;
+  --color-danger-glow: rgba(239, 68, 68, 0.4);
+  --color-warning: #f59e0b;
+  --color-info: #06b6d4;
+
+  /* Safe Area for Mobile Notch / Dynamic Island */
+  --safe-top: env(safe-area-inset-top, 12px);
+  --safe-bottom: env(safe-area-inset-bottom, 16px);
+  --safe-left: env(safe-area-inset-left, 16px);
+  --safe-right: env(safe-area-inset-right, 16px);
+}
+
+/* ===================================================================
+   THEME 1: ROLE CHỦ QUÁN / THỦ KHO F&B (.role-manager)
+   Emerald Cafe, Warm Amber & Golden Cream
+   =================================================================== */
+body.role-manager {
+  --primary: #10b981;
+  --primary-light: #34d399;
+  --primary-dark: #065f46;
+  --primary-glow: rgba(16, 185, 129, 0.45);
+
+  --accent: #f59e0b;
+  --accent-light: #fbbf24;
+  --accent-glow: rgba(245, 158, 11, 0.4);
+
+  --badge-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(245, 158, 11, 0.15));
+  --badge-border: rgba(52, 211, 153, 0.4);
+  --badge-color: #a7f3d0;
+
+  --btn-primary-grad: linear-gradient(135deg, #10b981 0%, #059669 50%, #d97706 100%);
+  --btn-primary-shadow: 0 10px 25px -4px rgba(16, 185, 129, 0.5);
+
+  --radar-blip-player: #34d399;
+  --radar-sweep: rgba(16, 185, 129, 0.25);
+  --minimap-border: rgba(16, 185, 129, 0.5);
+}
+
+/* ===================================================================
+   THEME 2: ROLE KỸ THUẬT VIÊN iPOS (.role-tech)
+   Cyber Navy, Electric Cyan & Neon Hologram
+   =================================================================== */
+body.role-tech {
+  --primary: #06b6d4;
+  --primary-light: #67e8f9;
+  --primary-dark: #0e7490;
+  --primary-glow: rgba(6, 182, 212, 0.45);
+
+  --accent: #8b5cf6;
+  --accent-light: #a78bfa;
+  --accent-glow: rgba(139, 92, 246, 0.4);
+
+  --badge-bg: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(139, 92, 246, 0.2));
+  --badge-border: rgba(103, 232, 249, 0.45);
+  --badge-color: #a5f3fc;
+
+  --btn-primary-grad: linear-gradient(135deg, #06b6d4 0%, #2563eb 50%, #8b5cf6 100%);
+  --btn-primary-shadow: 0 10px 25px -4px rgba(6, 182, 212, 0.5);
+
+  --radar-blip-player: #67e8f9;
+  --radar-sweep: rgba(6, 182, 212, 0.25);
+  --minimap-border: rgba(6, 182, 212, 0.5);
+}
+
+/* --- RESET & GLOBAL SETUP --- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-deep-space);
+  color: var(--text-main);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  touch-action: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 3D Canvas */
+#game-canvas-container,
+#game-canvas-container canvas,
+#game-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  display: block;
+}
+
+/* Main UI Root Layer */
+.ui-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Re-enable pointer events for interactive UI */
+.hud-glass,
+.modal-backdrop,
+.world-prompt-bubble,
+.mobile-controls-layer,
+.toast-stack {
+  pointer-events: auto;
+}
+
+/* Utility to hide elements */
+.hud-hidden {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* ===================================================================
+   GLASSMORPHISM BASE COMPONENT
+   =================================================================== */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  box-shadow: var(--glass-shadow);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel:hover {
+  border-color: var(--glass-border-bright);
+}
+
+/* Keyboard badge element */
+.kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.35);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  margin: 0 2px;
+}
+
+/* ===================================================================
+   TOP HUD (HEADS UP DISPLAY)
+   =================================================================== */
+#top-hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: calc(100% - 32px);
+  max-width: 1400px;
+  margin: calc(var(--safe-top) + 8px) auto 0;
+  padding: 10px 18px;
+  border-radius: 20px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), var(--glass-glow);
+  z-index: 20;
+  transition: all 0.35s ease;
+}
+
+/* Top HUD Left: Player Info */
+.hud-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar-ring {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03));
+  border: 2px solid var(--primary);
+  box-shadow: 0 0 16px var(--primary-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.avatar-ring:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 22px var(--primary-glow);
+}
+
+.avatar-icon {
+  font-size: 24px;
+}
+
+.role-indicator {
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--primary-light);
+  border: 2px solid #0d1520;
+  box-shadow: 0 0 8px var(--primary-light);
+}
+
+.player-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.role-tag-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.badge-role {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  padding: 2px 8px;
+  border-radius: 8px;
+  background: var(--badge-bg);
+  border: 1px solid var(--badge-border);
+  color: var(--badge-color);
+  text-transform: uppercase;
+}
+
+.badge-level {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background: rgba(245, 158, 11, 0.2);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #fbbf24;
+}
+
+.player-title {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.2px;
+}
+
+/* EXP Progress Bar */
+.exp-bar-wrap {
+  position: relative;
+  width: 180px;
+  height: 14px;
+  background: rgba(0, 0, 0, 0.45);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+}
+
+.exp-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 60%, var(--accent) 100%);
+  border-radius: 8px;
+  transition: width 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 0 10px var(--primary-glow);
+}
+
+.exp-text {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+  pointer-events: none;
+}
+
+/* Top HUD Center: Objective & Bridge Progress */
+.hud-center {
+  display: flex;
+  justify-content: center;
+}
+
+.objective-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 16px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.objective-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.objective-icon {
+  font-size: 15px;
+}
+
+.objective-title {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  color: #cbd5e1;
+}
+
+.objective-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--primary-light);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 1px 6px;
+  border-radius: 6px;
+}
+
+.bridge-steps {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.step-dot {
+  width: 18px;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.step-dot.active {
+  background: var(--primary-light);
+  box-shadow: 0 0 10px var(--primary-light);
+  border-color: #fff;
+  transform: scaleY(1.2);
+}
+
+.target-kpi {
+  font-size: 10px;
+  color: var(--text-muted);
+  display: flex;
+  gap: 4px;
+}
+
+.kpi-val {
+  color: var(--text-highlight);
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+
+/* Top HUD Right: Action Buttons & Radar Minimap */
+.hud-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hud-buttons {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: var(--glass-bg-subtle);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-icon:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  color: var(--primary-light);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btn-icon:active {
+  transform: translateY(0) scale(0.95);
+}
+
+.icon-svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* Minimap Radar */
+.minimap-container {
+  position: relative;
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(13, 27, 42, 0.85) 0%, rgba(6, 13, 22, 0.95) 100%);
+  border: 2px solid var(--minimap-border);
+  box-shadow: 0 0 16px rgba(0, 0, 0, 0.6), inset 0 0 12px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#minimap-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.radar-scan-line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 2px;
+  transform-origin: 0 0;
+  background: linear-gradient(90deg, transparent 0%, var(--primary-light) 100%);
+  animation: radar-sweep-anim 3s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes radar-sweep-anim {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.minimap-north {
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 800;
+  color: var(--text-highlight);
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.8);
+}
+
+/* ===================================================================
+   WORLD FLOATING INTERACTION PROMPT
+   =================================================================== */
+.world-prompt-bubble {
+  position: fixed;
+  bottom: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--glass-border-bright);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px var(--primary-glow);
+  padding: 8px 18px;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: prompt-float 1.8s ease-in-out infinite;
+  z-index: 25;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+@keyframes prompt-float {
+  0%, 100% { transform: translate(-50%, 0); }
+  50% { transform: translate(-50%, -6px); }
+}
+
+.prompt-key {
+  font-family: var(--font-mono);
+  font-weight: 800;
+  font-size: 13px;
+  background: var(--primary);
+  color: #070c14;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px var(--primary-glow);
+}
+
+.prompt-label {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.3px;
+}
+
+/* ===================================================================
+   MODALS: BACKDROP & BASE
+   =================================================================== */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(5, 9, 16, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+  padding: 16px;
+  transition: opacity 0.3s ease;
+}
+
+.modal-card {
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: modal-pop 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Custom scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.modal-card::-webkit-scrollbar {
+  width: 6px;
+}
+.modal-card::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+@keyframes modal-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Primary Button Glow */
+.btn-primary-glow {
+  background: var(--btn-primary-grad);
+  border: none;
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 14px 28px;
+  border-radius: 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: var(--btn-primary-shadow);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-primary-glow:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 14px 30px -4px var(--primary-glow);
+}
+
+.btn-primary-glow:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.btn-arrow {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.2s ease;
+}
+
+.btn-primary-glow:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+/* ===================================================================
+   START SCREEN & DUAL ROLE SELECTOR
+   =================================================================== */
+.start-card {
+  max-width: 820px;
+  padding: 32px 36px;
+  text-align: center;
+}
+
+.start-header {
+  margin-bottom: 24px;
+}
+
+.logo-badge {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  background: var(--badge-bg);
+  border: 1px solid var(--badge-border);
+  color: var(--badge-color);
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.logo-title {
+  font-family: var(--font-heading);
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 50%, var(--primary-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1.2;
+}
+
+.logo-subtitle {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+.role-selector-wrap {
+  margin: 24px 0;
+  text-align: left;
+}
+
+.role-heading {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-highlight);
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.role-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.role-card {
+  background: rgba(18, 30, 49, 0.45);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.role-card:hover {
+  transform: translateY(-4px);
+  background: rgba(26, 44, 72, 0.6);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.role-card.active {
+  border-color: var(--primary);
+  background: rgba(16, 185, 129, 0.1);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3), 0 0 24px var(--primary-glow);
+}
+
+.role-tech-card.active {
+  background: rgba(6, 182, 212, 0.1);
+}
+
+.role-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.role-icon {
+  font-size: 32px;
+}
+
+.role-type-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-muted);
+}
+
+.role-name {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.role-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.45;
+  margin-bottom: 14px;
+  flex-grow: 1;
+}
+
+.role-features {
+  list-style: none;
+  font-size: 12px;
+  color: #cbd5e1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 12px;
+}
+
+.feat-dot {
+  color: var(--primary-light);
+  font-weight: bold;
+  margin-right: 4px;
+}
+
+.role-select-indicator {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 6px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-muted);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.role-card.active .role-select-indicator {
+  background: var(--primary);
+  color: #070c14;
+  border-color: var(--primary);
+  box-shadow: 0 0 12px var(--primary-glow);
+}
+
+.start-controls-tip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+
+.start-actions {
+  display: flex;
+  justify-content: center;
+}
+
+/* ===================================================================
+   RPG DIALOGUE MODAL
+   =================================================================== */
+.dialog-card {
+  max-width: 680px;
+  padding: 24px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.dialog-npc-avatar-box {
+  flex-shrink: 0;
+}
+
+.npc-avatar-frame {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
+  border: 2px solid var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 20px var(--primary-glow);
+  animation: npc-avatar-float 3s ease-in-out infinite;
+}
+
+@keyframes npc-avatar-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+.npc-avatar-emoji {
+  font-size: 48px;
+}
+
+.npc-status-pulse {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-success);
+  border: 2px solid #0d1520;
+  box-shadow: 0 0 8px var(--color-success);
+  animation: pulse-ring 2s infinite;
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.dialog-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dialog-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dialog-npc-name {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.dialog-npc-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: var(--badge-bg);
+  border: 1px solid var(--badge-border);
+  color: var(--badge-color);
+}
+
+.dialog-speech-text {
+  font-size: 15px;
+  color: #e2e8f0;
+  line-height: 1.6;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 14px 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dialog-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.btn-dialog {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.btn-dialog-primary {
+  background: var(--btn-primary-grad);
+  color: #fff;
+  box-shadow: var(--btn-primary-shadow);
+}
+
+.btn-dialog-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -2px var(--primary-glow);
+}
+
+.btn-dialog-secondary {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-muted);
+}
+
+.btn-dialog-secondary:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+/* ===================================================================
+   TICKET CHALLENGE MODAL (THẺ BÀI NGHIỆP VỤ)
+   =================================================================== */
+.ticket-card {
+  max-width: 720px;
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  border: 2px solid var(--badge-border);
+}
+
+.ticket-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 12px;
+}
+
+.ticket-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ticket-id {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--primary-light);
+  letter-spacing: 0.5px;
+}
+
+.ticket-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: rgba(245, 158, 11, 0.18);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #fcd34d;
+}
+
+.ticket-role-target {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.ticket-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.ticket-close-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.ticket-scenario-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px dashed rgba(245, 158, 11, 0.35);
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-size: 12px;
+  color: #fef08a;
+  margin-bottom: 10px;
+}
+
+.ticket-question {
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.45;
+  margin-bottom: 16px;
+}
+
+/* Options Grid */
+.ticket-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.ticket-option-btn {
+  background: rgba(18, 30, 49, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: left;
+  color: var(--text-main);
+  font-family: var(--font-body);
+  font-size: 14px;
+}
+
+.ticket-option-btn:hover:not(:disabled) {
+  background: rgba(26, 44, 72, 0.85);
+  border-color: var(--primary-light);
+  transform: translateX(4px);
+}
+
+.opt-index-badge {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.ticket-option-btn.correct {
+  background: rgba(16, 185, 129, 0.25) !important;
+  border-color: #10b981 !important;
+  color: #a7f3d0 !important;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.4);
+}
+
+.ticket-option-btn.correct .opt-index-badge {
+  background: #10b981;
+  color: #070c14;
+}
+
+.ticket-option-btn.wrong {
+  background: rgba(239, 68, 68, 0.25) !important;
+  border-color: #ef4444 !important;
+  color: #fecaca !important;
+  box-shadow: 0 0 16px rgba(239, 68, 68, 0.4);
+  animation: shake 0.3s ease;
+}
+
+.ticket-option-btn.wrong .opt-index-badge {
+  background: #ef4444;
+  color: #fff;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
+/* Expandable Hint Box */
+.ticket-hint-box {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.hint-toggle-btn {
+  width: 100%;
+  padding: 8px 14px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hint-toggle-btn:hover {
+  color: var(--text-highlight);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.hint-chevron {
+  margin-left: auto;
+  font-size: 10px;
+  transition: transform 0.25s ease;
+}
+
+.hint-toggle-btn.open .hint-chevron {
+  transform: rotate(180deg);
+}
+
+.hint-content {
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #cbd5e1;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(0, 0, 0, 0.25);
+  line-height: 1.5;
+}
+
+/* Deep Explanation Card */
+.ticket-explanation-box {
+  background: rgba(13, 31, 26, 0.7);
+  border: 1px solid var(--primary);
+  border-radius: 12px;
+  padding: 14px 18px;
+  box-shadow: 0 0 20px var(--primary-glow);
+  animation: modal-pop 0.3s ease;
+}
+
+.explanation-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary-light);
+}
+
+.explanation-body {
+  font-size: 13px;
+  color: #e2e8f0;
+  line-height: 1.55;
+}
+
+/* Ticket Footer */
+.ticket-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 14px;
+}
+
+.ticket-hint-status {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: var(--font-mono);
+}
+
+/* ===================================================================
+   VICTORY POPUP MODAL
+   =================================================================== */
+.victory-card {
+  max-width: 620px;
+  padding: 36px 32px;
+  text-align: center;
+}
+
+.victory-trophy-wrap {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.victory-trophy {
+  font-size: 64px;
+  animation: trophy-bounce 1s ease infinite alternate;
+}
+
+@keyframes trophy-bounce {
+  from { transform: translateY(0) scale(1); }
+  to { transform: translateY(-8px) scale(1.05); }
+}
+
+.victory-title {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #10b981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+}
+
+.victory-subtitle {
+  font-size: 15px;
+  color: #e2e8f0;
+  margin-bottom: 24px;
+}
+
+.victory-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.stat-box {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.stat-number {
+  font-family: var(--font-mono);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-highlight);
+}
+
+.stat-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  margin-top: 2px;
+}
+
+.victory-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+}
+
+/* ===================================================================
+   HELP & TUTORIAL MODAL
+   =================================================================== */
+.help-card {
+  max-width: 660px;
+  padding: 28px;
+}
+
+.help-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+.help-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.help-icon {
+  font-size: 22px;
+}
+
+.help-title {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.help-content-scroll {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-height: 55vh;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.help-section h3 {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--primary-light);
+  margin-bottom: 8px;
+}
+
+.control-table {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.control-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.control-keys {
+  font-size: 13px;
+  color: #fff;
+}
+
+.control-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.npc-legend-list {
+  list-style: none;
+  font-size: 13px;
+  color: #cbd5e1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.help-footer {
+  margin-top: 18px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* ===================================================================
+   MOBILE TOUCH CONTROLS (DÀNH CHO ĐIỆN THOẠI & TABLET)
+   =================================================================== */
+.mobile-controls-layer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 220px;
+  pointer-events: none;
+  z-index: 25;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 calc(var(--safe-right) + 24px) calc(var(--safe-bottom) + 20px) calc(var(--safe-left) + 24px);
+}
+
+/* By default, hide on desktop with fine mouse pointer */
+@media (hover: hover) and (pointer: fine) and (min-width: 901px) {
+  .mobile-controls-layer {
+    display: none;
+  }
+}
+
+/* Joystick Zone (Bottom Left) */
+.joystick-zone {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  pointer-events: auto;
+  touch-action: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.joystick-base {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(18, 30, 49, 0.6) 0%, rgba(7, 12, 20, 0.8) 100%);
+  border: 2px solid var(--glass-border-bright);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6), inset 0 0 20px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.joystick-crosshair {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle, transparent 65%, rgba(255, 255, 255, 0.05) 66%),
+    linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
+  background-size: 100% 100%, 20px 20px, 20px 20px;
+  background-position: center;
+  border-radius: 50%;
+}
+
+.joystick-knob {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  border: 2px solid #ffffff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5), 0 0 16px var(--primary-glow);
+  transform: translate(0px, 0px);
+  will-change: transform;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.knob-glow {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.joystick-tip {
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--text-dim);
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Action Zone (Bottom Right) */
+.action-zone {
+  position: relative;
+  pointer-events: auto;
+  touch-action: none;
+}
+
+.mobile-action-btn {
+  position: relative;
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--primary) 0%, var(--primary-dark) 100%);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 20px var(--primary-glow);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  overflow: hidden;
+}
+
+.mobile-action-btn:active {
+  transform: scale(0.92);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4), 0 0 30px var(--primary-glow);
+}
+
+.action-btn-glow {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.25) 0%, transparent 60%);
+  animation: action-pulse 2.2s infinite;
+}
+
+@keyframes action-pulse {
+  0% { transform: scale(0.8); opacity: 0.3; }
+  50% { transform: scale(1.1); opacity: 0.8; }
+  100% { transform: scale(0.8); opacity: 0.3; }
+}
+
+.action-btn-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.action-icon {
+  width: 32px;
+  height: 32px;
+  stroke: #ffffff;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+}
+
+.action-btn-text {
+  font-family: var(--font-heading);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* ===================================================================
+   TOAST NOTIFICATION STACK
+   =================================================================== */
+.toast-stack {
+  position: fixed;
+  top: calc(var(--safe-top) + 85px);
+  right: calc(var(--safe-right) + 16px);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 100;
+  pointer-events: none;
+  max-width: 360px;
+  width: calc(100% - 32px);
+}
+
+.toast-item {
+  pointer-events: auto;
+  background: var(--glass-bg);
+  backdrop-filter: blur(14px) saturate(180%);
+  -webkit-backdrop-filter: blur(14px) saturate(180%);
+  border: 1px solid var(--glass-border-bright);
+  border-radius: 14px;
+  padding: 12px 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  animation: toast-enter 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s ease;
+}
+
+.toast-item.toast-exit {
+  animation: toast-leave 0.3s forwards ease-in;
+}
+
+@keyframes toast-enter {
+  from {
+    opacity: 0;
+    transform: translateX(40px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes toast-leave {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(40px) scale(0.9);
+  }
+}
+
+.toast-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.toast-body {
+  flex-grow: 1;
+}
+
+.toast-title {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.toast-msg {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.35;
+}
+
+.toast-item.toast-success {
+  border-color: var(--color-success);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 12px var(--color-success-glow);
+}
+
+.toast-item.toast-warning {
+  border-color: var(--color-warning);
+}
+
+.toast-item.toast-danger {
+  border-color: var(--color-danger);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45), 0 0 12px var(--color-danger-glow);
+}
+
+/* ===================================================================
+   RESPONSIVE DESIGN (MOBILE & TABLET ADJUSTMENTS)
+   =================================================================== */
+
+/* Tablet & Smaller Laptops (<= 1024px) */
+@media (max-width: 1024px) {
+  #top-hud {
+    width: calc(100% - 20px);
+    padding: 8px 14px;
+  }
+  
+  .exp-bar-wrap {
+    width: 130px;
+  }
+
+  .role-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .logo-title {
+    font-size: 28px;
+  }
+}
+
+/* Mobile Phones (<= 768px) */
+@media (max-width: 768px) {
+  #top-hud {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 16px;
+  }
+
+  .hud-left {
+    gap: 8px;
+  }
+
+  .avatar-ring {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .avatar-icon {
+    font-size: 20px;
+  }
+
+  .player-title {
+    font-size: 13px;
+  }
+
+  .exp-bar-wrap {
+    width: 100px;
+    height: 11px;
+  }
+
+  /* Center Objective collapses to top row right or compact */
+  .hud-center {
+    order: 3;
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  .objective-card {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    padding: 4px 10px;
+  }
+
+  .target-kpi {
+    display: none;
+  }
+
+  .hud-right {
+    gap: 6px;
+  }
+
+  .minimap-container {
+    width: 48px;
+    height: 48px;
+  }
+
+  .btn-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .icon-svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  /* Dialogue Box */
+  .dialog-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    gap: 12px;
+  }
+
+  .dialog-header {
+    justify-content: center;
+  }
+
+  .dialog-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-dialog {
+    width: 100%;
+  }
+
+  /* Ticket Challenge */
+  .ticket-card {
+    padding: 18px 16px;
+  }
+
+  .ticket-question {
+    font-size: 15px;
+  }
+
+  .ticket-option-btn {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .ticket-footer {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+  }
+
+  .ticket-hint-status {
+    text-align: center;
+  }
+
+  /* Mobile Controls ergonomics */
+  .mobile-controls-layer {
+    height: 180px;
+    padding: 0 16px 16px 16px;
+  }
+
+  .joystick-base {
+    width: 105px;
+    height: 105px;
+  }
+
+  .joystick-knob {
+    width: 44px;
+    height: 44px;
+  }
+
+  .mobile-action-btn {
+    width: 72px;
+    height: 72px;
+  }
+
+  .action-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .action-btn-text {
+    font-size: 9px;
+  }
+
+  /* Toast stack on mobile */
+  .toast-stack {
+    top: calc(var(--safe-top) + 120px);
+    right: 16px;
+    left: 16px;
+    width: auto;
+  }
+}
+
+/* Landscape Mode on Mobile */
+@media (max-height: 520px) and (orientation: landscape) {
+  #top-hud {
+    padding: 4px 12px;
+    margin-top: 4px;
+  }
+
+  .avatar-ring {
+    width: 34px;
+    height: 34px;
+  }
+
+  .modal-card {
+    max-height: 85vh;
+    padding: 16px 20px;
+  }
+
+  .mobile-controls-layer {
+    height: 140px;
+    padding: 0 20px 8px 20px;
+  }
+
+  .joystick-base {
+    width: 90px;
+    height: 90px;
+  }
+
+  .joystick-knob {
+    width: 38px;
+    height: 38px;
+  }
+
+  .mobile-action-btn {
+    width: 64px;
+    height: 64px;
+  }
+}
