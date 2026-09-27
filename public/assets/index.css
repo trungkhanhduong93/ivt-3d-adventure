@@ -265,3 +265,25 @@ dialog h2 {
   height: 26px !important;
   vertical-align: middle !important;
 }
+
+
+/* Hiển thị Emoji Avatar to rõ, rực rỡ và căn giữa */
+.avatar-face {
+  font-size: 28px !important;
+  line-height: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: linear-gradient(160deg, #fbf2df, #ebd4a8) !important;
+  border: 2px solid #e0c58e !important;
+  border-radius: 16px !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.8), 0 3px 8px rgba(0,0,0,0.08) !important;
+}
+.brand-mark {
+  border-radius: 12px !important;
+  background: linear-gradient(145deg, #2b7554, #154c34) !important;
+  box-shadow: 0 3px 8px rgba(21, 76, 52, 0.3) !important;
+}
+.brand-mark svg {
+  color: #ffde70 !important;
+}
