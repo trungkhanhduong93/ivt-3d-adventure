@@ -294,18 +294,16 @@ dialog h2 {
    ========================================================================== */
 .workstation-label {
   cursor: pointer !important;
-  transition: box-shadow 0.2s ease, filter 0.2s ease, background 0.2s ease !important;
   user-select: none !important;
+  transition: filter 0.15s ease, box-shadow 0.2s ease !important;
 }
 
 .workstation-label:hover {
-  filter: brightness(1.08) !important;
-  background: #ffffff !important;
-  box-shadow: 0 0 0 3px #f59e0b, 0 8px 24px rgba(35, 78, 64, 0.35) !important;
+  filter: brightness(1.05) !important;
 }
 
 .workstation-label.near {
-  box-shadow: 0 0 0 3px #f59e0b, 0 8px 22px rgba(245, 158, 11, 0.45) !important;
+  box-shadow: 0 0 0 3px var(--gold), 0 8px 20px #234e4040 !important;
 }
 
 .station-dot {
