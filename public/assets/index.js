@@ -5104,7 +5104,7 @@ function fg(i,e){
   }
   _n();
   Xt();
-}function $a(i=ie.table||2){Jn("Sổ cửu chương",`<div class="dialog-eyebrow">HỌC TỪNG CHÚT, NHỚ THẬT LÂU</div><div class="table-tabs" role="group" aria-label="Chọn kho IVT Pro">${Ha.map(e=>`<button data-table="${e}" aria-pressed="${e===i}">×${e}</button>`).join("")}</div><div class="multiplication-grid">${Array.from({length:10},(e,t)=>{const n=ie.questionStats[`m${i}_${t+1}`];return`<div class="${n?.correct?"known":""}"><span>${i} × ${t+1}</span><b>= ${i*(t+1)}</b><small>${n?.correct?"✓":""}</small></div>`}).join("")}</div><p class="book-note">Dấu ✓ là nghiệp vụ kho bạn đã trả lời đúng. Mình luyện thêm nhé?</p><button id="practice-table" class="primary wide">Luyện bảng ×${i} ${Xe("arrow")}</button><button id="practice-all" class="text-button centered">Trộn các bảng ×2 – ×10</button>`,"book"),document.querySelectorAll("[data-table]").forEach(e=>e.onclick=()=>$a(Number(e.dataset.table))),Y("practice-table").onclick=()=>{ie.table=i,Xt(),Xr("practice")},Y("practice-all").onclick=()=>{ie.table=0,Xt(),Xr("practice")}}
+}function $a(){openRoadmapModal();}
 const rmBtn=Y("open-roadmap");if(rmBtn)rmBtn.onclick=()=>openRoadmapModal();
 const qNavBtn=Y("quest-nav-btn");if(qNavBtn)qNavBtn.onclick=()=>{const nq=getNextSuggestedQuest();navigateToTarget(nq.id);};
 Y("learn").onclick=()=>window.open("https://iposvni.gitbook.io/inventory/","_blank","noopener,noreferrer");Y("learn-welcome").onclick=()=>window.open("https://iposvni.gitbook.io/inventory/","_blank","noopener,noreferrer");function pg(){Jn("Sẵn sàng phiêu lưu?",`<div class="help-list">
@@ -5314,7 +5314,7 @@ Y("settings").onclick=Ti;Y("sound").onclick=()=>{xt.unlock(),ie.sound=!ie.sound,
 
   // Bảng tên luôn luôn hiện khi ở trong tầm mắt
   if(i.hidden)i.hidden=!1;
-}function cc(){const i=_e.player.position,e=Xm(i.x,i.z);if(e.id===bi)return;const t=bi==="";bi=e.id,Y("area-icon").innerHTML=Xe(e.icon),Y("area-name").textContent=Cn(e.name),Y("area-sub").textContent=Cn(e.subtitle);const n=Y("area-label");n.classList.remove("arrive"),n.offsetWidth,n.classList.add("arrive"),!t&&_e.active&&e.id!=="village"&&e.id!=="garden"&&Di(e,ie.questComplete)&&In(Va()==="vi"?`Chào mừng đến ${e.name}!`:`Welcome to ${Cn(e.name)}!`)}try{_e=new $m(Y("world")),_e.setBridge(ie.bridge),_e.setAvatar(ie.avatar),_e.onJump=()=>xt.jump(),_e.onSceneClick=()=>Yr(),_e.onFrame=(i,e)=>{if(ec=i,!(++ul%2!==0||!_e.active)){
+}function cc(){const i=_e.player.position,e=Xm(i.x,i.z);if(e.id===bi)return;const t=bi==="";bi=e.id,Y("area-icon").innerHTML=Xe(e.icon),Y("area-name").textContent=Cn(e.name),Y("area-sub").textContent=Cn(e.subtitle);const n=Y("area-label");n.classList.remove("arrive"),n.offsetWidth,n.classList.add("arrive"),!t&&_e.active&&e.id!=="village"&&e.id!=="garden"&&Di(e,ie.questComplete)&&In(`Chào mừng bạn đến với ${e.name}!`)}try{_e=new $m(Y("world")),_e.setBridge(ie.bridge),_e.setAvatar(ie.avatar),_e.onJump=()=>xt.jump(),_e.onSceneClick=()=>Yr(),_e.onFrame=(i,e)=>{if(ec=i,!(++ul%2!==0||!_e.active)){
     const ws=_e.nearWorkstation();
     window._currentStation=ws;
     const canInteract=i||!!ws;
