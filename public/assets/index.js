@@ -3864,7 +3864,16 @@ void main() {
 }createSky(){const e=new gn({side:Lt,depthWrite:!1,fog:!1,uniforms:{top:{value:new ke(qm)},horizon:{value:new ke(Cs)}},vertexShader:"varying vec3 vDir; void main(){ vDir = normalize(position); gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }",fragmentShader:`uniform vec3 top; uniform vec3 horizon; varying vec3 vDir; void main(){ float h = smoothstep(0.0, 0.55, vDir.y); gl_FragColor = vec4(mix(horizon, top, h), 1.0);
 #include <tonemapping_fragment>
 #include <colorspace_fragment>
-}`}),t=new St(new za(1200,32,16),e);return t.renderOrder=-1,t.frustumCulled=!1,t}groundHeight(e,t){const n=Math.max(fe.west.minX-e,e-fe.east.maxX,0),r=Math.max(fe.minZ-t,t-fe.maxZ,0),s=Math.hypot(n,r);if(s<8)return 0;const a=fr.clamp((Math.abs(e-7)-7)/24,0,1),o=(Math.sin(e*.045)+Math.sin(t*.06+1.3)+Math.sin((e+t)*.025+2)+3)/6;return Math.min(1,(s-8)/70)*a*(3+o*20)}terrain(){const e=new Li(2400,2400,100,100);e.rotateX(-Math.PI/2);const t=e.attributes.position,n=new Float32Array(t.count*3),r=new ke,s=new ke(9357667),a=new ke(11128682),o=new ke(7319125);for(let h=0;h<t.count;h++){const f=t.getX(h),m=t.getZ(h),g=this.groundHeight(f,m);t.setY(h,g);const S=(Math.sin(f*.13+m*.07)+Math.sin(m*.11-f*.05))*.25+.5;r.copy(s).lerp(S>.5?a:o,Math.abs(S-.5)*1.4).lerp(o,Math.min(.5,g/30)),n.set([r.r,r.g,r.b],h*3)}e.setAttribute("color",new kt(n,3)),e.computeVertexNormals();const l=new St(e,new Ss({vertexColors:!0,roughness:.95,flatShading:!0}));l.receiveShadow=!0,this.scene.add(l);const c=900,u=this.box(this.scene,(Qe.riverMin+Qe.riverMax)/2,-.33,0,Qe.riverMax-Qe.riverMin,.74,c,4765903);u.castShadow=!1;for(const h of[Qe.riverMin-.45,Qe.riverMax+.45]){const f=this.box(this.scene,h,.012,0,.9,.03,c,14469528);f.castShadow=!1}for(let h=0;h<60;h++){const f=this.box(this.scene,4.7+h%4*1.35,.05,-42+h*2.17%84,.35+h%3*.2,.025,.07,11924717);f.castShadow=!1,this.ripples.push(f)}this.box(this.scene,-7,.055,1,21,.08,3.2,15390115),this.box(this.scene,-10,.055,-4,3.1,.08,20,15390115),this.cylinder(this.scene,-6,.07,5,4.5,4.5,.1,15390115,24);for(const h of Wr.slice(2))for(let f=1;f<h.length;f++)this.road(h[f-1],h[f]);for(let h=0;h<15;h++){const f=this.box(this.scene,-16+h*1.3,.12,1+Math.sin(h)*.8,.65,.08,.4,16116170);f.rotation.y=h}}road([e,t],[n,r]){const s=n-e,a=r-t,o=Math.hypot(s,a),l=this.box(this.scene,(e+n)/2,.05,(t+r)/2,3,.07,o,15390115);l.rotation.y=Math.atan2(s,a),l.castShadow=!1;for(const[c,u]of[[e,t],[n,r]]){const h=this.cylinder(this.scene,c,.052,u,1.5,1.5,.07,15390115,16);h.castShadow=!1}}house(e,t,n,r=1,s=0){const a=new ut;a.position.set(e,0,t),a.scale.setScalar(r),a.rotation.y=s,this.box(a,0,1.5,0,3.6,3,3,16773326);const o=this.cylinder(a,0,3.5,0,0,3.1,2,n,4);o.rotation.y=Math.PI/4,o.scale.z=.95,this.box(a,-.85,4.15,-.65,.5,1.5,.6,15320736),this.box(a,-.35,.95,1.53,.9,1.9,.15,8608577),this.box(a,1,1.55,1.53,.8,.8,.12,5084579),this.box(a,1,1.55,1.61,.08,.84,.07,16777215),this.box(a,1,1.55,1.61,.84,.08,.07,16777215),this.box(a,1,1.02,1.7,1.1,.22,.4,10381892);for(let l=0;l<4;l++)this.sphere(a,.63+l*.25,1.23,1.7,.18,l%2?16764504:15830657);this.box(a,0,.12,1.85,2.3,.25,.8,14075041),this.scene.add(a),this.obstacles.push({x:e,z:t,radius:2.35*r})}tree(e,t,n,r=0){const s=new ut;s.position.set(e,0,t),s.scale.setScalar(n),this.cylinder(s,0,1.1,0,.18,.26,2.2,9726787);const a=[3969888,5678173,7779153];if(r%3===0)this.cylinder(s,0,2.35,0,0,1.35,2.3,a[r%3]),this.cylinder(s,0,3.35,0,0,1,1.9,6401385);else if(this.sphere(s,0,2.7,0,1.35,a[r%3]),this.sphere(s,-.7,2.25,.25,.9,a[(r+1)%3]),this.sphere(s,.6,2.7,.3,.8,8503138),r%4===0)for(let o=0;o<4;o++)this.sphere(s,Math.cos(o*2)*.8,2.4+Math.sin(o)*.4,.85,.17,15967300);this.scene.add(s),this.obstacles.push({x:e,z:t,radius:.45*n})}village(){this.house(-12,-6,14191701,1.25),this.house(-17,6,5410705,.9,.25),this.house(-4,-11,12415075,1);const e=new ut;e.position.set(-15,0,-14),this.cylinder(e,0,2,0,1.2,1.6,4,15851443),this.cylinder(e,0,4.7,0,0,1.8,1.9,5476749),this.windmill.position.set(0,3.2,1.65);for(let n=0;n<4;n++){const r=new ut;r.rotation.z=n*Math.PI/2,this.box(r,0,1.6,0,.18,3,.18,9203785),this.box(r,.4,1.85,0,.75,1.7,.12,16773579),this.windmill.add(r)}this.sphere(this.windmill,0,0,.1,.25,15382107),e.add(this.windmill),this.scene.add(e),this.obstacles.push({x:-15,z:-14,radius:1.8}),[[-20,-14,1.3],[-20,-8,1],[-20,0,1.1],[-20,13,1.3],[-14,14,1.1],[-7,16,1.4],[-2,13,1.1],[1,17,1.2],[0,-16,1.5],[1,-8,1],[-8,-17,1.2],[13,-14,1.3],[18,-17,1.5],[21,-10,1.2],[21,7,1.3],[17,14,1.5],[12,11,1.2],[12,-7,.85]].forEach(([n,r,s],a)=>this.tree(n,r,s,a));const t=new ut;t.position.set(.4,0,3.4),this.box(t,0,.7,0,.17,1.4,.17,9201991),this.box(t,0,1.45,0,1.5,.65,.2,12028500),this.scene.add(t)}garden(){for(let e=0;e<6;e++)this.box(this.scene,12+e*1.8,.65,5,.15,1.3,.15,15918525);this.box(this.scene,16.5,.8,5,9.2,.15,.15,15918525);for(let e=0;e<3;e++){this.box(this.scene,16+e*1.6,.09,-7,1,.12,5.5,11703138);for(let t=0;t<6;t++)this.sphere(this.scene,16+e*1.6,.35,-9+t*.8,.32,5942105),this.sphere(this.scene,16+e*1.6,.54,-9+t*.8,.15,15579480)}this.cylinder(this.scene,17.5,2.1,0,.08,.08,4.2,9138249),this.box(this.scene,18.1,3.6,0,1.2,.8,.06,16763222),this.cylinder(this.scene,16,.12,0,1.5,1.5,.2,15255931,12)}mathMeadow(){const e=this.regionGroup("meadow");this.box(e,0,.04,0,18,.08,14,10144363);for(let r=0;r<3;r++){const s=-4+r*4;this.box(e,0,.1,s,11,.14,2.2,r%2?11900514:13085041);for(let a=0;a<7;a++){const o=-4.4+a*1.45;this.sphere(e,o,.42,s,.28,[15908181,15304039,7649703][(r+a)%3]),this.cylinder(e,o,.25,s,.08,.11,.35,6265681,6)}}for(const r of[-2.4,2.4])this.cylinder(e,r,1.6,7,.16,.2,3.2,9201991),this.sphere(e,r,3.35,7,.35,16765028);this.box(e,0,3.1,7,5.6,.22,.22,9201991),this.sign(e,"BẾP TRUNG TÂM",0,3.9,7.05,2.9,"#ffd064","#6b4a1c"),this.block(e,-2.4,7,.3),this.block(e,2.4,7,.3);for(let r=0;r<7;r++){const s=this.sphere(e,-7.4+r*2.4,.22,-6.2,.45,15059349);s.rotation.y=r*.8}const t=new ut;t.position.set(6.5,0,-1),this.box(t,0,1.4,0,3,2.8,3.6,13197903);const n=this.cylinder(t,0,3.2,0,0,2.5,1.4,9062974,4);n.rotation.y=Math.PI/4,n.scale.z=1.3,this.box(t,-1.52,1,0,.1,1.8,1.6,16181188),e.add(t),this.block(e,6.5,-1,2.3),this.sign(t,"ĐỊNH MỨC BOM",-1.6,2.4,0,2.0,"#fffbea","#8a4a3e",-Math.PI/2)}forest(){const e=this.regionGroup("forest"),[t,n]=Ps("forest").center;this.box(e,0,.04,0,20,.08,16,7316827),this.box(e,0,.08,-2,1.8,.12,12,13809533),[[-8,-6],[-5.5,-4],[-8,-1],[-6,2],[-8,5],[-4.5,6],[-2.5,2.5],[3,-5],[5.5,-6.5],[8,-4],[5,-1],[8,1.5],[5.5,4],[8,6.5],[3,6.5],[-2.5,-6.5]].forEach(([o,l],c)=>this.tree(t+o,n+l,.85+c%3*.2,c+2));for(let o=0;o<5;o++){const l=-6+o*2.6,c=o%2?2:-2;this.box(e,c,.08,l,.9,.12,.9,9333580),this.sphere(e,c,.38,l,.3,15252826)}for(let o=0;o<6;o++){const l=-1+o%3*1.1,c=3+Math.floor(o/3)*1.2;this.cylinder(e,l,.2,c,.08,.1,.4,16182484,6),this.sphere(e,l,.45,c,.24,14242634).scale.y=.6}const s=new ut;s.position.set(0,0,5.5),this.box(s,0,1.1,0,3.2,2.2,2.4,10120005);const a=this.cylinder(s,0,2.8,0,0,2.5,1.4,4160088,4);a.rotation.y=Math.PI/4,this.box(s,0,.8,-1.22,.8,1.5,.08,5979176),e.add(s),this.block(e,0,5.5,2),this.sign(e,"KHO TỔNG",0,2.2,-1.25,1.5,"#fff4d8","#3f7a58")}city(){const e=this.regionGroup("city");this.box(e,0,.04,0,18,.08,18,12241078),this.box(e,0,.07,0,18,.06,2.6,9278607),this.box(e,0,.071,0,2.6,.06,18,9278607);const t=[15320702,8566192,15047544,10197968];[[-5,-5,4],[5,-5,6],[-5,5,5],[5,5,3.4]].forEach(([s,a,o],l)=>{const c=new ut;c.position.set(s,0,a),e.add(c),this.box(c,0,o/2,0,4.2,o,3.8,t[l]),this.box(c,0,o+.3,0,4.5,.6,4.1,15786688);for(let u=1;u<o-.6;u+=1.3)for(const h of[-1.2,0,1.2])this.box(c,h,u+.3,a<0?1.92:-1.92,.6,.7,.06,16643804);this.box(c,0,.7,a<0?1.93:-1.93,.9,1.4,.08,6508377),this.sign(c,["BC008","BC014","A08 HAO HỤT","KIỂM KÊ"][l],0,o+1.4,0,2.2,"#fffbea","#3c4f6b",a<0?0:Math.PI),this.block(e,s,a,2.7)});const n=this.cylinder(e,0,.12,0,2.4,2.4,.18,15192219,20);n.castShadow=!1,this.cylinder(e,0,.6,0,.5,.7,.9,14206880,12);const r=this.sphere(e,0,1.3,0,.35,8376544);this.floaters.push({object:r,baseY:1.3,speed:2,spin:0}),this.block(e,0,0,1);for(let s=0;s<8;s++){const a=s*Math.PI/4+Math.PI/8;this.cylinder(e,Math.cos(a)*8,1.2,Math.sin(a)*8,.07,.09,2.4,4872794),this.sphere(e,Math.cos(a)*8,2.5,Math.sin(a)*8,.22,16770976)}}tower(){const e=this.regionGroup("tower"),t=this.cylinder(e,0,.06,0,6.6,7,.12,10996090,20);t.castShadow=!1,this.cylinder(e,0,.14,0,4.4,4.6,.16,14206100,14).castShadow=!1,this.cylinder(e,0,4.9,0,2.3,2.9,8,7828392,10);for(let r=0;r<3;r++)this.cylinder(e,0,2.4+r*2.4,0,2.95-r*.2,2.95-r*.2,.25,15786688,10);this.cylinder(e,0,9.6,0,3.4,0,2,15778909,10);const n=this.sphere(e,0,11.6,0,.6,16768115);this.floaters.push({object:n,baseY:11.6,speed:1.4,spin:1}),this.box(e,0,1.6,2.72,1.3,2,.2,4931435),this.sign(e,"THÁP CHẨN ĐOÁN",0,7.4,2.62,3.4,"#fffbea","#4b3f6b"),this.block(e,0,0,3.4),["SYS","BUG","FIX","SYNC","PRO"].forEach((r,s)=>{const a=s/5*Math.PI*2,o=new ut;o.position.set(Math.cos(a)*5.4,2.2,Math.sin(a)*5.4);const l=this.mesh(o,new Ba(.45),[10148336,16167888,16766836][s%3],0,0,0);l.scale.y=1.5,this.sign(o,r,0,1.2,0,1.1,"#ffffffdd","#4b3f6b"),e.add(o),this.floaters.push({object:o,baseY:2.2,speed:1.2+s*.15,spin:.6})})}westBank(){const e=this.cylinder(this.scene,-38,.03,-11,4.6,4.6,.08,6080214,28);e.castShadow=!1;for(let r=0;r<16;r++){const s=r/16*Math.PI*2,a=this.sphere(this.scene,-38+Math.cos(s)*4.9,.15,-11+Math.sin(s)*4.9,.35+r%3*.1,13221280);a.scale.y=.6}this.box(this.scene,-36.5,.25,-7.6,1.4,.12,2.6,10779730);for(let r=0;r<4;r++){const s=this.cylinder(this.scene,-39.5+r%2*2.4,.1,-12+r,.45,.45,.04,5940826,10);s.castShadow=!1}this.obstacles.push({x:-38,z:-11,radius:4.8});const t=this.sphere(this.scene,-40,-1.8,18,5.5,8831582);t.scale.y=.45,t.castShadow=!1;const n=new ut;n.position.set(-40,.6,18);for(let r=0;r<6;r++){const s=r/6*Math.PI*2;this.cylinder(n,Math.cos(s)*1.6,1.2,Math.sin(s)*1.6,.1,.1,2.4,15918525)}this.cylinder(n,0,2.8,0,0,2.3,1.2,14191701,6),this.cylinder(n,0,.1,0,2,2,.2,15390115,12),this.scene.add(n),this.obstacles.push({x:-40,z:18,radius:2.2});for(const[r,s,a]of[[-46,-34,8],[-46,34,7],[66,-38,7],[66,38,8],[-24,-40,6],[30,40,6]]){const o=this.sphere(this.scene,r,-a*.55,s,a,8371548);o.scale.y=.55,o.castShadow=!1,this.obstacles.push({x:r,z:s,radius:a*.82})}}scatter(){let e=1337;const t=()=>(e=e*16807%2147483647,(e-1)/2147483646),n=(A,x,_)=>Wr.some(w=>w.some((U,z)=>{if(!z)return!1;const[G,V]=w[z-1],[X,Z]=U,H=X-G,se=Z-V,ue=fr.clamp(((A-G)*H+(x-V)*se)/(H*H+se*se),0,1);return Math.hypot(A-G-H*ue,x-V-se*ue)<_})),r=(A,x,_)=>x>fe.minZ+_&&x<fe.maxZ-_&&(A>fe.west.minX+_&&A<fe.west.maxX-_||A>fe.east.minX+_&&A<fe.east.maxX-_),s=(A,x,_)=>Dt.some(w=>w.id!=="forest"&&Math.abs(A-w.center[0])<w.size[0]/2+_&&Math.abs(x-w.center[1])<w.size[1]/2+_),a=(A,x,_)=>!r(A,x,_)||s(A,x,_)||n(A,x,_+1)||this.obstacles.some(w=>Math.hypot(A-w.x,x-w.z)<w.radius+_),o=new Mt,l=new ke,c=[];for(let A=0;c.length<(this.lowPower?150:230)&&A<6e3;A++){const x=fe.west.minX+t()*(fe.east.maxX-fe.west.minX),_=fe.minZ+t()*(fe.maxZ-fe.minZ),w=.8+t()*.7,U=Ps("forest");Math.abs(x-U.center[0])<U.size[0]/2+1&&Math.abs(_-U.center[1])<U.size[1]/2+1||a(x,_,1.4)||c.some(([z,G])=>Math.hypot(x-z,_-G)<2.4)||(c.push([x,_,w,0]),this.obstacles.push({x,z:_,radius:.45*w}))}const u=this.lowPower?450:900;for(let A=0,x=0;x<u&&A<u*12;A++){const _=-150+t()*310,w=-140+t()*280,U=Math.max(fe.west.minX-_,_-fe.east.maxX,0),z=Math.max(fe.minZ-w,w-fe.maxZ,0),G=Math.hypot(U,z);G<1.5||Math.abs(_-7)<6||t()>(G<22?.95:.3)||(c.push([_,w,.9+t()*.9,this.groundHeight(_,w)-.1]),x++)}const h=this.material(16777215),f=[3969888,5678173,7779153,5216866,6860888],m=new En(new tr(.18,.26,2.2,6),this.material(9726787),c.length),g=new En(new Yi(1,1),h,c.length*2),S=new En(new $i(1,1,7),h,c.length*2);let p=0,d=0;c.forEach(([A,x,_,w],U)=>{o.position.set(A,w+1.1*_,x),o.rotation.set(0,U,0),o.scale.setScalar(_),o.updateMatrix(),m.setMatrixAt(U,o.matrix);const z=f[U%f.length];if(U%3===0)for(const[G,V,X]of[[2.35,1.35,2.3],[3.35,1,1.9]])o.position.set(A,w+G*_,x),o.scale.set(V*_,X*_,V*_),o.updateMatrix(),S.setMatrixAt(d,o.matrix),S.setColorAt(d++,l.setHex(G>3?6401385:z));else for(const[G,V,X,Z]of[[0,2.7,0,1.35],[-.7,2.25,.25,.9]])o.position.set(A+G*_,w+V*_,x+X*_),o.scale.setScalar(Z*_),o.updateMatrix(),g.setMatrixAt(p,o.matrix),g.setColorAt(p++,l.setHex(G?8503138:z))}),g.count=p,S.count=d;for(const A of[m,g,S])A.castShadow=!0,A.receiveShadow=!0,this.scene.add(A);const E=new En(new Oa(1,0),this.material(12168334),70);let b=0;for(;b<70;){const A=fe.west.minX+t()*120,x=fe.minZ+t()*88;if(a(A,x,.8))continue;const _=.25+t()*.5;o.position.set(A,_*.3,x),o.rotation.set(t(),t()*6,0),o.scale.set(_*1.3,_*.7,_),o.updateMatrix(),E.setMatrixAt(b++,o.matrix)}E.castShadow=!0,E.receiveShadow=!0,this.scene.add(E);const y=this.lowPower?700:1300,P=new En(new Yi(.11,0),this.material(16777215),y),R=new En(new $i(.1,.35,3),this.material(6399056),y),L=new En(new $i(.16,.5,4),this.material(7320915),y);for(b=0;b<y;){const A=fe.west.minX+t()*120,x=fe.minZ+t()*88;!r(A,x,.6)||A>-24&&A<3&&Math.abs(x-1)<2||Math.abs(A+10)<2&&x<7&&x>-15||n(A,x,1.7)||(o.rotation.set(0,t()*6,0),o.scale.setScalar(1),o.position.set(A,.19,x),o.updateMatrix(),R.setMatrixAt(b,o.matrix),o.position.y=.39,o.updateMatrix(),P.setMatrixAt(b,o.matrix),P.setColorAt(b,l.setHex([16770211,16117975,15313294,12430304,16167888][b%5])),o.position.set(A+(t()-.5)*3,.22,x+(t()-.5)*3),o.scale.setScalar(.7+t()*.6),o.updateMatrix(),L.setMatrixAt(b,o.matrix),b++)}for(const A of[P,R,L])A.receiveShadow=!0,this.scene.add(A)}createPlayer(){const e=this.player;this.shirt=this.box(e,0,.93,0,.7,.8,.47,15445570),this.sphere(e,0,1.67,0,.45,16766382),this.hair=this.sphere(e,0,1.93,-.035,.43,5323826),this.hair.scale.y=.65,this.ponytail=this.sphere(e,0,1.66,-.39,.25,5323826),this.ponytail.visible=!1;for(const t of[-.16,.16]){this.sphere(e,t,1.72,.394,.042,2571317);const n=this.box(e,t,.3,0,.25,.55,.28,4349808);this.box(n,0,-.19,.08,.29,.16,.4,16446166),this.legs.push(n)}this.box(e,-.48,.94,0,.2,.65,.23,16766382),this.box(e,.48,.94,0,.2,.65,.23,16766382),this.box(e,0,1,-.36,.52,.65,.3,5872009),this.box(e,0,1,-.54,.32,.25,.1,15781238);this.powerAura=this.cylinder(e,0,0.035,0,0.85,0.85,0.02,0x34d399,16);}updatePlayerVisuals(level,role="manager"){const lvl=Math.max(1,Math.min(5,level||1));const auraColors=[0x34d399,0x38bdf8,0xfbbf24,0xa78bfa,0xf472b6];const cColor=auraColors[lvl-1];if(this.powerAura){this.powerAura.material=this.material(cColor);const s=0.85+(lvl-1)*0.12;this.powerAura.scale.set(s,1,s);}}createMilo(){this.cylinder(this.milo,0,.65,0,.45,.7,1.25,5471870),this.sphere(this.milo,0,1.58,0,.48,16766123),this.cylinder(this.milo,0,2.15,0,.08,.58,.95,4486774),this.cylinder(this.milo,0,1.82,0,.75,.75,.12,4486774);for(const t of[-.16,.16])this.sphere(this.milo,t,1.6,.44,.045,2702648);this.sphere(this.milo,0,1.28,.33,.22,16183513),this.box(this.milo,.7,.9,0,.09,1.8,.09,10449480),this.sphere(this.milo,.7,1.9,0,.19,16765546);const e=this.sphere(this.milo,0,3,0,.19,16764765);e.userData.beacon=!0}setAvatar(e){this.shirt.material=this.material(e==="girl"?9925816:15445570),this.ponytail.visible=e==="girl"}createBridge(){for(let e=0;e<yt;e++){const t=new ut;t.position.x=Qe.riverMin+e+.5,this.box(t,0,.12,0,.97,.35,Qe.bridgeWidth,12826773),this.box(t,0,.33,0,.86,.06,Qe.bridgeWidth-.15,15062702);for(const n of[-1.6,1.6])this.box(t,0,.9,n,.17,1.3,.17,11109464),this.box(t,0,1.35,n,1.08,.12,.15,12559481);t.visible=!1,this.bridge.add(t)}for(const e of[3.6,10.4])for(const t of[-1.85,1.85])this.cylinder(this.scene,e,.65,t,.23,.3,1.3,13287582),this.sphere(this.scene,e,1.4,t,.28,16044924)}setBridge(e,t=!1){this.bridgeCount=e,this.bridge.children.forEach((n,r)=>{n.visible=r<e,t&&r===e-1&&(n.position.y=3,this.burst(new F(n.position.x,.8,0)))})}decorate(){let e=91;const t=()=>(e=e*16807%2147483647,(e-1)/2147483646);for(let n=0;n<22;n++){const r=new ut,s=t()*Math.PI*2,a=80+t()*110;r.position.set(10+Math.cos(s)*a,16+t()*10,Math.sin(s)*a),r.scale.setScalar(1.4+t()*1.4);for(let o=0;o<4;o++){const l=this.sphere(r,o*1.1,Math.sin(o)*.35,0,.95+o%2*.4,16055541);l.scale.set(1.4,.65,1),l.castShadow=!1,l.receiveShadow=!1}this.scene.add(r),this.clouds.push(r)}for(let n=0;n<18;n++){const r=n/18*Math.PI*2+t()*.2,s=230+t()*140,a=new ut,o=10+Math.cos(r)*s,l=Math.sin(r)*s;if(Math.abs(o-7)<40)continue;a.position.set(o,this.groundHeight(o,l)-1,l),a.rotation.y=t()*6;const c=16+t()*20;for(let u=0;u<3;u++){const h=10+t()*26,f=this.cylinder(a,(t()-.5)*c,h/2,(t()-.5)*c,0,c*.45,h,u%2?7315066:8300682,7);f.castShadow=!1,h>26&&(this.cylinder(a,f.position.x,h*.9,f.position.z,0,c*.45*.2+.4,h*.2,16054514,7).castShadow=!1)}this.scene.add(a)}}mergeStatic(){const e=new Set([this.player,this.milo,this.bridge,this.windmill,this.sky,...this.clouds,...this.ripples,...this.floaters.map(s=>s.object)]),t=s=>!!s&&(e.has(s)||t(s.parent)),n=new Set(this.materials.values()),r=new Map;this.scene.updateMatrixWorld(!0),this.scene.traverse(s=>{if(!(s instanceof St)||s instanceof En||Array.isArray(s.material)||!n.has(s.material)||t(s))return;const a=`${s.material.uuid}:${s.castShadow}`;let o=r.get(a);o||(o={material:s.material,cast:s.castShadow,geometries:[],meshes:[]},r.set(a,o));const l=(s.geometry.index?s.geometry.toNonIndexed():s.geometry.clone()).applyMatrix4(s.matrixWorld);for(const c of Object.keys(l.attributes))["position","normal","uv"].includes(c)||l.deleteAttribute(c);l.clearGroups(),o.geometries.push(l),o.meshes.push(s)});for(const{material:s,cast:a,geometries:o,meshes:l}of r.values()){if(l.length<2){o.forEach(h=>h.dispose());continue}const c=Wm(o);if(o.forEach(h=>h.dispose()),!c)continue;const u=new St(c,s);u.castShadow=a,u.receiveShadow=!0,this.scene.add(u);for(const h of l)h.removeFromParent(),h.geometry.dispose()}}resize(){const{clientWidth:e,clientHeight:t}=this.canvas;this.renderer.setSize(e,t,!1),this.camera.aspect=e/t,this.camera.updateProjectionMatrix()}floorHeight(){return this.bridgeCount===yt&&this.player.position.x>=4&&this.player.position.x<=10&&Math.abs(this.player.position.z)<1.4?.36:0}jump(){this.active&&!this.paused&&this.player.position.y<=this.floorHeight()+.01&&(this.jumpVelocity=6.5,this.onJump?.())}zoom(e){this.distance=fr.clamp(this.distance+e,20,85)}clearInput(){this.keys.clear(),this.joystick={x:0,y:0},this.destination=void 0;this.path=[];this.onArrival=null;if(this.targetMarker)this.targetMarker.visible=!1;}resetCamera(){this.yaw=.57,this.pitch=.95,this.distance=42}
+}`}),t=new St(new za(1200,32,16),e);return t.renderOrder=-1,t.frustumCulled=!1,t}groundHeight(e,t){const n=Math.max(fe.west.minX-e,e-fe.east.maxX,0),r=Math.max(fe.minZ-t,t-fe.maxZ,0),s=Math.hypot(n,r);if(s<8)return 0;const a=fr.clamp((Math.abs(e-7)-7)/24,0,1),o=(Math.sin(e*.045)+Math.sin(t*.06+1.3)+Math.sin((e+t)*.025+2)+3)/6;return Math.min(1,(s-8)/70)*a*(3+o*20)}terrain(){const e=new Li(2400,2400,100,100);e.rotateX(-Math.PI/2);const t=e.attributes.position,n=new Float32Array(t.count*3),r=new ke,s=new ke(9357667),a=new ke(11128682),o=new ke(7319125);for(let h=0;h<t.count;h++){const f=t.getX(h),m=t.getZ(h),g=this.groundHeight(f,m);t.setY(h,g);const S=(Math.sin(f*.13+m*.07)+Math.sin(m*.11-f*.05))*.25+.5;r.copy(s).lerp(S>.5?a:o,Math.abs(S-.5)*1.4).lerp(o,Math.min(.5,g/30)),n.set([r.r,r.g,r.b],h*3)}e.setAttribute("color",new kt(n,3)),e.computeVertexNormals();const l=new St(e,new Ss({vertexColors:!0,roughness:.95,flatShading:!0}));l.receiveShadow=!0,this.scene.add(l);const c=900,u=this.box(this.scene,(Qe.riverMin+Qe.riverMax)/2,-.33,0,Qe.riverMax-Qe.riverMin,.74,c,4765903);u.castShadow=!1;for(const h of[Qe.riverMin-.45,Qe.riverMax+.45]){const f=this.box(this.scene,h,.012,0,.9,.03,c,14469528);f.castShadow=!1}for(let h=0;h<60;h++){const f=this.box(this.scene,4.7+h%4*1.35,.05,-42+h*2.17%84,.35+h%3*.2,.025,.07,11924717);f.castShadow=!1,this.ripples.push(f)}this.box(this.scene,-7,.055,1,21,.08,3.2,15390115),this.box(this.scene,-10,.055,-4,3.1,.08,20,15390115),this.cylinder(this.scene,-6,.07,5,4.5,4.5,.1,15390115,24);for(const h of Wr.slice(2))for(let f=1;f<h.length;f++)this.road(h[f-1],h[f]);for(let h=0;h<15;h++){const f=this.box(this.scene,-16+h*1.3,.12,1+Math.sin(h)*.8,.65,.08,.4,16116170);f.rotation.y=h}}road([e,t],[n,r]){const s=n-e,a=r-t,o=Math.hypot(s,a),l=this.box(this.scene,(e+n)/2,.05,(t+r)/2,3,.07,o,15390115);l.rotation.y=Math.atan2(s,a),l.castShadow=!1;for(const[c,u]of[[e,t],[n,r]]){const h=this.cylinder(this.scene,c,.052,u,1.5,1.5,.07,15390115,16);h.castShadow=!1}}house(e,t,n,r=1,s=0){const a=new ut;a.position.set(e,0,t),a.scale.setScalar(r),a.rotation.y=s,this.box(a,0,1.5,0,3.6,3,3,16773326);const o=this.cylinder(a,0,3.5,0,0,3.1,2,n,4);o.rotation.y=Math.PI/4,o.scale.z=.95,this.box(a,-.85,4.15,-.65,.5,1.5,.6,15320736),this.box(a,-.35,.95,1.53,.9,1.9,.15,8608577),this.box(a,1,1.55,1.53,.8,.8,.12,5084579),this.box(a,1,1.55,1.61,.08,.84,.07,16777215),this.box(a,1,1.55,1.61,.84,.08,.07,16777215),this.box(a,1,1.02,1.7,1.1,.22,.4,10381892);for(let l=0;l<4;l++)this.sphere(a,.63+l*.25,1.23,1.7,.18,l%2?16764504:15830657);this.box(a,0,.12,1.85,2.3,.25,.8,14075041),this.scene.add(a),this.obstacles.push({x:e,z:t,radius:2.35*r})}tree(e,t,n,r=0){const s=new ut;s.position.set(e,0,t),s.scale.setScalar(n),this.cylinder(s,0,1.1,0,.18,.26,2.2,9726787);const a=[3969888,5678173,7779153];if(r%3===0)this.cylinder(s,0,2.35,0,0,1.35,2.3,a[r%3]),this.cylinder(s,0,3.35,0,0,1,1.9,6401385);else if(this.sphere(s,0,2.7,0,1.35,a[r%3]),this.sphere(s,-.7,2.25,.25,.9,a[(r+1)%3]),this.sphere(s,.6,2.7,.3,.8,8503138),r%4===0)for(let o=0;o<4;o++)this.sphere(s,Math.cos(o*2)*.8,2.4+Math.sin(o)*.4,.85,.17,15967300);this.scene.add(s),this.obstacles.push({x:e,z:t,radius:.45*n})}village(){this.house(-12,-6,14191701,1.25),this.house(-17,6,5410705,.9,.25),this.house(-4,-11,12415075,1);const e=new ut;e.position.set(-15,0,-14),this.cylinder(e,0,2,0,1.2,1.6,4,15851443),this.cylinder(e,0,4.7,0,0,1.8,1.9,5476749),this.windmill.position.set(0,3.2,1.65);for(let n=0;n<4;n++){const r=new ut;r.rotation.z=n*Math.PI/2,this.box(r,0,1.6,0,.18,3,.18,9203785),this.box(r,.4,1.85,0,.75,1.7,.12,16773579),this.windmill.add(r)}this.sphere(this.windmill,0,0,.1,.25,15382107),e.add(this.windmill),this.scene.add(e),this.obstacles.push({x:-15,z:-14,radius:1.8}),[[-20,-14,1.3],[-20,-8,1],[-20,0,1.1],[-20,13,1.3],[-14,14,1.1],[-7,16,1.4],[-2,13,1.1],[1,17,1.2],[0,-16,1.5],[1,-8,1],[-8,-17,1.2],[13,-14,1.3],[18,-17,1.5],[21,-10,1.2],[21,7,1.3],[17,14,1.5],[12,11,1.2],[12,-7,.85]].forEach(([n,r,s],a)=>this.tree(n,r,s,a));const t=new ut;t.position.set(.4,0,3.4),this.box(t,0,.7,0,.17,1.4,.17,9201991),this.box(t,0,1.45,0,1.5,.65,.2,12028500),this.scene.add(t)}garden(){for(let e=0;e<6;e++)this.box(this.scene,12+e*1.8,.65,5,.15,1.3,.15,15918525);this.box(this.scene,16.5,.8,5,9.2,.15,.15,15918525);for(let e=0;e<3;e++){this.box(this.scene,16+e*1.6,.09,-7,1,.12,5.5,11703138);for(let t=0;t<6;t++)this.sphere(this.scene,16+e*1.6,.35,-9+t*.8,.32,5942105),this.sphere(this.scene,16+e*1.6,.54,-9+t*.8,.15,15579480)}this.cylinder(this.scene,17.5,2.1,0,.08,.08,4.2,9138249),this.box(this.scene,18.1,3.6,0,1.2,.8,.06,16763222),this.cylinder(this.scene,16,.12,0,1.5,1.5,.2,15255931,12)}mathMeadow(){const e=this.regionGroup("meadow");this.box(e,0,.04,0,18,.08,14,10144363);for(let r=0;r<3;r++){const s=-4+r*4;this.box(e,0,.1,s,11,.14,2.2,r%2?11900514:13085041);for(let a=0;a<7;a++){const o=-4.4+a*1.45;this.sphere(e,o,.42,s,.28,[15908181,15304039,7649703][(r+a)%3]),this.cylinder(e,o,.25,s,.08,.11,.35,6265681,6)}}for(const r of[-2.4,2.4])this.cylinder(e,r,1.6,7,.16,.2,3.2,9201991),this.sphere(e,r,3.35,7,.35,16765028);this.box(e,0,3.1,7,5.6,.22,.22,9201991),this.sign(e,"BẾP TRUNG TÂM",0,3.9,7.05,2.9,"#ffd064","#6b4a1c"),this.block(e,-2.4,7,.3),this.block(e,2.4,7,.3);for(let r=0;r<7;r++){const s=this.sphere(e,-7.4+r*2.4,.22,-6.2,.45,15059349);s.rotation.y=r*.8}const t=new ut;t.position.set(6.5,0,-1),this.box(t,0,1.4,0,3,2.8,3.6,13197903);const n=this.cylinder(t,0,3.2,0,0,2.5,1.4,9062974,4);n.rotation.y=Math.PI/4,n.scale.z=1.3,this.box(t,-1.52,1,0,.1,1.8,1.6,16181188),e.add(t),this.block(e,6.5,-1,2.3),this.sign(t,"ĐỊNH MỨC BOM",-1.6,2.4,0,2.0,"#fffbea","#8a4a3e",-Math.PI/2)}forest(){const e=this.regionGroup("forest"),[t,n]=Ps("forest").center;this.box(e,0,.04,0,20,.08,16,7316827),this.box(e,0,.08,-2,1.8,.12,12,13809533),[[-8,-6],[-5.5,-4],[-8,-1],[-6,2],[-8,5],[-4.5,6],[-2.5,2.5],[3,-5],[5.5,-6.5],[8,-4],[5,-1],[8,1.5],[5.5,4],[8,6.5],[3,6.5],[-2.5,-6.5]].forEach(([o,l],c)=>this.tree(t+o,n+l,.85+c%3*.2,c+2));for(let o=0;o<5;o++){const l=-6+o*2.6,c=o%2?2:-2;this.box(e,c,.08,l,.9,.12,.9,9333580),this.sphere(e,c,.38,l,.3,15252826)}for(let o=0;o<6;o++){const l=-1+o%3*1.1,c=3+Math.floor(o/3)*1.2;this.cylinder(e,l,.2,c,.08,.1,.4,16182484,6),this.sphere(e,l,.45,c,.24,14242634).scale.y=.6}const s=new ut;s.position.set(0,0,5.5),this.box(s,0,1.1,0,3.2,2.2,2.4,10120005);const a=this.cylinder(s,0,2.8,0,0,2.5,1.4,4160088,4);a.rotation.y=Math.PI/4,this.box(s,0,.8,-1.22,.8,1.5,.08,5979176),e.add(s),this.block(e,0,5.5,2),this.sign(e,"KHO TỔNG",0,2.2,-1.25,1.5,"#fff4d8","#3f7a58")}city(){const e=this.regionGroup("city");this.box(e,0,.04,0,18,.08,18,12241078),this.box(e,0,.07,0,18,.06,2.6,9278607),this.box(e,0,.071,0,2.6,.06,18,9278607);const t=[15320702,8566192,15047544,10197968];[[-5,-5,4],[5,-5,6],[-5,5,5],[5,5,3.4]].forEach(([s,a,o],l)=>{const c=new ut;c.position.set(s,0,a),e.add(c),this.box(c,0,o/2,0,4.2,o,3.8,t[l]),this.box(c,0,o+.3,0,4.5,.6,4.1,15786688);for(let u=1;u<o-.6;u+=1.3)for(const h of[-1.2,0,1.2])this.box(c,h,u+.3,a<0?1.92:-1.92,.6,.7,.06,16643804);this.box(c,0,.7,a<0?1.93:-1.93,.9,1.4,.08,6508377),this.sign(c,["BC008","BC014","A08 HAO HỤT","KIỂM KÊ"][l],0,o+1.4,0,2.2,"#fffbea","#3c4f6b",a<0?0:Math.PI),this.block(e,s,a,2.7)});const n=this.cylinder(e,0,.12,0,2.4,2.4,.18,15192219,20);n.castShadow=!1,this.cylinder(e,0,.6,0,.5,.7,.9,14206880,12);const r=this.sphere(e,0,1.3,0,.35,8376544);this.floaters.push({object:r,baseY:1.3,speed:2,spin:0}),this.block(e,0,0,1);for(let s=0;s<8;s++){const a=s*Math.PI/4+Math.PI/8;this.cylinder(e,Math.cos(a)*8,1.2,Math.sin(a)*8,.07,.09,2.4,4872794),this.sphere(e,Math.cos(a)*8,2.5,Math.sin(a)*8,.22,16770976)}}tower(){const e=this.regionGroup("tower"),t=this.cylinder(e,0,.06,0,6.6,7,.12,10996090,20);t.castShadow=!1,this.cylinder(e,0,.14,0,4.4,4.6,.16,14206100,14).castShadow=!1,this.cylinder(e,0,4.9,0,2.3,2.9,8,7828392,10);for(let r=0;r<3;r++)this.cylinder(e,0,2.4+r*2.4,0,2.95-r*.2,2.95-r*.2,.25,15786688,10);this.cylinder(e,0,9.6,0,3.4,0,2,15778909,10);const n=this.sphere(e,0,11.6,0,.6,16768115);this.floaters.push({object:n,baseY:11.6,speed:1.4,spin:1}),this.box(e,0,1.6,2.72,1.3,2,.2,4931435),this.sign(e,"THÁP CHẨN ĐOÁN",0,7.4,2.62,3.4,"#fffbea","#4b3f6b"),this.block(e,0,0,3.4),["SYS","BUG","FIX","SYNC","PRO"].forEach((r,s)=>{const a=s/5*Math.PI*2,o=new ut;o.position.set(Math.cos(a)*5.4,2.2,Math.sin(a)*5.4);const l=this.mesh(o,new Ba(.45),[10148336,16167888,16766836][s%3],0,0,0);l.scale.y=1.5,this.sign(o,r,0,1.2,0,1.1,"#ffffffdd","#4b3f6b"),e.add(o),this.floaters.push({object:o,baseY:2.2,speed:1.2+s*.15,spin:.6})})}westBank(){const e=this.cylinder(this.scene,-38,.03,-11,4.6,4.6,.08,6080214,28);e.castShadow=!1;for(let r=0;r<16;r++){const s=r/16*Math.PI*2,a=this.sphere(this.scene,-38+Math.cos(s)*4.9,.15,-11+Math.sin(s)*4.9,.35+r%3*.1,13221280);a.scale.y=.6}this.box(this.scene,-36.5,.25,-7.6,1.4,.12,2.6,10779730);for(let r=0;r<4;r++){const s=this.cylinder(this.scene,-39.5+r%2*2.4,.1,-12+r,.45,.45,.04,5940826,10);s.castShadow=!1}this.obstacles.push({x:-38,z:-11,radius:4.8});const t=this.sphere(this.scene,-40,-1.8,18,5.5,8831582);t.scale.y=.45,t.castShadow=!1;const n=new ut;n.position.set(-40,.6,18);for(let r=0;r<6;r++){const s=r/6*Math.PI*2;this.cylinder(n,Math.cos(s)*1.6,1.2,Math.sin(s)*1.6,.1,.1,2.4,15918525)}this.cylinder(n,0,2.8,0,0,2.3,1.2,14191701,6),this.cylinder(n,0,.1,0,2,2,.2,15390115,12),this.scene.add(n),this.obstacles.push({x:-40,z:18,radius:2.2});for(const[r,s,a]of[[-46,-34,8],[-46,34,7],[66,-38,7],[66,38,8],[-24,-40,6],[30,40,6]]){const o=this.sphere(this.scene,r,-a*.55,s,a,8371548);o.scale.y=.55,o.castShadow=!1,this.obstacles.push({x:r,z:s,radius:a*.82})}}scatter(){let e=1337;const t=()=>(e=e*16807%2147483647,(e-1)/2147483646),n=(A,x,_)=>Wr.some(w=>w.some((U,z)=>{if(!z)return!1;const[G,V]=w[z-1],[X,Z]=U,H=X-G,se=Z-V,ue=fr.clamp(((A-G)*H+(x-V)*se)/(H*H+se*se),0,1);return Math.hypot(A-G-H*ue,x-V-se*ue)<_})),r=(A,x,_)=>x>fe.minZ+_&&x<fe.maxZ-_&&(A>fe.west.minX+_&&A<fe.west.maxX-_||A>fe.east.minX+_&&A<fe.east.maxX-_),s=(A,x,_)=>Dt.some(w=>w.id!=="forest"&&Math.abs(A-w.center[0])<w.size[0]/2+_&&Math.abs(x-w.center[1])<w.size[1]/2+_),a=(A,x,_)=>!r(A,x,_)||s(A,x,_)||n(A,x,_+1)||this.obstacles.some(w=>Math.hypot(A-w.x,x-w.z)<w.radius+_),o=new Mt,l=new ke,c=[];for(let A=0;c.length<(this.lowPower?150:230)&&A<6e3;A++){const x=fe.west.minX+t()*(fe.east.maxX-fe.west.minX),_=fe.minZ+t()*(fe.maxZ-fe.minZ),w=.8+t()*.7,U=Ps("forest");Math.abs(x-U.center[0])<U.size[0]/2+1&&Math.abs(_-U.center[1])<U.size[1]/2+1||a(x,_,1.4)||c.some(([z,G])=>Math.hypot(x-z,_-G)<2.4)||(c.push([x,_,w,0]),this.obstacles.push({x,z:_,radius:.45*w}))}const u=this.lowPower?450:900;for(let A=0,x=0;x<u&&A<u*12;A++){const _=-150+t()*310,w=-140+t()*280,U=Math.max(fe.west.minX-_,_-fe.east.maxX,0),z=Math.max(fe.minZ-w,w-fe.maxZ,0),G=Math.hypot(U,z);G<1.5||Math.abs(_-7)<6||t()>(G<22?.95:.3)||(c.push([_,w,.9+t()*.9,this.groundHeight(_,w)-.1]),x++)}const h=this.material(16777215),f=[3969888,5678173,7779153,5216866,6860888],m=new En(new tr(.18,.26,2.2,6),this.material(9726787),c.length),g=new En(new Yi(1,1),h,c.length*2),S=new En(new $i(1,1,7),h,c.length*2);let p=0,d=0;c.forEach(([A,x,_,w],U)=>{o.position.set(A,w+1.1*_,x),o.rotation.set(0,U,0),o.scale.setScalar(_),o.updateMatrix(),m.setMatrixAt(U,o.matrix);const z=f[U%f.length];if(U%3===0)for(const[G,V,X]of[[2.35,1.35,2.3],[3.35,1,1.9]])o.position.set(A,w+G*_,x),o.scale.set(V*_,X*_,V*_),o.updateMatrix(),S.setMatrixAt(d,o.matrix),S.setColorAt(d++,l.setHex(G>3?6401385:z));else for(const[G,V,X,Z]of[[0,2.7,0,1.35],[-.7,2.25,.25,.9]])o.position.set(A+G*_,w+V*_,x+X*_),o.scale.setScalar(Z*_),o.updateMatrix(),g.setMatrixAt(p,o.matrix),g.setColorAt(p++,l.setHex(G?8503138:z))}),g.count=p,S.count=d;for(const A of[m,g,S])A.castShadow=!0,A.receiveShadow=!0,this.scene.add(A);const E=new En(new Oa(1,0),this.material(12168334),70);let b=0;for(;b<70;){const A=fe.west.minX+t()*120,x=fe.minZ+t()*88;if(a(A,x,.8))continue;const _=.25+t()*.5;o.position.set(A,_*.3,x),o.rotation.set(t(),t()*6,0),o.scale.set(_*1.3,_*.7,_),o.updateMatrix(),E.setMatrixAt(b++,o.matrix)}E.castShadow=!0,E.receiveShadow=!0,this.scene.add(E);const y=this.lowPower?700:1300,P=new En(new Yi(.11,0),this.material(16777215),y),R=new En(new $i(.1,.35,3),this.material(6399056),y),L=new En(new $i(.16,.5,4),this.material(7320915),y);for(b=0;b<y;){const A=fe.west.minX+t()*120,x=fe.minZ+t()*88;!r(A,x,.6)||A>-24&&A<3&&Math.abs(x-1)<2||Math.abs(A+10)<2&&x<7&&x>-15||n(A,x,1.7)||(o.rotation.set(0,t()*6,0),o.scale.setScalar(1),o.position.set(A,.19,x),o.updateMatrix(),R.setMatrixAt(b,o.matrix),o.position.y=.39,o.updateMatrix(),P.setMatrixAt(b,o.matrix),P.setColorAt(b,l.setHex([16770211,16117975,15313294,12430304,16167888][b%5])),o.position.set(A+(t()-.5)*3,.22,x+(t()-.5)*3),o.scale.setScalar(.7+t()*.6),o.updateMatrix(),L.setMatrixAt(b,o.matrix),b++)}for(const A of[P,R,L])A.receiveShadow=!0,this.scene.add(A)}createPlayer(){const e=this.player;this.shirt=this.box(e,0,.93,0,.7,.8,.47,15445570),this.sphere(e,0,1.67,0,.45,16766382),this.hair=this.sphere(e,0,1.93,-.035,.43,5323826),this.hair.scale.y=.65,this.ponytail=this.sphere(e,0,1.66,-.39,.25,5323826),this.ponytail.visible=!1;for(const t of[-.16,.16]){this.sphere(e,t,1.72,.394,.042,2571317);const n=this.box(e,t,.3,0,.25,.55,.28,4349808);this.box(n,0,-.19,.08,.29,.16,.4,16446166),this.legs.push(n)}this.box(e,-.48,.94,0,.2,.65,.23,16766382),this.box(e,.48,.94,0,.2,.65,.23,16766382),this.box(e,0,1,-.36,.52,.65,.3,5872009),this.box(e,0,1,-.54,.32,.25,.1,15781238);this.powerAura=this.cylinder(e,0,0.035,0,0.85,0.85,0.02,0x34d399,16);}updatePlayerVisuals(level,role="manager"){const lvl=Math.max(1,Math.min(5,level||1));const auraColors=[0x34d399,0x38bdf8,0xfbbf24,0xa78bfa,0xf472b6];const cColor=auraColors[lvl-1];if(this.powerAura){this.powerAura.material=this.material(cColor);const s=0.85+(lvl-1)*0.12;this.powerAura.scale.set(s,1,s);}}createMilo(){this.cylinder(this.milo,0,.65,0,.45,.7,1.25,5471870),this.sphere(this.milo,0,1.58,0,.48,16766123),this.cylinder(this.milo,0,2.15,0,.08,.58,.95,4486774),this.cylinder(this.milo,0,1.82,0,.75,.75,.12,4486774);for(const t of[-.16,.16])this.sphere(this.milo,t,1.6,.44,.045,2702648);this.sphere(this.milo,0,1.28,.33,.22,16183513),this.box(this.milo,.7,.9,0,.09,1.8,.09,10449480),this.sphere(this.milo,.7,1.9,0,.19,16765546);const e=this.sphere(this.milo,0,3,0,.19,16764765);e.userData.beacon=!0}setAvatar(e){this.shirt.material=this.material(e==="girl"?9925816:15445570),this.ponytail.visible=e==="girl"}createBridge(){for(let e=0;e<yt;e++){const t=new ut;t.position.x=Qe.riverMin+e+.5,this.box(t,0,.12,0,.97,.35,Qe.bridgeWidth,12826773),this.box(t,0,.33,0,.86,.06,Qe.bridgeWidth-.15,15062702);for(const n of[-1.6,1.6])this.box(t,0,.9,n,.17,1.3,.17,11109464),this.box(t,0,1.35,n,1.08,.12,.15,12559481);t.visible=!1,this.bridge.add(t)}for(const e of[3.6,10.4])for(const t of[-1.85,1.85])this.cylinder(this.scene,e,.65,t,.23,.3,1.3,13287582),this.sphere(this.scene,e,1.4,t,.28,16044924)}setBridge(e,t=!1){this.bridgeCount=e,this.bridge.children.forEach((n,r)=>{n.visible=r<e,t&&r===e-1&&(n.position.y=3,this.burst(new F(n.position.x,.8,0)))})}decorate(){let e=91;const t=()=>(e=e*16807%2147483647,(e-1)/2147483646);for(let n=0;n<22;n++){const r=new ut,s=t()*Math.PI*2,a=80+t()*110;r.position.set(10+Math.cos(s)*a,16+t()*10,Math.sin(s)*a),r.scale.setScalar(1.4+t()*1.4);for(let o=0;o<4;o++){const l=this.sphere(r,o*1.1,Math.sin(o)*.35,0,.95+o%2*.4,16055541);l.scale.set(1.4,.65,1),l.castShadow=!1,l.receiveShadow=!1}this.scene.add(r),this.clouds.push(r)}for(let n=0;n<18;n++){const r=n/18*Math.PI*2+t()*.2,s=230+t()*140,a=new ut,o=10+Math.cos(r)*s,l=Math.sin(r)*s;if(Math.abs(o-7)<40)continue;a.position.set(o,this.groundHeight(o,l)-1,l),a.rotation.y=t()*6;const c=16+t()*20;for(let u=0;u<3;u++){const h=10+t()*26,f=this.cylinder(a,(t()-.5)*c,h/2,(t()-.5)*c,0,c*.45,h,u%2?7315066:8300682,7);f.castShadow=!1,h>26&&(this.cylinder(a,f.position.x,h*.9,f.position.z,0,c*.45*.2+.4,h*.2,16054514,7).castShadow=!1)}this.scene.add(a)}}mergeStatic(){const e=new Set([this.player,this.milo,this.bridge,this.windmill,this.sky,...this.clouds,...this.ripples,...this.floaters.map(s=>s.object)]),t=s=>!!s&&(e.has(s)||t(s.parent)),n=new Set(this.materials.values()),r=new Map;this.scene.updateMatrixWorld(!0),this.scene.traverse(s=>{if(!(s instanceof St)||s instanceof En||Array.isArray(s.material)||!n.has(s.material)||t(s))return;const a=`${s.material.uuid}:${s.castShadow}`;let o=r.get(a);o||(o={material:s.material,cast:s.castShadow,geometries:[],meshes:[]},r.set(a,o));const l=(s.geometry.index?s.geometry.toNonIndexed():s.geometry.clone()).applyMatrix4(s.matrixWorld);for(const c of Object.keys(l.attributes))["position","normal","uv"].includes(c)||l.deleteAttribute(c);l.clearGroups(),o.geometries.push(l),o.meshes.push(s)});for(const{material:s,cast:a,geometries:o,meshes:l}of r.values()){if(l.length<2){o.forEach(h=>h.dispose());continue}const c=Wm(o);if(o.forEach(h=>h.dispose()),!c)continue;const u=new St(c,s);u.castShadow=a,u.receiveShadow=!0,this.scene.add(u);for(const h of l)h.removeFromParent(),h.geometry.dispose()}}resize(){const{clientWidth:e,clientHeight:t}=this.canvas;this.renderer.setSize(e,t,!1),this.camera.aspect=e/t,this.camera.updateProjectionMatrix()}floorHeight(){return this.bridgeCount===yt&&this.player.position.x>=4&&this.player.position.x<=10&&Math.abs(this.player.position.z)<1.4?.36:0}jump(){this.active&&!this.paused&&this.player.position.y<=this.floorHeight()+.01&&(this.jumpVelocity=6.5,this.onJump?.())}zoom(e){this.distance=fr.clamp(this.distance+e,20,85)}clearInput(forceAll=false){
+    this.keys.clear();
+    this.joystick={x:0,y:0};
+    if(forceAll || !this.navigatingTarget){
+      this.destination=void 0;
+      this.path=[];
+      this.onArrival=null;
+      if(this.targetMarker)this.targetMarker.visible=!1;
+    }
+  }resetCamera(){this.yaw=.57,this.pitch=.95,this.distance=42}
   setPerformanceMode(mode){
     window._perfMode = mode;
     try{localStorage.setItem("ivt_perf_mode", mode);}catch(e){}
@@ -4483,7 +4492,7 @@ function Ql(i,e,t,n,r){const s=n.scale,a=i.createRadialGradient(e/2,t/2,0,e/2,t/
         if(isM){
           mList.push(st);
           const d=el.querySelector(".station-dot, .mystery-dot");
-          if(d)d.textContent="👑";
+          if(d)d.innerHTML=Xe("crown");
         }
       }
     });
@@ -4565,8 +4574,10 @@ function Yr(){
     const uncompleted = pool.filter(q => !(ie.questionStats?.[q.id]?.correct > 0));
     if(uncompleted.length === 0){
       Jn(
-        `👑 ${ws.name}`,
-        `<div class="completion-medal" style="font-size:36px;margin:8px auto;display:flex;justify-content:center">👑</div>
+        ws.name,
+        `<div class="completion-medal" style="margin:8px auto;display:flex;justify-content:center;color:#f59e0b">
+          ${Xe("crown")}
+         </div>
          <div class="dialog-eyebrow" style="color:#d97706;font-weight:800;letter-spacing:1px;text-align:center">TRẠM ĐÃ THÀNH THẠO 100%</div>
          <p class="dialog-copy centered" style="margin:10px 0 14px">
            Chúc mừng! Bạn đã chinh phục trọn vẹn <strong>${pool.length}/${pool.length} câu hỏi</strong> tại trạm này.<br>
@@ -4574,12 +4585,12 @@ function Yr(){
          </p>
          <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.25);border-radius:12px;padding:12px 16px;margin:12px 0 18px;display:flex;align-items:center;justify-content:space-around;gap:12px;text-align:center">
            <div>
-             <span style="display:block;font-size:16px;font-weight:800;color:#10b981">✓ Đã Hoàn Thành</span>
+             <span style="display:flex;align-items:center;justify-content:center;gap:4px;font-size:15px;font-weight:800;color:#059669">${Xe("check")} Đã Hoàn Thành</span>
              <small style="color:#6b7280;font-size:12px">${pool.length}/${pool.length} câu chuẩn xác</small>
            </div>
            <div style="width:1px;height:30px;background:rgba(0,0,0,0.12)"></div>
            <div>
-             <span style="display:block;font-size:16px;font-weight:800;color:#d97706">📚 Chế Độ Ôn Tập</span>
+             <span style="display:flex;align-items:center;justify-content:center;gap:4px;font-size:15px;font-weight:800;color:#d97706">${Xe("book")} Chế Độ Ôn Tập</span>
              <small style="color:#6b7280;font-size:12px">Không cộng thêm EXP</small>
            </div>
          </div>
@@ -4663,7 +4674,9 @@ function Yr(){
     if(gBtn){
       gBtn.onclick = () => {
         cr();
-        navigateToTarget(nextWest.id);
+        setTimeout(() => {
+          navigateToTarget(nextWest.id);
+        }, 50);
       };
     }
     const cBtn = Y("close-milo-dialog-btn");
@@ -4713,28 +4726,17 @@ function handleStationClick(s){
   const isMilo=(!s||s==="milo"||s.id==="milo-label");
   const ws=isMilo?null:(typeof s==="object"?s:_stationsDef.find(item=>item.id===s||item.type===s||item.id===`${s}-label`));
 
-  if(isMilo){
-    const role=(ie.avatar==="girl"||ie.avatar==="tech")?"tech":"manager";
-    const westStatus=getWestStationsStatus(role);
-    const uncompletedWest=westStatus.filter(item=>!item.completed);
-    if(uncompletedWest.length>0){
-      window._currentStation=null;
-      Yr();
-      return;
-    }
-  }
-
   const targetCoords=isMilo?[-3.0,0,1.5]:ws.pos;
   const targetPos=new F(targetCoords[0],0,targetCoords[2]);
   const pPos=_e.player.position;
   const dist=Math.hypot(pPos.x-targetPos.x,pPos.z-targetPos.z);
 
-  // If character is ALREADY NEAR (< 3.2m): Open challenge immediately!
+  // If character is ALREADY NEAR (< 3.2m): Open challenge / Milo dialog immediately!
   if(dist<3.2 || (isMilo&&_e.nearMilo()) || (!isMilo&&_e.nearWorkstation()?.type===ws?.type)){
     window._currentStation=ws;
     Yr();
   } else {
-    // If far away: Navigate to station first! Only open when arrived!
+    // If far away: Auto-navigate to station or Milo first! Only open when arrived!
     const targetId=isMilo?"milo":(ws.type||ws.id.replace("-label",""));
     navigateToTarget(targetId);
   }
@@ -4782,9 +4784,10 @@ function getNextSuggestedQuest(){
 }
 
 function navigateToTarget(targetId){
-  const st=QUEST_JOURNEY.find(s=>s.id===targetId)||getNextSuggestedQuest();
-  if(!_e)return;
-  _e.paused=!1;
+  const st = QUEST_JOURNEY.find(s => s.id === targetId) || getNextSuggestedQuest();
+  if(!_e) return;
+  _e.paused = !1;
+  _e.navigatingTarget = true;
   const targetPos=new F(st.pos[0],0,st.pos[2]);
   if(_e.navigateToPoint){
     _e.navigateToPoint(targetPos);
@@ -4792,7 +4795,7 @@ function navigateToTarget(targetId){
     _e.destination=targetPos;
   }
   // Auto-open station quiz/dialog as soon as character arrives at destination!
-  _e.onArrival=()=>{document.querySelectorAll(".workstation-label, #milo-label").forEach(el=>el.classList.remove("gps-focus"));
+  _e.onArrival=()=>{_e.navigatingTarget=false;document.querySelectorAll(".workstation-label, #milo-label").forEach(el=>el.classList.remove("gps-focus"));
     if(st.id==="milo"){
       window._currentStation=null;
       Yr();
@@ -4830,7 +4833,7 @@ function openRoadmapModal(){
         isFinished = pool.length > 0 && pool.every(q => ie.questionStats?.[q.id]?.correct > 0);
       }
     }
-    const statusBadge = isFinished ? `<span style="display:inline-flex;align-items:center;gap:3px;color:#10b981;font-weight:700;font-size:12px">${Xe("check")} Đã xong</span>` : (isCurrent ? `<span style="color:#f59e0b;font-weight:700;font-size:12px">⚡ Đang làm</span>` : `<span style="color:#9ca3af;font-size:12px">Chưa xong</span>`);
+    const statusBadge = isFinished ? `<span style="display:inline-flex;align-items:center;gap:3px;color:#059669;font-weight:800;font-size:11.5px">${Xe("check")} Đã xong</span>` : (isCurrent ? `<span style="display:inline-flex;align-items:center;gap:3px;color:#b45309;font-weight:800;font-size:11.5px">⚡ Đang làm</span>` : `<span style="color:#788f80;font-weight:700;font-size:11px">Chưa xong</span>`);
     return `
       <div class="roadmap-step-card ${isCurrent?'current':''}">
         <div class="step-num">${st.step}</div>
@@ -4912,7 +4915,7 @@ _stationsDef.forEach(s=>{const el=Y(s.id);if(el)el.onclick=()=>handleStationClic
     const currentNum=qIdx>=0?qIdx+1:1;
     const isReview=window._isReviewMode||pool.every(q=>ie.questionStats?.[q.id]?.correct>0);
     eyebrow=isReview
-      ? `👑 ${ws.name} · ÔN TẬP KIẾN THỨC (CÂU ${currentNum}/${pool.length}) · KHÔNG CỘNG EXP`
+      ? `[ÔN TẬP] ${ws.name} · ÔN TẬP KIẾN THỨC (CÂU ${currentNum}/${pool.length}) · KHÔNG CỘNG EXP`
       : `${ws.name} · Câu ${currentNum}/${pool.length} · ${t.subsystemName||""}`;
   } else if(Kt==="bridge"){
     eyebrow=`ĐOẠN CẦU ${ie.bridge+1} / ${yt} · ${t.subsystemName||"IVT PRO"}`;
@@ -4955,7 +4958,7 @@ function ic(){
       </div>
       <p style="margin:0;font-size:14px;line-height:1.5;color:#374151"><strong>Gợi ý:</strong> ${hintText}</p>
       ${Yn>=2 && i.category ? `<small style="display:block;margin-top:6px;color:#6b7280">Phân hệ: <b>${i.subsystemName||i.category}</b> · Mã: <b>${i.ticketCode||""}</b></small>` : ""}
-      <small style="display:block;margin-top:4px;color:#0284c7;font-weight:600">💡 Bạn hãy suy luận và bấm chọn lại một đáp án khác nhé!</small>
+      <small style="display:block;margin-top:4px;color:#0284c7;font-weight:600"><span class="inline-svg" style="display:inline-flex;align-items:center;vertical-align:-2px;margin-right:4px">${Xe("help")}</span>Bạn hãy suy luận và bấm chọn lại một đáp án khác nhé!</small>
     </div>
   `);
 }
@@ -5016,7 +5019,7 @@ function fg(i,e){
         </div>
         <div style="border-top:1px dashed rgba(16,185,129,0.3);padding-top:8px;margin-top:6px">
           <strong style="display:block;color:#065f46;font-size:13px;margin-bottom:4px">
-            📚 KIẾN THỨC CỐT LÕI (${t.subsystemName||"IVT PRO"} · ${t.ticketCode||"#TK"}):
+            <span class="inline-svg" style="display:inline-flex;align-items:center;vertical-align:-2px;margin-right:4px">${Xe("book")}</span>KIẾN THỨC CỐT LÕI (${t.subsystemName||"IVT PRO"} · ${t.ticketCode||"#TK"}):
           </strong>
           <p style="margin:0;font-size:14px;line-height:1.6;color:#1f2937">
             ${t.explanation}
@@ -5104,24 +5107,33 @@ function fg(i,e){
 }function $a(i=ie.table||2){Jn("Sổ cửu chương",`<div class="dialog-eyebrow">HỌC TỪNG CHÚT, NHỚ THẬT LÂU</div><div class="table-tabs" role="group" aria-label="Chọn kho IVT Pro">${Ha.map(e=>`<button data-table="${e}" aria-pressed="${e===i}">×${e}</button>`).join("")}</div><div class="multiplication-grid">${Array.from({length:10},(e,t)=>{const n=ie.questionStats[`m${i}_${t+1}`];return`<div class="${n?.correct?"known":""}"><span>${i} × ${t+1}</span><b>= ${i*(t+1)}</b><small>${n?.correct?"✓":""}</small></div>`}).join("")}</div><p class="book-note">Dấu ✓ là nghiệp vụ kho bạn đã trả lời đúng. Mình luyện thêm nhé?</p><button id="practice-table" class="primary wide">Luyện bảng ×${i} ${Xe("arrow")}</button><button id="practice-all" class="text-button centered">Trộn các bảng ×2 – ×10</button>`,"book"),document.querySelectorAll("[data-table]").forEach(e=>e.onclick=()=>$a(Number(e.dataset.table))),Y("practice-table").onclick=()=>{ie.table=i,Xt(),Xr("practice")},Y("practice-all").onclick=()=>{ie.table=0,Xt(),Xr("practice")}}
 const rmBtn=Y("open-roadmap");if(rmBtn)rmBtn.onclick=()=>openRoadmapModal();
 const qNavBtn=Y("quest-nav-btn");if(qNavBtn)qNavBtn.onclick=()=>{const nq=getNextSuggestedQuest();navigateToTarget(nq.id);};
-Y("learn").onclick=()=>window.open("https://iposvni.gitbook.io/inventory/","_blank","noopener,noreferrer");Y("learn-welcome").onclick=()=>window.open("https://iposvni.gitbook.io/inventory/","_blank","noopener,noreferrer");function pg(){Jn("Sẵn sàng phiêu lưu?",`<div class="help-list"><div><b>1</b><p><strong>Khám phá ngôi làng</strong>Nhấn WASD / phím mũi tên, hoặc chạm xuống đất để di chuyển. Trên màn hình cảm ứng, dùng cần điều khiển.</p></div><div><b>2</b><p><strong>Làm quen với Milo</strong>Đến gần chiếc mũ xanh rồi nhấn E hoặc nút “Nói chuyện”.</p></div><div><b>3</b><p><strong>Xây cầu bằng nghiệp vụ kho</strong>Chọn 1 trong 3 đáp án. Cần giúp đỡ? Nhấn “Gợi ý cho mình”.</p></div><div><b>4</b><p><strong>Mở bản đồ thế giới</strong>Nhấn M hoặc chạm vào bản đồ nhỏ ở góc màn hình để xem các vùng đất.</p></div></div><div class="milo-tip"><p><b>Space</b>: nhảy · <b>Kéo trên làng</b>: xoay camera · <b>Lăn chuột</b>: phóng to / thu nhỏ · <b>Esc</b>: tạm dừng.</p></div><button id="understood" class="primary wide">Mình hiểu rồi! ${Xe("check")}</button>`,"help"),Y("understood").onclick=cr}function showLegalModal(onDone){
+Y("learn").onclick=()=>window.open("https://iposvni.gitbook.io/inventory/","_blank","noopener,noreferrer");Y("learn-welcome").onclick=()=>window.open("https://iposvni.gitbook.io/inventory/","_blank","noopener,noreferrer");function pg(){Jn("Sẵn sàng phiêu lưu?",`<div class="help-list">
+  <div><b class="help-step-num">1</b><p><strong>Khám phá Vương Quốc Kho</strong>Dùng phím WASD / mũi tên hoặc click chuột trên mặt đất để di chuyển. Trên điện thoại, dùng Cần điều khiển ảo 360° góc trái.</p></div>
+  <div><b class="help-step-num">2</b><p><strong>Tương tác với Milo & Các Trạm</strong>Đến gần trạm bất kỳ để mở thử thách nghiệp vụ. Bạn cũng có thể bấm nút "Lộ trình" hoặc "Tự dẫn đường" để nhân vật tự chạy đến trạm.</p></div>
+  <div><b class="help-step-num">3</b><p><strong>Xây Cầu Dữ Liệu bằng Tri thức</strong>Hoàn thành 4 trạm nghiệp vụ bên Làng Khởi Đầu để mở khóa nhiệm vụ xây Cây Cầu Dữ Liệu 6 nhịp của Milo vượt sông sang Đảo Bếp Trung Tâm.</p></div>
+  <div><b class="help-step-num">4</b><p><strong>Bản đồ & Lộ trình nhiệm vụ</strong>Nhấn phím M hoặc biểu tượng Bản đồ để mở Bản đồ thế giới; nhấn nút "Lộ trình" để theo dõi tiến trình 9 chặng từ tập sự đến Master kho F&B.</p></div>
+</div>
+<div class="milo-tip" style="background:#f0fdf4;border:1.5px solid #bbf7d0;border-radius:14px;padding:10px 14px;color:#166534">
+  <p style="margin:0;font-size:12px;font-weight:700"><b>Phím tắt</b>: <b>Space</b>: nhảy · <b>Kéo chuột</b>: xoay camera 3D · <b>Lăn chuột</b>: zoom xa/gần · <b>Esc</b>: đóng bảng.</p>
+</div>
+<button id="understood" class="primary wide" style="margin-top:12px;background:linear-gradient(135deg,#059669,#10b981);font-weight:800">Mình hiểu rồi! ${Xe("check")}</button>`,"help"),Y("understood").onclick=cr}function showLegalModal(onDone){
   Jn(
     "Căn cứ Pháp lý & Bản quyền",
     `<div class="help-list">
       <div>
-        <b style="font-size:16px">⚖️</b>
+        <b class="legal-icon-box" style="background:#ecfdf5;color:#059669;border:1.5px solid #a7f3d0">${Xe("scales")}</b>
         <p><strong>Mục đích Giáo dục & Đào tạo Nội bộ Phi thương mại</strong>Dự án mô phỏng 3D được phát triển nhằm phục vụ học tập, đào tạo nội bộ và rèn luyện nghiệp vụ quản trị kho F&B. Trò chơi phi thương mại, không kinh doanh, không bán hàng và không thu bất kỳ khoản phí nào từ người chơi.</p>
       </div>
       <div>
-        <b style="font-size:16px">🌐</b>
+        <b class="legal-icon-box" style="background:#eff6ff;color:#2563eb;border:1.5px solid #bfdbfe">${Xe("compass")}</b>
         <p><strong>Nguồn gốc Kiến trúc & Bản quyền Mã nguồn</strong>Môi trường 3D Engine và cơ chế tương tác thế giới ảo được kế thừa, chuyển thể từ dự án giáo dục mã nguồn mở tại <code>https://math.aigame3d.com/</code>. Toàn bộ hình ảnh, nhân vật, cây cối, mặt nước được dựng bằng thuật toán Procedural qua thư viện Three.js.</p>
       </div>
       <div>
-        <b style="font-size:16px">📦</b>
+        <b class="legal-icon-box" style="background:#fef3c7;color:#d97706;border:1.5px solid #fde68a">${Xe("warehouse")}</b>
         <p><strong>Bản chất Bộ câu hỏi & Tri thức Nghiệp vụ</strong>Các câu hỏi, tình huống xử lý ticket và giải thích được biên soạn dựa trên kiến thức quản trị kho tổng quát ngành F&B (FIFO, BOM định mức tiêu hao, kiểm kê cân đối, luân chuyển kho, giá vốn bình quân gia quyền).</p>
       </div>
       <div>
-        <b style="font-size:16px">🔒</b>
+        <b class="legal-icon-box" style="background:#f0fdf4;color:#059669;border:1.5px solid #bbf7d0">${Xe("lock")}</b>
         <p><strong>Bảo mật & Quyền riêng tư (100% Client-side)</strong>Hệ thống hoạt động hoàn toàn trên trình duyệt người dùng (Offline Client-side), không truyền dữ liệu cá nhân hay dữ liệu doanh nghiệp lên bất kỳ máy chủ nào. Điểm số và cấp độ được lưu trên LocalStorage thiết bị của bạn.</p>
       </div>
     </div>
@@ -5142,58 +5154,95 @@ Y("help").onclick=pg;function Ti(){
   const curPerf = window._perfMode || "smooth";
 
   Jn("Cài đặt hệ thống",`
-    <div class="settings-group-title">${Xe("sound")} Âm thanh & Nhạc nền</div>
-    <div class="settings-row">
-      <span>Hiệu ứng âm thanh</span>
-      <button id="toggle-sound" class="switch" role="switch" aria-checked="${ie.sound}" aria-label="Hiệu ứng âm thanh"><i></i></button>
-    </div>
-    <div class="settings-row">
-      <span>Nhạc nền nhẹ nhàng</span>
-      <button id="toggle-music" class="switch" role="switch" aria-checked="${ie.music}" aria-label="Nhạc nền"><i></i></button>
-    </div>
-
-    <div class="settings-group-title">${Xe("star")} Cấu hình đồ họa & hình ảnh</div>
-    <div class="perf-options-container">
-      <button id="perf-opt-ultra" class="perf-option-card ${curPerf==='ultra'?'active':''}" type="button">
-        <div class="perf-opt-header">
-          <span class="perf-opt-radio"></span>
-          <span class="perf-opt-name">Siêu nhẹ</span>
-          <span class="perf-opt-badge badge-ultra">Tiết kiệm pin</span>
+    <div class="settings-modal-wrap">
+      <!-- PHẦN 1: ÂM THANH (GRID 2 CỘT) -->
+      <div class="settings-subhead">
+        ${Xe("sound")} <span>Âm thanh & Nhạc nền</span>
+      </div>
+      <div class="settings-audio-grid">
+        <div class="audio-switch-card">
+          <div class="audio-switch-info">
+            <strong>Hiệu ứng âm thanh</strong>
+            <small>Bước chân, bíp POS, nhịp cầu</small>
+          </div>
+          <button id="toggle-sound" class="switch" role="switch" aria-checked="${ie.sound}" aria-label="Hiệu ứng âm thanh"><i></i></button>
         </div>
-        <div class="perf-opt-desc">Tắt bóng đổ, tải nhẹ nhất cho máy yếu hoặc điện thoại</div>
-      </button>
-
-      <button id="perf-opt-high" class="perf-option-card ${curPerf==='high'?'active':''}" type="button">
-        <div class="perf-opt-header">
-          <span class="perf-opt-radio"></span>
-          <span class="perf-opt-name">Sắc nét và mượt mà</span>
-          <span class="perf-opt-badge badge-high">Độ nét cao</span>
+        <div class="audio-switch-card">
+          <div class="audio-switch-info">
+            <strong>Nhạc nền nhẹ nhàng</strong>
+            <small>Lo-Fi F&B êm dịu, thư giãn</small>
+          </div>
+          <button id="toggle-music" class="switch" role="switch" aria-checked="${ie.music}" aria-label="Nhạc nền"><i></i></button>
         </div>
-        <div class="perf-opt-desc">Chi tiết rực rỡ, độ phân giải cao và bóng đổ mềm sống động</div>
-      </button>
+      </div>
 
-      <button id="perf-opt-smooth" class="perf-option-card ${curPerf==='smooth'?'active':''}" type="button">
-        <div class="perf-opt-header">
-          <span class="perf-opt-radio"></span>
-          <span class="perf-opt-name">Chế độ siêu mượt mà</span>
-          <span class="perf-opt-badge badge-smooth">Mặc định khuyên dùng</span>
+      <!-- PHẦN 2: CẤU HÌNH ĐỒ HỌA (GRID 3 CỘT) -->
+      <div class="settings-subhead">
+        ${Xe("star")} <span>Cấu hình hình ảnh & Đồ họa</span>
+      </div>
+      <div class="perf-cards-grid">
+        <button id="perf-opt-ultra" class="perf-card ${curPerf==='ultra'?'active':''}" type="button">
+          <div class="perf-card-top">
+            <span class="perf-card-radio"></span>
+            <span class="perf-badge badge-ultra">Tiết kiệm pin</span>
+          </div>
+          <div class="perf-card-title">Siêu nhẹ</div>
+          <div class="perf-card-sub">Tắt bóng đổ, nhẹ nhất cho máy yếu & điện thoại</div>
+        </button>
+
+        <button id="perf-opt-high" class="perf-card ${curPerf==='high'?'active':''}" type="button">
+          <div class="perf-card-top">
+            <span class="perf-card-radio"></span>
+            <span class="perf-badge badge-high">Độ nét cao</span>
+          </div>
+          <div class="perf-card-title">Sắc nét và mượt mà</div>
+          <div class="perf-card-sub">Độ nét 1.25x, bóng đổ mềm rực rỡ và sống động</div>
+        </button>
+
+        <button id="perf-opt-smooth" class="perf-card ${curPerf==='smooth'?'active':''}" type="button">
+          <div class="perf-card-top">
+            <span class="perf-card-radio"></span>
+            <span class="perf-badge badge-smooth">Khuyên dùng</span>
+          </div>
+          <div class="perf-card-title">Chế độ siêu mượt mà</div>
+          <div class="perf-card-sub">Chuẩn 60 FPS mượt mà, cân bằng hình ảnh & tốc độ</div>
+        </button>
+      </div>
+
+      <!-- PHẦN 3: TIẾN TRÌNH THỐNG KÊ (3 STAT PILLS) -->
+      <div class="settings-subhead">
+        ${Xe("star")} <span>Tiến trình & Tài khoản</span>
+      </div>
+      <div class="settings-stats-row">
+        <div class="stat-pill">
+          <strong>${ie.xp}</strong>
+          <span>XP tích lũy</span>
         </div>
-        <div class="perf-opt-desc">Chuẩn 60 FPS mượt mà, cân bằng hoàn hảo giữa đồ họa và tốc độ</div>
-      </button>
-    </div>
+        <div class="stat-pill">
+          <strong>${e}</strong>
+          <span>Lượt trả lời</span>
+        </div>
+        <div class="stat-pill">
+          <strong>${e?Math.round(t/e*100):0}%</strong>
+          <span>Trả lời đúng</span>
+        </div>
+      </div>
 
-    <div class="settings-group-title">${Xe("star")} Tiến trình & Tài khoản</div>
-    <div class="progress-summary">
-      <span><strong>${ie.xp}</strong>XP tích lũy</span>
-      <span><strong>${e}</strong>Lượt trả lời</span>
-      <span><strong>${e?Math.round(t/e*100):0}%</strong>Trả lời đúng</span>
-    </div>
-
-    <div class="settings-actions-group">
-      <button id="legal-btn" class="secondary wide" type="button" style="margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:8px;">${Xe("scales")} Căn cứ pháp lý & Bản quyền</button>
-      <button id="save-now" class="secondary wide" type="button" style="margin-bottom:8px;">${Xe("save")} Lưu tiến trình</button>
-      <button id="return-menu" class="text-button centered" type="button">Về màn hình chính</button>
-      <button id="reset-progress" class="text-button danger centered" type="button">${Xe("reset")} Chơi lại từ đầu</button>
+      <!-- PHẦN 4: HÀNG NÚT CHỨC NĂNG (GRID 2 CỘT CÂN ĐỐI) -->
+      <div class="settings-btn-grid">
+        <button id="legal-btn" class="settings-action-btn secondary" type="button">
+          ${Xe("scales")} <span>Căn cứ pháp lý</span>
+        </button>
+        <button id="save-now" class="settings-action-btn primary-action" type="button">
+          ${Xe("save")} <span>Lưu tiến trình</span>
+        </button>
+        <button id="return-menu" class="settings-action-btn text-action" type="button">
+          <span>Về màn hình chính</span>
+        </button>
+        <button id="reset-progress" class="settings-action-btn danger-action" type="button">
+          ${Xe("reset")} <span>Chơi lại từ đầu</span>
+        </button>
+      </div>
     </div>
   `,"settings");
 
@@ -5233,6 +5282,7 @@ Y("help").onclick=pg;function Ti(){
     Y("cancel-reset").onclick=Ti;
   };
 }
+
 Y("settings").onclick=Ti;Y("sound").onclick=()=>{xt.unlock(),ie.sound=!ie.sound,_n(),Xt()};Y("jump").onclick=()=>_e.jump();Y("zoom-in").onclick=()=>_e.zoom(-8);Y("zoom-out").onclick=()=>_e.zoom(8);function rc(i,e=i){const t=_e.player.position;return{player:{x:t.x,z:t.z,facing:_e.player.rotation.y},milo:{x:_e.milo.position.x,z:_e.milo.position.z},bridge:ie.bridge,questComplete:ie.questComplete,selected:e?Ei:void 0,labels:i,translate:Cn,time:performance.now()/1e3}}function sc(){const{ctx:i,w:e,h:t}=Jl(Y("minimap-canvas")),n=_e.player.position;Ql(i,e,t,{cx:n.x,cz:n.z,scale:e/70,rotation:_e.heading},rc(!1))}function ac(){if(!Dn)return;const i=Y("map-canvas"),{ctx:e,w:t,h:n}=Jl(i);Ql(e,t,n,oc(t,n),rc(t>600,!0)),requestAnimationFrame(ac)}function oc(i,e){const t=i>820,n=lg(t?i-360:i,t?e:e*.62,t?56:22);return t?n.cx+=180/n.scale:n.cz+=e*.19/n.scale,n}function Ya(){Y("map-regions").innerHTML=Ln(Dt.map(e=>{const t=Di(e,ie.questComplete);return`<button class="map-region${t?"":" locked"}" data-region="${e.id}" aria-pressed="${Ei===e.id}"><span class="map-region-icon" style="--tint:${e.color}">${Xe(t?e.icon:"lock")}</span><span><strong>${e.name}</strong><small>${e.subtitle}</small></span>${bi===e.id?"<em>Bạn ở đây</em>":""}</button>`}).join(""));const i=Dt.find(e=>e.id===Ei);Y("map-detail").innerHTML=i?Ln(`<strong>${Xe(i.icon)} ${i.name}</strong><p>${i.blurb}</p>${Di(i,ie.questComplete)?"":`<p class="map-locked">${Xe("lock")} Mở khóa khi hoàn thành Cây cầu tình bạn</p>`}`):"",document.querySelectorAll("[data-region]").forEach(e=>e.onclick=()=>{Ei=e.dataset.region,Ya()})}function Ka(){!_e.active||Y("dialog").open||(Dn=!0,_e.paused=!0,_e.clearInput(),Ei=bi||void 0,Y("world-map").hidden=!1,Ya(),Wa(Y("world-map")),Y("close-map").focus(),requestAnimationFrame(ac))}function Kr(){Dn&&(Dn=!1,Y("world-map").hidden=!0,_e.paused=!1,_e.clearInput())}Y("minimap").onclick=Ka;Y("open-map").onclick=Ka;Y("close-map").onclick=Kr;Y("map-canvas").addEventListener("click",i=>{const e=i.currentTarget,t=e.getBoundingClientRect(),n=oc(t.width,t.height),r=cg(n,t.width,t.height,i.clientX-t.left,i.clientY-t.top);Ei=hg(r.x,r.z)?.id,Ya()});document.addEventListener("keydown",i=>{if(i.repeat&&["e"," ","Escape","m","M"].includes(i.key))return;if(Y("dialog").open){if(Xa==="quiz"&&/^[1-4]$/.test(i.key)){const t=document.querySelectorAll(".answer")[Number(i.key)-1];t&&!t.disabled&&t.click()}return}if(Dn){(i.key==="Escape"||i.key.toLowerCase()==="m")&&(i.preventDefault(),Kr());return}if(!_e?.active)return;const e=i.key.toLowerCase();["w","a","s","d","arrowup","arrowdown","arrowleft","arrowright"," "].includes(e)&&(i.preventDefault(),_e.keys.add(e)),e===" "&&_e.jump(),e==="e"&&Yr(),e==="m"&&Ka(),e==="escape"&&(i.preventDefault(),Ti())});document.addEventListener("keyup",i=>_e?.keys.delete(i.key.toLowerCase()));window.addEventListener("blur",()=>{_e?.clearInput(),_e?.active&&!Dn&&!Y("dialog").open&&Ti()});document.addEventListener("visibilitychange",()=>{_e?.clearInput(),document.hidden?xt.music(!1):_e?.active&&xt.music(ie.music)});const nr=Y("joystick");let Za=-1;function lc(i){if(i.pointerId!==Za)return;const e=nr.getBoundingClientRect();let t=(i.clientX-e.left-e.width/2)/34,n=(i.clientY-e.top-e.height/2)/34;const r=Math.max(1,Math.hypot(t,n));t/=r,n/=r,_e.joystick={x:t,y:n},Y("joystick-knob").style.transform=`translate(${t*30}px,${n*30}px)`}nr.addEventListener("pointerdown",i=>{Za=i.pointerId,nr.setPointerCapture(i.pointerId),lc(i)});nr.addEventListener("pointermove",lc);for(const i of["pointerup","pointercancel"])nr.addEventListener(i,()=>{Za=-1,_e.joystick={x:0,y:0},Y("joystick-knob").style.transform=""});function Ls(i,e,t,n){
   if(!i)return;
 
