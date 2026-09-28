@@ -2914,3 +2914,597 @@ dialog h2 {
     width: min(295px, calc(100vw - 2 * var(--gutter) - 75px)) !important;
   }
 }
+
+
+
+/* ========================================================
+   MOBILE HUD CONTROLS: COMPACT AVATAR, COMPACT AUTO-NAV, ZOOM
+   ======================================================== */
+
+/* Base Desktop Styling */
+.avatar-toggle-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  cursor: default;
+}
+
+.avatar-mini-level {
+  display: none;
+}
+
+.player-card-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.player-card-header {
+  display: none;
+}
+
+.card-close-btn {
+  display: none;
+}
+
+.quest-mobile-trigger {
+  display: none;
+}
+
+.quest-card-header-mobile {
+  display: none;
+}
+
+.mobile-zoom-controls {
+  display: none;
+}
+
+.step-card-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.step-card-title-wrap {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.step-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+/* ========================================================
+   RESPONSIVE MOBILE / TABLET STYLES (<= 768px)
+   ======================================================== */
+@media (max-width: 768px) {
+  /* HUD Left Container: Row of 2 compact badges */
+  .hud-left {
+    position: absolute !important;
+    top: 66px !important;
+    left: 12px !important;
+    width: auto !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    z-index: 25 !important;
+    pointer-events: none !important;
+  }
+
+  /* --- 1. COMPACT AVATAR ICON --- */
+  .player-card {
+    position: relative !important;
+    padding: 0 !important;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    pointer-events: auto !important;
+  }
+
+  .avatar-toggle-btn {
+    width: 46px !important;
+    height: 46px !important;
+    border-radius: 50% !important;
+    display: grid !important;
+    place-items: center !important;
+    position: relative !important;
+    cursor: pointer !important;
+    background: linear-gradient(145deg, #ffffff, #f0f7ec) !important;
+    border: 2px solid #34d399 !important;
+    box-shadow: 0 4px 0 #1b6352, 0 6px 14px rgba(18, 61, 51, 0.25) !important;
+    transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+  }
+
+  .avatar-toggle-btn:active {
+    transform: translateY(2px) !important;
+    box-shadow: 0 2px 0 #1b6352 !important;
+  }
+
+  .avatar-face {
+    width: 100% !important;
+    height: 100% !important;
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    font-size: 24px !important;
+    display: grid !important;
+    place-items: center !important;
+  }
+
+  .avatar-mini-level {
+    display: block !important;
+    position: absolute !important;
+    top: -4px !important;
+    right: -4px !important;
+    background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+    color: #ffffff !important;
+    font-size: 10.5px !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+    padding: 2.5px 5.5px !important;
+    border-radius: 999px !important;
+    border: 1.5px solid #ffffff !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) !important;
+  }
+
+  /* Collapsed by default: hide details */
+  .player-card-content {
+    display: none !important;
+  }
+
+  /* Expanded Avatar Profile Popup */
+  .player-card.expanded .player-card-content {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    position: absolute !important;
+    top: 54px !important;
+    left: 0 !important;
+    width: min(290px, calc(100vw - 28px)) !important;
+    padding: 16px 16px 14px !important;
+    border-radius: 20px !important;
+    background: rgba(255, 253, 245, 0.98) !important;
+    border: 2px solid #bbf7d0 !important;
+    box-shadow: 0 16px 36px rgba(18, 61, 51, 0.35) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    z-index: 60 !important;
+    animation: pop 0.22s cubic-bezier(0.2, 1.3, 0.4, 1) !important;
+  }
+
+  .player-card.expanded .player-card-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    border-bottom: 1.5px solid #e7eadc !important;
+    padding-bottom: 8px !important;
+  }
+
+  .player-card.expanded .player-card-title {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    font-size: 12px !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.06em !important;
+    color: var(--ink, #194f42) !important;
+  }
+
+  .player-card.expanded .player-card-title svg {
+    width: 16px !important;
+    height: 16px !important;
+    color: #059669 !important;
+  }
+
+  .card-close-btn {
+    display: grid !important;
+    place-items: center !important;
+    width: 26px !important;
+    height: 26px !important;
+    border-radius: 50% !important;
+    border: 1px solid #dce4d5 !important;
+    background: #ffffff !important;
+    color: #64748b !important;
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    cursor: pointer !important;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06) !important;
+  }
+
+  .card-close-btn:active {
+    transform: scale(0.92) !important;
+  }
+
+  /* --- 2. COMPACT AUTO-NAV (QUEST) ICON --- */
+  .quest-card {
+    position: relative !important;
+    padding: 0 !important;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    pointer-events: auto !important;
+  }
+
+  .quest-mobile-trigger {
+    display: grid !important;
+    place-items: center !important;
+    width: 46px !important;
+    height: 46px !important;
+    border-radius: 50% !important;
+    cursor: pointer !important;
+    background: linear-gradient(145deg, #194f42, #10382f) !important;
+    border: 2px solid #34d399 !important;
+    box-shadow: 0 4px 0 #0d2921, 0 6px 14px rgba(17, 57, 47, 0.3) !important;
+    color: #fffbea !important;
+    position: relative !important;
+    transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+  }
+
+  .quest-mobile-trigger:active {
+    transform: translateY(2px) !important;
+    box-shadow: 0 2px 0 #0d2921 !important;
+  }
+
+  .quest-trigger-icon {
+    display: grid !important;
+    place-items: center !important;
+  }
+
+  .quest-trigger-icon svg {
+    width: 22px !important;
+    height: 22px !important;
+    color: #fde68a !important;
+  }
+
+  .quest-trigger-ping {
+    position: absolute !important;
+    top: -2px !important;
+    right: -2px !important;
+    width: 11px !important;
+    height: 11px !important;
+    border-radius: 50% !important;
+    background: #fbbf24 !important;
+    border: 2px solid #ffffff !important;
+    box-shadow: 0 0 8px #fbbf24 !important;
+    animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite !important;
+  }
+
+  /* Collapsed by default: hide inner content */
+  .quest-card-content {
+    display: none !important;
+  }
+
+  /* Expanded Quest / Auto-Nav Card Popup */
+  .quest-card.expanded .quest-card-content {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    position: absolute !important;
+    top: 54px !important;
+    left: 0 !important;
+    width: min(305px, calc(100vw - 28px)) !important;
+    padding: 16px 16px 14px !important;
+    border-radius: 20px !important;
+    background: rgba(255, 253, 245, 0.98) !important;
+    border: 2px solid #bbf7d0 !important;
+    box-shadow: 0 16px 36px rgba(18, 61, 51, 0.35) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    z-index: 60 !important;
+    animation: pop 0.22s cubic-bezier(0.2, 1.3, 0.4, 1) !important;
+  }
+
+  .quest-card.header-mobile, .quest-card-header-mobile {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    border-bottom: 1.5px solid #e7eadc !important;
+    padding-bottom: 8px !important;
+    margin-bottom: 2px !important;
+  }
+
+  .quest-card-title-mobile {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    font-size: 11.5px !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.06em !important;
+    color: var(--ink, #194f42) !important;
+  }
+
+  .quest-card-title-mobile svg {
+    width: 15px !important;
+    height: 15px !important;
+    color: #d97706 !important;
+  }
+
+  .quest-card.expanded .quest-head {
+    display: none !important;
+  }
+
+  .quest-card.expanded #quest-title {
+    font-size: 14.5px !important;
+    line-height: 1.35 !important;
+    margin: 4px 0 2px !important;
+    color: #194f42 !important;
+  }
+
+  .quest-card.expanded .quest-body {
+    display: block !important;
+  }
+
+  .quest-card.expanded #quest-copy {
+    font-size: 12px !important;
+    line-height: 1.45 !important;
+    color: #4b6354 !important;
+    margin: 0 0 8px !important;
+  }
+
+  .quest-card.expanded .quest-nav-btn {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px !important;
+    width: 100% !important;
+    padding: 11px 14px !important;
+    font-size: 13px !important;
+    font-weight: 850 !important;
+    border-radius: 14px !important;
+    background: var(--ink, #194f42) !important;
+    color: #fffbea !important;
+    border: none !important;
+    box-shadow: 0 4px 0 #11392f, 0 6px 14px rgba(17, 57, 47, 0.25) !important;
+    cursor: pointer !important;
+  }
+
+  .quest-card.expanded .quest-bottom {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: #64748b !important;
+    margin-top: 6px !important;
+    padding-top: 6px !important;
+    border-top: 1px dashed rgba(25, 79, 66, 0.15) !important;
+  }
+
+  /* --- 3. FLOATING MOBILE ZOOM CONTROLS --- */
+  .mobile-zoom-controls {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    position: absolute !important;
+    top: 176px !important;
+    right: 14px !important;
+    z-index: 15 !important;
+    pointer-events: auto !important;
+  }
+
+  .mobile-zoom-btn {
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 50% !important;
+    background: #ffffff !important;
+    border: 1.5px solid #d4decb !important;
+    color: var(--ink, #194f42) !important;
+    box-shadow: 0 4px 0 #c2cdb6, 0 6px 14px rgba(25, 79, 66, 0.15) !important;
+    display: grid !important;
+    place-items: center !important;
+    cursor: pointer !important;
+    transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+  }
+
+  .mobile-zoom-btn:active {
+    transform: translateY(2px) !important;
+    box-shadow: 0 2px 0 #c2cdb6 !important;
+  }
+
+  .mobile-zoom-btn svg {
+    width: 20px !important;
+    height: 20px !important;
+  }
+}
+
+/* ========================================================
+   4. THIẾT KẾ LẠI GIAO DIỆN LỘ TRÌNH TRÊN MOBILE (< 640px)
+   ======================================================== */
+@media (max-width: 640px) {
+  .roadmap-dialog-overlay {
+    padding: 8px !important;
+  }
+
+  .roadmap-dialog-box {
+    width: min(480px, calc(100vw - 16px)) !important;
+    padding: 16px 14px 14px !important;
+    border-radius: 22px !important;
+    max-height: 88vh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    box-sizing: border-box !important;
+  }
+
+  .roadmap-head {
+    margin-bottom: 8px !important;
+    padding-bottom: 8px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .roadmap-title h3 {
+    font-size: 15px !important;
+    line-height: 1.25 !important;
+  }
+
+  .roadmap-title small {
+    font-size: 10px !important;
+    line-height: 1.3 !important;
+  }
+
+  .rm-icon {
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: 10px !important;
+  }
+
+  .rm-icon svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .roadmap-close-btn {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 20px !important;
+  }
+
+  .roadmap-banner {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    padding: 10px 12px !important;
+    margin-bottom: 10px !important;
+    border-radius: 14px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .roadmap-banner .banner-target-text {
+    font-size: 12px !important;
+    line-height: 1.35 !important;
+  }
+
+  .roadmap-banner .quick-go-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 9px 14px !important;
+    font-size: 12.5px !important;
+  }
+
+  .roadmap-list {
+    gap: 12px !important;
+    padding-right: 4px !important;
+    flex: 1 !important;
+    overflow-y: auto !important;
+  }
+
+  /* THẺ TRẠM LỘ TRÌNH DẠNG ĐA TẦNG THOÁNG ĐÃNG - KHÔNG CHÈN CHẬT */
+  .roadmap-step-card {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+    padding: 12px 14px !important;
+    border-radius: 16px !important;
+    background: #ffffff !important;
+    border: 1.5px solid #dce4d5 !important;
+  }
+
+  .roadmap-step-card.current {
+    background: linear-gradient(135deg, #fffdf2, #fefae8) !important;
+    border: 2px solid #f59e0b !important;
+  }
+
+  .roadmap-step-card .step-card-top {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+  }
+
+  .roadmap-step-card .step-num {
+    width: 26px !important;
+    height: 26px !important;
+    font-size: 12px !important;
+    border-radius: 50% !important;
+    flex-shrink: 0 !important;
+  }
+
+  .roadmap-step-card .step-icon {
+    width: 34px !important;
+    height: 34px !important;
+    border-radius: 10px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .roadmap-step-card .step-icon svg {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  .roadmap-step-card .step-card-title-wrap {
+    flex: 1 !important;
+    min-width: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+    gap: 4px 6px !important;
+  }
+
+  .roadmap-step-card .step-card-name {
+    font-size: 13.5px !important;
+    font-weight: 900 !important;
+    line-height: 1.3 !important;
+    color: var(--ink, #194f42) !important;
+  }
+
+  .roadmap-step-card.current .step-card-name {
+    color: #92400e !important;
+  }
+
+  .roadmap-step-card .step-desc {
+    font-size: 12px !important;
+    line-height: 1.45 !important;
+    color: #4b6354 !important;
+    margin: 4px 0 6px !important;
+  }
+
+  .roadmap-step-card .step-card-meta {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+  }
+
+  .roadmap-step-card .step-zone {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    color: #7b8f7e !important;
+  }
+
+  .roadmap-step-card .step-tag {
+    font-size: 9.5px !important;
+    padding: 2px 7px !important;
+  }
+
+  .roadmap-step-card .step-action {
+    width: 100% !important;
+    margin-top: 4px !important;
+  }
+
+  .roadmap-step-card .nav-go-btn {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 9px 12px !important;
+    font-size: 12.5px !important;
+    font-weight: 900 !important;
+    border-radius: 12px !important;
+  }
+}
