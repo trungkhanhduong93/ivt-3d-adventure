@@ -5573,17 +5573,15 @@ Y("settings").onclick=Ti;Y("sound").onclick=()=>{xt.unlock(),ie.sound=!ie.sound,
 
   const isNear=i.classList.contains("near")||i.classList.contains("gps-focus");
   if(isNear){
-    i.style.transform=`translate(${r.x.toFixed(1)}px,${r.y.toFixed(1)}px) ${t} scale(1.08)`;
+    i.style.transform=`translate(${r.x.toFixed(1)}px,${r.y.toFixed(1)}px) ${t} scale(1.05)`;
     i.style.opacity="1";
     i.style.zIndex="999";
   } else {
     i.style.transform=`translate(${r.x.toFixed(1)}px,${r.y.toFixed(1)}px) ${t}`;
-    // Các trạm ở xa bán trong suốt tinh tế (0.42) để không che phong cảnh
-    i.style.opacity="0.42";
-    i.style.zIndex="10";
+    i.style.opacity="1";
+    i.style.zIndex="15";
   }
 
-  // Bảng tên luôn luôn hiện khi ở trong tầm mắt
   if(i.hidden)i.hidden=!1;
 }function cc(){const i=_e.player.position,e=Xm(i.x,i.z);if(e.id===bi)return;const t=bi==="";bi=e.id,Y("area-icon").innerHTML=Xe(e.icon),Y("area-name").textContent=Cn(e.name),Y("area-sub").textContent=Cn(e.subtitle);const n=Y("area-label");n.classList.remove("arrive"),n.offsetWidth,n.classList.add("arrive"),!t&&_e.active&&e.id!=="village"&&e.id!=="garden"&&Di(e,ie.questComplete)&&In(`Chào mừng bạn đến với ${e.name}!`)}try{_e=new $m(Y("world")),_e.setBridge(ie.bridge),_e.setAvatar(ie.avatar),_e.onJump=()=>xt.jump(),_e.onSceneClick=()=>Yr(),_e.onFrame=(i,e)=>{if(ec=i,!(++ul%2!==0||!_e.active)){
     const ws=_e.nearWorkstation();
@@ -5597,18 +5595,21 @@ Y("settings").onclick=Ti;Y("sound").onclick=()=>{xt.unlock(),ie.sound=!ie.sound,
     }
 
     // 1. Update .near class for all stations FIRST so Ls immediately knows which station is active
-    Y("milo-label").classList.toggle("near",!!i);
-    Y("house-label").classList.toggle("near",ws?.type==="house");
-    Y("pond-label").classList.toggle("near",ws?.type==="pond");
-    Y("pos-label").classList.toggle("near",ws?.type==="pos");
-    Y("weigh-label").classList.toggle("near",ws?.type==="weigh");
-    Y("kitchen-label").classList.toggle("near",ws?.type==="kitchen");
-    Y("audit-label").classList.toggle("near",ws?.type==="audit");
-    Y("server-label").classList.toggle("near",ws?.type==="server");
-    Y("truck-label").classList.toggle("near",ws?.type==="truck");
-    Y("crate1-label").classList.toggle("near",ws?.type==="crate");
-    Y("crate2-label").classList.toggle("near",ws?.type==="crate");
-    Y("crate3-label").classList.toggle("near",ws?.type==="crate");
+    // 1. Cập nhật trạng thái .near theo khoảng cách thực tế (bán kính 6.5m):
+    const _pPos=_e.player.position;
+    const _isNearMilo=!!i||Math.hypot(_pPos.x-(-3),_pPos.z-1.5)<5.5;
+    Y("milo-label").classList.toggle("near",_isNearMilo);
+
+    if(typeof _stationsDef!=="undefined"){
+      _stationsDef.forEach(st=>{
+        const el=Y(st.id);
+        if(el){
+          const d=Math.hypot(_pPos.x-st.pos[0],_pPos.z-st.pos[2]);
+          const isNearSt=(d<6.5)||(ws&&ws.type===st.type&&(!st.id.startsWith("crate")||(ws.name&&ws.name.includes(st.name.slice(0,6)))));
+          el.classList.toggle("near",isNearSt);
+        }
+      });
+    }
 
     // 2. Project and position station labels
     Ls(Y("milo-label"),new F(-3,3.5,1.5),"translate(-50%,-100%)",_e.paused);
