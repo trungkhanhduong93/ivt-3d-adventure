@@ -4716,17 +4716,17 @@ if(_qnb){
   }
 }
 Y("play").onclick=startAdventure;for(const i of["boy","girl"])Y(i).onclick=()=>{ie.avatar=i,_e.setAvatar(i),_n(),Xt()};const _stationsDef=[
-  {id:"house-label",type:"house",name:"Nhà Bên Milo - Danh Mục Gốc",pos:[-4.0,2.0,-9.5],subs:["PHAN_HE_02_DANH_MUC"]},
-  {id:"pond-label",type:"pond",name:"Bến Hồ Cá - Cấu Hình & Nghiệm Thu",pos:[-36.5,1.5,-7.5],subs:["PHAN_HE_01_CAU_HINH"]},
-  {id:"pos-label",type:"pos",name:"Quầy Thu Ngân POS",pos:[-8.5,1.8,-2.5],subs:["PHAN_HE_05_XUAT_BAN_DINH_LUONG"]},
-  {id:"weigh-label",type:"weigh",name:"Bàn Cân & Pallet Kho",pos:[-1.5,1.8,7.5],subs:["PHAN_HE_03_DAT_HANG_CUNG_UNG"]},
-  {id:"kitchen-label",type:"kitchen",name:"Nồi Nấu Bếp Trung Tâm",pos:[18.0,2.0,-6.0],subs:["PHAN_HE_06_SAN_XUAT_BEP_TRUNG_TAM"]},
-  {id:"truck-label",type:"truck",name:"Xe Tải Điều Chuyển",pos:[12.0,2.0,-8.0],subs:["PHAN_HE_04_DIEU_CHUYEN"]},
-  {id:"crate1-label",type:"crate1",name:"Rương Bí Kíp Nhượng Quyền",pos:[24.0,1.5,-12.0],subs:["PHAN_HE_10_NHUONG_QUYEN"]},
-  {id:"audit-label",type:"audit",name:"Kệ Kho & Quét Barcode",pos:[33.0,2.2,16.0],subs:["PHAN_HE_07_KIEM_KE"]},
-  {id:"crate2-label",type:"crate2",name:"Rương Sự Cố Báo Cáo",pos:[38.0,1.5,8.0],subs:["PHAN_HE_11_BAO_CAO"]},
-  {id:"crate3-label",type:"crate3",name:"Rương Cứu Hộ Công Nợ",pos:[48.0,1.5,-8.0],subs:["PHAN_HE_09_CONG_NO"]},
-  {id:"server-label",type:"server",name:"Tháp Ticket Cứu Hộ",pos:[54.0,2.5,-18.0],subs:["PHAN_HE_08_GIA_VON","PHAN_HE_12_CHAN_DOAN_TICKET"]}
+  {id:"house-label",type:"house",name:"Nhà Bên Milo - Danh Mục Gốc",pos:[-4.0,2.0,-9.5],hint:"Khai báo danh mục & Base UOM",subs:["PHAN_HE_02_DANH_MUC"]},
+  {id:"pond-label",type:"pond",name:"Bến Hồ Cá - Cấu Hình & Nghiệm Thu",pos:[-36.5,1.5,-7.5],hint:"Cài đặt chứng từ & Reset Data",subs:["PHAN_HE_01_CAU_HINH"]},
+  {id:"pos-label",type:"pos",name:"Quầy Thu Ngân POS",pos:[-8.5,1.8,-2.5],hint:"Kiểm tra máy POS & Xuất bán",subs:["PHAN_HE_05_XUAT_BAN_DINH_LUONG"]},
+  {id:"weigh-label",type:"weigh",name:"Bàn Cân & Pallet Kho",pos:[-1.5,1.8,7.5],hint:"Cân hàng & Kiểm tra ĐVT",subs:["PHAN_HE_03_DAT_HANG_CUNG_UNG"]},
+  {id:"kitchen-label",type:"kitchen",name:"Nồi Nấu Bếp Trung Tâm",pos:[18.0,2.0,-6.0],hint:"Chế biến BTP & Nấu Cốt Trà",subs:["PHAN_HE_06_SAN_XUAT_BEP_TRUNG_TAM"]},
+  {id:"truck-label",type:"truck",name:"Xe Tải Điều Chuyển",pos:[12.0,2.0,-8.0],hint:"Kiểm tra Phiếu Chuyển Kho",subs:["PHAN_HE_04_DIEU_CHUYEN"]},
+  {id:"crate1-label",type:"crate1",name:"Rương Bí Kíp Nhượng Quyền",pos:[24.0,1.5,-12.0],hint:"Mở Rương Bí Kíp Nhượng Quyền",subs:["PHAN_HE_10_NHUONG_QUYEN"]},
+  {id:"audit-label",type:"audit",name:"Kệ Kho & Quét Barcode",pos:[33.0,2.2,16.0],hint:"Quét Barcode kiểm kê kho",subs:["PHAN_HE_07_KIEM_KE"]},
+  {id:"crate2-label",type:"crate2",name:"Rương Sự Cố Báo Cáo",pos:[38.0,1.5,8.0],hint:"Mở Rương Sự Cố Báo Cáo",subs:["PHAN_HE_11_BAO_CAO"]},
+  {id:"crate3-label",type:"crate3",name:"Rương Cứu Hộ Công Nợ",pos:[48.0,1.5,-8.0],hint:"Mở Rương Cứu Hộ Công Nợ",subs:["PHAN_HE_09_CONG_NO"]},
+  {id:"server-label",type:"server",name:"Tháp Ticket Cứu Hộ",pos:[54.0,2.5,-18.0],hint:"Xử lý sự cố Ticket #SYS",subs:["PHAN_HE_08_GIA_VON","PHAN_HE_12_CHAN_DOAN_TICKET"]}
 ];
 const WEST_STATION_IDS = ["house", "pond", "pos", "weigh"];
 const WEST_STATION_META = {
@@ -5733,12 +5733,21 @@ function _projStations(){
   }
   if(!(++ul%2!==0||!_e.active)){
     const _nwsRaw=_e.nearWorkstation();
-    const ws=_nwsRaw?(_stationsDef.find(s=>s.type===_nwsRaw.type||s.id===_nwsRaw.type+"-label")||_nwsRaw):null;
+    const def=_nwsRaw?_stationsDef.find(s=>s.type===_nwsRaw.type||s.id===_nwsRaw.type+"-label"):null;
+    const ws=_nwsRaw?{
+      ...def,
+      ..._nwsRaw,
+      id:def?.id||(_nwsRaw.type?`${_nwsRaw.type}-label`:_nwsRaw.id),
+      name:def?.name||_nwsRaw.name,
+      subs:def?.subs||_nwsRaw.subs,
+      hint:_nwsRaw.hint||def?.hint||(def?.name?`Khám phá ${def.name.split(" - ")[0].trim()}`:"Tương tác")
+    }:null;
     window._currentStation=ws;
     const canInteract=i||!!ws;
     Y("interact").hidden=!canInteract||_e.paused;
     if(ws){
-      Y("interact").innerHTML=`<kbd>E</kbd> ${ws.hint} ${Xe("arrow")}`;
+      const actionText=ws.hint||_nwsRaw?.hint||(ws.name?`Khám phá ${ws.name.split(" - ")[0].trim()}`:"Tương tác");
+      Y("interact").innerHTML=`<kbd>E</kbd> ${actionText} ${Xe("arrow")}`;
     }else if(i){
       Y("interact").innerHTML=`<kbd>E</kbd> Nói chuyện với Milo ${Xe("arrow")}`;
     }
