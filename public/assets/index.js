@@ -4312,7 +4312,68 @@ if(this.masteredAuras&&this.masteredAuras.size>0){
       });
     }
   });
-};this.active&&!this.paused&&this.movement(e),this.active?this.wanted.copy(this.player.position).setY(0):(this.wanted.set(8,0,0),this.yaw+=e*.03),this.target.lerp(this.wanted,1-Math.exp(-e*3));const t=1-Math.exp(-e*2.2),tDist=1-Math.exp(-e*5.5);this.viewDistance+=((this.active?this.distance:this.camera.aspect<.85?175:120)-this.viewDistance)*tDist,this.viewPitch+=((this.active?this.pitch:.72)-this.viewPitch)*t,this.viewShift+=((!this.active&&this.camera.aspect>1.25?.16:0)-this.viewShift)*t;const{clientWidth:n,clientHeight:r}=this.canvas;this.viewShift>.001?this.camera.setViewOffset(n,r,-this.viewShift*n,0,n,r):this.camera.view?.enabled&&this.camera.clearViewOffset();const s=this.viewDistance,a=this.viewPitch;this.camera.position.set(this.target.x+Math.sin(this.yaw)*Math.cos(a)*s,this.target.y+Math.sin(a)*s,this.target.z+Math.cos(this.yaw)*Math.cos(a)*s),this.camera.lookAt(this.target),this.sky.position.copy(this.camera.position),this.updateShadows(),this.windmill.rotation.z-=e*.25,this.bridge.children.forEach(o=>o.position.y=Math.max(0,o.position.y-e*5)),this.clouds.forEach((o,l)=>{o.position.x+=e*.35,o.position.x>210&&(o.position.x=-190),o.position.y+=Math.sin(this.time*.2+l)*.002}),this.floaters.forEach(o=>{o.object.position.y=o.baseY+Math.sin(this.time*o.speed)*.25,o.object.rotation.y+=e*o.spin}),this.milo.children.forEach(o=>{o.userData.beacon&&(o.position.y=3+Math.sin(this.time*2)*.15)});for(let o=this.sparks.length-1;o>=0;o--){const l=this.sparks[o];l.life-=e,l.velocity.y-=e*6,l.mesh.position.addScaledVector(l.velocity,e),l.mesh.scale.setScalar(Math.max(0,l.life)),l.life<=0&&(this.scene.remove(l.mesh),l.mesh.geometry.dispose(),this.sparks.splice(o,1))}this.ripples.forEach(o=>{o.position.z+=e*.25,o.position.z>43&&(o.position.z=-43)}),this.renderer.render(this.scene,this.camera),this.onFrame?.(this.nearMilo(),this.player.position.x>12&&Math.abs(this.player.position.z)<4,1/Math.max(e,.001))};dispose(){cancelAnimationFrame(this.frame),this.observer.disconnect(),this.renderer.dispose()}}const Ga=()=>({version:1,xp:0,coins:0,bridge:0,questAccepted:!1,questComplete:!1,avatar:"boy",table:0,sound:!0,music:!1,combo:0,questionStats:{},review:[],started:!1,inventory:["item_pos"],equipped:{hat:"item_pos",tool:null,armor:null}}),Gn=(i,e=1e7)=>typeof i=="number"&&Number.isFinite(i)?Math.max(0,Math.min(e,Math.floor(i))):0;function Ym(i){const e=Ga();if(!i)return e;try{const parsed=JSON.parse(i);if(parsed&&typeof parsed==="object"){if(Array.isArray(parsed.inventory))e.inventory=parsed.inventory;if(parsed.equipped&&typeof parsed.equipped==="object")e.equipped=parsed.equipped;}const t=JSON.parse(i);if(!t||typeof t!="object"||!("version"in t)||t.version!==1)return e;const n=t;if(e.xp=Gn(n.xp),e.coins=Gn(n.coins),e.bridge=Gn(n.bridge,yt),e.questAccepted=n.questAccepted===!0||e.bridge>0,e.questComplete=n.questComplete===!0&&e.bridge===yt,e.avatar=n.avatar==="girl"?"girl":"boy",e.table=Ha.includes(n.table)?n.table:0,e.sound=n.sound!==!1,e.music=n.music===!0,e.started=n.started===!0,e.combo=Gn(n.combo,1e4),n.questionStats&&typeof n.questionStats=="object")for(const[r,s]of Object.entries(n.questionStats).slice(0,30)){if(!/^m([2-9]|10)_([1-9]|10)$/.test(r)||!s||typeof s!="object")continue;const a=s,o=Gn(a.correct),l=Gn(a.wrong);e.questionStats[r]={attempts:o+l,correct:o,wrong:l,responseTime:Gn(a.responseTime),lastAnsweredAt:typeof a.lastAnsweredAt=="string"?a.lastAnsweredAt.slice(0,40):""}}return Array.isArray(n.review)&&(e.review=[...new Set(n.review.filter(r=>typeof r=="string"&&/^m([2-9]|10)_([1-9]|10)$/.test(r)))].slice(0,30)),e}catch{return e}}function Km(){try{return Ym(localStorage.getItem(Kl))}catch{return Ga()}}function Zm(i){try{return localStorage.setItem(Kl,JSON.stringify(i)),!0}catch{return!1}}function jm(i,e=Math.random){const t=[...i];for(let n=t.length-1;n>0;n--){const r=Math.floor(e()*(n+1));[t[n],t[r]]=[t[r],t[n]]}return t}function ll(i,e,t,n=Math.random){const r=i*e,s=[e>1?e-1:e+2,e<10?e+1:e-2],a=[e,...s].map(o=>({value:i*o,label:t==="bridge"?`${i} × ${o}`:`${i*o}`}));return{id:`m${i}_${e}`,a:i,b:e,answer:r,options:jm(a,n),review:!1}}function Jm(i,e,t="",n=Math.random){
+};this.active&&!this.paused&&this.movement(e),this.active?this.wanted.copy(this.player.position).setY(0):(this.wanted.set(8,0,0),this.yaw+=e*.03),this.target.lerp(this.wanted,1-Math.exp(-e*3));const t=1-Math.exp(-e*2.2),tDist=1-Math.exp(-e*5.5);this.viewDistance+=((this.active?this.distance:this.camera.aspect<.85?175:120)-this.viewDistance)*tDist,this.viewPitch+=((this.active?this.pitch:.72)-this.viewPitch)*t,this.viewShift+=((!this.active&&this.camera.aspect>1.25?.16:0)-this.viewShift)*t;const{clientWidth:n,clientHeight:r}=this.canvas;this.viewShift>.001?this.camera.setViewOffset(n,r,-this.viewShift*n,0,n,r):this.camera.view?.enabled&&this.camera.clearViewOffset();const s=this.viewDistance,a=this.viewPitch;this.camera.position.set(this.target.x+Math.sin(this.yaw)*Math.cos(a)*s,this.target.y+Math.sin(a)*s,this.target.z+Math.cos(this.yaw)*Math.cos(a)*s),this.camera.lookAt(this.target),this.sky.position.copy(this.camera.position),this.updateShadows(),this.windmill.rotation.z-=e*.25,this.bridge.children.forEach(o=>o.position.y=Math.max(0,o.position.y-e*5)),this.clouds.forEach((o,l)=>{o.position.x+=e*.35,o.position.x>210&&(o.position.x=-190),o.position.y+=Math.sin(this.time*.2+l)*.002}),this.floaters.forEach(o=>{o.object.position.y=o.baseY+Math.sin(this.time*o.speed)*.25,o.object.rotation.y+=e*o.spin}),this.milo.children.forEach(o=>{o.userData.beacon&&(o.position.y=3+Math.sin(this.time*2)*.15)});for(let o=this.sparks.length-1;o>=0;o--){const l=this.sparks[o];l.life-=e,l.velocity.y-=e*6,l.mesh.position.addScaledVector(l.velocity,e),l.mesh.scale.setScalar(Math.max(0,l.life)),l.life<=0&&(this.scene.remove(l.mesh),l.mesh.geometry.dispose(),this.sparks.splice(o,1))}this.ripples.forEach(o=>{o.position.z+=e*.25,o.position.z>43&&(o.position.z=-43)}),this.renderer.render(this.scene,this.camera),this.onFrame?.(this.nearMilo(),this.player.position.x>12&&Math.abs(this.player.position.z)<4,1/Math.max(e,.001))};dispose(){cancelAnimationFrame(this.frame),this.observer.disconnect(),this.renderer.dispose()}}const Ga=()=>({version:1,xp:0,coins:0,bridge:0,questAccepted:!1,questComplete:!1,avatar:"boy",table:0,sound:!0,music:!1,combo:0,questionStats:{},review:[],started:!1,inventory:["item_pos"],equipped:{hat:"item_pos",tool:null,armor:null}}),Gn=(i,e=1e7)=>typeof i=="number"&&Number.isFinite(i)?Math.max(0,Math.min(e,Math.floor(i))):0;function Ym(i){
+  const e=Ga();
+  if(!i)return e;
+  try{
+    const parsed=JSON.parse(i);
+    if(parsed&&typeof parsed==="object"){
+      if(Array.isArray(parsed.inventory))e.inventory=parsed.inventory;
+      if(parsed.equipped&&typeof parsed.equipped==="object")e.equipped=parsed.equipped;
+    }
+    const t=parsed;
+    if(!t||typeof t!="object"||!("version"in t)||t.version!==1)return e;
+    const n=t;
+    if(e.xp=Gn(n.xp),
+       e.coins=Gn(n.coins),
+       e.bridge=Gn(n.bridge,yt),
+       e.questAccepted=n.questAccepted===!0||e.bridge>0,
+       e.questComplete=n.questComplete===!0&&e.bridge===yt,
+       e.avatar=(n.avatar==="girl"||n.avatar==="tech")?"girl":"boy",
+       e.table=Ha.includes(n.table)?n.table:0,
+       e.sound=n.sound!==!1,
+       e.music=n.music===!0,
+       e.started=n.started===!0,
+       e.combo=Gn(n.combo,1e4),
+       n.questionStats&&typeof n.questionStats=="object") {
+      for(const[r,s]of Object.entries(n.questionStats)){
+        if(!s||typeof s!="object")continue;
+        const a=s,o=Gn(a.correct),l=Gn(a.wrong);
+        e.questionStats[r]={
+          attempts:Gn(a.attempts)||(o+l),
+          correct:o,
+          wrong:l,
+          responseTime:Gn(a.responseTime),
+          lastAnsweredAt:typeof a.lastAnsweredAt=="string"?a.lastAnsweredAt.slice(0,40):""
+        };
+      }
+    }
+    if(Array.isArray(n.review)){
+      e.review=[...new Set(n.review.filter(r=>typeof r=="string"))];
+    }
+    return e;
+  }catch{
+    return e;
+  }
+}
+function Km(){
+  try{
+    const raw=localStorage.getItem("ivt_3d_adventure_save")||localStorage.getItem(Kl);
+    return Ym(raw);
+  }catch{
+    return Ga();
+  }
+}
+function Zm(i){
+  try{
+    localStorage.setItem("ivt_3d_adventure_save",JSON.stringify(i));
+    localStorage.setItem(Kl,JSON.stringify(i));
+    return !0;
+  }catch{
+    return !1;
+  }
+}
+function jm(i,e=Math.random){const t=[...i];for(let n=t.length-1;n>0;n--){const r=Math.floor(e()*(n+1));[t[n],t[r]]=[t[r],t[n]]}return t}function ll(i,e,t,n=Math.random){const r=i*e,s=[e>1?e-1:e+2,e<10?e+1:e-2],a=[e,...s].map(o=>({value:i*o,label:t==="bridge"?`${i} × ${o}`:`${i*o}`}));return{id:`m${i}_${e}`,a:i,b:e,answer:r,options:jm(a,n),review:!1}}function Jm(i,e,t="",n=Math.random){
   const role = (i.avatar === "girl" || i.avatar === "tech" || window.__currentRole === "tech") ? "tech" : "manager";
   const level = (i.bridge >= 4) ? 2 : 1;
   const plank = Math.min(6, (i.bridge || 0) + 1);
@@ -4576,12 +4637,14 @@ if(_avatarToggleBtn&&_playerCardEl){
     ev.stopPropagation();
     const isExp=_playerCardEl.classList.toggle("expanded");
     if(isExp&&_questCardEl)_questCardEl.classList.remove("expanded");
+    document.body.classList.toggle("hud-modal-open", isExp || (_questCardEl && _questCardEl.classList.contains("expanded")));
   };
 }
 if(_closeAvatarBtn&&_playerCardEl){
   _closeAvatarBtn.onclick=(ev)=>{
     ev.stopPropagation();
     _playerCardEl.classList.remove("expanded");
+    document.body.classList.toggle("hud-modal-open", _questCardEl && _questCardEl.classList.contains("expanded"));
   };
 }
 // Toggle Tự dẫn đường / Nhiệm vụ trên mobile:
@@ -4591,21 +4654,29 @@ if(_questMobileTrigger&&_questCardEl){
     ev.stopPropagation();
     const isExp=_questCardEl.classList.toggle("expanded");
     if(isExp&&_playerCardEl)_playerCardEl.classList.remove("expanded");
+    document.body.classList.toggle("hud-modal-open", isExp || (_playerCardEl && _playerCardEl.classList.contains("expanded")));
   };
 }
 if(_closeQuestBtn&&_questCardEl){
   _closeQuestBtn.onclick=(ev)=>{
     ev.stopPropagation();
     _questCardEl.classList.remove("expanded");
+    document.body.classList.toggle("hud-modal-open", _playerCardEl && _playerCardEl.classList.contains("expanded"));
   };
 }
 // Chạm ra ngoài tự đóng cả 2 popup
 window.addEventListener("click",(ev)=>{
+  let changed = false;
   if(_playerCardEl&&_playerCardEl.classList.contains("expanded")&&!_playerCardEl.contains(ev.target)){
     _playerCardEl.classList.remove("expanded");
+    changed = true;
   }
   if(_questCardEl&&_questCardEl.classList.contains("expanded")&&!_questCardEl.contains(ev.target)){
     _questCardEl.classList.remove("expanded");
+    changed = true;
+  }
+  if(changed){
+    document.body.classList.remove("hud-modal-open");
   }
 });
 // Nút zoom trên điện thoại:
@@ -4614,7 +4685,7 @@ const _mobileZoomOut=Y("mobile-zoom-out");if(_mobileZoomOut)_mobileZoomOut.oncli
 // Khi bấm Tự dẫn đường thì tự đóng popup quest trên mobile
 const _qnb=Y("quest-nav-btn");
 if(_qnb){
-  _qnb.addEventListener("click",()=>{if(_questCardEl)_questCardEl.classList.remove("expanded");});
+  _qnb.addEventListener("click",()=>{if(_questCardEl)_questCardEl.classList.remove("expanded");document.body.classList.remove("hud-modal-open");});
 }try{(localStorage.getItem("aigame3d_quest_collapsed")==="1"||matchMedia("(max-width: 700px)").matches)&&nc(!0)}catch{}function Jn(i,e,t){Dn&&Kr(),_e.paused=!0,_e.clearInput(),Xa=t,Y("dialog-content").innerHTML=Ln(`<h2 id="dialog-title">${i}</h2>${e}`);const n=Y("dialog");n.open||n.showModal()}function cr(){Y("dialog").close()}Y("dialog").addEventListener("close",()=>{_e.paused=Dn,_e.clearInput(),Xa="",jn=void 0});Y("close-dialog").onclick=cr;function ug(){xt.unlock(),xt.music(ie.music),ie.started=!0,_e.active=!0,_e.paused=!1,_e.setAvatar(ie.avatar),Y("welcome").hidden=!0,Y("hud").hidden=!1,Y("area-label").hidden=!1,Y("world-caption").hidden=!0,Y("menu-footer").hidden=!0,document.body.classList.add("playing"),Xt(),_n(),bi="",cc(),requestAnimationFrame(sc),In("Chào bạn! Di chuyển đến Milo, hoặc chạm xuống đất để đi.")}function pl(){cr(),Kr(),_e.active=!1,_e.clearInput(),Y("welcome").hidden=!1,Y("hud").hidden=!0,Y("area-label").hidden=!0,Y("world-caption").hidden=!1,Y("menu-footer").hidden=!1,document.body.classList.remove("playing"),_n(),xt.music(!1)}function startAdventure(){
   let seen=!1;
   try{seen=sessionStorage.getItem("ivt_legal_seen")==="1"}catch(e){}
