@@ -5115,62 +5115,65 @@ dialog::-webkit-scrollbar-thumb:hover {
 }
 
 /* 1. BẢNG NỀN AVATAR DẠNG KÍNH MỜ APPLE IOS GLASS (DESKTOP) */
-.player-card {
-  display: flex !important;
-  align-items: center !important;
-  gap: 12px !important;
-  padding: 8px 14px 8px 10px !important;
-  border-radius: 22px !important;
-  /* Kính mờ siêu thực phong cách iOS Frosted Glass */
-  background: rgba(255, 255, 255, 0.68) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.85) !important;
-  box-shadow: 0 10px 32px rgba(18, 61, 51, 0.12), inset 0 1px 1.5px rgba(255, 255, 255, 0.95), inset 0 -1px 1px rgba(0, 0, 0, 0.04) !important;
-  min-width: 320px !important;
-}
+@media (min-width: 769px) {
+  .player-card {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 8px 14px 8px 10px !important;
+    border-radius: 22px !important;
+    /* Kính mờ siêu thực phong cách iOS Frosted Glass */
+    background: rgba(255, 255, 255, 0.68) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.85) !important;
+    box-shadow: 0 10px 32px rgba(18, 61, 51, 0.12), inset 0 1px 1.5px rgba(255, 255, 255, 0.95), inset 0 -1px 1px rgba(0, 0, 0, 0.04) !important;
+    min-width: 320px !important;
+  }
 
-/* Khung Avatar tròn phong cách iOS Pod */
-.avatar-face {
-  width: 48px !important;
-  height: 48px !important;
-  border-radius: 50% !important;
-  display: grid !important;
-  place-items: center !important;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(240, 253, 244, 0.75)) !important;
-  border: 2px solid rgba(52, 211, 153, 0.65) !important;
-  box-shadow: 0 4px 14px rgba(18, 61, 51, 0.12), inset 0 1px 1.5px #ffffff !important;
-  font-size: 26px !important;
-  line-height: 1 !important;
-  flex-shrink: 0 !important;
-}
+  /* Khung Avatar tròn phong cách iOS Pod */
+  .avatar-face {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 50% !important;
+    display: grid !important;
+    place-items: center !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(240, 253, 244, 0.75)) !important;
+    border: 2px solid rgba(52, 211, 153, 0.65) !important;
+    box-shadow: 0 4px 14px rgba(18, 61, 51, 0.12), inset 0 1px 1.5px #ffffff !important;
+    font-size: 26px !important;
+    line-height: 1 !important;
+    flex-shrink: 0 !important;
+  }
 
-/* Ví tiền phong cách iOS Glass Capsule */
-.wallet {
-  flex-shrink: 0 !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 5px !important;
-  padding: 6px 11px 6px 9px !important;
-  border-radius: 999px !important;
-  background: rgba(254, 243, 199, 0.65) !important;
-  backdrop-filter: blur(6px) !important;
-  -webkit-backdrop-filter: blur(6px) !important;
-  border: 1px solid rgba(251, 191, 36, 0.6) !important;
-  color: #92400e !important;
-  font-size: 12px !important;
-  font-weight: 700 !important;
-  box-shadow: 0 2px 8px rgba(217, 119, 6, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.85) !important;
-}
+  /* Ví tiền phong cách iOS Glass Capsule */
+  .wallet {
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    padding: 6px 11px 6px 9px !important;
+    border-radius: 999px !important;
+    background: rgba(254, 243, 199, 0.65) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+    border: 1px solid rgba(251, 191, 36, 0.6) !important;
+    color: #92400e !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    box-shadow: 0 2px 8px rgba(217, 119, 6, 0.12), inset 0 1px 1px rgba(255, 255, 255, 0.85) !important;
+  }
 
-/* Đồng bộ thẻ nhiệm vụ quest-card theo chuẩn iOS Glass */
-.quest-card {
-  background: rgba(255, 255, 255, 0.68) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.85) !important;
-  box-shadow: 0 10px 32px rgba(18, 61, 51, 0.12), inset 0 1px 1.5px rgba(255, 255, 255, 0.95) !important;
-  border-radius: 22px !important;
+  /* Đồng bộ thẻ nhiệm vụ quest-card theo chuẩn iOS Glass */
+  .quest-card {
+    background: rgba(255, 255, 255, 0.68) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.85) !important;
+    box-shadow: 0 10px 32px rgba(18, 61, 51, 0.12), inset 0 1px 1.5px rgba(255, 255, 255, 0.95) !important;
+    border-radius: 22px !important;
+    min-width: 320px !important;
+  }
 }
 
 /* 2. RESPONSIVE ĐIỆN THOẠI (<= 768px) */
@@ -5181,7 +5184,8 @@ dialog::-webkit-scrollbar-thumb:hover {
     position: absolute !important;
     left: 50% !important;
     top: 14px !important;
-    transform: translateX(-50%) !important;
+    transform: translateX(-50%) translateZ(0) !important;
+    -webkit-transform: translateX(-50%) translateZ(0) !important;
     margin: 0 !important;
     max-width: calc(100vw - 160px) !important;
     padding: 5px 12px 5px 6px !important;
@@ -5203,6 +5207,42 @@ dialog::-webkit-scrollbar-thumb:hover {
     width: 26px !important;
     height: 26px !important;
     font-size: 14px !important;
+  }
+
+  .hud-left {
+    position: absolute !important;
+    top: 66px !important;
+    left: 12px !important;
+    width: auto !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 10px !important;
+    z-index: 25 !important;
+    pointer-events: none !important;
+  }
+
+  /* Compact Avatar Button on Mobile */
+  .player-card,
+  .player-card:not(.expanded) {
+    position: relative !important;
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    max-width: 48px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    pointer-events: auto !important;
+    display: block !important;
+  }
+
+  .player-card:not(.expanded) .player-card-content {
+    display: none !important;
   }
 
   /* Nút Avatar tròn dạng viên kính mờ iOS Glass trên điện thoại */
@@ -5227,6 +5267,33 @@ dialog::-webkit-scrollbar-thumb:hover {
     box-shadow: 0 3px 10px rgba(18, 61, 51, 0.2) !important;
   }
 
+  /* Compact Quest Button on Mobile */
+  .quest-card,
+  .quest-card:not(.expanded) {
+    position: relative !important;
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+    max-width: 48px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    pointer-events: auto !important;
+    display: block !important;
+  }
+
+  .quest-card:not(.expanded) .quest-card-content,
+  .quest-card:not(.expanded) .quest-body,
+  .quest-card:not(.expanded) .quest-steps,
+  .quest-card:not(.expanded) .quest-bottom,
+  .quest-card:not(.expanded) .reward {
+    display: none !important;
+  }
+
   /* Popup hồ sơ khi chạm mở Avatar trên điện thoại dạng tấm kính iOS Liquid Glass */
   .player-card.expanded .player-card-content {
     display: flex !important;
@@ -5238,10 +5305,10 @@ dialog::-webkit-scrollbar-thumb:hover {
     width: min(300px, calc(100vw - 24px)) !important;
     padding: 16px !important;
     border-radius: 24px !important;
-    background: rgba(255, 255, 255, 0.82) !important;
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
-    border: 1px solid rgba(255, 255, 255, 0.85) !important;
+    background: rgba(255, 255, 255, 0.94) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1.5px solid #ffffff !important;
     box-shadow: 0 20px 48px rgba(18, 61, 51, 0.25), inset 0 1px 1.5px rgba(255, 255, 255, 0.95), inset 0 -1px 1px rgba(0, 0, 0, 0.04) !important;
     z-index: 10000 !important;
     animation: pop 0.22s cubic-bezier(0.2, 1.3, 0.4, 1) !important;
@@ -5295,33 +5362,23 @@ dialog::-webkit-scrollbar-thumb:hover {
   -webkit-backface-visibility: hidden;
 }
 
-/* 2. Chuẩn hóa kính mờ Apple iOS mượt mà (Lightweight Frosted Glass) */
-.player-card {
-  background: rgba(255, 253, 245, 0.88) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.9) !important;
-  box-shadow: 0 6px 20px rgba(18, 61, 51, 0.12), inset 0 1px 1px #ffffff !important;
-}
+/* 2. Chuẩn hóa kính mờ Apple iOS mượt mà (Lightweight Frosted Glass) cho Desktop */
+@media (min-width: 769px) {
+  .player-card {
+    background: rgba(255, 253, 245, 0.88) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 6px 20px rgba(18, 61, 51, 0.12), inset 0 1px 1px #ffffff !important;
+  }
 
-#area-label,
-.area-label {
-  background: rgba(255, 253, 245, 0.88) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.9) !important;
-  box-shadow: 0 4px 16px rgba(18, 61, 51, 0.12), inset 0 1px 1px #ffffff !important;
-  opacity: var(--zoom-alpha, 1) !important;
-  pointer-events: var(--zoom-pe, auto) !important;
-  transition: opacity 0.15s ease-out !important;
-}
-
-.quest-card {
-  background: rgba(255, 253, 245, 0.88) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  border: 1px solid rgba(255, 255, 255, 0.9) !important;
-  box-shadow: 0 6px 20px rgba(18, 61, 51, 0.12), inset 0 1px 1px #ffffff !important;
+  .quest-card {
+    background: rgba(255, 253, 245, 0.88) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 6px 20px rgba(18, 61, 51, 0.12), inset 0 1px 1px #ffffff !important;
+  }
 }
 
 .wallet {

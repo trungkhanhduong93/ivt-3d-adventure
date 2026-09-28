@@ -5658,6 +5658,51 @@ Y("settings").onclick=Ti;Y("sound").onclick=()=>{xt.unlock(),ie.sound=!ie.sound,
     i.dataset.lastTf=newTf;
   }
   if(i.hidden)i.hidden=!1;
+}const _stPos=new F(),_regPos=new F();
+const _stProjs=[
+  {id:"milo-label",x:-3.0,y:3.5,z:1.5,offset:"translate(-50%,-100%)"},
+  {id:"house-label",x:-4.0,y:2.6,z:-9.5,offset:"translate(-50%,-100%)"},
+  {id:"pond-label",x:-36.5,y:2.2,z:-7.5,offset:"translate(-50%,-100%)"},
+  {id:"pos-label",x:-8.5,y:2.2,z:-2.5,offset:"translate(-50%,-100%)"},
+  {id:"weigh-label",x:-1.5,y:2.2,z:7.5,offset:"translate(-50%,-100%)"},
+  {id:"kitchen-label",x:18.0,y:2.4,z:-6.0,offset:"translate(-50%,-100%)"},
+  {id:"audit-label",x:33.0,y:2.7,z:16.0,offset:"translate(-50%,-100%)"},
+  {id:"server-label",x:54.0,y:2.8,z:-18.0,offset:"translate(-50%,-100%)"},
+  {id:"truck-label",x:12.0,y:2.4,z:-8.0,offset:"translate(-50%,-100%)"},
+  {id:"crate1-label",x:24.0,y:1.8,z:-12.0,offset:"translate(-50%,-100%)"},
+  {id:"crate2-label",x:38.0,y:1.8,z:8.0,offset:"translate(-50%,-100%)"},
+  {id:"crate3-label",x:48.0,y:1.8,z:-8.0,offset:"translate(-50%,-100%)"},
+  {id:"bridge-label",x:7.0,y:0.8,z:0.0,offset:"translate(-50%,15px)"}
+];
+function _projStations(){
+  if(!_e||!_e.active)return;
+  const pPos=_e.player.position;
+  const isMob=window.innerWidth<=768;
+  const maxDist=isMob?34:48;
+  for(let idx=0;idx<_stProjs.length;idx++){
+    const s=_stProjs[idx];
+    if(!s.el)s.el=Y(s.id);
+    if(!s.el)continue;
+    const isNearOrGps=s.el.classList.contains("near")||s.el.classList.contains("gps-focus");
+    const dist=Math.hypot(pPos.x-s.x,pPos.z-s.z);
+    if(dist>maxDist&&!isNearOrGps){
+      if(!s.el.hidden)s.el.hidden=!0;
+      continue;
+    }
+    _stPos.set(s.x,s.y,s.z);
+    Ls(s.el,_stPos,s.offset,_e.paused);
+  }
+  const hideRegions=_e.paused||isMob||(_e.distance<75);
+  for(const t of qa){
+    if(!t._el)t._el=Y(`${t.id}-label`);
+    if(!t._el)continue;
+    if(hideRegions){
+      if(!t._el.hidden)t._el.hidden=!0;
+    }else{
+      _regPos.set(t.center[0],t.labelHeight,t.center[1]);
+      Ls(t._el,_regPos,"translate(-50%,-100%)",!1);
+    }
+  }
 }function cc(){const i=_e.player.position,e=Xm(i.x,i.z);if(e.id===bi)return;const t=bi==="";bi=e.id,Y("area-icon").innerHTML=Xe(e.icon),Y("area-name").textContent=Cn(e.name),Y("area-sub").textContent=Cn(e.subtitle);const n=Y("area-label");n.classList.remove("arrive"),n.offsetWidth,n.classList.add("arrive"),!t&&_e.active&&e.id!=="village"&&e.id!=="garden"&&Di(e,ie.questComplete)&&In(`Chào mừng bạn đến với ${e.name}!`)}try{_e=new $m(Y("world")),_e.setBridge(ie.bridge),_e.setAvatar(ie.avatar),_e.onJump=()=>xt.jump(),_e.onSceneClick=()=>Yr(),_e.onFrame=(i,e)=>{
   if(ec=i,_e.active){
     const _curDist=_e.viewDistance||_e.distance||42;
@@ -5668,10 +5713,10 @@ Y("settings").onclick=Ti;Y("sound").onclick=()=>{xt.unlock(),ie.sound=!ie.sound,
       document.documentElement.style.setProperty("--zoom-alpha",_zoomAlpha.toFixed(3));
       document.documentElement.style.setProperty("--zoom-pe",_zoomAlpha<=0.02?"none":"auto");
     }
+    _projStations();
   }
   if(!(++ul%2!==0||!_e.active)){
     const _nwsRaw=_e.nearWorkstation();
-    // Map nearWorkstation result to canonical _stationsDef entry for consistent subs
     const ws=_nwsRaw?(_stationsDef.find(s=>s.type===_nwsRaw.type||s.id===_nwsRaw.type+"-label")||_nwsRaw):null;
     window._currentStation=ws;
     const canInteract=i||!!ws;
@@ -5682,8 +5727,6 @@ Y("settings").onclick=Ti;Y("sound").onclick=()=>{xt.unlock(),ie.sound=!ie.sound,
       Y("interact").innerHTML=`<kbd>E</kbd> Nói chuyện với Milo ${Xe("arrow")}`;
     }
 
-    // 1. Update .near class for all stations FIRST so Ls immediately knows which station is active
-    // 1. Cập nhật trạng thái .near theo khoảng cách thực tế (bán kính 6.5m):
     const _pPos=_e.player.position;
     const _isNearMilo=!!i||Math.hypot(_pPos.x-(-3),_pPos.z-1.5)<5.5;
     Y("milo-label").classList.toggle("near",_isNearMilo);
@@ -5699,20 +5742,13 @@ Y("settings").onclick=Ti;Y("sound").onclick=()=>{xt.unlock(),ie.sound=!ie.sound,
       });
     }
 
-    // 2. Project and position station labels
-    Ls(Y("milo-label"),new F(-3,3.5,1.5),"translate(-50%,-100%)",_e.paused);
-    Ls(Y("house-label"),new F(-4.0,2.6,-9.5),"translate(-50%,-100%)",_e.paused);
-    Ls(Y("pond-label"),new F(-36.5,2.2,-7.5),"translate(-50%,-100%)",_e.paused);
-    Ls(Y("pos-label"),new F(-8.5,2.2,-2.5),"translate(-50%,-100%)",_e.paused);
-    Ls(Y("weigh-label"),new F(-1.5,2.2,7.5),"translate(-50%,-100%)",_e.paused);
-    Ls(Y("kitchen-label"),new F(18,2.4,-6),"translate(-50%,-100%)",_e.paused);
-    Ls(Y("audit-label"),new F(33,2.7,16),"translate(-50%,-100%)",_e.paused);
-    Ls(Y("server-label"),new F(54,2.8,-18),"translate(-50%,-100%)",_e.paused);
-    Ls(Y("truck-label"),new F(12,2.4,-8),"translate(-50%,-100%)",_e.paused);
-    Ls(Y("crate1-label"),new F(24,1.8,-12),"translate(-50%,-100%)",_e.paused);
-    Ls(Y("crate2-label"),new F(38,1.8,8),"translate(-50%,-100%)",_e.paused);
-    Ls(Y("crate3-label"),new F(48,1.8,-8),"translate(-50%,-100%)",_e.paused);
+    Y("truck-label").classList.toggle("near",ws?.type==="truck");
+    Y("crate1-label").classList.toggle("near",ws?.type==="crate"&&ws?.name.includes("BTP"));
+    Y("crate2-label").classList.toggle("near",ws?.type==="crate"&&ws?.name.includes("Date"));
+    Y("crate3-label").classList.toggle("near",ws?.type==="crate"&&ws?.name.includes("Giá Vốn"));
 
-    const hideRegions=_e.paused||(_e.distance<36);
-    for(const t of qa)Ls(Y(`${t.id}-label`),new F(t.center[0],t.labelHeight,t.center[1]),"translate(-50%,-100%)",hideRegions);
-    Ls(Y("bridge-label"),new F(7,.8,0),"translate(-50%,15px)",_e.paused);Y("truck-label").classList.toggle("near",ws?.type==="truck");Y("crate1-label").classList.toggle("near",ws?.type==="crate"&&ws?.name.includes("BTP"));Y("crate2-label").classList.toggle("near",ws?.type==="crate"&&ws?.name.includes("Date"));Y("crate3-label").classList.toggle("near",ws?.type==="crate"&&ws?.name.includes("Giá Vốn")),cc(),ul%6===0&&sc(),_e.active&&!_e.paused&&ie.bridge===yt&&!ie.questComplete&&e&&(ie.questComplete=!0,ie.xp+=50,ie.coins+=10,Xt(),_n(),xt.celebrate(),_e.burst(_e.player.position.clone().add(new F(0,1,0))),Jn("Bạn đã làm được rồi!",`<div class="completion-medal">${Xe("crown")}</div><p class="dialog-copy centered">Nhờ bạn, hai bờ đã được nối liền.<br><b>Cây cầu tình bạn</b> đã hoàn thành!</p><div class="completion-rewards"><span>★ +50 XP</span><span>◉ +10 xu</span></div><p class="book-note centered">4 vùng đất mới đã mở trên bản đồ. Nhấn M để xem!</p><button id="keep-playing" class="primary wide">Tiếp tục khám phá ${Xe("arrow")}</button>`,"complete"),Y("keep-playing").onclick=cr)}},Y("loading").hidden=!0,_n()}catch(i){Y("loading").innerHTML='<strong>Chưa mở được thế giới 3D</strong><p>Hãy bật tăng tốc đồ họa trong trình duyệt, hoặc thử Chrome / Edge mới hơn.</p><button class="primary" onclick="location.reload()">Thử lại</button>',console.error(i)}const ml=document.modelContext,hc=new AbortController;if(ml?.registerTool)try{Promise.resolve(ml.registerTool({name:"read_adventure_progress",description:"Read local progress in Multiplication Kingdom: XP, coins, completed bridge segments and review count.",inputSchema:{type:"object",properties:{},additionalProperties:!1},annotations:{readOnlyHint:!0},execute:async i=>{if(!i||typeof i!="object"||Array.isArray(i)||Object.keys(i).length)throw new Error("Expected an empty object");return{xp:ie.xp,coins:ie.coins,bridgeSegments:ie.bridge,questComplete:ie.questComplete,reviewCount:ie.review.length}}},{signal:hc.signal})).catch(()=>{})}catch{}window.addEventListener("pagehide",()=>hc.abort(),{once:!0});
+    cc();
+    ul%6===0&&sc();
+    _e.active&&!_e.paused&&ie.bridge===yt&&!ie.questComplete&&e&&(ie.questComplete=!0,ie.xp+=50,ie.coins+=10,Xt(),_n(),xt.celebrate(),_e.burst(_e.player.position.clone().add(new F(0,1,0))),Jn("Bạn đã làm được rồi!",`<div class="completion-medal">${Xe("crown")}</div><p class="dialog-copy centered">Nhờ bạn, hai bờ đã được nối liền.<br><b>Cây cầu tình bạn</b> đã hoàn thành!</p><div class="completion-rewards"><span>★ +50 XP</span><span>◉ +10 xu</span></div><p class="book-note centered">4 vùng đất mới đã mở trên bản đồ. Nhấn M để xem!</p><button id="keep-playing" class="primary wide">Tiếp tục khám phá ${Xe("arrow")}</button>`,"complete"),Y("keep-playing").onclick=cr);
+  }
+},Y("loading").hidden=!0,_n()}catch(i){Y("loading").innerHTML='<strong>Chưa mở được thế giới 3D</strong><p>Hãy bật tăng tốc đồ họa trong trình duyệt, hoặc thử Chrome / Edge mới hơn.</p><button class="primary" onclick="location.reload()">Thử lại</button>',console.error(i)}const ml=document.modelContext,hc=new AbortController;if(ml?.registerTool)try{Promise.resolve(ml.registerTool({name:"read_adventure_progress",description:"Read local progress in Multiplication Kingdom: XP, coins, completed bridge segments and review count.",inputSchema:{type:"object",properties:{},additionalProperties:!1},annotations:{readOnlyHint:!0},execute:async i=>{if(!i||typeof i!="object"||Array.isArray(i)||Object.keys(i).length)throw new Error("Expected an empty object");return{xp:ie.xp,coins:ie.coins,bridgeSegments:ie.bridge,questComplete:ie.questComplete,reviewCount:ie.review.length}}},{signal:hc.signal})).catch(()=>{})}catch{}window.addEventListener("pagehide",()=>hc.abort(),{once:!0});
