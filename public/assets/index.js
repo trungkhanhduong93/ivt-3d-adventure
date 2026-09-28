@@ -4277,7 +4277,18 @@ nearMilo(){return Math.hypot(this.player.position.x-this.milo.position.x,this.pl
     this.player.position.y=Math.max(o,this.player.position.y+this.jumpVelocity*e),
     this.player.position.y===o&&(this.jumpVelocity=0)
   ):this.player.position.y=o;
-}burst(e){for(let t=0;t<20;t++){const n=this.sphere(this.scene,e.x,e.y,e.z,.09,[16765284,16774343,8246453][t%3]);n.castShadow=!1,this.sparks.push({mesh:n,life:1.2,velocity:new F((Math.random()-.5)*5,3+Math.random()*3,(Math.random()-.5)*5)})}}project(e){const camToObj=e.clone().sub(this.camera.position),camDir=new F();this.camera.getWorldDirection(camDir);if(camDir.dot(camToObj)<=0.1)return{x:-9999,y:-9999,visible:!1,distance:9999};const t=e.clone().project(this.camera),n=this.canvas.clientWidth,r=this.canvas.clientHeight,s=(t.x*.5+.5)*n,a=(-.5*t.y+.5)*r;return{x:s,y:a,visible:t.z>-1&&t.z<1&&s>-80&&s<n+80&&a>-80&&a<r+80,distance:this.camera.position.distanceTo(e)}}get heading(){return this.yaw}updateShadows(){const e=this.active?46:95;e!==this.shadowSize&&(this.shadowSize=e,Object.assign(this.sun.shadow.camera,{left:-e,right:e,top:e,bottom:-e,near:1,far:e*3.2}),this.sun.shadow.camera.updateProjectionMatrix()),this.sun.target.position.copy(this.target),this.sun.position.set(this.target.x-24,42,this.target.z+16)}animate=()=>{this.frame=requestAnimationFrame(this.animate);const e=Math.min(this.clock.getDelta(),.05);this.time+=e;if(this.powerAura){this.powerAura.rotation.y+=e*0.8;};
+}burst(e){for(let t=0;t<20;t++){const n=this.sphere(this.scene,e.x,e.y,e.z,.09,[16765284,16774343,8246453][t%3]);n.castShadow=!1,this.sparks.push({mesh:n,life:1.2,velocity:new F((Math.random()-.5)*5,3+Math.random()*3,(Math.random()-.5)*5)})}}project(e){
+  if(!this._pCamDir){this._pCamDir=new F();this._pCamToObj=new F();this._pNDC=new F();this._pLastFrame=-1;}
+  this._pCamToObj.copy(e).sub(this.camera.position);
+  if(this._pLastFrame!==this.time){
+    this.camera.getWorldDirection(this._pCamDir);
+    this._pLastFrame=this.time;
+  }
+  if(this._pCamDir.dot(this._pCamToObj)<=0.1)return{x:-9999,y:-9999,visible:!1,distance:9999};
+  this._pNDC.copy(e).project(this.camera);
+  const n=this.canvas.clientWidth,r=this.canvas.clientHeight,s=(this._pNDC.x*.5+.5)*n,a=(-.5*this._pNDC.y+.5)*r;
+  return{x:s,y:a,visible:this._pNDC.z>-1&&this._pNDC.z<1&&s>-80&&s<n+80&&a>-80&&a<r+80,distance:this.camera.position.distanceTo(e)}
+}get heading(){return this.yaw}updateShadows(){const e=this.active?46:95;e!==this.shadowSize&&(this.shadowSize=e,Object.assign(this.sun.shadow.camera,{left:-e,right:e,top:e,bottom:-e,near:1,far:e*3.2}),this.sun.shadow.camera.updateProjectionMatrix()),this.sun.target.position.copy(this.target),this.sun.position.set(this.target.x-24,42,this.target.z+16)}animate=()=>{this.frame=requestAnimationFrame(this.animate);const e=Math.min(this.clock.getDelta(),.05);this.time+=e;if(this.powerAura){this.powerAura.rotation.y+=e*0.8;};
 if(this.targetMarker&&this.targetMarker.visible){
   const tTime=this.time;
   const pulse=1+0.12*Math.sin(tTime*7);
@@ -5631,32 +5642,21 @@ Y("help").onclick=pg;function Ti(){
 
 Y("settings").onclick=Ti;Y("sound").onclick=()=>{xt.unlock(),ie.sound=!ie.sound,_n(),Xt()};Y("jump").onclick=()=>_e.jump();Y("zoom-in").onclick=()=>_e.zoom(-8);Y("zoom-out").onclick=()=>_e.zoom(8);function rc(i,e=i){const t=_e.player.position;return{player:{x:t.x,z:t.z,facing:_e.player.rotation.y},milo:{x:_e.milo.position.x,z:_e.milo.position.z},bridge:ie.bridge,questComplete:ie.questComplete,selected:e?Ei:void 0,labels:i,translate:Cn,time:performance.now()/1e3}}function sc(){const{ctx:i,w:e,h:t}=Jl(Y("minimap-canvas")),n=_e.player.position;Ql(i,e,t,{cx:n.x,cz:n.z,scale:e/70,rotation:_e.heading},rc(!1))}function ac(){if(!Dn)return;const i=Y("map-canvas"),{ctx:e,w:t,h:n}=Jl(i);Ql(e,t,n,oc(t,n),rc(t>600,!0)),requestAnimationFrame(ac)}function oc(i,e){const t=i>820,n=lg(t?i-360:i,t?e:e*.62,t?56:22);return t?n.cx+=180/n.scale:n.cz+=e*.19/n.scale,n}function Ya(){Y("map-regions").innerHTML=Ln(Dt.map(e=>{const t=Di(e,ie.questComplete);return`<button class="map-region${t?"":" locked"}" data-region="${e.id}" aria-pressed="${Ei===e.id}"><span class="map-region-icon" style="--tint:${e.color}">${Xe(t?e.icon:"lock")}</span><span><strong>${e.name}</strong><small>${e.subtitle}</small></span>${bi===e.id?"<em>Bạn ở đây</em>":""}</button>`}).join(""));const i=Dt.find(e=>e.id===Ei);Y("map-detail").innerHTML=i?Ln(`<strong>${Xe(i.icon)} ${i.name}</strong><p>${i.blurb}</p>${Di(i,ie.questComplete)?"":`<p class="map-locked">${Xe("lock")} Mở khóa khi hoàn thành Cây cầu tình bạn</p>`}`):"",document.querySelectorAll("[data-region]").forEach(e=>e.onclick=()=>{Ei=e.dataset.region,Ya()})}function Ka(){!_e.active||Y("dialog").open||(Dn=!0,_e.paused=!0,_e.clearInput(),Ei=bi||void 0,Y("world-map").hidden=!1,Ya(),Wa(Y("world-map")),Y("close-map").focus(),requestAnimationFrame(ac))}function Kr(){Dn&&(Dn=!1,Y("world-map").hidden=!0,_e.paused=!1,_e.clearInput())}Y("minimap").onclick=Ka;Y("open-map").onclick=Ka;Y("close-map").onclick=Kr;Y("map-canvas").addEventListener("click",i=>{const e=i.currentTarget,t=e.getBoundingClientRect(),n=oc(t.width,t.height),r=cg(n,t.width,t.height,i.clientX-t.left,i.clientY-t.top);Ei=hg(r.x,r.z)?.id,Ya()});document.addEventListener("keydown",i=>{if(i.repeat&&["e"," ","Escape","m","M"].includes(i.key))return;if(Y("dialog").open){if(Xa==="quiz"&&/^[1-4]$/.test(i.key)){const t=document.querySelectorAll(".answer")[Number(i.key)-1];t&&!t.disabled&&t.click()}return}if(Dn){(i.key==="Escape"||i.key.toLowerCase()==="m")&&(i.preventDefault(),Kr());return}if(!_e?.active)return;const e=i.key.toLowerCase();["w","a","s","d","arrowup","arrowdown","arrowleft","arrowright"," "].includes(e)&&(i.preventDefault(),_e.keys.add(e)),e===" "&&_e.jump(),e==="e"&&Yr(),e==="m"&&Ka(),e==="escape"&&(i.preventDefault(),Ti())});document.addEventListener("keyup",i=>_e?.keys.delete(i.key.toLowerCase()));window.addEventListener("blur",()=>{_e?.clearInput(),_e?.active&&!Dn&&!Y("dialog").open&&Ti()});document.addEventListener("visibilitychange",()=>{_e?.clearInput(),document.hidden?xt.music(!1):_e?.active&&xt.music(ie.music)});const nr=Y("joystick");let Za=-1;function lc(i){if(i.pointerId!==Za)return;const e=nr.getBoundingClientRect();let t=(i.clientX-e.left-e.width/2)/34,n=(i.clientY-e.top-e.height/2)/34;const r=Math.max(1,Math.hypot(t,n));t/=r,n/=r,_e.joystick={x:t,y:n},Y("joystick-knob").style.transform=`translate(${t*30}px,${n*30}px)`}nr.addEventListener("pointerdown",i=>{Za=i.pointerId,nr.setPointerCapture(i.pointerId),lc(i)});nr.addEventListener("pointermove",lc);for(const i of["pointerup","pointercancel"])nr.addEventListener(i,()=>{Za=-1,_e.joystick={x:0,y:0},Y("joystick-knob").style.transform=""});function Ls(i,e,t,n){
   if(!i)return;
-
-  // Khi đang mở Bản đồ lớn (Dn === true), ẩn toàn bộ bảng tên 3D để không đè lên bản đồ lớn!
   if(Dn||n){
     if(!i.hidden)i.hidden=!0;
     return;
   }
-
   const r=_e.project(e);
-
-  // Chỉ ẩn khi vật thể nằm phía sau lưng camera (r.visible === false)
   if(!r.visible){
     if(!i.hidden)i.hidden=!0;
     return;
   }
-
   const isNear=i.classList.contains("near")||i.classList.contains("gps-focus");
-  if(isNear){
-    i.style.transform=`translate(${r.x.toFixed(1)}px,${r.y.toFixed(1)}px) ${t} scale(1.05)`;
-    i.style.opacity="1";
-    i.style.zIndex="25";
-  } else {
-    i.style.transform=`translate(${r.x.toFixed(1)}px,${r.y.toFixed(1)}px) ${t}`;
-    i.style.opacity="1";
-    i.style.zIndex="10";
+  const newTf=`translate3d(${r.x.toFixed(1)}px,${r.y.toFixed(1)}px,0) ${t}${isNear?" scale(1.05)":""}`;
+  if(i.dataset.lastTf!==newTf){
+    i.style.transform=newTf;
+    i.dataset.lastTf=newTf;
   }
-
   if(i.hidden)i.hidden=!1;
 }function cc(){const i=_e.player.position,e=Xm(i.x,i.z);if(e.id===bi)return;const t=bi==="";bi=e.id,Y("area-icon").innerHTML=Xe(e.icon),Y("area-name").textContent=Cn(e.name),Y("area-sub").textContent=Cn(e.subtitle);const n=Y("area-label");n.classList.remove("arrive"),n.offsetWidth,n.classList.add("arrive"),!t&&_e.active&&e.id!=="village"&&e.id!=="garden"&&Di(e,ie.questComplete)&&In(`Chào mừng bạn đến với ${e.name}!`)}try{_e=new $m(Y("world")),_e.setBridge(ie.bridge),_e.setAvatar(ie.avatar),_e.onJump=()=>xt.jump(),_e.onSceneClick=()=>Yr(),_e.onFrame=(i,e)=>{if(ec=i,!(++ul%2!==0||!_e.active)){
     const _nwsRaw=_e.nearWorkstation();
