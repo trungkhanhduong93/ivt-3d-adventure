@@ -3799,3 +3799,145 @@ body.dialog-open .world-label {
   opacity: 0.15 !important;
   pointer-events: none !important;
 }
+
+
+/* ========================================================
+   THANH CUỘN ĐỒ HỌA TRONG GAME (CUSTOM IN-GAME SCROLLBAR)
+   Loại bỏ hoàn toàn thanh scroll thô kệch mặc định của Windows/trình duyệt
+   Thay bằng thanh cuộn ngọc lục bảo (Emerald Green) bo tròn chuẩn theme F&B IVT
+   ======================================================== */
+
+/* 1. Áp dụng chuẩn W3C / Firefox cho toàn bộ phần tử */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #10b981 transparent;
+}
+
+/* 2. Áp dụng chuẩn Webkit (Chrome, Edge, Safari, Cốc Cốc, Opera) */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #10b981;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #059669;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #047857;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Triệt tiêu 2 nút mũi tên lên/xuống vuông vức của thanh cuộn Windows */
+::-webkit-scrollbar-button {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* 3. Tinh chỉnh chuyên biệt cho Modal Dialog (Bảng câu hỏi & thử thách) */
+dialog {
+  scrollbar-width: thin;
+  scrollbar-color: #10b981 rgba(25, 79, 66, 0.05);
+  overscroll-behavior: contain;
+}
+
+dialog::-webkit-scrollbar {
+  width: 8px;
+}
+
+dialog::-webkit-scrollbar-track {
+  background: rgba(25, 79, 66, 0.05);
+  border-radius: 999px;
+  margin: 20px 8px 20px 0; /* Cách góc bo tròn 28px của modal để không chạm viền */
+}
+
+dialog::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #10b981, #059669);
+  border-radius: 999px;
+  border: 1.5px solid #fffdf5;
+  box-shadow: 0 2px 6px rgba(25, 79, 66, 0.25);
+}
+
+dialog::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #059669, #047857);
+}
+
+/* 4. Tinh chỉnh cho Modal Lộ trình (Roadmap) */
+.roadmap-dialog-box {
+  overscroll-behavior: contain;
+}
+
+.roadmap-list {
+  scrollbar-width: thin;
+  scrollbar-color: #10b981 rgba(25, 79, 66, 0.05);
+}
+
+.roadmap-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.roadmap-list::-webkit-scrollbar-track {
+  background: rgba(25, 79, 66, 0.04);
+  border-radius: 999px;
+  margin: 6px 0;
+}
+
+.roadmap-list::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #10b981, #059669);
+  border-radius: 999px;
+}
+
+.roadmap-list::-webkit-scrollbar-thumb:hover {
+  background: #059669;
+}
+
+/* 5. Tinh chỉnh cho Bảng thông tin Bản đồ và Hướng dẫn */
+.map-panel,
+.help-list {
+  scrollbar-width: thin;
+  scrollbar-color: #10b981 rgba(25, 79, 66, 0.05);
+}
+
+.map-panel::-webkit-scrollbar,
+.help-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.map-panel::-webkit-scrollbar-track,
+.help-list::-webkit-scrollbar-track {
+  background: rgba(25, 79, 66, 0.04);
+  border-radius: 999px;
+  margin: 6px 0;
+}
+
+.map-panel::-webkit-scrollbar-thumb,
+.help-list::-webkit-scrollbar-thumb {
+  background: #10b981;
+  border-radius: 999px;
+}
+
+@media (max-width: 700px) {
+  dialog::-webkit-scrollbar-track {
+    margin: 14px 4px 14px 0;
+  }
+  dialog::-webkit-scrollbar {
+    width: 6px;
+  }
+}
