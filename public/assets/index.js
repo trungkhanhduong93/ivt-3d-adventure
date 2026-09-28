@@ -4277,7 +4277,7 @@ nearMilo(){return Math.hypot(this.player.position.x-this.milo.position.x,this.pl
     this.player.position.y=Math.max(o,this.player.position.y+this.jumpVelocity*e),
     this.player.position.y===o&&(this.jumpVelocity=0)
   ):this.player.position.y=o;
-}burst(e){for(let t=0;t<20;t++){const n=this.sphere(this.scene,e.x,e.y,e.z,.09,[16765284,16774343,8246453][t%3]);n.castShadow=!1,this.sparks.push({mesh:n,life:1.2,velocity:new F((Math.random()-.5)*5,3+Math.random()*3,(Math.random()-.5)*5)})}}project(e){const t=e.clone().project(this.camera),n=this.canvas.clientWidth,r=this.canvas.clientHeight,s=(t.x*.5+.5)*n,a=(-.5*t.y+.5)*r;return{x:s,y:a,visible:t.z<1&&s>-80&&s<n+80&&a>-80&&a<r+80,distance:this.camera.position.distanceTo(e)}}get heading(){return this.yaw}updateShadows(){const e=this.active?46:95;e!==this.shadowSize&&(this.shadowSize=e,Object.assign(this.sun.shadow.camera,{left:-e,right:e,top:e,bottom:-e,near:1,far:e*3.2}),this.sun.shadow.camera.updateProjectionMatrix()),this.sun.target.position.copy(this.target),this.sun.position.set(this.target.x-24,42,this.target.z+16)}animate=()=>{this.frame=requestAnimationFrame(this.animate);const e=Math.min(this.clock.getDelta(),.05);this.time+=e;if(this.powerAura){this.powerAura.rotation.y+=e*0.8;};
+}burst(e){for(let t=0;t<20;t++){const n=this.sphere(this.scene,e.x,e.y,e.z,.09,[16765284,16774343,8246453][t%3]);n.castShadow=!1,this.sparks.push({mesh:n,life:1.2,velocity:new F((Math.random()-.5)*5,3+Math.random()*3,(Math.random()-.5)*5)})}}project(e){const camToObj=e.clone().sub(this.camera.position),camDir=new F();this.camera.getWorldDirection(camDir);if(camDir.dot(camToObj)<=0.1)return{x:-9999,y:-9999,visible:!1,distance:9999};const t=e.clone().project(this.camera),n=this.canvas.clientWidth,r=this.canvas.clientHeight,s=(t.x*.5+.5)*n,a=(-.5*t.y+.5)*r;return{x:s,y:a,visible:t.z>-1&&t.z<1&&s>-80&&s<n+80&&a>-80&&a<r+80,distance:this.camera.position.distanceTo(e)}}get heading(){return this.yaw}updateShadows(){const e=this.active?46:95;e!==this.shadowSize&&(this.shadowSize=e,Object.assign(this.sun.shadow.camera,{left:-e,right:e,top:e,bottom:-e,near:1,far:e*3.2}),this.sun.shadow.camera.updateProjectionMatrix()),this.sun.target.position.copy(this.target),this.sun.position.set(this.target.x-24,42,this.target.z+16)}animate=()=>{this.frame=requestAnimationFrame(this.animate);const e=Math.min(this.clock.getDelta(),.05);this.time+=e;if(this.powerAura){this.powerAura.rotation.y+=e*0.8;};
 if(this.targetMarker&&this.targetMarker.visible){
   const tTime=this.time;
   const pulse=1+0.12*Math.sin(tTime*7);
@@ -5633,7 +5633,7 @@ Y("settings").onclick=Ti;Y("sound").onclick=()=>{xt.unlock(),ie.sound=!ie.sound,
   if(!i)return;
 
   // Khi đang mở Bản đồ lớn (Dn === true), ẩn toàn bộ bảng tên 3D để không đè lên bản đồ lớn!
-  if(Dn){
+  if(Dn||n){
     if(!i.hidden)i.hidden=!0;
     return;
   }
