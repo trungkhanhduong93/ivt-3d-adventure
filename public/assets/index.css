@@ -3762,3 +3762,40 @@ body.hud-modal-open .world-label {
     opacity: 1;
   }
 }
+
+
+/* ========================================================
+   CRITICAL FIX: BẢO ĐẢM NÚT ĐÁP ÁN LUÔN BẤM ĐƯỢC 100%
+   VÀ DIALOG LUÔN NẰM TRÊN CÙNG
+   ======================================================== */
+dialog {
+  z-index: 100000 !important;
+  pointer-events: auto !important;
+}
+
+dialog::backdrop {
+  z-index: 99999 !important;
+  pointer-events: auto !important;
+}
+
+/* Nút đáp án luôn nhận tương tác đầy đủ, không bị kẹt hay trễ */
+.answers .answer {
+  position: relative !important;
+  z-index: 100001 !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+  touch-action: manipulation !important;
+  -webkit-tap-highlight-color: rgba(16, 185, 129, 0.2) !important;
+  user-select: none !important;
+}
+
+/* Các phần tử con trong nút đáp án không nuốt sự kiện click của button */
+.answers .answer * {
+  pointer-events: none !important;
+}
+
+/* Khi đang mở dialog câu hỏi, toàn bộ world-label 3D phía dưới tắt pointer-events */
+body.dialog-open .world-label {
+  opacity: 0.15 !important;
+  pointer-events: none !important;
+}

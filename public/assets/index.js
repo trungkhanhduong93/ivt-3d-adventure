@@ -4142,22 +4142,22 @@ createWorkstations(){
 }
 nearWorkstation(){
   const px=this.player.position.x, pz=this.player.position.z;
-  if(Math.hypot(px-(-36.5), pz-(-7.5)) < 3.0) return { type:"pond", name:"Bến Hồ Cá - Cấu Hình & Nghiệm Thu", hint:"Cài đặt chứng từ & Reset Data", subs:["PHAN_HE_01_CAU_HINH","PHAN_HE_01_KHOI_TAO","PHAN_HE_01_RESET_DATA"] };
-  if(Math.hypot(px-(-4.0), pz-(-9.5)) < 2.8) return { type:"house", name:"Nhà Bên Milo - Danh Mục Gốc", hint:"Khai báo danh mục & Base UOM", subs:["PHAN_HE_02_DANH_MUC","PHAN_HE_01_CAU_HINH"] };
-  if(Math.hypot(px-(-8.5), pz-(-2.5)) < 2.8) return { type:"pos", name:"Quầy POS Bán Hàng", hint:"Kiểm tra máy POS", subs:["PHAN_HE_01_CAU_HINH","PHAN_HE_05_XUAT_BAN_DINH_LUONG"] };
-  if(Math.hypot(px-(-1.5), pz-7.5) < 2.8) return { type:"weigh", name:"Bàn Cân & Pallet Kho", hint:"Cân hàng & Kiểm tra ĐVT", subs:["PHAN_HE_02_DANH_MUC","PHAN_HE_03_DAT_HANG_CUNG_UNG"] };
-  if(Math.hypot(px-18.0, pz-(-6.0)) < 3.0) return { type:"kitchen", name:"Nồi Nấu Bếp Trung Tâm", hint:"Chế biến BTP & Nấu Cốt Trà", subs:["PHAN_HE_06_SAN_XUAT_BEP_TRUNG_TAM","PHAN_HE_04_DIEU_CHUYEN"] };
-  if(Math.hypot(px-33.0, pz-16.0) < 3.0) return { type:"audit", name:"Tổng Kho & Kệ Kiểm Kê", hint:"Quét Barcode kiểm kê", subs:["PHAN_HE_07_KIEM_KE","PHAN_HE_11_BAO_CAO"] };
+  if(Math.hypot(px-(-36.5), pz-(-7.5)) < 3.0) return { type:"pond", name:"Bến Hồ Cá - Cấu Hình & Nghiệm Thu", hint:"Cài đặt chứng từ & Reset Data", subs:["PHAN_HE_01_CAU_HINH"] };
+  if(Math.hypot(px-(-4.0), pz-(-9.5)) < 2.8) return { type:"house", name:"Nhà Bên Milo - Danh Mục Gốc", hint:"Khai báo danh mục & Base UOM", subs:["PHAN_HE_02_DANH_MUC"] };
+  if(Math.hypot(px-(-8.5), pz-(-2.5)) < 2.8) return { type:"pos", name:"Quầy POS Bán Hàng", hint:"Kiểm tra máy POS", subs:["PHAN_HE_05_XUAT_BAN_DINH_LUONG"] };
+  if(Math.hypot(px-(-1.5), pz-7.5) < 2.8) return { type:"weigh", name:"Bàn Cân & Pallet Kho", hint:"Cân hàng & Kiểm tra ĐVT", subs:["PHAN_HE_03_DAT_HANG_CUNG_UNG"] };
+  if(Math.hypot(px-18.0, pz-(-6.0)) < 3.0) return { type:"kitchen", name:"Nồi Nấu Bếp Trung Tâm", hint:"Chế biến BTP & Nấu Cốt Trà", subs:["PHAN_HE_06_SAN_XUAT_BEP_TRUNG_TAM"] };
+  if(Math.hypot(px-33.0, pz-16.0) < 3.0) return { type:"audit", name:"Tổng Kho & Kệ Kiểm Kê", hint:"Quét Barcode kiểm kê", subs:["PHAN_HE_07_KIEM_KE"] };
   if(Math.hypot(px-54.0, pz-(-18.0)) < 3.0) return { type:"server", name:"Tháp Ticket Cứu Hộ", hint:"Xử lý sự cố Ticket #SYS", subs:["PHAN_HE_08_GIA_VON","PHAN_HE_12_CHAN_DOAN_TICKET"] };
   
-  if(Math.hypot(px-12.0, pz-(-8.0)) < 2.8) return { type:"truck", name:"Xe Tải Điều Chuyển", hint:"Kiểm tra Phiếu Chuyển Kho", subs:["PHAN_HE_04_DIEU_CHUYEN","PHAN_HE_03_DAT_HANG_CUNG_UNG"] };
+  if(Math.hypot(px-12.0, pz-(-8.0)) < 2.8) return { type:"truck", name:"Xe Tải Điều Chuyển", hint:"Kiểm tra Phiếu Chuyển Kho", subs:["PHAN_HE_04_DIEU_CHUYEN"] };
   const crateChecks = [
-    {pos:[24.0,-12.0], id:"crate1", name:"Rương Bí Ẩn Bếp Trung Tâm", hint:"Mở Rương Bí Kíp BTP", subs:["PHAN_HE_06_SAN_XUAT_BEP_TRUNG_TAM","PHAN_HE_05_XUAT_BAN_DINH_LUONG"]},
-    {pos:[38.0,8.0], id:"crate2", name:"Rương Bí Ẩn Logistics & Date", hint:"Mở Rương Sự Cố Date", subs:["PHAN_HE_04_DIEU_CHUYEN","PHAN_HE_11_BAO_CAO"]},
-    {pos:[48.0,-8.0], id:"crate3", name:"Rương Bí Ẩn Giá Vốn Âm", hint:"Mở Rương Cứu Hộ Giá Vốn", subs:["PHAN_HE_08_GIA_VON","PHAN_HE_12_CHAN_DOAN_TICKET"]}
+    {pos:[24.0,-12.0], id:"crate1", name:"Rương Bí Kíp Nhượng Quyền", hint:"Mở Rương Bí Kíp Nhượng Quyền", subs:["PHAN_HE_10_NHUONG_QUYEN"]},
+    {pos:[38.0,8.0], id:"crate2", name:"Rương Sự Cố Báo Cáo", hint:"Mở Rương Sự Cố Báo Cáo", subs:["PHAN_HE_11_BAO_CAO"]},
+    {pos:[48.0,-8.0], id:"crate3", name:"Rương Cứu Hộ Công Nợ", hint:"Mở Rương Cứu Hộ Công Nợ", subs:["PHAN_HE_09_CONG_NO"]}
   ];
   for(let c of crateChecks){
-    if(Math.hypot(px-c.pos[0], pz-c.pos[1]) < 2.4) return { type:"crate", name:c.name, hint:c.hint, subs:c.subs };
+    if(Math.hypot(px-c.pos[0], pz-c.pos[1]) < 2.4) return { type:c.id, name:c.name, hint:c.hint, subs:c.subs };
   }
 return null;
 }
@@ -4686,7 +4686,7 @@ const _mobileZoomOut=Y("mobile-zoom-out");if(_mobileZoomOut)_mobileZoomOut.oncli
 const _qnb=Y("quest-nav-btn");
 if(_qnb){
   _qnb.addEventListener("click",()=>{if(_questCardEl)_questCardEl.classList.remove("expanded");document.body.classList.remove("hud-modal-open");});
-}try{(localStorage.getItem("aigame3d_quest_collapsed")==="1"||matchMedia("(max-width: 700px)").matches)&&nc(!0)}catch{}function Jn(i,e,t){Dn&&Kr(),_e.paused=!0,_e.clearInput(),Xa=t,Y("dialog-content").innerHTML=Ln(`<h2 id="dialog-title">${i}</h2>${e}`);const n=Y("dialog");n.open||n.showModal()}function cr(){Y("dialog").close()}Y("dialog").addEventListener("close",()=>{_e.paused=Dn,_e.clearInput(),Xa="",jn=void 0});Y("close-dialog").onclick=cr;function ug(){xt.unlock(),xt.music(ie.music),ie.started=!0,_e.active=!0,_e.paused=!1,_e.setAvatar(ie.avatar),Y("welcome").hidden=!0,Y("hud").hidden=!1,Y("area-label").hidden=!1,Y("world-caption").hidden=!0,Y("menu-footer").hidden=!0,document.body.classList.add("playing"),Xt(),_n(),bi="",cc(),requestAnimationFrame(sc),In("Chào bạn! Di chuyển đến Milo, hoặc chạm xuống đất để đi.")}function pl(){cr(),Kr(),_e.active=!1,_e.clearInput(),Y("welcome").hidden=!1,Y("hud").hidden=!0,Y("area-label").hidden=!0,Y("world-caption").hidden=!1,Y("menu-footer").hidden=!1,document.body.classList.remove("playing"),_n(),xt.music(!1)}function startAdventure(){
+}try{(localStorage.getItem("aigame3d_quest_collapsed")==="1"||matchMedia("(max-width: 700px)").matches)&&nc(!0)}catch{}function Jn(i,e,t){Dn&&Kr(),_e.paused=!0,_e.clearInput(),Xa=t,Y("dialog-content").innerHTML=Ln(`<h2 id="dialog-title">${i}</h2>${e}`);const n=Y("dialog");document.body.classList.add("dialog-open");n.open||n.showModal()}function cr(){window._isReviewMode=false;document.body.classList.remove("dialog-open");Y("dialog").close()}Y("dialog").addEventListener("close",()=>{_e.paused=Dn,_e.clearInput(),Xa="",jn=void 0,window._isReviewMode=false;document.body.classList.remove("dialog-open");});Y("close-dialog").onclick=cr;function ug(){xt.unlock(),xt.music(ie.music),ie.started=!0,_e.active=!0,_e.paused=!1,_e.setAvatar(ie.avatar),Y("welcome").hidden=!0,Y("hud").hidden=!1,Y("area-label").hidden=!1,Y("world-caption").hidden=!0,Y("menu-footer").hidden=!0,document.body.classList.add("playing"),Xt(),_n(),bi="",cc(),requestAnimationFrame(sc),In("Chào bạn! Di chuyển đến Milo, hoặc chạm xuống đất để đi.")}function pl(){cr(),Kr(),_e.active=!1,_e.clearInput(),Y("welcome").hidden=!1,Y("hud").hidden=!0,Y("area-label").hidden=!0,Y("world-caption").hidden=!1,Y("menu-footer").hidden=!1,document.body.classList.remove("playing"),_n(),xt.music(!1)}function startAdventure(){
   let seen=!1;
   try{seen=sessionStorage.getItem("ivt_legal_seen")==="1"}catch(e){}
   if(!seen){
@@ -4702,10 +4702,10 @@ Y("play").onclick=startAdventure;for(const i of["boy","girl"])Y(i).onclick=()=>{
   {id:"weigh-label",type:"weigh",name:"Bàn Cân & Pallet Kho",pos:[-1.5,1.8,7.5],subs:["PHAN_HE_03_DAT_HANG_CUNG_UNG"]},
   {id:"kitchen-label",type:"kitchen",name:"Nồi Nấu Bếp Trung Tâm",pos:[18.0,2.0,-6.0],subs:["PHAN_HE_06_SAN_XUAT_BEP_TRUNG_TAM"]},
   {id:"truck-label",type:"truck",name:"Xe Tải Điều Chuyển",pos:[12.0,2.0,-8.0],subs:["PHAN_HE_04_DIEU_CHUYEN"]},
-  {id:"crate1-label",type:"crate",name:"Rương Bí Kíp Nhượng Quyền",pos:[24.0,1.5,-12.0],subs:["PHAN_HE_10_NHUONG_QUYEN"]},
+  {id:"crate1-label",type:"crate1",name:"Rương Bí Kíp Nhượng Quyền",pos:[24.0,1.5,-12.0],subs:["PHAN_HE_10_NHUONG_QUYEN"]},
   {id:"audit-label",type:"audit",name:"Kệ Kho & Quét Barcode",pos:[33.0,2.2,16.0],subs:["PHAN_HE_07_KIEM_KE"]},
-  {id:"crate2-label",type:"crate",name:"Rương Sự Cố Báo Cáo",pos:[38.0,1.5,8.0],subs:["PHAN_HE_11_BAO_CAO"]},
-  {id:"crate3-label",type:"crate",name:"Rương Cứu Hộ Công Nợ",pos:[48.0,1.5,-8.0],subs:["PHAN_HE_09_CONG_NO"]},
+  {id:"crate2-label",type:"crate2",name:"Rương Sự Cố Báo Cáo",pos:[38.0,1.5,8.0],subs:["PHAN_HE_11_BAO_CAO"]},
+  {id:"crate3-label",type:"crate3",name:"Rương Cứu Hộ Công Nợ",pos:[48.0,1.5,-8.0],subs:["PHAN_HE_09_CONG_NO"]},
   {id:"server-label",type:"server",name:"Tháp Ticket Cứu Hộ",pos:[54.0,2.5,-18.0],subs:["PHAN_HE_08_GIA_VON","PHAN_HE_12_CHAN_DOAN_TICKET"]}
 ];
 const WEST_STATION_IDS = ["house", "pond", "pos", "weigh"];
@@ -4914,20 +4914,37 @@ function handleStationClick(s){
   const isMilo=(!s||s==="milo"||s.id==="milo-label");
   const ws=isMilo?null:(typeof s==="object"?s:_stationsDef.find(item=>item.id===s||item.type===s||item.id===`${s}-label`));
 
+  if(!isMilo && !ws) return;
+
   const targetCoords=isMilo?[-3.0,0,1.5]:ws.pos;
   const targetPos=new F(targetCoords[0],0,targetCoords[2]);
   const pPos=_e.player.position;
   const dist=Math.hypot(pPos.x-targetPos.x,pPos.z-targetPos.z);
 
-  // If character is ALREADY NEAR (< 3.2m): Open challenge / Milo dialog immediately!
+  // If character is ALREADY NEAR (< 3.2m): Open challenge immediately
   if(dist<3.2 || (isMilo&&_e.nearMilo()) || (!isMilo&&_e.nearWorkstation()?.type===ws?.type)){
     window._currentStation=ws;
     Yr();
-  } else {
-    // If far away: Auto-navigate to station or Milo first! Only open when arrived!
-    const targetId=isMilo?"milo":(ws.type||ws.id.replace("-label",""));
-    navigateToTarget(targetId);
+    return;
   }
+
+  // Cross-river rule: If bridge is not built and station is on east bank (x > 6):
+  // Open the challenge directly so player can answer questions without getting blocked at the river!
+  const stationX = targetCoords[0];
+  const bridgeNotBuilt = (ie.bridge < yt);
+  const playerOnWest = pPos.x < 6;
+  const stationOnEast = stationX > 6;
+
+  if(!isMilo && bridgeNotBuilt && playerOnWest && stationOnEast){
+    window._currentStation=ws;
+    In(`Đang mở thử thách tại ${ws.name} (Chưa xây cầu vẫn có thể trả lời!)`);
+    Yr();
+    return;
+  }
+
+  // Otherwise, auto-navigate to destination
+  const targetId=isMilo?"milo":(ws.id?ws.id.replace("-label",""):(ws.type||""));
+  navigateToTarget(targetId);
 }
 
 Y("milo-label").onclick=()=>handleStationClick("milo");
@@ -4944,8 +4961,11 @@ const QUEST_JOURNEY=[
   {step:5,id:"milo",name:"Người Dẫn Đường Milo",desc:"Luyện tập câu hỏi & Ghép 6 nhịp cầu qua sông",zone:"Đầu Cầu Sông Dữ Liệu",pos:[-3.0,0,1.5],icon:"flag",tag:"XÂY CẦU VƯỢT SÔNG"},
   {step:6,id:"kitchen",name:"Bếp Trung Tâm (BOM)",desc:"Lệnh sản xuất BTP & Định mức công thức",zone:"Đảo Bếp Trung Tâm (Bờ Đông)",pos:[18.0,0,-4.5],icon:"pot",tag:"BẾP SẢN XUẤT"},
   {step:7,id:"truck",name:"Xe Tải Điều Chuyển",desc:"Store Order & Duyệt cung ứng chi nhánh",zone:"Bến Điều Chuyển Bờ Đông",pos:[12.0,0,-6.5],icon:"truck",tag:"ĐIỀU CHUYỂN"},
-  {step:8,id:"audit",name:"Kệ Kho & Barcode",desc:"Quét barcode kiểm kê & Báo cáo hao hụt A08",zone:"Tổng Kho Logistics",pos:[33.0,0,14.5],icon:"clipboard",tag:"KIỂM KÊ KHO"},
-  {step:9,id:"server",name:"Tháp Chẩn Đoán Ticket",desc:"Khắc phục giá vốn âm, lệch kho & Master IVT",zone:"Tháp Chẩn Đoán Tối Cao",pos:[54.0,0,-16.0],icon:"tower",tag:"CHẨN ĐOÁN HỆ THỐNG"}
+  {step:8,id:"crate1",name:"Rương Bí Kíp Nhượng Quyền",desc:"Bí quyết vận hành kho chuỗi nhượng quyền F&B",zone:"Đảo Bếp Trung Tâm",pos:[24.0,0,-10.5],icon:"lock",tag:"NHƯỢNG QUYỀN"},
+  {step:9,id:"audit",name:"Kệ Kho & Barcode",desc:"Quét barcode kiểm kê & Báo cáo hao hụt A08",zone:"Tổng Kho Logistics",pos:[33.0,0,14.5],icon:"clipboard",tag:"KIỂM KÊ KHO"},
+  {step:10,id:"crate2",name:"Rương Sự Cố Báo Cáo",desc:"Truy vết chênh lệch kho & kiểm soát báo cáo",zone:"Tổng Kho Logistics",pos:[38.0,0,6.5],icon:"lock",tag:"BÁO CÁO KHO"},
+  {step:11,id:"crate3",name:"Rương Cứu Hộ Công Nợ",desc:"Xử lý công nợ nhà cung cấp & kỳ thanh toán",zone:"Thung Lũng Cứu Hộ",pos:[48.0,0,-6.5],icon:"lock",tag:"CÔNG NỢ NCC"},
+  {step:12,id:"server",name:"Tháp Chẩn Đoán Ticket",desc:"Khắc phục giá vốn âm, lệch kho & Master IVT",zone:"Tháp Chẩn Đoán Tối Cao",pos:[54.0,0,-16.0],icon:"tower",tag:"CHẨN ĐOÁN HỆ THỐNG"}
 ];
 
 function getNextSuggestedQuest(){
@@ -4972,29 +4992,55 @@ function getNextSuggestedQuest(){
 }
 
 function navigateToTarget(targetId){
-  const st = QUEST_JOURNEY.find(s => s.id === targetId) || getNextSuggestedQuest();
+  let st = QUEST_JOURNEY.find(s => s.id === targetId);
+  if(!st){
+    const wsDef = _stationsDef.find(s => s.id === targetId || s.id === `${targetId}-label` || s.type === targetId);
+    if(wsDef){
+      st = { id: targetId, name: wsDef.name, pos: wsDef.pos };
+    }
+  }
+  if(!st) st = getNextSuggestedQuest();
   if(!_e) return;
+
+  // Cross-river check: If bridge is not built and target is on east bank, open quiz directly!
+  const bridgeNotBuilt = (ie.bridge < yt);
+  const playerOnWest = (_e.player.position.x < 6);
+  const targetOnEast = (st.pos[0] > 6);
+  if(bridgeNotBuilt && playerOnWest && targetOnEast && st.id !== "milo"){
+    const wsForQuiz = _stationsDef.find(s => s.id === `${st.id}-label` || s.type === st.id || s.id === st.id);
+    if(wsForQuiz){
+      window._currentStation = wsForQuiz;
+      In(`Đang kết nối câu hỏi tại ${wsForQuiz.name}...`);
+      Yr();
+      return;
+    }
+  }
+
   _e.paused = !1;
   _e.navigatingTarget = true;
-  const targetPos=new F(st.pos[0],0,st.pos[2]);
+  const targetPos = new F(st.pos[0], 0, st.pos[2]);
   if(_e.navigateToPoint){
     _e.navigateToPoint(targetPos);
   } else {
-    _e.destination=targetPos;
+    _e.destination = targetPos;
   }
+
   // Auto-open station quiz/dialog as soon as character arrives at destination!
-  _e.onArrival=()=>{_e.navigatingTarget=false;document.querySelectorAll(".workstation-label, #milo-label").forEach(el=>el.classList.remove("gps-focus"));
+  _e.onArrival=()=>{
+    _e.navigatingTarget=false;
+    document.querySelectorAll(".workstation-label, #milo-label").forEach(el=>el.classList.remove("gps-focus"));
     if(st.id==="milo"){
       window._currentStation=null;
       Yr();
     } else {
-      const ws=_stationsDef.find(s=>s.id===`${st.id}-label`||s.type===st.id);
+      const ws=_stationsDef.find(s=>s.id===`${st.id}-label`||s.type===st.id||s.id===st.id);
       if(ws){
         window._currentStation=ws;
         Yr();
       }
     }
   };
+
   if(xt&&xt.tone)xt.tone(587.33,0.15,0,0.06);
   In(`Đang tự dẫn đường đến ${st.name}... Đến nơi sẽ tự mở thử thách!`);
   const lbl=Y(`${st.id}-label`)||Y(`${st.id}`);
@@ -5198,7 +5244,7 @@ _stationsDef.forEach(s=>{const el=Y(s.id);if(el)el.onclick=()=>handleStationClic
     `<div class="dialog-eyebrow">${eyebrow}</div>
      <p class="question-intro"><strong>${t.ticketCode||"#TK"}</strong>: ${t.prompt}</p>
      <div class="answers">
-       ${t.options.map((n,r)=>`<button class="answer" data-value="${n.value}"><kbd>${r+1}</kbd><span>${n.label}</span></button>`).join("")}
+       ${t.options.map((n,r)=>`<button class="answer" type="button" data-value="${n.value}"><kbd>${r+1}</kbd><span>${n.label}</span></button>`).join("")}
      </div>
      <div id="feedback" class="feedback" aria-live="polite"></div>
      <div id="hint-area" class="hint-area" hidden></div>
@@ -5209,7 +5255,14 @@ _stationsDef.forEach(s=>{const el=Y(s.id);if(el)el.onclick=()=>handleStationClic
      <button id="next-question" class="primary wide" hidden>Tiếp tục ${Xe("arrow")}</button>`,
     "quiz"
   );
-  document.querySelectorAll(".answer").forEach(n=>n.onclick=()=>fg(n.dataset.value,n));
+  document.querySelectorAll(".answer").forEach(btn => {
+    btn.onclick = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const val = btn.getAttribute("data-value") || btn.dataset.value;
+      fg(val, btn);
+    };
+  });
   Y("hint").onclick=()=>{
     Yn=Math.min(3,Yn+1);
     ic();
@@ -5584,7 +5637,9 @@ Y("settings").onclick=Ti;Y("sound").onclick=()=>{xt.unlock(),ie.sound=!ie.sound,
 
   if(i.hidden)i.hidden=!1;
 }function cc(){const i=_e.player.position,e=Xm(i.x,i.z);if(e.id===bi)return;const t=bi==="";bi=e.id,Y("area-icon").innerHTML=Xe(e.icon),Y("area-name").textContent=Cn(e.name),Y("area-sub").textContent=Cn(e.subtitle);const n=Y("area-label");n.classList.remove("arrive"),n.offsetWidth,n.classList.add("arrive"),!t&&_e.active&&e.id!=="village"&&e.id!=="garden"&&Di(e,ie.questComplete)&&In(`Chào mừng bạn đến với ${e.name}!`)}try{_e=new $m(Y("world")),_e.setBridge(ie.bridge),_e.setAvatar(ie.avatar),_e.onJump=()=>xt.jump(),_e.onSceneClick=()=>Yr(),_e.onFrame=(i,e)=>{if(ec=i,!(++ul%2!==0||!_e.active)){
-    const ws=_e.nearWorkstation();
+    const _nwsRaw=_e.nearWorkstation();
+    // Map nearWorkstation result to canonical _stationsDef entry for consistent subs
+    const ws=_nwsRaw?(_stationsDef.find(s=>s.type===_nwsRaw.type||s.id===_nwsRaw.type+"-label")||_nwsRaw):null;
     window._currentStation=ws;
     const canInteract=i||!!ws;
     Y("interact").hidden=!canInteract||_e.paused;
