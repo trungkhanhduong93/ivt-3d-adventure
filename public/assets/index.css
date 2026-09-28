@@ -4593,3 +4593,351 @@ dialog::-webkit-scrollbar-thumb:hover {
     font-size: 13.5px !important;
   }
 }
+
+/* ========================================================
+   PLAYER CARD & LEVEL BADGE OVERHAUL (DESKTOP & MOBILE)
+   Thiết kế chuẩn mực, căn giữa hoàn hảo, chống lệch thông tin
+   ======================================================== */
+
+/* 1. Desktop Base Card */
+.player-card {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  padding: 8px 14px 8px 10px !important;
+  border-radius: 20px !important;
+  background: rgba(255, 253, 245, 0.95) !important;
+  border: 1.5px solid #bbf7d0 !important;
+  box-shadow: 0 8px 24px rgba(18, 61, 51, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  min-width: 320px !important;
+}
+
+.avatar-toggle-btn {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  cursor: default !important;
+  flex-shrink: 0 !important;
+}
+
+.avatar-face {
+  width: 48px !important;
+  height: 48px !important;
+  border-radius: 50% !important;
+  display: grid !important;
+  place-items: center !important;
+  background: linear-gradient(145deg, #ffffff, #f0fdf4) !important;
+  border: 2.5px solid #34d399 !important;
+  box-shadow: 0 3px 0 #1b6352, 0 4px 10px rgba(18, 61, 51, 0.15) !important;
+  font-size: 26px !important;
+  line-height: 1 !important;
+  flex-shrink: 0 !important;
+}
+
+.avatar-mini-level {
+  display: none;
+}
+
+.player-card-content {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+
+.player-info {
+  flex: 1 !important;
+  min-width: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+}
+
+/* Hàng Tên nhân vật & Cấp độ - Flex 2 đầu, không bao giờ lệch */
+.player-name-row,
+.player-info strong {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 8px !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.player-name,
+#player-name {
+  font-size: 13.5px !important;
+  font-weight: 800 !important;
+  color: #194f42 !important;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+
+/* Level Badge hoàng kim sắc sảo */
+.level-badge {
+  flex-shrink: 0 !important;
+  white-space: nowrap !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 2.5px !important;
+  padding: 2.5px 8px !important;
+  height: 20px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+  border: 1.5px solid #ffffff !important;
+  color: #ffffff !important;
+  font-size: 11px !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+  box-shadow: 0 2px 5px rgba(217, 119, 6, 0.35) !important;
+  letter-spacing: 0.2px !important;
+  vertical-align: middle !important;
+}
+
+.level-badge .lvl-prefix {
+  font-size: 9.5px !important;
+  font-weight: 800 !important;
+  opacity: 0.92 !important;
+  text-transform: uppercase !important;
+}
+
+.level-badge #level {
+  font-size: 11px !important;
+  font-weight: 900 !important;
+}
+
+/* Thanh EXP & Số điểm */
+.xp-track-wrap {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+}
+
+.xp-track {
+  flex: 1 !important;
+  height: 7px !important;
+  margin: 0 !important;
+  border-radius: 99px !important;
+  background: #e2e8d8 !important;
+  overflow: hidden !important;
+}
+
+.xp-track i {
+  display: block !important;
+  height: 100% !important;
+  border-radius: 99px !important;
+  background: linear-gradient(90deg, #10b981, #059669) !important;
+  transition: width 0.4s ease !important;
+}
+
+#xp-text,
+.player-info small {
+  font-size: 10.5px !important;
+  font-weight: 700 !important;
+  color: #557262 !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  margin: 0 !important;
+}
+
+/* Khối ví tiền (Wallet) */
+.wallet {
+  flex-shrink: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  padding: 6px 10px 6px 8px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(135deg, #fef3c7, #fde68a) !important;
+  border: 1.5px solid #fbbf24 !important;
+  color: #92400e !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  box-shadow: 0 2px 6px rgba(217, 119, 6, 0.15) !important;
+}
+
+.wallet svg {
+  width: 18px !important;
+  height: 18px !important;
+  color: #d97706 !important;
+  fill: #f59e0b !important;
+}
+
+.wallet strong {
+  font-family: var(--font-display) !important;
+  font-size: 16px !important;
+  font-weight: 900 !important;
+  line-height: 1 !important;
+}
+
+/* 2. Mobile Responsive Overrides */
+@media (max-width: 768px) {
+  .player-card {
+    position: relative !important;
+    padding: 0 !important;
+    background: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    min-width: unset !important;
+    pointer-events: auto !important;
+  }
+
+  .avatar-toggle-btn {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 50% !important;
+    display: grid !important;
+    place-items: center !important;
+    position: relative !important;
+    cursor: pointer !important;
+    background: linear-gradient(145deg, #ffffff, #f0fdf4) !important;
+    border: 2.5px solid #34d399 !important;
+    box-shadow: 0 4px 0 #1b6352, 0 6px 14px rgba(18, 61, 51, 0.25) !important;
+    transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+  }
+
+  .avatar-toggle-btn:active {
+    transform: translateY(2px) !important;
+    box-shadow: 0 2px 0 #1b6352 !important;
+  }
+
+  .avatar-face {
+    width: 100% !important;
+    height: 100% !important;
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    font-size: 26px !important;
+    display: grid !important;
+    place-items: center !important;
+    line-height: 1 !important;
+  }
+
+  /* Huy hiệu cấp độ đính đáy Avatar điện thoại cân đối, sắc nét */
+  .avatar-mini-level {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: absolute !important;
+    bottom: -6px !important;
+    left: 50% !important;
+    right: auto !important;
+    top: auto !important;
+    transform: translateX(-50%) !important;
+    background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+    color: #ffffff !important;
+    font-size: 9.5px !important;
+    font-weight: 900 !important;
+    line-height: 1 !important;
+    padding: 2px 6px !important;
+    border-radius: 999px !important;
+    border: 1.5px solid #ffffff !important;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35) !important;
+    white-space: nowrap !important;
+    pointer-events: none !important;
+    z-index: 10 !important;
+    letter-spacing: 0.2px !important;
+  }
+
+  .player-card-content {
+    display: none !important;
+  }
+
+  /* Popup hồ sơ nhân vật khi bấm Avatar trên điện thoại */
+  .player-card.expanded .player-card-content {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    position: absolute !important;
+    top: 56px !important;
+    left: 0 !important;
+    width: min(300px, calc(100vw - 24px)) !important;
+    padding: 16px !important;
+    border-radius: 20px !important;
+    background: rgba(255, 253, 245, 0.98) !important;
+    border: 2px solid #bbf7d0 !important;
+    box-shadow: 0 16px 36px rgba(18, 61, 51, 0.35) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    z-index: 10000 !important;
+    animation: pop 0.22s cubic-bezier(0.2, 1.3, 0.4, 1) !important;
+  }
+
+  .player-card.expanded .player-card-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    border-bottom: 1.5px solid #e7eadc !important;
+    padding-bottom: 8px !important;
+  }
+
+  .player-card.expanded .player-card-title {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    font-size: 12px !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.06em !important;
+    color: #194f42 !important;
+  }
+
+  .player-card.expanded .player-card-title svg {
+    width: 16px !important;
+    height: 16px !important;
+    color: #059669 !important;
+  }
+
+  .player-card.expanded .player-info {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+  }
+
+  .player-card.expanded .player-name-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+
+  .player-card.expanded .player-name {
+    font-size: 13.5px !important;
+    font-weight: 800 !important;
+    color: #194f42 !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    flex: 1 !important;
+    min-width: 0 !important;
+  }
+
+  .player-card.expanded .level-badge {
+    flex-shrink: 0 !important;
+  }
+
+  .player-card.expanded .xp-track-wrap {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    width: 100% !important;
+  }
+
+  .player-card.expanded .wallet {
+    align-self: flex-start !important;
+  }
+}
