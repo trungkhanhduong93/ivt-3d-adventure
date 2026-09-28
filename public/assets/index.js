@@ -5055,39 +5055,50 @@ function openRoadmapModal(){
   xt.unlock();
   const nextQ=getNextSuggestedQuest();
   const role = (ie.avatar === "girl" || ie.avatar === "tech") ? "tech" : "manager";
+  
   const listHtml=QUEST_JOURNEY.map((st,idx)=>{
-    const isCurrent=st.id===nextQ.id;
+    const isCurrent = (st.id === nextQ.id);
     let isFinished = false;
     if(st.id === "milo") {
-      isFinished = ie.bridge >= yt;
+      isFinished = (ie.bridge >= yt);
     } else {
-      const stDef = _stationsDef.find(s => s.id === `${st.id}-label` || s.type === st.id);
+      const stDef = _stationsDef.find(s => s.id === `${st.id}-label` || s.type === st.id || s.id === st.id);
       if(stDef) {
         const pool = getStationQuestionPool(stDef, role);
         isFinished = pool.length > 0 && pool.every(q => ie.questionStats?.[q.id]?.correct > 0);
       }
     }
-    const statusBadge = isFinished ? `<span style="display:inline-flex;align-items:center;gap:3px;color:#059669;font-weight:800;font-size:11.5px">${Xe("check")} Đã xong</span>` : (isCurrent ? `<span style="display:inline-flex;align-items:center;gap:3px;color:#b45309;font-weight:800;font-size:11.5px">⚡ Đang làm</span>` : `<span style="color:#788f80;font-weight:700;font-size:11px">Chưa xong</span>`);
+    
+    let statusBadge = '';
+    if(isFinished){
+      statusBadge = `<span class="rm-status-badge badge-done"><span class="badge-icon">${Xe("check")}</span> ĐÃ XONG</span>`;
+    } else if(isCurrent){
+      statusBadge = `<span class="rm-status-badge badge-current"><span class="badge-icon">⚡</span> ĐANG THỰC HIỆN</span>`;
+    } else {
+      statusBadge = `<span class="rm-status-badge badge-locked">CHƯA MỞ</span>`;
+    }
+
     return `
-      <div class="roadmap-step-card ${isCurrent?'current':''}">
-        <div class="step-card-top">
-          <div class="step-num">${st.step}</div>
+      <div class="roadmap-step-card ${isCurrent?'current':''} ${isFinished?'finished':''}">
+        <div class="step-badge-col">
+          <span class="step-num">${String(st.step).padStart(2, '0')}</span>
           <div class="step-icon svg-icon-box">${Xe(st.icon)}</div>
-          <div class="step-card-title-wrap">
-            <strong class="step-card-name">${st.name}</strong>
-            ${statusBadge}
-          </div>
         </div>
-        <div class="step-info">
+        <div class="step-main-col">
+          <div class="step-title-row">
+            <h4 class="step-card-name">${st.name}</h4>
+            <div class="step-status-wrap">${statusBadge}</div>
+          </div>
           <p class="step-desc">${st.desc}</p>
           <div class="step-card-meta">
-            <small class="step-zone"><span class="inline-svg">${Xe("map")}</span>${st.zone}</small>
+            <span class="step-zone"><span class="inline-svg">${Xe("map")}</span> ${st.zone}</span>
             <span class="step-tag">${st.tag}</span>
           </div>
         </div>
-        <div class="step-action">
+        <div class="step-action-col">
           <button class="nav-go-btn ${isCurrent?'primary-nav':''}" data-target-id="${st.id}">
-            ${isCurrent?'Tự Chạy Tới Đây':'Đi tới đây'} ${Xe("arrow")}
+            <span>${isCurrent ? 'Tự Chạy Tới Đây' : (isFinished ? 'Đến Ôn Tập' : 'Đi Tới Đây')}</span>
+            ${Xe("arrow")}
           </button>
         </div>
       </div>
@@ -5102,14 +5113,24 @@ function openRoadmapModal(){
             <span class="rm-icon">${Xe("compass")}</span>
             <div>
               <h3>LỘ TRÌNH NHIỆM VỤ KHO IVT PRO</h3>
-              <small>Hành trình 9 chặng từ Khởi đầu đến Master Quản Trị Kho F&B</small>
+              <small>Hành trình 12 chặng thực chiến từ Khởi đầu đến Master Quản Trị Kho F&B</small>
             </div>
           </div>
-          <button id="close-roadmap-btn" class="roadmap-close-btn">&times;</button>
+          <button id="close-roadmap-btn" class="roadmap-close-btn" aria-label="Đóng lộ trình">&times;</button>
         </div>
         <div class="roadmap-banner">
-          <span class="banner-target-text"><span class="inline-svg">${Xe("flag")}</span> Đích đến gợi ý: <strong>${nextQ.name}</strong></span>
-          <button id="quick-go-next" class="quick-go-btn" data-target-id="${nextQ.id}">Tự Dẫn Đường Ngay ${Xe("arrow")}</button>
+          <div class="banner-target-info">
+            <span class="banner-flag-icon">${Xe("flag")}</span>
+            <div class="banner-text-wrap">
+              <span class="banner-label">ĐÍCH ĐẾN GỢI Ý TIẾP THEO:</span>
+              <strong class="banner-target-name">${nextQ.name}</strong>
+              <span class="banner-target-zone">(${nextQ.zone})</span>
+            </div>
+          </div>
+          <button id="quick-go-next" class="quick-go-btn" data-target-id="${nextQ.id}">
+            <span>Tự Dẫn Đường Ngay</span>
+            ${Xe("arrow")}
+          </button>
         </div>
         <div class="roadmap-list">
           ${listHtml}
@@ -5133,7 +5154,6 @@ function openRoadmapModal(){
     };
   });
 }
-
 
 _stationsDef.forEach(s=>{const el=Y(s.id);if(el)el.onclick=()=>handleStationClick(s);});function Xr(i,e=""){
   Kt=i;
@@ -5628,11 +5648,11 @@ Y("settings").onclick=Ti;Y("sound").onclick=()=>{xt.unlock(),ie.sound=!ie.sound,
   if(isNear){
     i.style.transform=`translate(${r.x.toFixed(1)}px,${r.y.toFixed(1)}px) ${t} scale(1.05)`;
     i.style.opacity="1";
-    i.style.zIndex="999";
+    i.style.zIndex="25";
   } else {
     i.style.transform=`translate(${r.x.toFixed(1)}px,${r.y.toFixed(1)}px) ${t}`;
     i.style.opacity="1";
-    i.style.zIndex="15";
+    i.style.zIndex="10";
   }
 
   if(i.hidden)i.hidden=!1;

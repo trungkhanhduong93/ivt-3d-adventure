@@ -3941,3 +3941,655 @@ dialog::-webkit-scrollbar-thumb:hover {
     width: 6px;
   }
 }
+
+
+/* ========================================================
+   CRITICAL FIX: Z-INDEX HIERARCHY - HUD LUÔN TRÊN BẢNG TÊN TRẠM
+   Đảm bảo Bảng tên Làng Khởi Đầu, Bản đồ mini và Thanh công cụ
+   không bao giờ bị các bảng tên trạm (.world-label) đè lên
+   ======================================================== */
+
+/* Bảng tên 3D & Beacon nhấp nháy: Giới hạn tối đa z-index: 25 */
+.world-label {
+  z-index: 10 !important;
+}
+
+.world-label.near,
+.world-label.gps-focus {
+  z-index: 25 !important;
+}
+
+/* 1. Header & Bảng tên Làng Khởi Đầu (#area-label) */
+.topbar {
+  z-index: 1000 !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  pointer-events: none !important;
+}
+
+.topbar .brand,
+.topbar .top-right,
+.topbar button,
+.topbar a {
+  pointer-events: auto !important;
+}
+
+#area-label,
+.area-label {
+  z-index: 1010 !important;
+  position: relative !important;
+  pointer-events: auto !important;
+}
+
+/* 2. Bản đồ mini (#minimap) */
+#minimap,
+.minimap {
+  z-index: 1000 !important;
+  pointer-events: auto !important;
+}
+
+/* 3. Khung nhân vật & nhiệm vụ bên trái (.hud-left) */
+.hud-left {
+  z-index: 1000 !important;
+  pointer-events: auto !important;
+}
+
+/* 4. Thanh công cụ đáy màn hình (Toolbar, Lộ trình, Bản đồ) */
+.bottom-bar {
+  z-index: 1000 !important;
+  pointer-events: none !important;
+}
+
+.bottom-bar .toolbar,
+.bottom-bar .controls-hint,
+.bottom-bar button,
+.bottom-bar .tool-button {
+  pointer-events: auto !important;
+  z-index: 1005 !important;
+}
+
+.toolbar {
+  z-index: 1005 !important;
+}
+
+#mobile-zoom-controls,
+.mobile-zoom-controls {
+  z-index: 1000 !important;
+}
+
+#interact,
+.interact {
+  z-index: 1100 !important;
+}
+
+.touch-controls {
+  z-index: 1100 !important;
+}
+
+.toast {
+  z-index: 1200 !important;
+}
+
+
+/* ========================================================
+   REDESIGN TOÀN DIỆN BẢNG LỘ TRÌNH NHIỆM VỤ (ROADMAP MODAL)
+   Khắc phục triệt để lỗi lệch chữ, vỡ khung trên cả PC & Điện thoại
+   ======================================================== */
+
+.roadmap-dialog-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  background: rgba(15, 45, 38, 0.65) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 95000 !important;
+  padding: 16px !important;
+  box-sizing: border-box !important;
+}
+
+.roadmap-dialog-box {
+  background: var(--paper, #fffcf0) !important;
+  border: 2px solid #dce4d5 !important;
+  border-radius: 26px !important;
+  padding: 24px 26px !important;
+  max-width: 740px !important;
+  width: 100% !important;
+  max-height: calc(100dvh - 36px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-shadow: 0 24px 64px rgba(15, 45, 38, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.8) inset !important;
+  color: var(--ink, #194f42) !important;
+  font-family: var(--font, sans-serif) !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+
+/* Head */
+.roadmap-head {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  margin-bottom: 14px !important;
+  padding-bottom: 14px !important;
+  border-bottom: 1.5px solid #e7eadc !important;
+  flex-shrink: 0 !important;
+}
+
+.roadmap-title {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+.rm-icon {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 14px !important;
+  background: linear-gradient(135deg, #ecfdf5, #d1fae5) !important;
+  border: 1.5px solid #a7f3d0 !important;
+  color: #059669 !important;
+  display: grid !important;
+  place-items: center !important;
+  flex-shrink: 0 !important;
+  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.15) !important;
+}
+
+.rm-icon svg {
+  width: 24px !important;
+  height: 24px !important;
+}
+
+.roadmap-title h3 {
+  margin: 0 !important;
+  font-family: var(--font-display, "Baloo 2", sans-serif) !important;
+  font-size: 21px !important;
+  font-weight: 900 !important;
+  color: var(--ink, #194f42) !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.roadmap-title small {
+  display: block !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: #5f7867 !important;
+  margin-top: 3px !important;
+}
+
+.roadmap-close-btn {
+  background: #ffffff !important;
+  border: 1.5px solid #dce4d5 !important;
+  color: #194f42 !important;
+  font-size: 22px !important;
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  display: grid !important;
+  place-items: center !important;
+  box-shadow: 0 3px 0 #c2cdb6 !important;
+  transition: all 0.15s ease !important;
+  line-height: 1 !important;
+  flex-shrink: 0 !important;
+}
+
+.roadmap-close-btn:hover {
+  background: #f0fdf4 !important;
+  border-color: #059669 !important;
+  color: #059669 !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Banner gợi ý đích đến tiếp theo */
+.roadmap-banner {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 14px !important;
+  background: linear-gradient(135deg, #f0fdf4, #e8f5ec) !important;
+  border: 1.5px solid #bbf7d0 !important;
+  border-radius: 18px !important;
+  padding: 12px 18px !important;
+  margin-bottom: 16px !important;
+  box-shadow: 0 2px 8px rgba(22, 101, 52, 0.08) !important;
+  flex-shrink: 0 !important;
+}
+
+.banner-target-info {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  min-width: 0 !important;
+  flex: 1 !important;
+}
+
+.banner-flag-icon {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 10px !important;
+  background: #dcfce7 !important;
+  color: #16a34a !important;
+  display: grid !important;
+  place-items: center !important;
+  flex-shrink: 0 !important;
+}
+
+.banner-flag-icon svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.banner-text-wrap {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  min-width: 0 !important;
+}
+
+.banner-label {
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  color: #15803d !important;
+  text-transform: uppercase !important;
+}
+
+.banner-target-name {
+  font-size: 14.5px !important;
+  font-weight: 900 !important;
+  color: #064e3b !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.banner-target-zone {
+  font-size: 11.5px !important;
+  font-weight: 700 !important;
+  color: #4b6354 !important;
+}
+
+.quick-go-btn {
+  padding: 10px 18px !important;
+  font-size: 13px !important;
+  font-weight: 850 !important;
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(146, 64, 14, 0.45) !important;
+  background: linear-gradient(180deg, #ffc83b 0%, #f59e0b 52%, #d97706 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.5) !important;
+  border-radius: 14px !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+  box-shadow: inset 0 1.5px 0 rgba(255, 255, 255, 0.75), 0 3px 0 #b45309, 0 5px 12px rgba(217, 119, 6, 0.28) !important;
+  transition: all 0.12s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  flex-shrink: 0 !important;
+}
+
+.quick-go-btn:hover {
+  background: linear-gradient(180deg, #ffd359 0%, #fbbf24 52%, #d97706 100%) !important;
+  transform: translateY(-1px) !important;
+}
+
+.quick-go-btn:active {
+  transform: translateY(2px) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 0 #b45309 !important;
+}
+
+/* Danh sách các chặng */
+.roadmap-list {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  padding-right: 6px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  flex: 1 !important;
+}
+
+/* Thẻ chặng (Roadmap Step Card) - Thiết kế 3 cột chuẩn mực */
+.roadmap-step-card {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  background: #ffffff !important;
+  border: 1.5px solid #dce4d5 !important;
+  border-radius: 20px !important;
+  padding: 14px 18px !important;
+  transition: all 0.18s ease !important;
+  box-shadow: 0 2px 6px rgba(25, 79, 66, 0.04) !important;
+  box-sizing: border-box !important;
+}
+
+.roadmap-step-card:hover {
+  border-color: #10b981 !important;
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.12) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* Cột 1: Số thứ tự + Icon trạm */
+.step-badge-col {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  flex-shrink: 0 !important;
+}
+
+.step-num {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 10px !important;
+  background: #f0f4ec !important;
+  color: #43634b !important;
+  font-size: 13px !important;
+  font-weight: 900 !important;
+  display: grid !important;
+  place-items: center !important;
+  flex-shrink: 0 !important;
+  border: 1px solid #d9e2d3 !important;
+}
+
+.step-icon {
+  width: 42px !important;
+  height: 42px !important;
+  border-radius: 12px !important;
+  background: #f0fdf4 !important;
+  border: 1.5px solid #bbf7d0 !important;
+  color: #059669 !important;
+  display: grid !important;
+  place-items: center !important;
+  flex-shrink: 0 !important;
+}
+
+.step-icon svg {
+  width: 22px !important;
+  height: 22px !important;
+}
+
+/* Cột 2: Nội dung chính (Tiêu đề, mô tả, thẻ tag) */
+.step-main-col {
+  flex: 1 !important;
+  min-width: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  text-align: left !important;
+}
+
+.step-title-row {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 8px !important;
+  flex-wrap: wrap !important;
+}
+
+.step-card-name {
+  margin: 0 !important;
+  font-size: 15px !important;
+  font-weight: 900 !important;
+  color: var(--ink, #194f42) !important;
+  line-height: 1.3 !important;
+}
+
+/* Trạng thái */
+.rm-status-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  font-size: 11px !important;
+  font-weight: 900 !important;
+  padding: 3px 8px !important;
+  border-radius: 8px !important;
+  white-space: nowrap !important;
+  letter-spacing: 0.02em !important;
+}
+
+.rm-status-badge.badge-done {
+  background: #ecfdf5 !important;
+  color: #059669 !important;
+  border: 1px solid #a7f3d0 !important;
+}
+
+.rm-status-badge.badge-current {
+  background: #fef3c7 !important;
+  color: #b45309 !important;
+  border: 1px solid #fde68a !important;
+  animation: pulseBadge 1.5s infinite ease-in-out !important;
+}
+
+.rm-status-badge.badge-locked {
+  background: #f3f4f6 !important;
+  color: #6b7280 !important;
+  border: 1px solid #e5e7eb !important;
+}
+
+@keyframes pulseBadge {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+.step-desc {
+  margin: 0 !important;
+  font-size: 12.5px !important;
+  line-height: 1.45 !important;
+  color: #4b6354 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+.step-card-meta {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex-wrap: wrap !important;
+  margin-top: 2px !important;
+}
+
+.step-zone {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  color: #6d8272 !important;
+}
+
+.step-zone svg {
+  width: 13px !important;
+  height: 13px !important;
+  color: #10b981 !important;
+}
+
+.step-tag {
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  padding: 2px 8px !important;
+  border-radius: 6px !important;
+  background: #f0f7ef !important;
+  color: #2e6648 !important;
+  border: 1px solid #d4e5d2 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+}
+
+/* Cột 3: Nút hành động */
+.step-action-col {
+  flex-shrink: 0 !important;
+}
+
+.nav-go-btn {
+  padding: 10px 18px !important;
+  font-size: 13px !important;
+  font-weight: 850 !important;
+  border-radius: 12px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  white-space: nowrap !important;
+  cursor: pointer !important;
+  border: 1.5px solid #d0dccb !important;
+  background: #ffffff !important;
+  color: #194f42 !important;
+  box-shadow: 0 3px 0 #c2cdb6 !important;
+  transition: all 0.15s ease !important;
+}
+
+.nav-go-btn svg {
+  width: 14px !important;
+  height: 14px !important;
+  transition: transform 0.15s ease !important;
+}
+
+.nav-go-btn:hover {
+  background: #f0fdf4 !important;
+  border-color: #10b981 !important;
+  color: #059669 !important;
+}
+
+.nav-go-btn:hover svg {
+  transform: translateX(2px) !important;
+}
+
+.nav-go-btn:active {
+  transform: translateY(2px) !important;
+  box-shadow: 0 1px 0 #c2cdb6 !important;
+}
+
+/* Chặng hiện tại (Current Step) */
+.roadmap-step-card.current {
+  background: linear-gradient(135deg, #fffdf2, #fefae8) !important;
+  border: 2px solid #f59e0b !important;
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.22) !important;
+}
+
+.roadmap-step-card.current .step-num {
+  background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+  color: #ffffff !important;
+  border-color: #f59e0b !important;
+  box-shadow: 0 2px 6px rgba(217, 119, 6, 0.35) !important;
+}
+
+.roadmap-step-card.current .step-icon {
+  background: #fef3c7 !important;
+  border-color: #fde68a !important;
+  color: #d97706 !important;
+}
+
+.roadmap-step-card.current .nav-go-btn {
+  background: linear-gradient(180deg, #ffc83b 0%, #f59e0b 52%, #d97706 100%) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  color: #ffffff !important;
+  text-shadow: 0 1px 2px rgba(146, 64, 14, 0.45) !important;
+  box-shadow: inset 0 1.5px 0 rgba(255, 255, 255, 0.75), 0 3px 0 #b45309, 0 4px 10px rgba(217, 119, 6, 0.28) !important;
+}
+
+.roadmap-step-card.current .nav-go-btn:active {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 0 #b45309 !important;
+}
+
+/* Chặng đã hoàn thành (Finished Step) */
+.roadmap-step-card.finished {
+  border-color: #bbf7d0 !important;
+  background: #fafffc !important;
+}
+
+.roadmap-step-card.finished .step-num {
+  background: #dcfce7 !important;
+  color: #15803d !important;
+  border-color: #86efac !important;
+}
+
+
+/* ========================================================
+   RESPONSIVE CHO ĐIỆN THOẠI (< 720px)
+   Bố cục chuẩn mực, không bao giờ bị tràn lấn hay lệch chữ
+   ======================================================== */
+@media (max-width: 720px) {
+  .roadmap-dialog-overlay {
+    padding: 10px !important;
+  }
+
+  .roadmap-dialog-box {
+    padding: 18px 16px !important;
+    border-radius: 20px !important;
+  }
+
+  .roadmap-title h3 {
+    font-size: 18px !important;
+  }
+
+  .roadmap-banner {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+    padding: 12px 14px !important;
+  }
+
+  .quick-go-btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+
+  /* Trên điện thoại: Thẻ chặng xếp tầng dọc thông minh */
+  .roadmap-step-card {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 10px !important;
+    padding: 14px !important;
+  }
+
+  .step-badge-col {
+    gap: 8px !important;
+  }
+
+  /* Đưa tiêu đề lên cùng hàng với Icon và Số thứ tự */
+  .roadmap-step-card {
+    display: grid !important;
+    grid-template-columns: auto 1fr !important;
+    grid-template-rows: auto auto auto !important;
+    column-gap: 12px !important;
+    row-gap: 8px !important;
+  }
+
+  .step-badge-col {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    align-self: flex-start !important;
+  }
+
+  .step-main-col {
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+  }
+
+  .step-desc {
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
+    margin-top: 2px !important;
+  }
+
+  .step-action-col {
+    grid-column: 1 / -1 !important;
+    grid-row: 3 !important;
+    width: 100% !important;
+    margin-top: 4px !important;
+  }
+
+  .nav-go-btn {
+    width: 100% !important;
+    padding: 11px 14px !important;
+    font-size: 13.5px !important;
+  }
+}
