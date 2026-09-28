@@ -4678,7 +4678,7 @@ if(_closeQuestBtn&&_questCardEl){
   };
 }
 // Chạm ra ngoài tự đóng cả 2 popup
-window.addEventListener("click",(ev)=>{
+const _closePopupsIfOutside=(ev)=>{
   let changed = false;
   if(_playerCardEl&&_playerCardEl.classList.contains("expanded")&&!_playerCardEl.contains(ev.target)){
     _playerCardEl.classList.remove("expanded");
@@ -4690,6 +4690,13 @@ window.addEventListener("click",(ev)=>{
   }
   if(changed){
     document.body.classList.remove("hud-modal-open");
+  }
+};
+window.addEventListener("click",_closePopupsIfOutside);
+window.addEventListener("pointerdown",(ev)=>{
+  if((_playerCardEl&&_playerCardEl.classList.contains("expanded")&&!_playerCardEl.contains(ev.target))||
+     (_questCardEl&&_questCardEl.classList.contains("expanded")&&!_questCardEl.contains(ev.target))){
+    _closePopupsIfOutside(ev);
   }
 });
 // Nút zoom trên điện thoại:
