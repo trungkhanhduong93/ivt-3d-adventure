@@ -4284,10 +4284,10 @@ nearMilo(){return Math.hypot(this.player.position.x-this.milo.position.x,this.pl
     this.camera.getWorldDirection(this._pCamDir);
     this._pLastFrame=this.time;
   }
-  if(this._pCamDir.dot(this._pCamToObj)<=0.1)return{x:-9999,y:-9999,visible:!1,distance:9999};
+  if(this._pCamDir.dot(this._pCamToObj)<=0.5)return{x:-9999,y:-9999,visible:!1,distance:9999};
   this._pNDC.copy(e).project(this.camera);
   const n=this.canvas.clientWidth,r=this.canvas.clientHeight,s=(this._pNDC.x*.5+.5)*n,a=(-.5*this._pNDC.y+.5)*r;
-  return{x:s,y:a,visible:this._pNDC.z>-1&&this._pNDC.z<1&&s>-80&&s<n+80&&a>-80&&a<r+80,distance:this.camera.position.distanceTo(e)}
+  return{x:s,y:a,visible:this._pNDC.z>-1&&this._pNDC.z<1&&s>-40&&s<n+40&&a>-40&&a<r+40,distance:this.camera.position.distanceTo(e)}
 }get heading(){return this.yaw}updateShadows(){const e=this.active?46:95;e!==this.shadowSize&&(this.shadowSize=e,Object.assign(this.sun.shadow.camera,{left:-e,right:e,top:e,bottom:-e,near:1,far:e*3.2}),this.sun.shadow.camera.updateProjectionMatrix()),this.sun.target.position.copy(this.target),this.sun.position.set(this.target.x-24,42,this.target.z+16)}animate=()=>{this.frame=requestAnimationFrame(this.animate);const e=Math.min(this.clock.getDelta(),.05);this.time+=e;if(this.powerAura){this.powerAura.rotation.y+=e*0.8;};
 if(this.targetMarker&&this.targetMarker.visible){
   const tTime=this.time;
@@ -4596,20 +4596,20 @@ function Ql(i,e,t,n,r){const s=n.scale,a=i.createRadialGradient(e/2,t/2,0,e/2,t/
       </div>
       <button id="minimap" class="minimap" aria-label="Mở bản đồ thế giới" title="Bản đồ (M)"><canvas id="minimap-canvas"></canvas><span class="minimap-ring"></span><span class="minimap-key"><kbd>M</kbd></span></button>
       <div id="mobile-zoom-controls" class="mobile-zoom-controls"><button id="mobile-zoom-in" class="mobile-zoom-btn" aria-label="Phóng to" title="Phóng to">${Xe("plus")}</button><button id="mobile-zoom-out" class="mobile-zoom-btn" aria-label="Thu nhỏ" title="Thu nhỏ">${Xe("minus")}</button></div>
-      <button id="milo-label" class="world-label" aria-label="Nói chuyện với Milo"><span class="milo-dot">!</span><strong>Milo</strong><small>Người dẫn đường</small></button>
-      <button id="house-label" class="world-label workstation-label" aria-label="Nhà Bên Milo - Danh Mục Gốc"><span class="milo-dot station-dot" style="background:#eab308">!</span><strong>Nhà Bên Milo</strong><small>Danh Mục Gốc & ĐVT</small></button>
-      <button id="pond-label" class="world-label workstation-label" aria-label="Bến Hồ Cá - Cấu Hình & Nghiệm Thu"><span class="milo-dot station-dot" style="background:#0284c7">!</span><strong>Bến Hồ Cá</strong><small>Cấu Hình & Nghiệm Thu</small></button>
-      <button id="pos-label" class="world-label workstation-label" aria-label="Máy POS Bán Hàng"><span class="milo-dot station-dot" style="background:#10b981">!</span><strong>Máy POS Bán Hàng</strong><small>Phân Hệ Bán Hàng</small></button>
-      <button id="weigh-label" class="world-label workstation-label" aria-label="Bàn Cân & Pallet Kho"><span class="milo-dot station-dot" style="background:#f59e0b">!</span><strong>Bàn Cân & Pallet Kho</strong><small>Hàng Hoá & ĐVT</small></button>
-      <button id="kitchen-label" class="world-label workstation-label" aria-label="Bếp Trung Tâm & Định Mức BOM"><span class="milo-dot station-dot" style="background:#ef4444">!</span><strong>Bếp Trung Tâm (BOM)</strong><small>Nồi Nấu BTP & Định Mức</small></button>
-      <button id="audit-label" class="world-label workstation-label" aria-label="Kệ Kho & Barcode"><span class="milo-dot station-dot" style="background:#3b82f6">!</span><strong>Kệ Kho & Barcode</strong><small>Kiểm Kê Kho</small></button>
-      <button id="server-label" class="world-label workstation-label" aria-label="Tháp Chẩn Đoán Ticket"><span class="milo-dot station-dot" style="background:#8b5cf6">!</span><strong>Tháp Chẩn Đoán Ticket</strong><small>Cứu Hộ Dữ Liệu & Hệ Thống</small></button>
-      <button id="truck-label" class="world-label workstation-label" aria-label="Xe Tải Điều Chuyển"><span class="milo-dot station-dot" style="background:#0284c7">!</span><strong>Xe Tải Điều Chuyển</strong><small>Chuỗi & Vận Chuyển</small></button>
-      <button id="crate1-label" class="world-label workstation-label" aria-label="Rương Bí Ẩn BTP"><span class="milo-dot mystery-dot">★</span><strong>Rương Bí Kíp BTP</strong><small>Bí Mật Bếp</small></button>
-      <button id="crate2-label" class="world-label workstation-label" aria-label="Rương Sự Cố Date"><span class="milo-dot mystery-dot">★</span><strong>Rương Sự Cố Date</strong><small>Quản Trị Hạn Dùng</small></button>
-      <button id="crate3-label" class="world-label workstation-label" aria-label="Rương Cứu Hộ Giá Vốn"><span class="milo-dot mystery-dot">★</span><strong>Rương Cứu Hộ Giá Vốn</strong><small>Bí Quyết Giá Vốn</small></button>
-      <div id="bridge-label" class="world-label landmark"><strong>Cây cầu tình bạn</strong><small id="bridge-count">0 / 6 đoạn cầu</small></div>
-      ${qa.map(i=>`<div id="${i.id}-label" class="world-label landmark region-label"><span class="region-icon">${Xe(i.icon)}</span><strong>${i.name}</strong><small>${i.subtitle}</small></div>`).join("")}
+      <button id="milo-label" class="world-label" hidden style="display:none;" aria-label="Nói chuyện với Milo"><span class="milo-dot">!</span><strong>Milo</strong><small>Người dẫn đường</small></button>
+      <button id="house-label" class="world-label workstation-label" hidden style="display:none;" aria-label="Nhà Bên Milo - Danh Mục Gốc"><span class="milo-dot station-dot" style="background:#eab308">!</span><strong>Nhà Bên Milo</strong><small>Danh Mục Gốc & ĐVT</small></button>
+      <button id="pond-label" class="world-label workstation-label" hidden style="display:none;" aria-label="Bến Hồ Cá - Cấu Hình & Nghiệm Thu"><span class="milo-dot station-dot" style="background:#0284c7">!</span><strong>Bến Hồ Cá</strong><small>Cấu Hình & Nghiệm Thu</small></button>
+      <button id="pos-label" class="world-label workstation-label" hidden style="display:none;" aria-label="Máy POS Bán Hàng"><span class="milo-dot station-dot" style="background:#10b981">!</span><strong>Máy POS Bán Hàng</strong><small>Phân Hệ Bán Hàng</small></button>
+      <button id="weigh-label" class="world-label workstation-label" hidden style="display:none;" aria-label="Bàn Cân & Pallet Kho"><span class="milo-dot station-dot" style="background:#f59e0b">!</span><strong>Bàn Cân & Pallet Kho</strong><small>Hàng Hoá & ĐVT</small></button>
+      <button id="kitchen-label" class="world-label workstation-label" hidden style="display:none;" aria-label="Bếp Trung Tâm & Định Mức BOM"><span class="milo-dot station-dot" style="background:#ef4444">!</span><strong>Bếp Trung Tâm (BOM)</strong><small>Nồi Nấu BTP & Định Mức</small></button>
+      <button id="audit-label" class="world-label workstation-label" hidden style="display:none;" aria-label="Kệ Kho & Barcode"><span class="milo-dot station-dot" style="background:#3b82f6">!</span><strong>Kệ Kho & Barcode</strong><small>Kiểm Kê Kho</small></button>
+      <button id="server-label" class="world-label workstation-label" hidden style="display:none;" aria-label="Tháp Chẩn Đoán Ticket"><span class="milo-dot station-dot" style="background:#8b5cf6">!</span><strong>Tháp Chẩn Đoán Ticket</strong><small>Cứu Hộ Dữ Liệu & Hệ Thống</small></button>
+      <button id="truck-label" class="world-label workstation-label" hidden style="display:none;" aria-label="Xe Tải Điều Chuyển"><span class="milo-dot station-dot" style="background:#0284c7">!</span><strong>Xe Tải Điều Chuyển</strong><small>Chuỗi & Vận Chuyển</small></button>
+      <button id="crate1-label" class="world-label workstation-label" hidden style="display:none;" aria-label="Rương Bí Ẩn BTP"><span class="milo-dot mystery-dot">★</span><strong>Rương Bí Kíp BTP</strong><small>Bí Mật Bếp</small></button>
+      <button id="crate2-label" class="world-label workstation-label" hidden style="display:none;" aria-label="Rương Sự Cố Date"><span class="milo-dot mystery-dot">★</span><strong>Rương Sự Cố Date</strong><small>Quản Trị Hạn Dùng</small></button>
+      <button id="crate3-label" class="world-label workstation-label" hidden style="display:none;" aria-label="Rương Cứu Hộ Giá Vốn"><span class="milo-dot mystery-dot">★</span><strong>Rương Cứu Hộ Giá Vốn</strong><small>Bí Quyết Giá Vốn</small></button>
+      <div id="bridge-label" class="world-label landmark" hidden style="display:none;"><strong>Cây cầu tình bạn</strong><small id="bridge-count">0 / 6 đoạn cầu</small></div>
+      ${qa.map(i=>`<div id="${i.id}-label" class="world-label landmark region-label" hidden style="display:none;"><span class="region-icon">${Xe(i.icon)}</span><strong>${i.name}</strong><small>${i.subtitle}</small></div>`).join("")}
       <div class="bottom-bar"><div class="controls-hint"><span class="key-group"><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd></span><span>Di chuyển</span><span class="divider"></span><kbd>Space</kbd><span>Nhảy</span><span class="divider"></span><kbd>M</kbd><span>Bản đồ</span><span class="divider"></span><span>Kéo chuột để xoay</span></div><div class="toolbar"><div class="zoom-group"><button id="zoom-in" class="icon-button" aria-label="Phóng to" title="Phóng to">${Xe("plus")}</button><button id="zoom-out" class="icon-button" aria-label="Thu nhỏ" title="Thu nhỏ">${Xe("minus")}</button></div><button id="open-roadmap" class="tool-button" title="Lộ trình nhiệm vụ & Tự dẫn đường">${Xe("compass")}<span>Lộ trình</span></button><button id="open-map" class="tool-button">${Xe("map")}<span>Bản đồ</span></button><button id="learn" class="tool-button" title="Mở tài liệu hướng dẫn IVT PRO">${Xe("book")}<span>Tài liệu IVT PRO</span></button><button id="help" class="icon-button" aria-label="Hướng dẫn chơi" title="Hướng dẫn chơi">${Xe("help")}</button></div></div>
       <button id="interact" class="interact" hidden><kbd>E</kbd> Nói chuyện với Milo ${Xe("arrow")}</button>
       <div id="touch-controls" class="touch-controls"><div id="joystick" class="joystick" role="group" aria-label="Cần điều khiển di chuyển"><div id="joystick-knob"></div></div><button id="jump" class="jump-button" aria-label="Nhảy">${Xe("jump")}</button></div>
@@ -5644,11 +5644,15 @@ Y("settings").onclick=Ti;Y("sound").onclick=()=>{xt.unlock(),ie.sound=!ie.sound,
   if(!i)return;
   if(Dn||n||(window._lastZoomAlpha!==undefined&&window._lastZoomAlpha<=0.001)){
     if(!i.hidden)i.hidden=!0;
+    i.style.display="none";
+    i.style.visibility="hidden";
     return;
   }
   const r=_e.project(e);
   if(!r.visible){
     if(!i.hidden)i.hidden=!0;
+    i.style.display="none";
+    i.style.visibility="hidden";
     return;
   }
   const isNear=i.classList.contains("near")||i.classList.contains("gps-focus");
@@ -5658,6 +5662,8 @@ Y("settings").onclick=Ti;Y("sound").onclick=()=>{xt.unlock(),ie.sound=!ie.sound,
     i.dataset.lastTf=newTf;
   }
   if(i.hidden)i.hidden=!1;
+  if(i.style.display==="none")i.style.display="";
+  if(i.style.visibility==="hidden")i.style.visibility="";
 }const _stPos=new F(),_regPos=new F();
 const _stProjs=[
   {id:"milo-label",x:-3.0,y:3.5,z:1.5,offset:"translate(-50%,-100%)"},
@@ -5678,15 +5684,16 @@ function _projStations(){
   if(!_e||!_e.active)return;
   const pPos=_e.player.position;
   const isMob=window.innerWidth<=768;
-  const maxDist=isMob?34:48;
+  const playerOnWest=pPos.x<7;
   for(let idx=0;idx<_stProjs.length;idx++){
     const s=_stProjs[idx];
     if(!s.el)s.el=Y(s.id);
     if(!s.el)continue;
     const isNearOrGps=s.el.classList.contains("near")||s.el.classList.contains("gps-focus");
-    const dist=Math.hypot(pPos.x-s.x,pPos.z-s.z);
-    if(dist>maxDist&&!isNearOrGps){
+    if(isMob&&playerOnWest&&s.x>8&&!isNearOrGps){
       if(!s.el.hidden)s.el.hidden=!0;
+      s.el.style.display="none";
+      s.el.style.visibility="hidden";
       continue;
     }
     _stPos.set(s.x,s.y,s.z);
@@ -5698,6 +5705,8 @@ function _projStations(){
     if(!t._el)continue;
     if(hideRegions){
       if(!t._el.hidden)t._el.hidden=!0;
+      t._el.style.display="none";
+      t._el.style.visibility="hidden";
     }else{
       _regPos.set(t.center[0],t.labelHeight,t.center[1]);
       Ls(t._el,_regPos,"translate(-50%,-100%)",!1);
